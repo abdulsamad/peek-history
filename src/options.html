@@ -10,13 +10,168 @@
 <body>
   <div class="options">
     <div class="container">
-      <nav class="options__head">
+      <nav class="options__head blue accent-1 waves-effect">
+        <a href="#" class="brand-logo center">Simple History</a>
       </nav>
       <div class="options__body">
+        <div class="card">
+          <div class="card-content">
+            <h3 class="card-title"><i class="icon-brush" aria-hidden="true"></i> Appearance</h3>
+            <div class="row">
+              <div class="col s1"></div>
+              <div class="col s5">
+                <label for="theme">
+                  <h6>Theme</h6>
+                </label>
+              </div>
+              <div class="input-field col s5">
+                <select id="theme">
+                  <option value="defult" selected>System Default</option>
+                  <option value="dark">Dark</option>
+                  <option value="light">Light</option>
+                </select>
+              </div>
+              <div class="col s1"></div>
+            </div>
+            <div class="row">
+              <div class="col s1"></div>
+              <div class="col s5">
+                <label for="font">
+                  <h6>Font</h6>
+                </label>
+              </div>
+              <div class="input-field col s5">
+                <select id="selectFont">
+                  <option value="default" selected>System Default</option>
+                </select>
+              </div>
+              <div class="col s1"></div>
+            </div>
+            <div class="row">
+              <div class="col s1"></div>
+              <div class="col s5">
+                <label for="theme">
+                  <h6>Accent Color</h6>
+                </label>
+              </div>
+              <div class="input-field col s5">
+                <div class="accent-collection">
+                  <button class="btn-floating btn waves-effect waves-light blue lighten-2 accent-btn active"
+                    data-color="blue lighten-2"></button>
+                  <button class="btn-floating btn waves-effect waves-light red lighten-2 accent-btn"
+                    data-color="red lighten-2"></button>
+                  <button class="btn-floating btn waves-effect waves-light teal lighten-2 accent-btn"
+                    data-color="teal lighten-2"></button>
+                  <button class="btn-floating btn waves-effect waves-light grey lighten-2 accent-btn"
+                    data-color="grey lighten-2"></button>
+                  <button class="btn-floating btn waves-effect waves-light cyan lighten-2 accent-btn"
+                    data-color="cyan lighten-2"></button>
+                  <button class="btn-floating btn waves-effect waves-light amber lighten-2 accent-btn"
+                    data-color="amber lighten-2"></button>
+                  <button class="btn-floating btn waves-effect waves-light pink lighten-2 accent-btn"
+                    data-color="pink lighten-2"></button>
+                </div>
+              </div>
+              <div class="col s1"></div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-content">
+            <h3 class="card-title"><i class="icon-cog" aria-hidden="true"></i> Settings</h3>
+            <div class="row">
+              <div class="col s1"></div>
+              <div class="col s5">
+                <label for="theme">
+                  <h6>Sort By</h6>
+                </label>
+              </div>
+              <div class="input-field col s5">
+                <select id="theme">
+                  <option value="">By Last Visited</option>
+                  <option value="">By Most Visited</option>
+                </select>
+              </div>
+              <div class="col s1"></div>
+            </div>
+            <div class="row">
+              <div class="col s1"></div>
+              <div class="col s5">
+                <label for="font">
+                  <h6 title="Open Excluded Entries in Incognito Tab ">Excluded Entries<span
+                      class="badge blue white-text">Coming
+                      soon</span></a>
+                  </h6>
+                </label>
+              </div>
+              <div class="input-field col s5">
+                <div class="switch center-align">
+                  <label>
+                    Off
+                    <input id="incognitoCheckbox" type="checkbox">
+                    <span class="lever"></span>
+                    On
+                  </label>
+                </div>
+              </div>
+              <div class="col s1"></div>
+            </div>
+            <div id="excludedEntriesContainer" class="excluded-entries-container hide">
+              <div class="row">
+                <div class="col s1"></div>
+                <div class="col s5">
+                  <label for="theme">
+                    <h6>Add Excluded Entries</h6>
+                  </label>
+                </div>
+                <div class="input-field col s5">
+                  <div class="row">
+                    <div class="col l10">
+                      <input type="text" class="validate" placeholder="https://google.com">
+                    </div>
+                    <div class="col">
+                      <button class="btn waves-effect waves-light" id="addExclusion">Add</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col s1"></div>
+              </div>
+              <div class="row table">
+                <div class="col m1"></div>
+                <div class="col m10">
+                  <table class="centered striped highlight responsive-table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>URL</th>
+                        <th>-</th>
+                      </tr>
+                    </thead>
+                    <tbody class="excluded-entries-body" id="excluded-entries-body">
+                      <tr>
+                        <td>Example</td>
+                        <td>https://example.com</td>
+                        <td><button class="btn-small disabled waves-effect waves-light red accent-4">Remove</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Google</td>
+                        <td>https://google.com</td>
+                        <td><button class="btn-small waves-effect waves-light red accent-4">Remove</button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col m1"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <script src="js/options.js"></script>
+  <script defer src="js/libs.js"></script>
+  <script async src="js/options.js"></script>
 </body>
 
 </html>

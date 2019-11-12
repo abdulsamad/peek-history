@@ -13,7 +13,7 @@
 		"64": "./assets/icon.png",
 		"32": "./assets/icon.png"
 	},
-	"permissions": ["history", "tabs"],
+	"permissions": ["history", "tabs", "fontSettings", "chrome://favicon/*"],
 	"options_page": "options.html",
 	"commands": {
 		"_execute_browser_action": {

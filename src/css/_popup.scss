@@ -1,0 +1,147 @@
+.popup {
+	min-height: 250px;
+	max-height: 500px;
+	width: 400px;
+
+	.loader-container {
+		height: 100%;
+		width: 100%;
+		position: relative;
+
+		.loader {
+			display: inline-block;
+			position: fixed;
+			width: 50%;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+
+	.popup__head {
+		height: var(--navbar-height);
+		width: 100%;
+		position: fixed;
+		top: 0;
+		z-index: 10;
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		align-content: center;
+
+		.brand {
+			font-size: 1.6rem;
+			font-weight: 600;
+			padding: 0 1rem;
+			color: #fff;
+			white-space: nowrap;
+			transition: all 0.3s ease 0;
+			user-select: none;
+			cursor: default;
+			margin: 0;
+			text-decoration: none;
+		}
+
+		.input {
+			height: 100%;
+			width: 3rem;
+			font-size: 1.5rem;
+			padding: 0 10px;
+			font-family: fa;
+			box-sizing: border-box;
+			margin: 0;
+			border: 0;
+			transition: all 0.3s ease;
+			position: absolute;
+			cursor: pointer;
+			top: 0;
+			right: 0;
+
+			&::placeholder {
+				text-align: center;
+				font-size: 1.5rem;
+				color: rgb(255, 255, 255);
+			}
+
+			&:focus {
+				width: 100%;
+				background-color: #fff;
+
+				+ .brand {
+					visibility: hidden;
+					opacity: 0;
+					width: 0px;
+					padding: 0;
+				}
+
+				&::placeholder {
+					color: #c4c4c4;
+				}
+			}
+		}
+	}
+
+	.popup__body {
+		margin-top: var(--navbar-height);
+
+		.collection {
+			margin: 0;
+
+			.link {
+				display: flex;
+				align-items: center;
+			}
+		}
+
+		.collection-item.avatar {
+			min-height: var(--navbar-height);
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0 20px 0 45px;
+
+			.delte-btn {
+				font-family: fa;
+			}
+		}
+
+		.circle {
+			max-height: 16px;
+			max-width: 16px;
+		}
+
+		.title {
+			color: #2f2f2f;
+			width: 300px;
+		}
+
+		.url {
+			width: 250px;
+		}
+
+		.secondary-content.delete-btn {
+			font-size: 1rem;
+			background: transparent;
+			border: none;
+			cursor: pointer;
+			top: 8px;
+			right: 8px;
+		}
+
+		.secondary-content.time {
+			height: 1rem;
+			border: none;
+			top: auto;
+			bottom: 8px;
+			right: 8px;
+		}
+		.no-result-svg {
+			height: 200px;
+			width: 100%;
+		}
+
+		.svg-fill-color {
+			fill: yellow;
+		}
+	}
+}

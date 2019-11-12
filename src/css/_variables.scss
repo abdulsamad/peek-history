@@ -1,0 +1,17 @@
+:root {
+	--primary: #3b5988;
+	--accent: #3b5998;
+	--adjacent: #fff;
+	--navbar-height: 55px;
+	--scrollbar-width: 5px;
+	--scrollbar-color: #{color('blue', 'lighten-2')};
+}
+
+::-webkit-scrollbar {
+	width: var(--scrollbar-width);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--scrollbar-color);
+	border-radius: 10px;
+}

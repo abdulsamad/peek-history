@@ -1,0 +1,68 @@
+.options {
+	min-height: 100vh;
+	max-width: 100%;
+
+	.container {
+		width: 50%;
+	}
+
+	.brand-logo {
+		font-weight: 700;
+	}
+
+	.options__body {
+		.card-title {
+			font-weight: 600;
+
+			i {
+				font-family: fa;
+			}
+		}
+
+		.row {
+			height: 60px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-bottom: 0;
+		}
+
+		.input-field {
+			margin: 5px;
+		}
+
+		.accent-collection {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+
+			.btn-floating {
+				height: 30px;
+				width: 30px;
+				position: relative;
+			}
+
+			.active::after {
+				content: '\2714';
+				height: 30px;
+				width: 30px;
+				color: #fff;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				position: absolute;
+				top: 0;
+				left: 0;
+				background-color: rgba($color: #ffffff, $alpha: 0.4);
+				border: 2px solid #000000;
+				border-radius: 50%;
+			}
+		}
+
+		.row.table {
+			height: auto;
+			margin-top: 20px;
+			font-size: 1rem;
+		}
+	}
+}
