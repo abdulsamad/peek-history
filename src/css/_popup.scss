@@ -2,6 +2,9 @@
 	min-height: 250px;
 	max-height: 500px;
 	width: 400px;
+	background: var(--background-color);
+	color: var(--color);
+	overflow-x: hidden;
 
 	.loader-container {
 		height: 100%;
@@ -56,16 +59,17 @@
 			cursor: pointer;
 			top: 0;
 			right: 0;
+			color: var(--color);
 
 			&::placeholder {
 				text-align: center;
 				font-size: 1.5rem;
-				color: rgb(255, 255, 255);
+				color: #fff;
 			}
 
 			&:focus {
 				width: 100%;
-				background-color: #fff;
+				background-color: var(--background-color);
 
 				+ .brand {
 					visibility: hidden;
@@ -81,6 +85,24 @@
 		}
 	}
 
+	.modal {
+		background: var(--background-color);
+		color: var(--color);
+
+		.modal-footer {
+			background: var(--background-color);
+			color: var(--color);
+
+			a {
+				margin: 0 0.5rem;
+			}
+		}
+	}
+
+	.modal-overlay {
+		background: var(--opposite-color);
+	}
+
 	.popup__body {
 		margin-top: var(--navbar-height);
 
@@ -93,16 +115,13 @@
 			}
 		}
 
-		.collection-item.avatar {
+		.collection-item {
 			min-height: var(--navbar-height);
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
 			padding: 0 20px 0 45px;
-
-			.delte-btn {
-				font-family: fa;
-			}
+			background: var(--background-color);
 		}
 
 		.circle {
@@ -111,11 +130,12 @@
 		}
 
 		.title {
-			color: #2f2f2f;
+			color: var(--opposite-color);
 			width: 300px;
 		}
 
 		.url {
+			color: color('grey', 'base');
 			width: 250px;
 		}
 
@@ -126,6 +146,8 @@
 			cursor: pointer;
 			top: 8px;
 			right: 8px;
+			color: color('red', 'lighten-1');
+			font-family: fa;
 		}
 
 		.secondary-content.time {
@@ -134,6 +156,8 @@
 			top: auto;
 			bottom: 8px;
 			right: 8px;
+			color: var(--color);
+			font-family: fa;
 		}
 		.no-result-svg {
 			height: 200px;
@@ -141,7 +165,7 @@
 		}
 
 		.svg-fill-color {
-			fill: yellow;
+			fill: var(--accent);
 		}
 	}
 }

@@ -1,17 +1,43 @@
+/* CSS Variables */
 :root {
-	--primary: #3b5988;
-	--accent: #3b5998;
-	--adjacent: #fff;
+	--accent: #{color('red', 'lighten-2')};
+	--color: #2f2f2f;
+	--opposite-color: #000;
+	--background-color: #f5f5f5;
+	--options-background-color: #f5f5f5;
+	--select-hover-color: #2f2f2f;
+	--select-hover-background-color: #eeeeee;
+	--card-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 	--navbar-height: 55px;
 	--scrollbar-width: 5px;
-	--scrollbar-color: #{color('blue', 'lighten-2')};
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--accent: #{color('red', 'lighten-2')};
+		--color: #f2f2f2;
+		--opposite-color: #fff;
+		--background-color: #000;
+		--options-background-color: #1f1f1f;
+		--select-hover-color: #f2f2f2;
+		--card-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.14), 0 3px 1px -2px rgba(255, 255, 255, 0.12),
+			0 1px 5px 0 rgba(255, 255, 255, 0.2);
+	}
 }
 
 ::-webkit-scrollbar {
 	width: var(--scrollbar-width);
+	background-color: var(--background-color);
+	border: none;
 }
 
 ::-webkit-scrollbar-thumb {
-	background: var(--scrollbar-color);
+	background: var(--accent);
 	border-radius: 10px;
+}
+
+/* Global Defaults */
+
+.accent {
+	background-color: var(--accent);
 }

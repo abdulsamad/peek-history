@@ -1,6 +1,9 @@
 .options {
 	min-height: 100vh;
 	max-width: 100%;
+	background: var(--options-background-color);
+	color: var(--color);
+	overflow: hidden;
 
 	.container {
 		width: 50%;
@@ -11,11 +14,38 @@
 	}
 
 	.options__body {
+		.card {
+			background: var(--background-color);
+			box-shadow: var(--card-shadow);
+		}
+
 		.card-title {
 			font-weight: 600;
+			color: var(--color);
 
 			i {
 				font-family: fa;
+			}
+		}
+
+		.dropdown-content {
+			color: var(--color);
+			background-color: var(--background-color);
+			box-shadow: var(--card-shadow);
+
+			li span {
+				color: var(--color);
+				text-align: center;
+
+				&.selected {
+					color: var(--color);
+					background-color: var(--select-hover-background-color);
+				}
+
+				&:hover {
+					color: #3f3f3f;
+					background-color: var(--select-hover-background-color);
+				}
 			}
 		}
 
@@ -29,6 +59,16 @@
 
 		.input-field {
 			margin: 5px;
+			color: var(--color);
+
+			.caret {
+				fill: var(--color);
+			}
+
+			input {
+				text-align: center;
+				color: var(--color);
+			}
 		}
 
 		.accent-collection {
@@ -53,9 +93,15 @@
 				position: absolute;
 				top: 0;
 				left: 0;
-				background-color: rgba($color: #ffffff, $alpha: 0.4);
+				background-color: rgba($color: #000000, $alpha: 0.4);
 				border: 2px solid #000000;
 				border-radius: 50%;
+			}
+		}
+
+		.switch {
+			.lever {
+				background-color: #7d7d7d;
 			}
 		}
 
@@ -63,6 +109,14 @@
 			height: auto;
 			margin-top: 20px;
 			font-size: 1rem;
+
+			table {
+				border: 1px solid var(--opposite-color);
+
+				tr {
+					border-bottom: 1px solid var(--opposite-color);
+				}
+			}
 		}
 	}
 }
