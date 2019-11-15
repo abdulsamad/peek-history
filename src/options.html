@@ -5,11 +5,10 @@
   <meta charset="UTF-8" />
   <title>Simple History - Options</title>
   <link rel="stylesheet" href="css/style.scss" />
-  <script src="js/libs.js"></script>
 </head>
 
 <body>
-  <div class="options">
+  <div class="options hide">
     <div class="container">
       <nav class="options__head accent waves-effect">
         <a href="#" class="brand-logo center">Simple History</a>
@@ -21,7 +20,7 @@
             <div class="row">
               <div class="col s1"></div>
               <div class="col s5">
-                <label for="theme">
+                <label for="theme" title="Set default theme for this extension">
                   <h6>Theme</h6>
                 </label>
               </div>
@@ -37,7 +36,7 @@
             <div class="row">
               <div class="col s1"></div>
               <div class="col s5">
-                <label for="font">
+                <label for="font" title="Set default font for this extension">
                   <h6>Font</h6>
                 </label>
               </div>
@@ -51,7 +50,7 @@
             <div class="row">
               <div class="col s1"></div>
               <div class="col s5">
-                <label for="theme">
+                <label title="Set Accent Color for this extension">
                   <h6>Accent Color</h6>
                 </label>
               </div>
@@ -83,7 +82,7 @@
             <div class="row">
               <div class="col s1"></div>
               <div class="col s5">
-                <label for="theme">
+                <label for="sort">
                   <h6>Sort By</h6>
                 </label>
               </div>
@@ -98,10 +97,9 @@
             <div class="row">
               <div class="col s1"></div>
               <div class="col s5">
-                <label for="font">
-                  <h6 title="Open Excluded Entries in Incognito Tab ">Excluded Entries<span
-                      class="badge blue white-text">Coming
-                      soon</span></a>
+                <label for="incognitoCheckbox">
+                  <h6 title="Open Excluded Entries in Incognito Tab ">Excluded Entries
+                    <span class="badge blue white-text">Coming soon</span>
                   </h6>
                 </label>
               </div>
@@ -121,14 +119,14 @@
               <div class="row">
                 <div class="col s1"></div>
                 <div class="col s5">
-                  <label for="theme">
+                  <label for="excludeInput">
                     <h6>Add Excluded Entries</h6>
                   </label>
                 </div>
                 <div class="input-field col s5">
                   <div class="row">
                     <div class="col l10">
-                      <input type="text" class="validate" placeholder="https://google.com">
+                      <input class="validate" id="excludeInput" type="url" placeholder="https://google.com">
                     </div>
                     <div class="col">
                       <button class="btn waves-effect waves-light" id="addExclusion">Add</button>
@@ -143,8 +141,8 @@
                   <table class="centered striped highlight responsive-table">
                     <thead>
                       <tr>
-                        <th>Name</th>
-                        <th>URL</th>
+                        <th title="Website Name">Name</th>
+                        <th title="Website URL">URL</th>
                         <th>-</th>
                       </tr>
                     </thead>
@@ -171,6 +169,7 @@
       </div>
     </div>
   </div>
+  <script src="js/libs.js"></script>
   <script async src="js/options.js"></script>
 </body>
 

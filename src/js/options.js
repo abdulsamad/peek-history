@@ -10,14 +10,21 @@ console.time('hello');
 // import 'materialize-css/js/modal';
 // import 'materialize-css/js/waves';
 
+/* Load */
+window.addEventListener(
+	'load',
+	function() {
+		document.querySelector('.options').classList.remove('hide');
+	},
+	false,
+);
+
 /* Theme */
 document.querySelector('#theme').addEventListener(
 	'change',
 	function(ev) {
-		if (this.value !== 'default') {
-			const value = this.value;
-			chrome.storage.sync.set({ theme: value });
-		}
+		const value = this.value;
+		chrome.storage.sync.set({ theme: value });
 	},
 	false,
 );
@@ -66,6 +73,7 @@ document.querySelectorAll('.accent-btn').forEach(function(elem) {
 document.querySelector('#sort').addEventListener(
 	'change',
 	function() {
+		chrome.storage.sync.set({ sort: this.value });
 		console.log(this.value);
 	},
 	false,

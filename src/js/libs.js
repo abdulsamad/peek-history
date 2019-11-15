@@ -6,10 +6,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /* Get All Keys */
-/* chrome.storage.sync.get(null, function(items) {
-	var allKeys = Object.keys(items);
-	console.log(allKeys);
-}); */
+// chrome.storage.sync.get(null, function(items) {
+// 	var allKeys = Object.keys(items);
+// 	console.log(allKeys);
+// });
 
 // Change Theme
 function changeTheme(theme) {
@@ -33,12 +33,13 @@ function changeTheme(theme) {
 
 // Fetch Settings
 function fetchSettings() {
-	chrome.storage.sync.get(['theme', 'font', 'accent'], function(result) {
+	chrome.storage.sync.get(['theme', 'font', 'accent', 'sort'], function(result) {
 		// Theme
 		if (result.theme != undefined) {
 			const theme = document.querySelector('#theme');
 			if (theme) {
 				theme.value = result.theme;
+				M.FormSelect.init(theme, {});
 			}
 			changeTheme(result.theme);
 		}
@@ -47,9 +48,9 @@ function fetchSettings() {
 		if (result.font != undefined) {
 			const sel = document.querySelector('#font');
 			if (sel) {
-				M.FormSelect.init(sel, {});
 				sel.innerHTML = `<option value="${result.font}">${result.font}</option>`;
 				sel.value = result.font;
+				M.FormSelect.init(sel, {});
 			}
 			document.body.style.fontFamily = result.font;
 		}
@@ -63,7 +64,16 @@ function fetchSettings() {
 			}
 			document.documentElement.style.setProperty('--accent', result.accent);
 		}
+
+		// Sort
+		if (result.sort != undefined) {
+			const sort = document.querySelector('#sort');
+			if (sort) {
+				sort.value = result.sort;
+				M.FormSelect.init(sort, {});
+			}
+		}
 	});
 }
-fetchSettings();
+document.addEventListener('DOMContentLoaded', fetchSettings(), false);
 chrome.storage.onChanged.addListener(fetchSettings);

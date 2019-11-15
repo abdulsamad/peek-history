@@ -89,27 +89,38 @@ function searchUrlList(
 		},
 		historyItems => {
 			const historyCollection = document.querySelector('#history-collection');
+			let listHTML = '';
 			historyCollection.innerHTML = null;
-			console.log(historyItems);
+			// console.log(historyItems);
 
 			try {
-				if (historyItems.length === 0 && searchType == 'typeSearch') throw 'Not Found';
-				historyItems.forEach(function(item) {
-					historyCollection.innerHTML += `
-						<li class="collection-item avatar">
-						<a class="link" href="${item.url}" target="_blank">
-							<img src="chrome://favicon/${item.url}" alt="" class="circle">
-							<div class="title-url-container">
-								<span class="title truncate">${item.title}</span>
-								<p class="url truncate">${item.url}<br>
-								</p>
-							</div>
-						</a>
-							<a class="delete-btn icon-trash secondary-content modal-trigger" href="#modal1"></a>
-							<span class="time secondary-content">${convertTimeAgo(item.lastVisitTime)}</span>
-							</li>
-					`;
-				});
+				if (historyItems.length === 0 && searchType === 'typeSearch') throw 'Not Found';
+				if (historyItems.length > 0 && searchType === 'typeSearch') {
+					historyItems.forEach(function(item) {
+						// prettier-ignore
+						listHTML += `<li class="collection-item avatar"><a class="link" href="${item.url}" target="_blank"><img src="chrome://favicon/${item.url}" alt="" class="circle"><div class="title-url-container"><span class="title truncate">${item.title}</span><p class="url truncate">${item.url}<br></p></div></a><a class="delete-btn icon-trash secondary-content modal-trigger" href="#modal1"></a><span class="time secondary-content">${convertTimeAgo(item.lastVisitTime)}</span></li>`;
+					});
+					historyCollection.innerHTML = listHTML;
+				} else {
+					chrome.storage.sync.get('sort', sortVal => {
+						// Sort By Last Visit
+						if (sortVal.sort === undefined || sortVal.sort === 'last-visit') {
+							historyItems.forEach(function(item) {
+								// prettier-ignore
+								listHTML += `<li class="collection-item avatar"><a class="link" href="${item.url}" target="_blank"><img src="chrome://favicon/${item.url}" alt="" class="circle"><div class="title-url-container"><div class="title truncate">${item.title}</div><p class="url truncate">${item.url}<br></p></div></a><a class="delete-btn icon-trash secondary-content modal-trigger" href="#modal1"></a><span class="time secondary-content">${convertTimeAgo(item.lastVisitTime)}</span></li>`;
+							});
+						}
+						// Sort By Most Visit
+						else if (sortVal.sort === 'most-visit') {
+							let sortedArr = historyItems.sort((a, b) => b.visitCount - a.visitCount);
+							sortedArr.forEach(function(item) {
+								// prettier-ignore
+								listHTML += `<li class="collection-item avatar"><a class="link" href="${item.url}" target="_blank"><img src="chrome://favicon/${item.url}" alt="" class="circle"><div class="title-url-container"><div class="title truncate">${item.title}</div><p class="url truncate">${item.url}<br></p></div></a><a class="delete-btn icon-trash secondary-content modal-trigger" href="#modal1"></a><span class="time secondary-content">${convertTimeAgo(item.lastVisitTime)}</span></li>`;
+							});
+						}
+						historyCollection.innerHTML = listHTML;
+					});
+				}
 			} catch (err) {
 				// prettier-ignore
 				historyCollection.innerHTML = `

@@ -8,9 +8,12 @@
 	.container {
 		width: 50%;
 	}
+	.options__head {
+		box-shadow: var(--card-shadow);
 
-	.brand-logo {
-		font-weight: 700;
+		.brand-logo {
+			font-weight: 700;
+		}
 	}
 
 	.options__body {
@@ -45,6 +48,12 @@
 				&:hover {
 					color: #3f3f3f;
 					background-color: var(--select-hover-background-color);
+				}
+
+				&:focus {
+					color: #3f3f3f;
+					background-color: var(--select-hover-background-color);
+					outline-color: var(--opposite-color);
 				}
 			}
 		}
