@@ -4,6 +4,7 @@
 	width: 400px;
 	background: var(--background-color);
 	color: var(--color);
+	overflow-y: scroll;
 	overflow-x: hidden;
 
 	.loader-container {

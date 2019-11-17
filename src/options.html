@@ -116,47 +116,44 @@
               <div class="col s1"></div>
             </div>
             <div id="excludedEntriesContainer" class="excluded-entries-container hide">
-              <div class="row">
-                <div class="col s1"></div>
-                <div class="col s5">
-                  <label for="excludeInput">
-                    <h6>Add Excluded Entries</h6>
-                  </label>
-                </div>
-                <div class="input-field col s5">
-                  <div class="row">
-                    <div class="col l10">
-                      <input class="validate" id="excludeInput" type="url" placeholder="https://google.com">
-                    </div>
-                    <div class="col">
-                      <button class="btn waves-effect waves-light" id="addExclusion">Add</button>
+              <form id="exclusionForm">
+                <div class="row">
+                  <div class="col s1"></div>
+                  <div class="col s5">
+                    <label for="excludeInput">
+                      <h6>Add Excluded Entries</h6>
+                    </label>
+                  </div>
+                  <div class="input-field col s5">
+                    <div class="row">
+                      <div class="col l10">
+                        <input class="validate" id="excludeInput" type="url" placeholder="https://google.com">
+                      </div>
+                      <div class="col">
+                        <button class="btn waves-effect waves-light" id="addExclusion">Add</button>
+                      </div>
                     </div>
                   </div>
+                  <div class="col s1"></div>
                 </div>
-                <div class="col s1"></div>
-              </div>
+              </form>
               <div class="row table">
                 <div class="col m1"></div>
                 <div class="col m10">
                   <table class="centered striped highlight responsive-table">
                     <thead>
                       <tr>
-                        <th title="Website Name">Name</th>
+                        <th title="Website Name">Domain</th>
                         <th title="Website URL">URL</th>
                         <th>-</th>
                       </tr>
                     </thead>
                     <tbody class="excluded-entries-body" id="excluded-entries-body">
                       <tr>
-                        <td>Example</td>
-                        <td>https://example.com</td>
+                        <td class="excluded-url-name">example.com</td>
+                        <td class="excluded-url">https://example.com</td>
                         <td><button class="btn-small disabled waves-effect waves-light red accent-4">Remove</button>
                         </td>
-                      </tr>
-                      <tr>
-                        <td>Google</td>
-                        <td>https://google.com</td>
-                        <td><button class="btn-small waves-effect waves-light red accent-4">Remove</button></td>
                       </tr>
                     </tbody>
                   </table>

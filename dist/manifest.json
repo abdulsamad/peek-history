@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "Simple History",
 	"description": "A simple and minimal extension for quickly peeking and managing history.",
-	"version": "0.8.0",
+	"version": "0.8.5",
 	"browser_action": {
 		"default_popup": "./popup.html",
 		"default_icon": "./assets/icon.png",

@@ -36,7 +36,18 @@
 	border-radius: 10px;
 }
 
+/* Materialize CSS */
+$select-option-focus: unquote('var(--select-hover-background-color)');
+$select-option-hover: unquote('var(--select-hover-background-color)');
+$switch-unchecked-lever-bg: #7d7d7d;
+
 /* Global Defaults */
+
+body.keyboard-focused {
+	.select-dropdown.dropdown-content li:focus {
+		color: yellow;
+	}
+}
 
 .accent {
 	background-color: var(--accent);

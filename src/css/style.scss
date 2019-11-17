@@ -1,3 +1,6 @@
+/* Custom CSS Variables and Global Defaults */
+@import 'variables';
+
 /* Default Components & Libraries */
 @import '../../node_modules/materialize-css/sass/components/color-variables';
 @import '../../node_modules/materialize-css/sass/components/color-classes';
@@ -17,9 +20,6 @@
 @import '../../node_modules/materialize-css/sass/components/preloader';
 @import '../../node_modules/materialize-css/sass/components/typography';
 @import '../../node_modules/materialize-css/sass/components/waves';
-
-/* Custom CSS Variables and Global Defaults */
-@import 'variables';
 
 /* Files */
 @import 'fa';

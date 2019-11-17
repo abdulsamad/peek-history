@@ -1,5 +1,6 @@
-console.time('hello');
+// console.time('hello');
 /* Imports */
+// import 'materialize-css/dist/js/materialize';
 // import 'materialize-css/js/cash';
 // import 'materialize-css/js/component';
 // import 'materialize-css/js/global';
@@ -25,6 +26,9 @@ document.querySelector('#theme').addEventListener(
 	function(ev) {
 		const value = this.value;
 		chrome.storage.sync.set({ theme: value });
+		if (value === 'default') {
+			location.reload();
+		}
 	},
 	false,
 );
@@ -48,6 +52,7 @@ chrome.fontSettings.getFontList(function(list) {
 			if (this.value !== 'default') {
 				const value = this.value;
 				chrome.storage.sync.set({ font: value });
+				location.reload();
 			}
 		},
 		false,
@@ -74,12 +79,11 @@ document.querySelector('#sort').addEventListener(
 	'change',
 	function() {
 		chrome.storage.sync.set({ sort: this.value });
-		console.log(this.value);
 	},
 	false,
 );
 
-/* Incognito Selection */
+/* Incognito Switch */
 document.querySelector('#incognitoCheckbox').addEventListener(
 	'click',
 	function() {
@@ -87,27 +91,45 @@ document.querySelector('#incognitoCheckbox').addEventListener(
 		if (this.checked === true) {
 			// Checked
 			container.classList.remove('hide');
+			chrome.storage.sync.set({ incognito: true });
 		} else {
 			// Unchecked
 			container.classList.add('hide');
+			chrome.storage.sync.set({ incognito: false });
 		}
 	},
 	false,
 );
 
 /* Excluded URL's */
-document.querySelector('#addExclusion').addEventListener(
-	'click',
-	function(value) {
+document.querySelector('#exclusionForm').addEventListener(
+	'submit',
+	function(ev) {
+		ev.preventDefault();
+		const inpVal = document.querySelector('#excludeInput').value;
 		const body = document.querySelector('#excluded-entries-body');
-		body.innerHTML += `
-		<tr>
-			<td>Google</td>
-			<td>https://google.com</td>
-			<td><button class="btn-small waves-effect waves-light red accent-4">Remove</button></td>
-		</tr>`;
+		if (inpVal !== '') {
+			const url = new URL(inpVal);
+			body.innerHTML += `
+			<tr>
+				<td class="excluded-url-name">${url.host}</td>
+				<td class="excluded-url" title="${inpVal}">${inpVal}</td>
+				<td><button class="btn-small remove-excluded-url waves-effect waves-light red accent-4">Remove</button></td>
+			</tr>`;
+		}
 	},
 	false,
 );
 
-console.timeEnd('hello');
+// Event Delegation for Exclude URL
+document.querySelector('#excluded-entries-body').addEventListener(
+	'click',
+	function(ev) {
+		if (ev.target.className.includes('remove-excluded-url')) {
+			ev.target.parentElement.parentElement.remove();
+		}
+	},
+	false,
+);
+
+// console.timeEnd('hello');
