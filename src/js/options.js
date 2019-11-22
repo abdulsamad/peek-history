@@ -1,16 +1,3 @@
-// console.time('hello');
-/* Imports */
-// import 'materialize-css/dist/js/materialize';
-// import 'materialize-css/js/cash';
-// import 'materialize-css/js/component';
-// import 'materialize-css/js/global';
-
-// import 'materialize-css/js/dropdown';
-// import 'materialize-css/js/forms';
-// import 'materialize-css/js/select';
-// import 'materialize-css/js/modal';
-// import 'materialize-css/js/waves';
-
 /* Load */
 window.addEventListener(
 	'load',
@@ -48,12 +35,10 @@ chrome.fontSettings.getFontList(function(list) {
 	document.querySelector('#font').addEventListener(
 		'change',
 		function(ev) {
-			document.body.style.fontFamily = this.value;
-			if (this.value !== 'default') {
-				const value = this.value;
-				chrome.storage.sync.set({ font: value });
-				location.reload();
-			}
+			const value = this.value;
+			document.body.style.fontFamily = value;
+			chrome.storage.sync.set({ font: value });
+			location.reload();
 		},
 		false,
 	);
@@ -73,6 +58,21 @@ document.querySelectorAll('.accent-btn').forEach(function(elem) {
 		false,
 	);
 });
+
+/* Hide URL from Popup */
+document.querySelector('#hideURL').addEventListener(
+	'click',
+	function() {
+		if (this.checked === true) {
+			// Checked
+			chrome.storage.sync.set({ hideURL: true });
+		} else {
+			// Unchecked
+			chrome.storage.sync.set({ hideURL: false });
+		}
+	},
+	false,
+);
 
 /* Sorting */
 document.querySelector('#sort').addEventListener(
@@ -106,30 +106,56 @@ document.querySelector('#exclusionForm').addEventListener(
 	'submit',
 	function(ev) {
 		ev.preventDefault();
-		const inpVal = document.querySelector('#excludeInput').value;
 		const body = document.querySelector('#excluded-entries-body');
+		let inpVal = document.querySelector('#excludeInput').value;
+
 		if (inpVal !== '') {
 			const url = new URL(inpVal);
-			body.innerHTML += `
-			<tr>
-				<td class="excluded-url-name">${url.host}</td>
-				<td class="excluded-url" title="${inpVal}">${inpVal}</td>
-				<td><button class="btn-small remove-excluded-url waves-effect waves-light red accent-4">Remove</button></td>
-			</tr>`;
+			const filteredUrl = `*://${url.host}${url.pathname}*`;
+
+			chrome.storage.sync.get('excludedObj', obj => {
+				if (obj.excludedObj.excludedUrlArr === undefined) {
+					chrome.storage.sync.set({ excludedObj: { excludedUrlArr: [inpVal], filteredArr: [filteredUrl] } });
+				} else {
+					if (obj.excludedObj.excludedUrlArr.includes(inpVal)) {
+						// Check Array for duplicacy
+						alert('Are Bhaiyya pehle se hai wo to');
+					} else {
+						// Update Array in Chrome Storage
+						(function(arr) {
+							arr.excludedUrlArr.push(inpVal);
+							arr.filteredArr.push(filteredUrl);
+							chrome.storage.sync.set({
+								excludedObj: arr,
+							});
+						})(obj.excludedObj);
+
+						// Reloading the Window
+						location.reload();
+					}
+				}
+			});
+		} else {
+			alert('Enter a Valid Web Address!');
 		}
+		document.querySelector('#excludeInput').value = '';
 	},
 	false,
 );
 
 // Event Delegation for Exclude URL
-document.querySelector('#excluded-entries-body').addEventListener(
-	'click',
-	function(ev) {
-		if (ev.target.className.includes('remove-excluded-url')) {
-			ev.target.parentElement.parentElement.remove();
-		}
-	},
-	false,
-);
+// document.querySelector('#excluded-entries-body').addEventListener(
+// 	'click',
+// 	function(ev) {
+// 		if (ev.target.className.includes('remove-excluded-url')) {
+// 			ev.target.parentElement.parentElement.remove();
+// 		}
+// 	},
+// 	false,
+// );
 
-// console.timeEnd('hello');
+// Delete All Excluded URL's
+document.querySelector('#deleteAllExcluded').addEventListener('click', function() {
+	chrome.storage.sync.remove('excludedObj');
+	location.reload();
+});

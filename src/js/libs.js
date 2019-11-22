@@ -1,15 +1,14 @@
 import 'materialize-css/dist/js/materialize';
 
-// Init Materialize
 document.addEventListener('DOMContentLoaded', function() {
 	M.AutoInit();
 });
 
 /* Get All Keys */
 chrome.storage.sync.get(null, function(items) {
-	// var allKeys = Object.keys(items);
+	var allKeys = Object.keys(items);
 	// console.log(allKeys);
-	console.log(items);
+	console.log({ items });
 });
 
 // Change Theme
@@ -34,7 +33,7 @@ function changeTheme(theme) {
 
 // Fetch Settings
 function fetchSettings() {
-	chrome.storage.sync.get(['theme', 'font', 'accent', 'sort', 'incognito'], function(result) {
+	chrome.storage.sync.get(['theme', 'font', 'accent', 'hideURL', 'sort', 'incognito', 'excludedObj'], function(result) {
 		// Theme
 		if (result.theme !== undefined) {
 			const theme = document.querySelector('#theme');
@@ -49,9 +48,11 @@ function fetchSettings() {
 		if (result.font !== undefined) {
 			const sel = document.querySelector('#font');
 			if (sel) {
-				sel.innerHTML = `<option value="${result.font}">${result.font}</option>`;
-				sel.value = result.font;
-				M.FormSelect.init(sel, {});
+				if (result.font !== 'default') {
+					sel.innerHTML += `<option value="${result.font}">${result.font}</option>`;
+					sel.value = result.font;
+					M.FormSelect.init(sel, {});
+				}
 			}
 			document.body.style.fontFamily = result.font;
 		}
@@ -66,6 +67,14 @@ function fetchSettings() {
 			document.documentElement.style.setProperty('--accent', result.accent);
 		}
 
+		//  Hide URL from Popup
+		if (result.hideURL !== undefined) {
+			const hideURL = document.querySelector('#hideURL');
+			if (hideURL) {
+				hideURL.checked = result.hideURL;
+			}
+		}
+
 		// Sort
 		if (result.sort !== undefined) {
 			const sort = document.querySelector('#sort');
@@ -75,11 +84,40 @@ function fetchSettings() {
 			}
 		}
 
-		// Exclude URL's
+		// Exclude Switch
 		if (result.incognito) {
-			const container = document.querySelector('#excludedEntriesContainer');
-			document.querySelector('#incognitoCheckbox').checked = true;
-			container.classList.remove('hide');
+			const excludedEntriesContainer = document.querySelector('#excludedEntriesContainer');
+			if (excludedEntriesContainer) {
+				document.querySelector('#incognitoCheckbox').checked = true;
+				excludedEntriesContainer.classList.remove('hide');
+			}
+		}
+
+		// Create Blank Exclude Object
+		if (result.excludedObj === undefined) {
+			chrome.storage.sync.set({ excludedObj: {} });
+		}
+
+		// Excluded URL's
+		if (result.excludedObj === undefined) {
+			chrome.storage.sync.set({ excludedObj: {} });
+		} else {
+			if (result.excludedObj.excludedUrlArr !== undefined) {
+				const body = document.querySelector('#excluded-entries-body');
+				if (body) {
+					let str = '';
+					result.excludedObj.excludedUrlArr.forEach(val => {
+						const url = new URL(val);
+						str += `
+						<tr>
+							<td class="excluded-url-name" title="${url.host}">${url.host}</td>
+							<td class="excluded-url" title="${url}">${url}</td>
+							<td><a class="btn-small remove-excluded-url waves-effect waves-light modal-trigger red darken-1" href="#modal2">Remove</a></td>
+						</tr>`;
+					});
+					body.innerHTML = str;
+				}
+			}
 		}
 	});
 }

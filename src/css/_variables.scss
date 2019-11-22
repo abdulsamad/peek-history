@@ -1,6 +1,6 @@
 /* CSS Variables */
 :root {
-	--accent: #{color('red', 'lighten-2')};
+	--accent: #e57373;
 	--color: #2f2f2f;
 	--opposite-color: #000;
 	--background-color: #f5f5f5;
@@ -14,7 +14,7 @@
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--accent: #{color('red', 'lighten-2')};
+		--accent: #e57373;
 		--color: #f2f2f2;
 		--opposite-color: #fff;
 		--background-color: #000;
@@ -42,10 +42,25 @@ $select-option-hover: unquote('var(--select-hover-background-color)');
 $switch-unchecked-lever-bg: #7d7d7d;
 
 /* Global Defaults */
+body {
+	font-family: '';
 
-body.keyboard-focused {
-	.select-dropdown.dropdown-content li:focus {
-		color: yellow;
+	.modal {
+		background: var(--background-color) !important;
+		color: var(--color);
+
+		.modal-footer {
+			background: var(--background-color);
+			color: var(--color);
+
+			a.btn {
+				margin: 0 0.3rem;
+			}
+		}
+	}
+
+	.modal-overlay {
+		background: var(--opposite-color);
 	}
 }
 

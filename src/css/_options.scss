@@ -8,7 +8,9 @@
 	.container {
 		width: 50%;
 	}
+
 	.options__head {
+		background: var(--accent);
 		box-shadow: var(--card-shadow);
 
 		.brand-logo {
@@ -31,7 +33,6 @@
 			}
 		}
 
-		// ! Solve Keyboard Focus Bug
 		.dropdown-content {
 			color: var(--color);
 			background-color: var(--background-color);
@@ -116,19 +117,34 @@
 
 		.row.table {
 			height: auto;
+			width: 100%;
 			margin-top: 20px;
 			font-size: 1rem;
 
 			table {
+				width: 100%;
+				table-layout: fixed;
 				border: 1px solid var(--opposite-color);
 
 				tr {
 					border-bottom: 1px solid var(--opposite-color);
 				}
 
-				.excluded-url {
-					max-width: 60%;
-					overflow: hidden;
+				tbody {
+					td {
+						overflow-x: hidden;
+						text-overflow: ellipsis;
+					}
+				}
+
+				tfoot {
+					td {
+						padding: 0;
+					}
+					.btn {
+						width: 100%;
+						font-weight: 600;
+					}
 				}
 			}
 		}

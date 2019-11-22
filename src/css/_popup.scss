@@ -7,21 +7,6 @@
 	overflow-y: scroll;
 	overflow-x: hidden;
 
-	.loader-container {
-		height: 100%;
-		width: 100%;
-		position: relative;
-
-		.loader {
-			display: inline-block;
-			position: fixed;
-			width: 50%;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-		}
-	}
-
 	.popup__head {
 		height: var(--navbar-height);
 		width: 100%;
@@ -39,7 +24,7 @@
 			padding: 0 1rem;
 			color: #fff;
 			white-space: nowrap;
-			transition: all 0.3s ease 0;
+			transition: all 0.25s ease 0;
 			user-select: none;
 			cursor: default;
 			margin: 0;
@@ -55,7 +40,7 @@
 			box-sizing: border-box;
 			margin: 0;
 			border: 0;
-			transition: all 0.3s ease;
+			transition: all 0.25s ease;
 			position: absolute;
 			cursor: pointer;
 			top: 0;
@@ -86,24 +71,6 @@
 		}
 	}
 
-	.modal {
-		background: var(--background-color);
-		color: var(--color);
-
-		.modal-footer {
-			background: var(--background-color);
-			color: var(--color);
-
-			a {
-				margin: 0 0.5rem;
-			}
-		}
-	}
-
-	.modal-overlay {
-		background: var(--opposite-color);
-	}
-
 	.popup__body {
 		margin-top: var(--navbar-height);
 
@@ -114,6 +81,11 @@
 				display: flex;
 				align-items: center;
 			}
+
+			:focus {
+				outline: 2px solid var(--opposite-color);
+				outline-offset: 2px;
+			}
 		}
 
 		.collection-item {
@@ -123,11 +95,18 @@
 			justify-content: space-between;
 			padding: 0 20px 0 45px;
 			background: var(--background-color);
+			transition: background-color 0.3s ease;
+
+			&:hover {
+				background: var(--options-background-color);
+				border-left: 5px solid var(--accent);
+			}
 		}
 
 		.circle {
 			max-height: 16px;
 			max-width: 16px;
+			background-color: white;
 		}
 
 		.title {
