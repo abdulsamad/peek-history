@@ -1,1 +1,1 @@
-### A simple extension to manage and quickly peek at history
+### A simple and minimal extension for quickly peeking and managing history.
