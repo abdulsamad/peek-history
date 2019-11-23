@@ -5,16 +5,24 @@
 	"version": "0.8.5",
 	"browser_action": {
 		"default_popup": "./popup.html",
-		"default_icon": "./assets/icon.png",
+		"default_icon": "./assets/icon-128x128.png",
 		"default_title": "Simple History"
 	},
 	"icons": {
-		"128": "./assets/icon.png",
-		"64": "./assets/icon.png",
-		"32": "./assets/icon.png"
+		"128": "./assets/icon-128x128.png",
+		"48": "./assets/icon-48x48.png",
+		"32": "./assets/icon-32x32.png",
+		"16": "./assets/icon-16x16.png"
 	},
-	"permissions": ["history", "tabs", "fontSettings", "chrome://favicon/*", "storage"],
+	"permissions": ["history", "tabs", "fontSettings", "chrome://favicon/*", "storage", "webRequestBlocking", "webRequest", "http://*/*", "https://*/*"],
 	"options_page": "options.html",
+	"background": {
+		"scripts": [
+			"js/background.js"
+		],
+		"persistant": true
+	},
+	"incognito": "not_allowed",
 	"commands": {
 		"_execute_browser_action": {
 			"suggested_key": {

@@ -1,8 +1,8 @@
 .popup {
-	min-height: 250px;
-	max-height: 500px;
-	width: 400px;
+	height: var(--popup-height);
+	width: var(--popup-width);
 	background: var(--background-color);
+	border: 1px solid #7d7d7d;
 	color: var(--color);
 	overflow-y: scroll;
 	overflow-x: hidden;
@@ -76,15 +76,11 @@
 
 		.collection {
 			margin: 0;
+			border: 0;
 
 			.link {
 				display: flex;
 				align-items: center;
-			}
-
-			:focus {
-				outline: 2px solid var(--opposite-color);
-				outline-offset: 2px;
 			}
 		}
 
@@ -93,13 +89,24 @@
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			padding: 0 20px 0 45px;
+			box-sizing: border-box;
+			padding: 0 45px 0 45px;
 			background: var(--background-color);
-			transition: background-color 0.3s ease;
+			transition: all 0.25s ease;
+			animation: listAnim 0.25s ease forwards;
+			transform-origin: top;
+			opacity: 0;
 
 			&:hover {
 				background: var(--options-background-color);
 				border-left: 5px solid var(--accent);
+			}
+
+			// Loop for animation delay
+			@for $i from 1 through 100 {
+				&:nth-child(#{$i}n) {
+					animation-delay: #{$i * 0.035}s;
+				}
 			}
 		}
 
@@ -109,14 +116,20 @@
 			background-color: white;
 		}
 
-		.title {
-			color: var(--opposite-color);
-			width: 300px;
-		}
+		.title-url-container {
+			overflow: hidden;
 
-		.url {
-			color: color('grey', 'base');
-			width: 250px;
+			.title {
+				color: var(--opposite-color);
+				width: 250px;
+				width: calc(var(--popup-width) - 100px);
+			}
+
+			.url {
+				color: color('grey', 'base');
+				width: 250px;
+				width: calc(var(--popup-width) - 45px - 13ch);
+			}
 		}
 
 		.secondary-content.delete-btn {

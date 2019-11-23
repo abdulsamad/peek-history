@@ -55,9 +55,9 @@
                 </label>
               </div>
               <div class="input-field col s5">
-                <div class="accent-collection">
+                <div class="accent-collection" tabindex="-1">
                   <button class="btn-floating btn waves-effect waves-light red lighten-2 accent-btn active"
-                    data-color="#E57373"></button>
+                    data-color="#E57373" tabindex="0"></button>
                   <button class="btn-floating btn waves-effect waves-light blue lighten-2 accent-btn"
                     data-color="#64B5F6"></button>
                   <button class="btn-floating btn waves-effect waves-light teal lighten-2 accent-btn"
@@ -70,6 +70,51 @@
                     data-color="#ffd54f"></button>
                   <button class="btn-floating btn waves-effect waves-light pink lighten-2 accent-btn"
                     data-color="#f06292"></button>
+                </div>
+              </div>
+              <div class="col s1"></div>
+            </div>
+            <div class="row">
+              <div class="col s1"></div>
+              <div class="col s5">
+                <label for="popup-height">
+                  <h6 title="Change popup height">Popup Height</h6>
+                </label>
+              </div>
+              <div class="range-field col s5">
+                <input type="range" id="popup-height" min="220" max="600" value="495" step="5">
+                <button id="set-default-height">Reset to Default</button>
+              </div>
+              <div class="col s1"></div>
+            </div>
+            <div class="row">
+              <div class="col s1"></div>
+              <div class="col s5">
+                <label for="popup-width">
+                  <h6 title="Change popup width">Popup Width</h6>
+                </label>
+              </div>
+              <div class="range-field col s5">
+                <input type="range" id="popup-width" min="250" max="700" value="400" step="5">
+                <button id="set-default-width">Reset to Default</button>
+              </div>
+              <div class="col s1"></div>
+            </div>
+            <div class="row">
+              <div class="col s1"></div>
+              <div class="col s5">
+                <label for="hideURL">
+                  <h6 title="Hide URL from popup">Hide URL</h6>
+                </label>
+              </div>
+              <div class="input-field col s5">
+                <div class="switch center-align">
+                  <label>
+                    No
+                    <input id="hideURL" type="checkbox">
+                    <span class="lever"></span>
+                    Yes
+                  </label>
                 </div>
               </div>
               <div class="col s1"></div>
@@ -98,9 +143,7 @@
               <div class="col s1"></div>
               <div class="col s5">
                 <label for="incognitoCheckbox">
-                  <h6 title="Open Excluded Entries in Incognito Tab ">Excluded Entries
-                    <span class="badge blue white-text">Coming soon</span>
-                  </h6>
+                  <h6 title="Open Excluded Entries in Incognito Tab">Exclude URL's</h6>
                 </label>
               </div>
               <div class="input-field col s5">
@@ -116,18 +159,18 @@
               <div class="col s1"></div>
             </div>
             <div id="excludedEntriesContainer" class="excluded-entries-container hide">
-              <form id="exclusionForm">
+              <form id="exclusionForm" class="exclusionForm">
                 <div class="row">
                   <div class="col s1"></div>
                   <div class="col s5">
                     <label for="excludeInput">
-                      <h6>Add Excluded Entries</h6>
+                      <h6>Add Exclude URL's</h6>
                     </label>
                   </div>
                   <div class="input-field col s5">
                     <div class="row">
                       <div class="col l10">
-                        <input class="validate" id="excludeInput" type="url" placeholder="https://google.com">
+                        <input class="validate" id="excludeInput" type="url" placeholder="https://example.com">
                       </div>
                       <div class="col">
                         <button class="btn waves-effect waves-light" id="addExclusion">Add</button>
@@ -156,9 +199,29 @@
                         </td>
                       </tr>
                     </tbody>
+                    <tfoot>
+                      <tr>
+                        <td class="center-align" colspan="3"><a class="btn red modal-trigger" id="deleteAllExcluded"
+                            href="#modal2">Delete
+                            All
+                            Excluded Website Data</a></td>
+                      </tr>
+                    </tfoot>
                   </table>
                 </div>
                 <div class="col m1"></div>
+              </div>
+              <!-- Delete Modal -->
+              <div id="modal2" class="modal" aria-hidden="true" role="dialog">
+                <div class="modal-content">
+                  <h5 id="modalTitle">Delete Item?</h5>
+                  <h6 id="modalPara"></h6>
+                </div>
+                <div class="modal-footer">
+                  <a href="#!" tabindex="0" id="confirmedDelete"
+                    class="modal-close waves-effect waves-light btn red lighten-1">Delete</a>
+                  <a href="#!" class="modal-close waves-effect waves-light btn blue lighten-1">Cancel</a>
+                </div>
               </div>
             </div>
           </div>

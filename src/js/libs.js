@@ -33,93 +33,116 @@ function changeTheme(theme) {
 
 // Fetch Settings
 function fetchSettings() {
-	chrome.storage.sync.get(['theme', 'font', 'accent', 'hideURL', 'sort', 'incognito', 'excludedObj'], function(result) {
-		// Theme
-		if (result.theme !== undefined) {
-			const theme = document.querySelector('#theme');
-			if (theme) {
-				theme.value = result.theme;
-				M.FormSelect.init(theme, {});
+	chrome.storage.sync.get(
+		['theme', 'font', 'accent', 'popupHeight', 'popupWidth', 'hideURL', 'sort', 'incognito', 'excludedObj'],
+		function(result) {
+			// Theme
+			if (result.theme !== undefined) {
+				const theme = document.querySelector('#theme');
+				if (theme) {
+					theme.value = result.theme;
+					M.FormSelect.init(theme, {});
+				}
+				changeTheme(result.theme);
 			}
-			changeTheme(result.theme);
-		}
 
-		// Font
-		if (result.font !== undefined) {
-			const sel = document.querySelector('#font');
-			if (sel) {
-				if (result.font !== 'default') {
-					sel.innerHTML += `<option value="${result.font}">${result.font}</option>`;
-					sel.value = result.font;
-					M.FormSelect.init(sel, {});
+			// Font
+			if (result.font !== undefined) {
+				const sel = document.querySelector('#font');
+				if (sel) {
+					if (result.font !== 'default') {
+						sel.innerHTML += `<option value="${result.font}">${result.font}</option>`;
+						sel.value = result.font;
+						M.FormSelect.init(sel, {});
+					}
+				}
+				document.body.style.fontFamily = result.font;
+			}
+
+			// Accent
+			if (result.accent !== undefined) {
+				const accentCollection = document.querySelector('.accent-collection');
+				if (accentCollection) {
+					document.querySelector('.active').classList.remove('active');
+					document.querySelectorAll(`[data-color="${result.accent}"]`)[0].classList.add('active');
+				}
+				document.documentElement.style.setProperty('--accent', result.accent);
+			}
+
+			// Popup Height
+			if (result.popupHeight !== undefined) {
+				document.documentElement.style.setProperty('--popup-height', result.popupHeight + 'px');
+
+				const popupHeight = document.querySelector('#popup-height');
+				if (popupHeight) {
+					popupHeight.value = result.popupHeight;
 				}
 			}
-			document.body.style.fontFamily = result.font;
-		}
 
-		// Accent
-		if (result.accent !== undefined) {
-			const accentCollection = document.querySelector('.accent-collection');
-			if (accentCollection) {
-				document.querySelector('.active').classList.remove('active');
-				document.querySelectorAll(`[data-color="${result.accent}"]`)[0].classList.add('active');
+			// Popup Width
+			if (result.popupWidth !== undefined) {
+				document.documentElement.style.setProperty('--popup-width', result.popupWidth + 'px');
+
+				const popupWidth = document.querySelector('#popup-width');
+				if (popupWidth) {
+					popupWidth.value = result.popupWidth;
+				}
 			}
-			document.documentElement.style.setProperty('--accent', result.accent);
-		}
 
-		//  Hide URL from Popup
-		if (result.hideURL !== undefined) {
-			const hideURL = document.querySelector('#hideURL');
-			if (hideURL) {
-				hideURL.checked = result.hideURL;
+			//  Hide URL from Popup
+			if (result.hideURL !== undefined) {
+				const hideURL = document.querySelector('#hideURL');
+				if (hideURL) {
+					hideURL.checked = result.hideURL;
+				}
 			}
-		}
 
-		// Sort
-		if (result.sort !== undefined) {
-			const sort = document.querySelector('#sort');
-			if (sort) {
-				sort.value = result.sort;
-				M.FormSelect.init(sort, {});
+			// Sort
+			if (result.sort !== undefined) {
+				const sort = document.querySelector('#sort');
+				if (sort) {
+					sort.value = result.sort;
+					M.FormSelect.init(sort, {});
+				}
 			}
-		}
 
-		// Exclude Switch
-		if (result.incognito) {
-			const excludedEntriesContainer = document.querySelector('#excludedEntriesContainer');
-			if (excludedEntriesContainer) {
-				document.querySelector('#incognitoCheckbox').checked = true;
-				excludedEntriesContainer.classList.remove('hide');
+			// Exclude Switch
+			if (result.incognito) {
+				const excludedEntriesContainer = document.querySelector('#excludedEntriesContainer');
+				if (excludedEntriesContainer) {
+					document.querySelector('#incognitoCheckbox').checked = true;
+					excludedEntriesContainer.classList.remove('hide');
+				}
 			}
-		}
 
-		// Create Blank Exclude Object
-		if (result.excludedObj === undefined) {
-			chrome.storage.sync.set({ excludedObj: {} });
-		}
+			// Create Blank Exclude Object
+			if (result.excludedObj === undefined) {
+				chrome.storage.sync.set({ excludedObj: {} });
+			}
 
-		// Excluded URL's
-		if (result.excludedObj === undefined) {
-			chrome.storage.sync.set({ excludedObj: {} });
-		} else {
-			if (result.excludedObj.excludedUrlArr !== undefined) {
-				const body = document.querySelector('#excluded-entries-body');
-				if (body) {
-					let str = '';
-					result.excludedObj.excludedUrlArr.forEach(val => {
-						const url = new URL(val);
-						str += `
+			// Excluded URL's
+			if (result.excludedObj === undefined) {
+				chrome.storage.sync.set({ excludedObj: {} });
+			} else {
+				if (result.excludedObj.excludedUrlArr !== undefined) {
+					const body = document.querySelector('#excluded-entries-body');
+					if (body) {
+						let str = '';
+						result.excludedObj.excludedUrlArr.forEach(val => {
+							const url = new URL(val);
+							str += `
 						<tr>
 							<td class="excluded-url-name" title="${url.host}">${url.host}</td>
 							<td class="excluded-url" title="${url}">${url}</td>
 							<td><a class="btn-small remove-excluded-url waves-effect waves-light modal-trigger red darken-1" href="#modal2">Remove</a></td>
 						</tr>`;
-					});
-					body.innerHTML = str;
+						});
+						body.innerHTML = str;
+					}
 				}
 			}
-		}
-	});
+		},
+	);
 }
 document.addEventListener('DOMContentLoaded', fetchSettings(), false);
 chrome.storage.onChanged.addListener(fetchSettings);

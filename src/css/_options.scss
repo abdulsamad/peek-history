@@ -106,12 +106,46 @@
 			}
 		}
 
+		.range-field {
+			position: relative;
+
+			.thumb {
+				z-index: 10;
+			}
+
+			button {
+				height: 1.5rem;
+				padding: 5px;
+				position: absolute;
+				top: 50%;
+				right: 0;
+				color: var(--opposite-color);
+				font-weight: 600;
+				background-color: var(--accent);
+				border-radius: 10px;
+				border: none;
+				transform: translate(100%, -50%);
+				cursor: pointer;
+				visibility: hidden;
+			}
+
+			&:hover button {
+				visibility: visible;
+			}
+		}
+
 		.switch {
 			label input[type='checkbox']:checked + .lever {
 				background-color: var(--accent);
 			}
 			label input[type='checkbox']:checked + .lever:after {
 				background-color: #f1f1f1;
+			}
+		}
+
+		.exclusionForm {
+			.btn {
+				background-color: var(--accent);
 			}
 		}
 

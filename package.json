@@ -3,9 +3,9 @@
   "version": "0.8.5",
   "description": "A simple and minimal extension for quickly peeking and managing history.",
   "scripts": {
-    "dev": "parcel src/popup.html src/options.html src/js/popup.js src/js/options.js src/js/libs.js src/css/style.scss",
+    "dev": "parcel src/popup.html src/options.html src/js/popup.js src/js/options.js src/js/libs.js src/js/background.js src/css/style.scss",
     "prebuild": "rm -rf dist/* && cp src/manifest.json dist/ && cp -a src/assets dist/",
-    "build": "parcel build src/popup.html src/options.html src/js/popup.js src/js/options.js src/js/libs.js src/css/style.scss --no-content-hash --no-source-maps"
+    "build": "parcel build src/popup.html src/options.html src/js/popup.js src/js/options.js src/js/libs.js  src/js/background.js src/css/style.scss --no-content-hash --no-source-maps"
   },
   "author": "Abdul Samad",
   "license": "MIT",

@@ -59,6 +59,40 @@ document.querySelectorAll('.accent-btn').forEach(function(elem) {
 	);
 });
 
+/* Popup Height */
+document.querySelector('#popup-height').addEventListener(
+	'change',
+	function(ev) {
+		chrome.storage.sync.set({ popupHeight: ev.target.value });
+	},
+	false,
+);
+
+document.querySelector('#set-default-height').addEventListener(
+	'click',
+	function(ev) {
+		chrome.storage.sync.set({ popupHeight: '495' });
+	},
+	false,
+);
+
+/* Popup Width */
+document.querySelector('#popup-width').addEventListener(
+	'change',
+	function(ev) {
+		chrome.storage.sync.set({ popupWidth: ev.target.value });
+	},
+	false,
+);
+
+document.querySelector('#set-default-width').addEventListener(
+	'click',
+	function(ev) {
+		chrome.storage.sync.set({ popupWidth: '400' });
+	},
+	false,
+);
+
 /* Hide URL from Popup */
 document.querySelector('#hideURL').addEventListener(
 	'click',
@@ -115,15 +149,15 @@ document.querySelector('#exclusionForm').addEventListener(
 
 			chrome.storage.sync.get('excludedObj', obj => {
 				if (obj.excludedObj.excludedUrlArr === undefined) {
-					chrome.storage.sync.set({ excludedObj: { excludedUrlArr: [inpVal], filteredArr: [filteredUrl] } });
+					chrome.storage.sync.set({ excludedObj: { excludedUrlArr: [url.href], filteredArr: [filteredUrl] } });
 				} else {
-					if (obj.excludedObj.excludedUrlArr.includes(inpVal)) {
+					if (obj.excludedObj.excludedUrlArr.includes(url.href)) {
 						// Check Array for duplicacy
-						alert('Are Bhaiyya pehle se hai wo to');
+						alert('URL Already Added');
 					} else {
 						// Update Array in Chrome Storage
 						(function(arr) {
-							arr.excludedUrlArr.push(inpVal);
+							arr.excludedUrlArr.push(url.href);
 							arr.filteredArr.push(filteredUrl);
 							chrome.storage.sync.set({
 								excludedObj: arr,
@@ -144,18 +178,40 @@ document.querySelector('#exclusionForm').addEventListener(
 );
 
 // Event Delegation for Exclude URL
-// document.querySelector('#excluded-entries-body').addEventListener(
-// 	'click',
-// 	function(ev) {
-// 		if (ev.target.className.includes('remove-excluded-url')) {
-// 			ev.target.parentElement.parentElement.remove();
-// 		}
-// 	},
-// 	false,
-// );
+document.querySelector('#excluded-entries-body').addEventListener(
+	'click',
+	function(ev) {
+		if (ev.target.className.includes('remove-excluded-url')) {
+			// prettier-ignore
+			document.querySelector('#modalPara').innerHTML = `URL: <a href="${ev.target.parentElement.parentElement.querySelector('.excluded-url').innerText}">${ev.target.parentElement.parentElement.querySelector('.excluded-url').innerText}</a>`;
+
+			document.querySelector('#confirmedDelete').onclick = () => {
+				const url = new URL(ev.target.parentElement.parentElement.querySelector('.excluded-url').innerText);
+				const filteredUrl = `*://${url.host}${url.pathname}*`;
+				chrome.storage.sync.get('excludedObj', obj => {
+					(function(arr) {
+						const excludedUrlArr = arr.excludedUrlArr.filter(val => url.href !== val);
+						const filteredArr = arr.filteredArr.filter(val => filteredUrl !== val);
+						arr.filteredArr.push(filteredUrl);
+						chrome.storage.sync.set({
+							excludedObj: { excludedUrlArr, filteredArr },
+						});
+					})(obj.excludedObj);
+				});
+			};
+		}
+	},
+	false,
+);
 
 // Delete All Excluded URL's
 document.querySelector('#deleteAllExcluded').addEventListener('click', function() {
-	chrome.storage.sync.remove('excludedObj');
-	location.reload();
+	// prettier-ignore
+	document.querySelector('#modalPara').innerHTML = `Are you sure you want to delete all excluded websites?`;
+
+	document.querySelector('#confirmedDelete').onclick = () => {
+		chrome.storage.sync.remove('excludedObj');
+		chrome.storage.sync.set({ excludedObj: {} });
+		location.reload();
+	};
 });
