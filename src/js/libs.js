@@ -130,12 +130,13 @@ function fetchSettings() {
 							const url = new URL(val);
 							str += `
 						<tr>
-							<td class="excluded-url-name" title="${url.host}">${url.host}</td>
-							<td class="excluded-url" title="${url}">${url}</td>
-							<td><a class="btn-small remove-excluded-url waves-effect waves-light modal-trigger red" href="#modal2">Remove</a></td>
+							<td class="excluded-url-name"><span class="tooltipped" data-position="top" data-tooltip="${url.host}">${url.host}</span></td>
+							<td class="excluded-url"><span class="tooltipped" data-position="top" data-tooltip="${url.href}">${url.href}</span></td>
+							<td><a class="btn-small remove-excluded-url waves-effect waves-light modal-trigger red" href="#modal2" title="Remove url from exclusion list">Remove</a></td>
 						</tr>`;
 						});
 						body.innerHTML = str;
+						M.Tooltip.init(document.querySelectorAll('.tooltipped'), {});
 					}
 				}
 			}
