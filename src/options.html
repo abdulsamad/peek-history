@@ -143,7 +143,7 @@
               <div class="col s1"></div>
               <div class="col s5">
                 <label for="incognitoCheckbox">
-                  <h6 title="Open Excluded Entries in Incognito Tab">Exclude URL's</h6>
+                  <h6 title="Open Excluded Entries in Incognito Tab">Exclude URL's <small class="beta">Beta</small></h6>
                 </label>
               </div>
               <div class="input-field col s5">
@@ -164,7 +164,7 @@
                   <div class="col s1"></div>
                   <div class="col s5">
                     <label for="excludeInput">
-                      <h6>Add Exclude URL's</h6>
+                      <h6 title="Add a new url to exclude">Add Exclude URL</h6>
                     </label>
                   </div>
                   <div class="input-field col s5">
@@ -173,7 +173,7 @@
                         <input class="validate" id="excludeInput" type="url" placeholder="https://example.com">
                       </div>
                       <div class="col">
-                        <button class="btn waves-effect waves-light" id="addExclusion">Add</button>
+                        <button class="btn waves-effect waves-light addExclusionBtn" id="addExclusion">Add</button>
                       </div>
                     </div>
                   </div>
@@ -201,10 +201,10 @@
                     </tbody>
                     <tfoot>
                       <tr>
-                        <td class="center-align" colspan="3"><a class="btn red modal-trigger" id="deleteAllExcluded"
-                            href="#modal2">Delete
-                            All
-                            Excluded Website Data</a></td>
+                        <td class="center-align" colspan="3"><a class="btn red darken-2 modal-trigger"
+                            id="deleteAllExcluded" href="#modal2" title=">Delete All Excluded Website Data">Delete
+                            All</a></td>
+                        </td>
                       </tr>
                     </tfoot>
                   </table>

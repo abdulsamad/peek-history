@@ -14,6 +14,7 @@
 		box-shadow: var(--card-shadow);
 
 		.brand-logo {
+			text-shadow: 2px 2px #000000;
 			font-weight: 700;
 		}
 	}
@@ -146,7 +147,17 @@
 		.exclusionForm {
 			.btn {
 				background-color: var(--accent);
+				text-shadow: 1px 1px #000000;
 			}
+		}
+
+		.beta {
+			background-color: color('red', 'base');
+			border-radius: 10px;
+			color: #fff;
+			margin: 0 0 0 20px;
+			padding: 5px 8px;
+			text-shadow: 1px 1px #000000;
 		}
 
 		.row.table {
@@ -154,6 +165,11 @@
 			width: 100%;
 			margin-top: 20px;
 			font-size: 1rem;
+
+			.btn,
+			.btn-small {
+				text-shadow: 1px 1px #000000;
+			}
 
 			table {
 				width: 100%;
