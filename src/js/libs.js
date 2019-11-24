@@ -121,10 +121,8 @@ function fetchSettings() {
 			}
 
 			// Excluded URL's
-			if (result.excludedObj === undefined) {
-				chrome.storage.sync.set({ excludedObj: {} });
-			} else {
-				if (result.excludedObj.excludedUrlArr !== undefined) {
+			if (result.excludedObj) {
+				if (result.excludedObj.excludedUrlArr !== undefined && result.excludedObj.excludedUrlArr.length > 0) {
 					const body = document.querySelector('#excluded-entries-body');
 					if (body) {
 						let str = '';
@@ -134,7 +132,7 @@ function fetchSettings() {
 						<tr>
 							<td class="excluded-url-name" title="${url.host}">${url.host}</td>
 							<td class="excluded-url" title="${url}">${url}</td>
-							<td><a class="btn-small remove-excluded-url waves-effect waves-light modal-trigger red darken-1" href="#modal2">Remove</a></td>
+							<td><a class="btn-small remove-excluded-url waves-effect waves-light modal-trigger red" href="#modal2">Remove</a></td>
 						</tr>`;
 						});
 						body.innerHTML = str;
@@ -144,5 +142,6 @@ function fetchSettings() {
 		},
 	);
 }
+
 document.addEventListener('DOMContentLoaded', fetchSettings(), false);
 chrome.storage.onChanged.addListener(fetchSettings);
