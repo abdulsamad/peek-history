@@ -122,15 +122,29 @@ document.querySelector('#incognitoCheckbox').addEventListener(
 	'click',
 	function() {
 		const container = document.querySelector('#excludedEntriesContainer');
-		if (this.checked === true) {
-			// Checked
-			container.classList.remove('hide');
-			chrome.storage.sync.set({ incognito: true });
-		} else {
-			// Unchecked
-			container.classList.add('hide');
-			chrome.storage.sync.set({ incognito: false });
-		}
+		chrome.permissions.request(
+			{
+				permissions: ['tabs', 'webRequestBlocking', 'webRequest'],
+				origins: ['http://*/*', 'https://*/*'],
+			},
+			granted => {
+				if (granted) {
+					if (this.checked === true) {
+						// Checked
+						container.classList.remove('hide');
+						chrome.storage.sync.set({ incognito: true });
+					} else {
+						// Unchecked
+						container.classList.add('hide');
+						chrome.storage.sync.set({ incognito: false });
+					}
+				} else {
+					this.checked = false;
+					container.classList.add('hide');
+					chrome.storage.sync.set({ incognito: false });
+				}
+			},
+		);
 	},
 	false,
 );
