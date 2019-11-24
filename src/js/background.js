@@ -11,8 +11,8 @@ function blockUrl(details) {
 }
 
 /* Fetching Excluded URL's on Init */
-chrome.storage.sync.get('excludedObj', function(obj) {
-	if (obj.excludedObj.filteredArr && obj.excludedObj.filteredArr[0]) {
+chrome.storage.sync.get(['incognito', 'excludedObj'], function(obj) {
+	if (obj.excludedObj.filteredArr && obj.excludedObj.filteredArr[0] && obj.incognito === true) {
 		chrome.webRequest.onBeforeRequest.addListener(blockUrl, { urls: obj.excludedObj.filteredArr }, ['blocking']);
 	}
 });
@@ -23,8 +23,8 @@ chrome.storage.onChanged.addListener(function() {
 		chrome.webRequest.onBeforeRequest.removeListener(blockUrl);
 	}
 
-	chrome.storage.sync.get('excludedObj', function(obj) {
-		if (obj.excludedObj.filteredArr && obj.excludedObj.filteredArr[0]) {
+	chrome.storage.sync.get(['incognito', 'excludedObj'], function(obj) {
+		if (obj.excludedObj.filteredArr && obj.excludedObj.filteredArr[0] && obj.incognito === true) {
 			chrome.webRequest.onBeforeRequest.addListener(blockUrl, { urls: obj.excludedObj.filteredArr }, ['blocking']);
 		}
 	});
