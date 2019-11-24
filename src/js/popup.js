@@ -27,7 +27,7 @@ function convertTimeAgo(value, str = 'ago') {
 	if (millis < 60000) {
 		// Seconds
 		let seconds = ((millis % 60000) / 1000).toFixed(0);
-		strFull = seconds + ' seconds ' + str;
+		strFull = seconds + ' secs ' + str;
 	} else if (millis >= 60000 && millis < 3600000) {
 		// Mins
 		let minutes = Math.floor(millis / 60000);
