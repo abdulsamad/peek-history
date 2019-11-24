@@ -166,11 +166,6 @@
 			margin-top: 20px;
 			font-size: 1rem;
 
-			.btn,
-			.btn-small {
-				text-shadow: 1px 1px #000000;
-			}
-
 			table {
 				width: 100%;
 				table-layout: fixed;
@@ -184,6 +179,10 @@
 					td {
 						overflow-x: hidden;
 						text-overflow: ellipsis;
+
+						span {
+							cursor: alias;
+						}
 					}
 				}
 
