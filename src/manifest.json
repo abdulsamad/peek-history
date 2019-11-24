@@ -14,7 +14,8 @@
 		"32": "./assets/icon-32x32.png",
 		"16": "./assets/icon-16x16.png"
 	},
-	"permissions": ["history", "tabs", "fontSettings", "chrome://favicon/*", "storage", "webRequestBlocking", "webRequest", "http://*/*", "https://*/*"],
+	"permissions": ["chrome://favicon/*", "fontSettings", "history", "storage"],
+	"optional_permissions": ["http://*/*", "https://*/*", "tabs", "webRequestBlocking", "webRequest"],
 	"options_page": "options.html",
 	"background": {
 		"scripts": [
