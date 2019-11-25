@@ -214,6 +214,9 @@ document.querySelector('#excluded-entries-body').addEventListener(
 						});
 					})(obj.excludedObj);
 				});
+
+				// Reloading the Window
+				location.reload();
 			};
 		}
 	},
