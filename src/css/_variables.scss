@@ -71,6 +71,21 @@ body {
 		background: #7d7d7d;
 		border-radius: 5px;
 	}
+
+	#toast-container {
+		top: 2.5%;
+		top: calc(var(--navbar-height) + 0.3rem);
+		right: 50%;
+		transform: translate(50%, 50%);
+		box-shadow: var(--card-shadow);
+
+		.toast {
+			background: var(--accent);
+			box-shadow: var(--card-shadow);
+			color: var(--color);
+			font-weight: 600;
+		}
+	}
 }
 
 .accent {

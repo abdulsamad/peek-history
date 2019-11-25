@@ -167,7 +167,8 @@ document.querySelector('#exclusionForm').addEventListener(
 				} else {
 					if (obj.excludedObj.excludedUrlArr.includes(url.href)) {
 						// Check Array for duplicacy
-						alert('URL Already Added');
+						M.Toast.dismissAll();
+						M.toast({ html: 'URL already added' });
 					} else {
 						// Update Array in Chrome Storage
 						(function(arr) {
@@ -184,7 +185,8 @@ document.querySelector('#exclusionForm').addEventListener(
 				}
 			});
 		} else {
-			alert('Enter a Valid Web Address!');
+			M.Toast.dismissAll();
+			M.toast({ html: 'Please enter a valid address' });
 		}
 		document.querySelector('#excludeInput').value = '';
 	},
