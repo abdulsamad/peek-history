@@ -2,9 +2,11 @@ console.time('start');
 /* Placehoder */
 (function(search) {
 	const elem = document.querySelector(search);
+	const main = document.querySelector('#main');
 	let backup = '';
 	elem.onfocus = () => {
 		elem.placeholder = '\uE800 Search History';
+		main.click();
 		if (backup != '') {
 			elem.value = backup;
 		}
@@ -17,7 +19,13 @@ console.time('start');
 })('#search');
 
 /* Open Default History */
-document.querySelector('#brand').onclick = () => chrome.tabs.create({ url: 'chrome://history' });
+document.querySelector('#open-default-history').addEventListener(
+	'click',
+	() => {
+		chrome.tabs.create({ url: 'chrome://history' });
+	},
+	false,
+);
 
 /* Convert History Milli Seconds */
 function convertTimeAgo(value, str = 'ago') {

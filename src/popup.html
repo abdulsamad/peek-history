@@ -12,11 +12,11 @@
 	<div class="popup">
 		<nav class="popup__head accent">
 			<input class="input" id="search" type="search" placeholder="&#xe800;" role="Searchbox">
-			<a href="chrome://history/" class="brand" id="brand" title="Click to open default history">Simple History</a>
+			<a href="chrome://history/" class="brand" id="brand">Simple History</a>
 		</nav>
 		<div class="popup__body" tabindex="-1">
 			<!-- List Collection -->
-			<ul class="collection" id="history-collection" tabindex="0"></ul>
+			<ul class="collection" id="history-collection" tabindex="-1"></ul>
 			<!-- Delete Modal -->
 			<div id="modal1" class="modal" aria-hidden="true" role="dialog">
 				<div class="modal-content">
@@ -29,6 +29,39 @@
 					<a href="#!" class="modal-close waves-effect waves-light btn blue lighten-1">Cancel</a>
 				</div>
 			</div>
+			<div id="tab">
+				<h5 class="center-align"> This feature is coming soon. <br> Recent Tabs will be shown here</h5>
+			</div>
+		</div>
+		<div class="popup__footer">
+			<ul id="tabs" class="tabs">
+				<li class="tab col s3">
+					<a class="active link" id="main" href="#history-collection" title="Main">
+						<i class="icon-home"></i>
+					</a>
+				</li>
+				<li class="tab s3">
+					<a class="link" href="#tab" title="Recently closed tabs">
+						<i class="icon-window-restore"></i>
+					</a>
+				</li>
+				<!-- <li class="tab s3">
+					<a class="link" href="#">
+						<i class="icon-plus"></i>
+					</a>
+				</li> -->
+				<li class="tab s3">
+					<a class="link" id="open-default-history" href="#" title="Click to open default history">
+						<i class="icon-history"></i>
+					</a>
+				</li>
+				<li class="tab s3">
+					<a class="link" href="chrome-extension://hkhdpknblfpnjohdbmnlkeickmflojgc/options.html" target="_blank"
+						title="Open settings">
+						<i class="icon-cog" aria-hidden="true"></i>
+					</a>
+				</li>
+			</ul>
 		</div>
 	</div>
 	<script src="js/popup.js"></script>

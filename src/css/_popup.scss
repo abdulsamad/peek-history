@@ -4,14 +4,12 @@
 	background: var(--background-color);
 	border: 1px solid #7d7d7d;
 	color: var(--color);
-	overflow-y: scroll;
-	overflow-x: hidden;
+	overflow: hidden;
 
 	.popup__head {
 		height: var(--navbar-height);
 		width: 100%;
-		position: fixed;
-		top: 0;
+		position: relative;
 		z-index: 10;
 		box-sizing: border-box;
 		display: flex;
@@ -19,7 +17,7 @@
 		align-content: center;
 
 		.brand {
-			font-size: 1.6rem;
+			font-size: 1.4rem;
 			font-weight: 600;
 			text-shadow: 1px 1px #000000;
 			padding: 0 1rem;
@@ -30,7 +28,6 @@
 			cursor: default;
 			margin: 0;
 			text-decoration: none;
-			cursor: pointer;
 		}
 
 		.input {
@@ -74,11 +71,15 @@
 	}
 
 	.popup__body {
-		margin-top: var(--navbar-height);
+		height: var(--body-height);
+		width: 100%;
+		overflow: auto;
+		box-sizing: border-box;
 
 		.collection {
 			margin: 0;
 			border: 0;
+			box-sizing: border-box;
 
 			.link {
 				display: flex;
@@ -87,7 +88,7 @@
 		}
 
 		.collection-item {
-			min-height: var(--navbar-height);
+			min-height: var(--list-item-height);
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
@@ -165,6 +166,44 @@
 
 		.svg-fill-color {
 			fill: var(--accent);
+		}
+	}
+
+	.popup__footer {
+		height: var(--footer-height);
+		width: 100%;
+		box-sizing: border-box;
+		position: relative;
+		z-index: 10;
+
+		.tabs {
+			height: 100%;
+			border-top: 1px solid #7d7d7d;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.tab {
+			height: 100%;
+		}
+
+		.indicator {
+			background-color: var(--accent);
+		}
+
+		.link {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-family: fa;
+			font-size: 1.2rem;
+
+			&:focus,
+			&:focus.active {
+				background-color: transparentize(#e0e0e0, 0.8);
+				outline: none;
+			}
 		}
 	}
 }
