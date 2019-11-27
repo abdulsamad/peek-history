@@ -76,6 +76,8 @@
 		overflow: auto;
 		box-sizing: border-box;
 
+		// Main
+
 		.collection {
 			margin: 0;
 			border: 0;
@@ -166,6 +168,41 @@
 
 		.svg-fill-color {
 			fill: var(--accent);
+		}
+
+		// Tabs
+
+		.collapsible {
+			border-right: none;
+			border-left: none;
+			margin: 0;
+		}
+
+		.collapsible-header {
+			display: flex;
+			align-items: center;
+
+			.caret {
+				margin: 0 0 0 0.5rem;
+				fill: var(--opposite-color);
+			}
+		}
+
+		.collapsible-body {
+			padding: 0 0 0 3rem;
+
+			.collection-item {
+				border-left: 1px solid #e0e0e0;
+
+				&:hover {
+					background: var(--options-background-color);
+					border-left: 5px solid var(--accent);
+				}
+
+				&:last-child {
+					border-bottom: none;
+				}
+			}
 		}
 	}
 

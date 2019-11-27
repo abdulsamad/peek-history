@@ -1,4 +1,3 @@
-console.time('start');
 /* Placehoder */
 (function(search) {
 	const elem = document.querySelector(search);
@@ -190,4 +189,46 @@ function deleteUrl(url) {
 		console.log('Item Deleted');
 	});
 }
-console.timeEnd('start');
+
+/* Sessions */
+
+// Current Devices
+chrome.sessions.getRecentlyClosed(function(result) {
+	const tabCollection = document.querySelector('#tab-collection');
+	let str = '';
+	console.log(result);
+
+	result.forEach(val => {
+		if (val.window) {
+			// str += `<li class="collection-item avatar"><a class="link" href="${val.tab.url}" target="_blank"><img src="chrome://favicon/${val.tab.url}" alt="" class="circle"><div class="title-url-container"><span class="title truncate">${val.tab.title}</span><p class="url truncate">${val.tab.url}<br></p></div></a></li>`
+		} else {
+			str += `<li class="collection-item avatar"><a class="link" href="${val.tab.url}" target="_blank"><img src="chrome://favicon/${val.tab.url}" alt="" class="circle"><div class="title-url-container"><span class="title truncate">${val.tab.title}</span><p class="url truncate">${val.tab.url}<br></p></div></a></li>`;
+		}
+	});
+	tabCollection.innerHTML += `<li><div class="collapsible-header"><h6>Recently Closed Tabs</h6> <svg class="caret" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></div><div class="collapsible-body"><ul class="collection">${str}</ul></div></li>`;
+});
+
+// Other Devices
+chrome.sessions.getDevices(function(result) {
+	const tabCollection = document.querySelector('#tab-collection');
+	let deviceList = '';
+	let str = '';
+	console.log(result);
+	result.forEach(val => {
+		let nestStr = '';
+		val.sessions[0].window.tabs.forEach(nestVal => {
+			nestStr += `<li class="collection-item avatar"><a class="link" href="${nestVal.url}" target="_blank"><img src="chrome://favicon/${nestVal.url}" alt="" class="circle"><div class="title-url-container"><span class="title truncate">${nestVal.title}</span><p class="url truncate">${nestVal.url}<br></p></div></a></li>`;
+		});
+
+		deviceList += `<li>
+			<div class="collapsible-header"><h6>${val.deviceName}</h6> <svg class="caret" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></div>
+			<div class="collapsible-body">
+				<ul class="collection">
+					${nestStr}
+				</ul>
+			</div>
+		</li>
+		`;
+	});
+	tabCollection.innerHTML += deviceList;
+});

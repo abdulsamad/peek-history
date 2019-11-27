@@ -5,11 +5,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /* Get All Keys */
-chrome.storage.sync.get(null, function(items) {
-	var allKeys = Object.keys(items);
-	// console.log(allKeys);
-	console.log({ items });
-});
+// chrome.storage.sync.get(null, function(items) {
+// 	var allKeys = Object.keys(items);
+// 	// console.log(allKeys);
+// 	console.log({ items });
+// });
 
 // Change Theme
 function changeTheme(theme) {
