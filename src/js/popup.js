@@ -65,10 +65,13 @@ function convertTimeAgo(value, str = 'ago') {
 }
 
 /* Search List */
-
-function strCallback(val) {
+function strCallback(val, intersectCall) {
 	let historyCollection = document.querySelector('#history-collection');
-	historyCollection.innerHTML = val;
+	if (intersectCall === true) {
+		historyCollection.innerHTML += val;
+	} else {
+		historyCollection.innerHTML = val;
+	}
 
 	// Event Delegation for Delete Button
 	historyCollection.addEventListener(
@@ -88,7 +91,7 @@ function strCallback(val) {
 document.querySelector('#search').addEventListener(
 	'keyup',
 	function(ev) {
-		searchUrlList(strCallback, 'typed', this.value, 100, 0, new Date().getTime());
+		searchUrlList(strCallback, 'typed', this.value, 50, 0, new Date().getTime());
 	},
 	false,
 );
@@ -100,6 +103,7 @@ function searchUrlList(
 	maxResults = 100,
 	startTime = 0,
 	endTime = new Date().getTime(),
+	intersectCall = false,
 ) {
 	let listHTML = '';
 
@@ -153,7 +157,7 @@ function searchUrlList(
 							}
 						}
 
-						callback(listHTML);
+						callback(listHTML, intersectCall);
 					});
 				}
 			} catch (err) {
@@ -181,7 +185,7 @@ function searchUrlList(
 	);
 }
 
-searchUrlList(strCallback, 'fetch', '', 100);
+searchUrlList(strCallback, 'fetch', '', 50);
 
 /* Delete URL */
 function deleteUrl(url) {
@@ -191,7 +195,6 @@ function deleteUrl(url) {
 }
 
 /* Sessions */
-
 // Current Devices
 chrome.sessions.getRecentlyClosed(function(result) {
 	const tabCollection = document.querySelector('#tab-collection');
