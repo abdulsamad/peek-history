@@ -26,6 +26,15 @@ document.querySelector('#open-default-history').addEventListener(
 	false,
 );
 
+/* Open Options Page */
+document.querySelector('#open-options-page').addEventListener(
+	'click',
+	() => {
+		chrome.runtime.openOptionsPage();
+	},
+	false,
+);
+
 /* Convert History Milli Seconds */
 function convertTimeAgo(value, str = 'ago') {
 	const date = new Date();
@@ -203,12 +212,26 @@ chrome.sessions.getRecentlyClosed(function(result) {
 
 	result.forEach(val => {
 		if (val.window) {
-			// str += `<li class="collection-item avatar"><a class="link" href="${val.tab.url}" target="_blank"><img src="chrome://favicon/${val.tab.url}" alt="" class="circle"><div class="title-url-container"><span class="title truncate">${val.tab.title}</span><p class="url truncate">${val.tab.url}<br></p></div></a></li>`
+			let newStr = `
+			<li class="collection-item window"><a class="link"><h6 class="title truncate">Window (${val.window.tabs.length} Tabs)</h6><button class="btn-small" data-sessionId="${val.window.sessionId}" id="sessionRestore">Restore</button></a></li>`;
+			str += newStr;
 		} else {
 			str += `<li class="collection-item avatar"><a class="link" href="${val.tab.url}" target="_blank"><img src="chrome://favicon/${val.tab.url}" alt="" class="circle"><div class="title-url-container"><span class="title truncate">${val.tab.title}</span><p class="url truncate">${val.tab.url}<br></p></div></a></li>`;
 		}
 	});
-	tabCollection.innerHTML += `<li><div class="collapsible-header"><h6>Recently Closed Tabs</h6> <svg class="caret" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></div><div class="collapsible-body"><ul class="collection">${str}</ul></div></li>`;
+	tabCollection.innerHTML += `<li><div class="collapsible-header"><h6>Recently Closed</h6> <svg class="caret" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></div><div class="collapsible-body"><ul class="collection">${str}</ul></div></li>`;
+
+	// Event Delegation for Restore Button
+	tabCollection.addEventListener(
+		'click',
+		function(ev) {
+			if (ev.target.id === 'sessionRestore') {
+				let sessionId = ev.target.getAttribute('data-sessionId');
+				chrome.sessions.restore(sessionId);
+			}
+		},
+		false,
+	);
 });
 
 // Other Devices
@@ -224,14 +247,18 @@ chrome.sessions.getDevices(function(result) {
 		});
 
 		deviceList += `<li>
-			<div class="collapsible-header"><h6>${val.deviceName}</h6> <svg class="caret" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></div>
-			<div class="collapsible-body">
-				<ul class="collection">
-					${nestStr}
-				</ul>
-			</div>
-		</li>
-		`;
+				<div class="collapsible-header"><h6>${val.deviceName}</h6> <svg class="caret" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></div>
+				<div class="collapsible-body">
+					<ul class="collection">
+						${nestStr}
+					</ul>
+				</div>
+			</li>
+			`;
 	});
 	tabCollection.innerHTML += deviceList;
+});
+
+chrome.sessions.getRecentlyClosed(result => {
+	console.log({ result });
 });

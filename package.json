@@ -1,6 +1,6 @@
 {
   "name": "peek-history",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "A simple and minimal extension for quickly peeking and managing history.",
   "scripts": {
     "dev": "parcel src/popup.html src/options.html src/js/popup.js src/js/options.js src/js/libs.js src/js/background.js src/css/style.scss",
