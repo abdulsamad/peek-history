@@ -10,48 +10,29 @@ function blockUrl(details) {
 	return { cancel: true };
 }
 
-/* Fetching Excluded URL's on Init */
-chrome.permissions.contains(
-	{
-		permissions: ['tabs', 'webRequestBlocking', 'webRequest'],
-	},
-	function(result) {
-		if (result) {
-			chrome.storage.sync.get(['incognito', 'excludedObj'], function(obj) {
-				if (obj.excludedObj) {
-					if (obj.excludedObj.filteredArr && obj.excludedObj.filteredArr[0] && obj.incognito === true) {
-						chrome.webRequest.onBeforeRequest.addListener(blockUrl, { urls: obj.excludedObj.filteredArr }, [
-							'blocking',
-						]);
-					}
-				}
-			});
-		}
-	},
-);
-
-/* Fetching Excluded URL's on Obj Change */
-chrome.storage.onChanged.addListener(function() {
-	chrome.permissions.contains(
-		{
-			permissions: ['tabs', 'webRequestBlocking', 'webRequest'],
-		},
-		function(result) {
-			if (result) {
-				if (chrome.webRequest.onBeforeRequest.hasListener(blockUrl)) {
-					chrome.webRequest.onBeforeRequest.removeListener(blockUrl);
-				}
-
-				chrome.storage.sync.get(['incognito', 'excludedObj'], function(obj) {
-					if (obj.excludedObj) {
-						if (obj.excludedObj.filteredArr && obj.excludedObj.filteredArr[0] && obj.incognito === true) {
-							chrome.webRequest.onBeforeRequest.addListener(blockUrl, { urls: obj.excludedObj.filteredArr }, [
-								'blocking',
-							]);
-						}
-					}
-				});
+// Init Blocking
+if (chrome.webRequest) {
+	chrome.storage.sync.get(['incognito', 'excludedObj'], function(obj) {
+		if (obj.excludedObj) {
+			if (obj.excludedObj.filteredArr && obj.excludedObj.filteredArr[0] && obj.incognito === true) {
+				chrome.webRequest.onBeforeRequest.addListener(blockUrl, { urls: obj.excludedObj.filteredArr }, ['blocking']);
 			}
-		},
-	);
+		}
+	});
+}
+
+// Fetching Excluded URL's on Obj Change
+chrome.storage.onChanged.addListener(() => {
+	if (chrome.webRequest) {
+		if (chrome.webRequest.onBeforeRequest.hasListener(blockUrl)) {
+			chrome.webRequest.onBeforeRequest.removeListener(blockUrl);
+		}
+		chrome.storage.sync.get(['incognito', 'excludedObj'], function(obj) {
+			if (obj.excludedObj) {
+				if (obj.excludedObj.filteredArr && obj.excludedObj.filteredArr[0] && obj.incognito === true) {
+					chrome.webRequest.onBeforeRequest.addListener(blockUrl, { urls: obj.excludedObj.filteredArr }, ['blocking']);
+				}
+			}
+		});
+	}
 });
