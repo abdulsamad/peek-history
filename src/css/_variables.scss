@@ -117,3 +117,12 @@ body {
 		transform: scaleY(1);
 	}
 }
+
+@keyframes loadAnim {
+	from {
+		transform: scaleY(0.3);
+	}
+	to {
+		transform: scaleY(1);
+	}
+}
