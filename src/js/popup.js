@@ -95,12 +95,6 @@ function strCallback(val, intersectCall) {
 		},
 		false,
 	);
-
-	if (intersectCall === false) {
-		const i = 49;
-		const elem = historyCollection.getElementsByClassName('collection-item');
-		observeCollection(elem, i);
-	}
 }
 
 document.querySelector('#search').addEventListener(
@@ -201,32 +195,6 @@ function searchUrlList(
 }
 
 searchUrlList(strCallback, 'fetch', '', 50);
-
-// Intersection Observer
-function observeCollection(elem, i) {
-	const observer = new IntersectionObserver(
-		entries => {
-			if (entries[0].isIntersecting) {
-				console.log('In port ' + i);
-				observer.unobserve(elem[i]);
-				searchUrlList(strCallback, 'fetch', '', 50, 0, Date.now(), true);
-
-				i += 50;
-				setTimeout(() => {
-					if (elem[i]) {
-						observer.observe(elem[i]);
-					}
-				}, 2000);
-			}
-		},
-		{
-			root: null,
-			rootMargin: '0px',
-			threshold: 0,
-		},
-	);
-	observer.observe(elem[i]);
-}
 
 /* Delete URL */
 function deleteUrl(url) {
