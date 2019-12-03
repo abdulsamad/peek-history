@@ -75,7 +75,7 @@ function convertTimeAgo(value, str = 'ago') {
 
 /* Search List */
 function strCallback(val, intersectCall) {
-	let historyCollection = document.querySelector('#history-collection');
+	const historyCollection = document.querySelector('#history-collection');
 	if (intersectCall === true) {
 		historyCollection.innerHTML += val;
 	} else {
@@ -95,12 +95,18 @@ function strCallback(val, intersectCall) {
 		},
 		false,
 	);
+
+	if (intersectCall === false) {
+		const i = 49;
+		const elem = historyCollection.getElementsByClassName('collection-item');
+		observeCollection(elem, i);
+	}
 }
 
 document.querySelector('#search').addEventListener(
 	'keyup',
 	function(ev) {
-		searchUrlList(strCallback, 'typed', this.value, 50, 0, new Date().getTime());
+		searchUrlList(strCallback, 'typed', this.value, 50, 0, Date.now());
 	},
 	false,
 );
@@ -111,7 +117,7 @@ function searchUrlList(
 	text = '',
 	maxResults = 100,
 	startTime = 0,
-	endTime = new Date().getTime(),
+	endTime = Date.now(),
 	intersectCall = false,
 ) {
 	let listHTML = '';
@@ -196,6 +202,32 @@ function searchUrlList(
 
 searchUrlList(strCallback, 'fetch', '', 50);
 
+// Intersection Observer
+function observeCollection(elem, i) {
+	const observer = new IntersectionObserver(
+		entries => {
+			if (entries[0].isIntersecting) {
+				console.log('In port ' + i);
+				observer.unobserve(elem[i]);
+				searchUrlList(strCallback, 'fetch', '', 50, 0, Date.now(), true);
+
+				i += 50;
+				setTimeout(() => {
+					if (elem[i]) {
+						observer.observe(elem[i]);
+					}
+				}, 2000);
+			}
+		},
+		{
+			root: null,
+			rootMargin: '0px',
+			threshold: 0,
+		},
+	);
+	observer.observe(elem[i]);
+}
+
 /* Delete URL */
 function deleteUrl(url) {
 	chrome.history.deleteUrl({ url: url }, function() {
@@ -208,7 +240,7 @@ function deleteUrl(url) {
 chrome.sessions.getRecentlyClosed(function(result) {
 	const tabCollection = document.querySelector('#tab-collection');
 	let str = '';
-	console.log(result);
+	// console.log(result);
 
 	result.forEach(val => {
 		if (val.window) {
@@ -239,7 +271,7 @@ chrome.sessions.getDevices(function(result) {
 	const tabCollection = document.querySelector('#tab-collection');
 	let deviceList = '';
 	let str = '';
-	console.log(result);
+	// console.log(result);
 	result.forEach(val => {
 		let nestStr = '';
 		val.sessions[0].window.tabs.forEach(nestVal => {
