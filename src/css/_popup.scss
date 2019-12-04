@@ -218,6 +218,14 @@
 			border-left: none;
 			box-shadow: var(--card-shadow);
 			margin: 0;
+
+			li.active {
+				.collapsible-header {
+					.caret {
+						transform: rotateZ(-180deg);
+					}
+				}
+			}
 		}
 
 		.collapsible-header {
@@ -227,6 +235,7 @@
 			.caret {
 				margin: 0 0 0 0.5rem;
 				fill: var(--opposite-color);
+				transition: transform 0.5s ease;
 			}
 		}
 
