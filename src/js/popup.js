@@ -1,7 +1,8 @@
-/* Placehoder */
+/* Input */
+// Placeholder
 (function(search) {
 	const elem = document.querySelector(search);
-	const main = document.querySelector('#main');
+	const main = document.querySelector('#homeBtn');
 	let backup = '';
 	elem.onfocus = () => {
 		elem.placeholder = '\uE800 Search History';
@@ -27,7 +28,7 @@ document.querySelector('#open-default-history').addEventListener(
 );
 
 /* Open Options Page */
-document.querySelector('#open-options-page').addEventListener(
+document.querySelector('#optionsBtn').addEventListener(
 	'click',
 	() => {
 		chrome.runtime.openOptionsPage();
@@ -127,12 +128,21 @@ function searchUrlList(
 			try {
 				if (searchType === 'typed') {
 					if (historyItems.length < 1) throw 'No Records Found with this entry';
-					historyItems.forEach(function(item) {
-						// prettier-ignore
-						listHTML += `<li class="collection-item avatar"><a class="link" href="${item.url}" target="_blank"><img src="chrome://favicon/${item.url}" alt="" class="circle"><div class="title-url-container"><span class="title truncate">${item.title}</span><p class="url truncate">${item.url}<br></p></div></a><a class="delete-btn icon-trash secondary-content modal-trigger" href="#modal1"></a><span class="time secondary-content">${convertTimeAgo(item.lastVisitTime)}</span></li>`;
-					});
+					chrome.storage.sync.get(['sort', 'hideURL'], sortVal => {
+						if (sortVal.hideURL === true) {
+							historyItems.forEach(function(item) {
+								// prettier-ignore
+								listHTML += `<li class="collection-item avatar"><a class="link" href="${item.url}" target="_blank"><img src="chrome://favicon/${item.url}" alt="" class="circle"><div class="title-url-container" tabindex="0"><div class="title truncate" title="${item.title}">${item.title}</div></div></a><a class="delete-btn icon-trash secondary-content modal-trigger" href="#modal1"></a><span class="time secondary-content">${convertTimeAgo(item.lastVisitTime)}</span></li>`;
+							});
+						} else {
+							historyItems.forEach(function(item) {
+								// prettier-ignore
+								listHTML += `<li class="collection-item avatar"><a class="link" href="${item.url}" target="_blank"><img src="chrome://favicon/${item.url}" alt="" class="circle"><div class="title-url-container" tabindex="0"><div class="title truncate" title="${item.title}">${item.title}</div><p class="url truncate" title="${item.url}">${item.url}<br></p></div></a><a class="delete-btn icon-trash secondary-content modal-trigger" href="#modal1"></a><span class="time secondary-content">${convertTimeAgo(item.lastVisitTime)}</span></li>`;
+							});
+						}
 
-					callback(listHTML);
+						callback(listHTML);
+					});
 				} else {
 					if (historyItems.length < 1) throw 'No Records Found';
 					chrome.storage.sync.get(['sort', 'hideURL'], sortVal => {
@@ -141,12 +151,12 @@ function searchUrlList(
 							if (sortVal.hideURL === true) {
 								historyItems.forEach(function(item) {
 									// prettier-ignore
-									listHTML += `<li class="collection-item avatar"><a class="link" href="${item.url}" target="_blank"><img src="chrome://favicon/${item.url}" alt="" class="circle"><div class="title-url-container"><div class="title truncate" title="${item.title}">${item.title}</div></div></a><a class="delete-btn icon-trash secondary-content modal-trigger" href="#modal1"></a><span class="time secondary-content">${convertTimeAgo(item.lastVisitTime)}</span></li>`;
+									listHTML += `<li class="collection-item avatar"><a class="link" href="${item.url}" target="_blank"><img src="chrome://favicon/${item.url}" alt="" class="circle"><div class="title-url-container" tabindex="0"><div class="title truncate" title="${item.title}">${item.title}</div></div></a><a class="delete-btn icon-trash secondary-content modal-trigger" href="#modal1"></a><span class="time secondary-content">${convertTimeAgo(item.lastVisitTime)}</span></li>`;
 								});
 							} else {
 								historyItems.forEach(function(item) {
 									// prettier-ignore
-									listHTML += `<li class="collection-item avatar"><a class="link" href="${item.url}" target="_blank"><img src="chrome://favicon/${item.url}" alt="" class="circle"><div class="title-url-container"><div class="title truncate" title="${item.title}">${item.title}</div><p class="url truncate" title="${item.url}">${item.url}<br></p></div></a><a class="delete-btn icon-trash secondary-content modal-trigger" href="#modal1"></a><span class="time secondary-content">${convertTimeAgo(item.lastVisitTime)}</span></li>`;
+									listHTML += `<li class="collection-item avatar"><a class="link" href="${item.url}" target="_blank"><img src="chrome://favicon/${item.url}" alt="" class="circle"><div class="title-url-container" tabindex="0"><div class="title truncate" title="${item.title}">${item.title}</div><p class="url truncate" title="${item.url}">${item.url}<br></p></div></a><a class="delete-btn icon-trash secondary-content modal-trigger" href="#modal1"></a><span class="time secondary-content">${convertTimeAgo(item.lastVisitTime)}</span></li>`;
 								});
 							}
 						}
@@ -156,12 +166,12 @@ function searchUrlList(
 							if (sortVal.hideURL === true) {
 								sortedArr.forEach(function(item) {
 									// prettier-ignore
-									listHTML += `<li class="collection-item avatar"><a class="link" href="${item.url}" target="_blank"><img src="chrome://favicon/${item.url}" alt="" class="circle"><div class="title-url-container"><div class="title truncate" title="${item.title} (${item.visitCount})">${item.title}</div></div></a><a class="delete-btn icon-trash secondary-content modal-trigger" href="#modal1"></a><span class="time secondary-content">${convertTimeAgo(item.lastVisitTime)}</span></li>`;
+									listHTML += `<li class="collection-item avatar"><a class="link" href="${item.url}" target="_blank"><img src="chrome://favicon/${item.url}" alt="" class="circle"><div class="title-url-container" tabindex="0"><div class="title truncate" title="${item.title} (${item.visitCount})">${item.title}</div></div></a><a class="delete-btn icon-trash secondary-content modal-trigger" href="#modal1"></a><span class="time secondary-content">${convertTimeAgo(item.lastVisitTime)}</span></li>`;
 								});
 							} else {
 								sortedArr.forEach(function(item) {
 									// prettier-ignore
-									listHTML += `<li class="collection-item avatar"><a class="link" href="${item.url}" target="_blank"><img src="chrome://favicon/${item.url}" alt="" class="circle"><div class="title-url-container"><div class="title truncate" title="${item.title} (${item.visitCount})">${item.title}</div><p class="url truncate" title="${item.url} (${item.visitCount})">${item.url}<br></p></div></a><a class="delete-btn icon-trash secondary-content modal-trigger" href="#modal1"></a><span class="time secondary-content">${convertTimeAgo(item.lastVisitTime)}</span></li>`;
+									listHTML += `<li class="collection-item avatar"><a class="link" href="${item.url}" target="_blank"><img src="chrome://favicon/${item.url}" alt="" class="circle"><div class="title-url-container" tabindex="0"><div class="title truncate" title="${item.title} (${item.visitCount})">${item.title}</div><p class="url truncate" title="${item.url} (${item.visitCount})">${item.url}<br></p></div></a><a class="delete-btn icon-trash secondary-content modal-trigger" href="#modal1"></a><span class="time secondary-content">${convertTimeAgo(item.lastVisitTime)}</span></li>`;
 								});
 							}
 						}
@@ -219,7 +229,7 @@ chrome.sessions.getRecentlyClosed(function(result) {
 			str += `<li class="collection-item avatar"><a class="link" href="${val.tab.url}" target="_blank"><img src="chrome://favicon/${val.tab.url}" alt="" class="circle"><div class="title-url-container"><span class="title truncate">${val.tab.title}</span><p class="url truncate">${val.tab.url}<br></p></div></a></li>`;
 		}
 	});
-	tabCollection.innerHTML += `<li><div class="collapsible-header"><h6>Recently Closed Tabs</h6> <svg class="caret" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></div><div class="collapsible-body"><ul class="collection">${str}</ul></div></li>`;
+	tabCollection.innerHTML += `<li><div class="collapsible-header"><h6>Recently Closed Tabs</h6> <svg class="caret" height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></div><div class="collapsible-body"><ul class="collection">${str}</ul></div></li>`;
 
 	// Event Delegation for Restore Button
 	tabCollection.addEventListener(
@@ -247,7 +257,7 @@ chrome.sessions.getDevices(function(result) {
 		});
 
 		deviceList += `<li>
-				<div class="collapsible-header"><h6>${val.deviceName}</h6> <svg class="caret" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></div>
+				<div class="collapsible-header"><h6>${val.deviceName}</h6> <svg class="caret" height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></div>
 				<div class="collapsible-body">
 					<ul class="collection">
 						${nestStr}

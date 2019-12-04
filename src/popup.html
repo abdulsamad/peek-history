@@ -12,7 +12,7 @@
 	<div class="popup">
 		<nav class="popup__head accent">
 			<input class="input" id="search" type="search" placeholder="&#xe800;" role="Searchbox">
-			<a href="chrome://history/" class="brand" id="brand">Peek History</a>
+			<a class="brand" id="brand">Peek History</a>
 		</nav>
 		<div class="popup__body" tabindex="-1">
 			<!-- List Collection -->
@@ -44,12 +44,12 @@
 		<div class="popup__footer">
 			<ul id="tabs" class="tabs">
 				<li class="tab col s3">
-					<a class="active link" id="main" href="#history-collection" title="Home">
+					<a class="link active" id="homeBtn" href="#history-collection" title="Home">
 						<i class="icon-home"></i>
 					</a>
 				</li>
 				<li class="tab s3">
-					<a class="link" href="#tab" title="Tabs">
+					<a class="link" href="#tab" id="tabBtn" title="Tabs">
 						<i class="icon-window-restore"></i>
 					</a>
 				</li>
@@ -64,7 +64,7 @@
 					</a>
 				</li>
 				<li class="tab s3">
-					<a class="link" title="Options" id="open-options-page">
+					<a class="link" title="Options" id="optionsBtn">
 						<i class="icon-cog" aria-hidden="true"></i>
 					</a>
 				</li>
