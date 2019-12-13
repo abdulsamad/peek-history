@@ -1,8 +1,9 @@
 
 .icon-search:before { content: '\e800'; } /* '' */
 .icon-cog:before { content: '\e801'; } /* '' */
-.icon-plus:before { content: '\e802'; } /* '' */
+.icon-arrows-cw:before { content: '\e802'; } /* '' */
 .icon-home:before { content: '\e803'; } /* '' */
+.icon-block:before { content: '\e804'; } /* '' */
 .icon-history:before { content: '\f1da'; } /* '' */
 .icon-trash:before { content: '\f1f8'; } /* '' */
 .icon-brush:before { content: '\f1fc'; } /* '' */
