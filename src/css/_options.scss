@@ -120,8 +120,7 @@
 				position: absolute;
 				top: 50%;
 				right: 0;
-				color: var(--opposite-color);
-				font-weight: 600;
+				color: #3c2727;
 				background-color: var(--accent);
 				border-radius: 10px;
 				border: none;
@@ -148,6 +147,7 @@
 			.btn {
 				background-color: var(--accent);
 				color: #3c2727;
+				font-weight: 600;
 			}
 		}
 

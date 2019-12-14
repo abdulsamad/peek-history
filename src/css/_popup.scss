@@ -107,6 +107,11 @@
 				border-left: 5px solid var(--accent);
 			}
 
+			&.active {
+				background: var(--options-background-color);
+				border-left: 5px solid var(--accent);
+			}
+
 			&:last-child {
 				border-bottom: 1px solid #e0e0e0;
 			}

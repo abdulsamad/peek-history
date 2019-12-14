@@ -1,3 +1,4 @@
+console.time('time');
 /* Input */
 // Placeholder
 (function(search) {
@@ -17,6 +18,15 @@
 		elem.value = '';
 	};
 })('#search');
+
+// Stop keyboard event on input focus
+document.querySelector('#search').addEventListener(
+	'keydown',
+	function(ev) {
+		ev.stopPropagation();
+	},
+	false,
+);
 
 /* Open Default History */
 document.querySelector('#open-default-history').addEventListener(
@@ -101,7 +111,13 @@ function strCallback(val, intersectCall) {
 document.querySelector('#search').addEventListener(
 	'keyup',
 	function(ev) {
-		searchUrlList(strCallback, 'typed', this.value, 50, 0, Date.now());
+		if (ev.key !== 'ArrowDown') {
+			if (this.value !== '') {
+				searchUrlList(strCallback, 'typed', this.value, 50, 0, Date.now());
+			}
+		} else {
+			this.blur();
+		}
 	},
 	false,
 );
@@ -274,3 +290,226 @@ chrome.sessions.getDevices(function(result) {
 	});
 	tabCollection.innerHTML += deviceList;
 });
+
+/* Shortcuts */
+const nextList = nextListItem();
+const nextTab = nextTabItem();
+const homeBtn = document.querySelector('#homeBtn');
+const tabsBtn = document.querySelector('#tabBtn');
+const searchInp = document.querySelector('#search');
+const optionsBtn = document.querySelector('#optionsBtn');
+const historyCollection = document.querySelector('#history-collection');
+const tabCollection = document.querySelector('#tab-collection');
+const hotkeys = {
+	search: 's',
+	home: 'ArrowLeft',
+	tabs: 'ArrowRight',
+	options: 'o',
+	listUp: 'ArrowUp',
+	listDown: 'ArrowDown',
+	one: '1',
+	two: '2',
+	three: '3',
+	four: '4',
+	five: '5',
+	six: '6',
+	seven: '7',
+	eight: '8',
+	nine: '9',
+};
+
+document.addEventListener(
+	'keydown',
+	function(ev) {
+		for (const key in hotkeys) {
+			if (hotkeys[key] === ev.key) {
+				ev.preventDefault();
+			}
+		}
+
+		switch (ev.key) {
+			case hotkeys.search:
+				searchInp.focus();
+				break;
+			case hotkeys.home:
+				homeBtn.click();
+				break;
+			case hotkeys.tabs:
+				tabsBtn.click();
+				break;
+			case hotkeys.options:
+				optionsBtn.click();
+				break;
+			case hotkeys.listUp:
+				if (homeBtn.classList.contains('active')) {
+					nextList.prev();
+				} else if (tabsBtn.classList.contains('active')) {
+					nextTab.prev();
+				}
+				break;
+			case hotkeys.listDown:
+				if (homeBtn.classList.contains('active')) {
+					nextList.next();
+				} else if (tabsBtn.classList.contains('active')) {
+					nextTab.next();
+				}
+				break;
+			case hotkeys.one:
+				if (homeBtn.classList.contains('active')) {
+					historyCollection
+						.querySelectorAll('.collection-item')[0]
+						.querySelector('.link')
+						.click();
+				} else if (tabsBtn.classList.contains('active')) {
+					tabCollection
+						.querySelectorAll('.collection-item')[0]
+						.querySelector('.link')
+						.click();
+				}
+				break;
+			case hotkeys.two:
+				if (homeBtn.classList.contains('active')) {
+					historyCollection
+						.querySelectorAll('.collection-item')[1]
+						.querySelector('.link')
+						.click();
+				} else if (tabsBtn.classList.contains('active')) {
+					tabCollection
+						.querySelectorAll('.collection-item')[1]
+						.querySelector('.link')
+						.click();
+				}
+				break;
+			case hotkeys.three:
+				if (homeBtn.classList.contains('active')) {
+					historyCollection
+						.querySelectorAll('.collection-item')[2]
+						.querySelector('.link')
+						.click();
+				} else if (tabsBtn.classList.contains('active')) {
+					tabCollection
+						.querySelectorAll('.collection-item')[2]
+						.querySelector('.link')
+						.click();
+				}
+				break;
+			case hotkeys.four:
+				if (homeBtn.classList.contains('active')) {
+					historyCollection
+						.querySelectorAll('.collection-item')[3]
+						.querySelector('.link')
+						.click();
+				} else if (tabsBtn.classList.contains('active')) {
+					tabCollection
+						.querySelectorAll('.collection-item')[3]
+						.querySelector('.link')
+						.click();
+				}
+				break;
+			case hotkeys.five:
+				if (homeBtn.classList.contains('active')) {
+					historyCollection
+						.querySelectorAll('.collection-item')[4]
+						.querySelector('.link')
+						.click();
+				} else if (tabsBtn.classList.contains('active')) {
+					tabCollection
+						.querySelectorAll('.collection-item')[4]
+						.querySelector('.link')
+						.click();
+				}
+				break;
+			case hotkeys.six:
+				if (homeBtn.classList.contains('active')) {
+					historyCollection
+						.querySelectorAll('.collection-item')[5]
+						.querySelector('.link')
+						.click();
+				} else if (tabsBtn.classList.contains('active')) {
+					tabCollection
+						.querySelectorAll('.collection-item')[5]
+						.querySelector('.link')
+						.click();
+				}
+				break;
+			case hotkeys.seven:
+				if (homeBtn.classList.contains('active')) {
+					historyCollection
+						.querySelectorAll('.collection-item')[6]
+						.querySelector('.link')
+						.click();
+				} else if (tabsBtn.classList.contains('active')) {
+					tabCollection
+						.querySelectorAll('.collection-item')[6]
+						.querySelector('.link')
+						.click();
+				}
+				break;
+			case hotkeys.eight:
+				if (homeBtn.classList.contains('active')) {
+					historyCollection
+						.querySelectorAll('.collection-item')[7]
+						.querySelector('.link')
+						.click();
+				} else if (tabsBtn.classList.contains('active')) {
+					tabCollection
+						.querySelectorAll('.collection-item')[7]
+						.querySelector('.link')
+						.click();
+				}
+				break;
+			case hotkeys.nine:
+				if (homeBtn.classList.contains('active')) {
+					historyCollection
+						.querySelectorAll('.collection-item')[8]
+						.querySelector('.link')
+						.click();
+				} else if (tabsBtn.classList.contains('active')) {
+					tabCollection
+						.querySelectorAll('.collection-item')[8]
+						.querySelector('.link')
+						.click();
+				}
+				break;
+		}
+	},
+	false,
+);
+
+function nextListItem() {
+	let index = -1;
+
+	return {
+		next: function() {
+			if (index < document.querySelector('#history-collection').querySelectorAll('.collection-item').length) {
+				document.querySelectorAll('.link')[++index].focus();
+			}
+		},
+		prev: function() {
+			if (index >= 0) {
+				document.querySelectorAll('.link')[--index].focus();
+			}
+		},
+	};
+}
+
+function nextTabItem() {
+	let index = -1;
+	// document.querySelectorAll('#tab-collection > li').length;
+
+	return {
+		next: function() {
+			if (index < document.querySelectorAll('#tab-collection > li').length - 1) {
+				++index;
+				tabCollection.querySelectorAll('.collapsible-header')[index].click();
+			}
+		},
+		prev: function() {
+			if (index > 0) {
+				--index;
+				tabCollection.querySelectorAll('.collapsible-header')[index].click();
+			}
+		},
+	};
+}
+console.timeEnd('time');
