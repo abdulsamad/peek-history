@@ -1,6 +1,6 @@
 {
 	"name": "peek-history",
-	"version": "0.9.5",
+	"version": "0.9.6",
 	"description": "A simple and minimal extension for quickly peeking and managing history.",
 	"scripts": {
 		"dev": "parcel src/popup.html src/options.html src/js/popup.js src/js/options.js src/js/libs.js src/js/background.js src/css/style.scss",
@@ -11,10 +11,10 @@
 	"author": "Abdul Samad",
 	"license": "MIT",
 	"dependencies": {
-		"materialize-css": "^1.0.0-rc.2"
+		"materialize-css": "^1.0.0"
 	},
 	"devDependencies": {
 		"parcel-bundler": "^1.12.4",
-		"sass": "^1.23.1"
+		"sass": "^1.26.3"
 	}
 }
