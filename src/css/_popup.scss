@@ -292,6 +292,10 @@
 			font-family: fa;
 			font-size: 1.2rem;
 
+			svg {
+				fill: var(--opposite-color);
+			}
+
 			&:focus,
 			&:focus.active {
 				background-color: transparentize(#e0e0e0, 0.8);
