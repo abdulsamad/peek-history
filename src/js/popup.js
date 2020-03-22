@@ -237,24 +237,28 @@ function deleteUrl(url) {
 }
 
 /* Clear All History */
-document.querySelector('#clearHistoryBtn').addEventListener(
-	'click',
-	function(ev) {
-		let secs = 6;
-		const elem = document.querySelector('#confirmedClearHistory');
-		elem.classList.add('disabled');
-		const timer = setInterval(() => {
-			secs--;
-			elem.innerHTML = `Wait ${secs} secs`;
-			if (secs === 0) {
-				clearInterval(timer);
-				elem.innerHTML = 'Delete All';
-				elem.classList.remove('disabled');
-			}
-		}, 1000);
-	},
-	false,
-);
+(function() {
+	let timer;
+	document.querySelector('#clearHistoryBtn').addEventListener(
+		'click',
+		function(ev) {
+			let secs = 6;
+			const elem = document.querySelector('#confirmedClearHistory');
+			if (timer) clearInterval(timer);
+			elem.classList.add('disabled');
+			timer = setInterval(() => {
+				secs--;
+				elem.innerHTML = `Wait ${secs} secs`;
+				if (secs === 0) {
+					clearInterval(timer);
+					elem.innerHTML = 'Delete All';
+					elem.classList.remove('disabled');
+				}
+			}, 1000);
+		},
+		false,
+	);
+})();
 
 document.querySelector('#confirmedClearHistory').addEventListener(
 	'click',
