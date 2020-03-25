@@ -1,4 +1,3 @@
-console.time('time');
 /* Input */
 // Placeholder
 (function(search) {
@@ -546,4 +545,3 @@ function nextTabItem() {
 		},
 	};
 }
-console.timeEnd('time');

@@ -124,7 +124,7 @@ document.querySelector('#incognitoCheckbox').addEventListener(
 		const container = document.querySelector('#excludedEntriesContainer');
 		chrome.permissions.request(
 			{
-				permissions: [ 'webRequestBlocking', 'webRequest'],
+				permissions: ['webRequestBlocking', 'webRequest'],
 				origins: ['http://*/*', 'https://*/*'],
 			},
 			granted => {
