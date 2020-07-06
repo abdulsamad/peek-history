@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
-import './Options.css';
+import React from 'react';
+import Navbar from './components/layout/Navbar';
 
-class Options extends Component {
-  render() {
-    return <div className="OptionsContainer">Options Page</div>;
-  }
+function Options() {
+  return (
+    <div>
+      <Navbar title="Peek History" />
+    </div>
+  );
 }
 
 export default Options;
