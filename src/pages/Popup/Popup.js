@@ -1,25 +1,19 @@
 import React from 'react';
-import logo from '../../assets/icon128.png';
-import './Popup.css';
+import Navbar from './components/layout/Navbar';
+import BottomNavbar from './components/layout/BottomNavbar';
+import PopupState from './context/popupState';
+import Home from './components/home/Home';
 
 const Popup = () => {
-	return (
-		<div className='App'>
-			<header className='App-header'>
-				<img src={logo} className='App-logo' alt='logo' />
-				<p>
-					Edit <code>src/pages/Popup/Popup.js</code> and save to reload.
-				</p>
-				<a
-					className='App-link'
-					href='https://reactjs.org'
-					target='_blank'
-					rel='noopener noreferrer'>
-					Learn React
-				</a>
-			</header>
-		</div>
-	);
+  return (
+    <PopupState>
+      <div className="App">
+        <Navbar title="Peek History" />
+        <Home />
+        <BottomNavbar />
+      </div>
+    </PopupState>
+  );
 };
 
 export default Popup;
