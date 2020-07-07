@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
+import PopupContext from '../../context/popupContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,6 +63,8 @@ const useStyles = makeStyles((theme) => ({
 
 function Navbar({ title }) {
   const classes = useStyles();
+  const popupContext = useContext(PopupContext);
+  const { searchHistory } = popupContext;
 
   return (
     <div className={classes.root}>
@@ -80,6 +83,7 @@ function Navbar({ title }) {
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
+              onKeyUp={(ev) => searchHistory(ev.target.value)}
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
