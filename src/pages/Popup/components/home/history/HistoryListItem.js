@@ -87,7 +87,7 @@ function HistoryListItem({ title, url, lastVisitTime }) {
             className={classes.textContainer}
             primary={
               title ? (
-                <Typography variant="body1" display="block">
+                <Typography title={title} variant="body1" display="block">
                   {title}
                 </Typography>
               ) : (
@@ -97,6 +97,7 @@ function HistoryListItem({ title, url, lastVisitTime }) {
               )
             }
             secondary={url}
+            secondaryTypographyProps={{ title: url }}
           />
         </Link>
         <ListItemSecondaryAction className={classes.listItemSecondaryAction}>
@@ -112,7 +113,6 @@ function HistoryListItem({ title, url, lastVisitTime }) {
           </Typography>
         </ListItemSecondaryAction>
       </ListItem>
-
       <Divider />
     </>
   );

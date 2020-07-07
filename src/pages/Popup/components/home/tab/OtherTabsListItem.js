@@ -97,7 +97,13 @@ function RecentsTabsListItem(props) {
                     className={classes.textContainer}
                     primary={
                       tab.title ? (
-                        tab.title
+                        <Typography
+                          title={tab.title}
+                          variant="body1"
+                          display="block"
+                        >
+                          {tab.title}
+                        </Typography>
                       ) : (
                         <Typography
                           variant="body1"
@@ -109,6 +115,7 @@ function RecentsTabsListItem(props) {
                       )
                     }
                     secondary={tab.url}
+                    secondaryTypographyProps={{ title: tab.url }}
                   />
                 </Link>
               </ListItem>
@@ -173,7 +180,13 @@ function RecentsTabsListItem(props) {
                       className={classes.textContainer}
                       primary={
                         tab.title ? (
-                          tab.title
+                          <Typography
+                            title={tab.title}
+                            variant="body1"
+                            display="block"
+                          >
+                            {tab.title}
+                          </Typography>
                         ) : (
                           <Typography
                             variant="body1"
@@ -185,6 +198,7 @@ function RecentsTabsListItem(props) {
                         )
                       }
                       secondary={tab.url}
+                      secondaryTypographyProps={{ title: tab.url }}
                     />
                   </Link>
                 </ListItem>
