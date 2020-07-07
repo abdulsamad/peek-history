@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import HomeIcon from '@material-ui/icons/Home';
 import DevicesIcon from '@material-ui/icons/Devices';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import SettingsIcon from '@material-ui/icons/Settings';
-import DeleteAllModal from '../home/DeleteAllModal';
+import DeleteAllModal from '../home/history/DeleteAllModal';
+import PopupContext from '../../context/popupContext';
 
 const useStyles = makeStyles({
   root: {
@@ -28,25 +28,25 @@ const useStyles = makeStyles({
 
 function BottomNavbar() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const popupContext = useContext(PopupContext);
+  const { activeTabNum, setActiveTabNum } = popupContext;
 
   return (
     <nav className={classes.nav}>
-      {value === 2 && <DeleteAllModal />}
-
       <BottomNavigation
-        value={value}
+        value={activeTabNum}
         onChange={(event, newValue) => {
-          setValue(newValue);
-          console.log(newValue);
+          setActiveTabNum(newValue);
         }}
-        // showLabels={false}
         className={classes.root}
       >
         <BottomNavigationAction icon={<HomeIcon />} />
         <BottomNavigationAction icon={<DevicesIcon />} />
-        <BottomNavigationAction icon={<DeleteForeverIcon />} />
-        <BottomNavigationAction icon={<SettingsIcon />} />
+        <DeleteAllModal />
+        <BottomNavigationAction
+          onClick={() => chrome.runtime.openOptionsPage()}
+          icon={<SettingsIcon />}
+        />
       </BottomNavigation>
     </nav>
   );
