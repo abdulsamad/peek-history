@@ -36,12 +36,12 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: 'nowrap',
 
     '& span': {
-      width: 'calc(100% - 25px)',
+      width: '100%',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
     },
     '& p': {
-      width: 'calc(100% - 20px)',
+      width: '100%',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
     },
