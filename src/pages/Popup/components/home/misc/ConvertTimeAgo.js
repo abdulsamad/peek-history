@@ -1,4 +1,4 @@
-/* Convert History Milli Seconds */
+/* Convert History Timestamp to Humand Readable Time ago */
 
 function convertTimeAgo(value) {
   let strFull = '';
