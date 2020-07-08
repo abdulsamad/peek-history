@@ -1,10 +1,14 @@
 import React, { useContext } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import HomeIcon from '@material-ui/icons/Home';
-import DevicesIcon from '@material-ui/icons/Devices';
-import SettingsIcon from '@material-ui/icons/Settings';
+import {
+  makeStyles,
+  BottomNavigation,
+  BottomNavigationAction,
+} from '@material-ui/core';
+import {
+  Home as HomeIcon,
+  Devices as DevicesIcon,
+  Settings as SettingsIcon,
+} from '@material-ui/icons';
 import DeleteAllModal from '../home/history/DeleteAllModal';
 import PopupContext from '../../context/popupContext';
 

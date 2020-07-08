@@ -1,15 +1,17 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import Divider from '@material-ui/core/Divider';
-import Link from '@material-ui/core/Link';
+import {
+  makeStyles,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+  ListItemSecondaryAction,
+  Avatar,
+  IconButton,
+  Divider,
+  Link,
+  Typography,
+} from '@material-ui/core';
 import DeleteModal from './DeleteModal';
-import Typography from '@material-ui/core/Typography';
 import ConvertTimeAgo from '../misc/ConvertTimeAgo';
 
 const useStyles = makeStyles((theme) => ({
@@ -96,6 +98,7 @@ function HistoryListItem({ title, url, lastVisitTime }) {
                 </Typography>
               )
             }
+            primaryTypographyProps={{ title: title }}
             secondary={url}
             secondaryTypographyProps={{ title: url }}
           />

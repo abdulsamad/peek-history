@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
+import { makeStyles, List } from '@material-ui/core';
 import HistoryListItem from './HistoryListItem';
 import PopupContext from '../../../context/popupContext';
 
@@ -10,10 +9,13 @@ const useStyles = makeStyles((theme) => ({
     top: 60,
     bottom: 60,
     width: '100%',
+    color: theme.palette.text.primary,
     backgroundColor: theme.palette.background.paper,
+    overflowX: 'hidden',
     overflowY: 'scroll',
   },
   list: {
+    width: '100%',
     padding: 0,
   },
 }));

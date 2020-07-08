@@ -1,18 +1,20 @@
 import React, { Fragment } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import Avatar from '@material-ui/core/Avatar';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Link from '@material-ui/core/Link';
-import Button from '@material-ui/core/Button';
+import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
+import {
+  makeStyles,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+  Avatar,
+  Divider,
+  Typography,
+  List,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Link,
+  Button,
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -1,12 +1,14 @@
 import React, { useContext, useState } from 'react';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Slide from '@material-ui/core/Slide';
-import DeleteIcon from '@material-ui/icons/Delete';
+import { Delete as DeleteIcon } from '@material-ui/icons';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Slide,
+} from '@material-ui/core';
 import PopupContext from '../../../context/popupContext';
 
 const Transition = React.forwardRef(function Transition(props, ref) {

@@ -1,14 +1,16 @@
 import React, { useContext } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
+import {
+  makeStyles,
+  List,
+  Typography,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from '@material-ui/core/';
 import PopupContext from '../../../context/popupContext';
 import RecentsTabsListItem from './RecentsTabsListItem';
 import OtherTabsListItem from './OtherTabsListItem';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     top: 60,
     bottom: 60,
     width: '100%',
+    color: theme.palette.text.primary,
     backgroundColor: theme.palette.background.paper,
     overflowX: 'hidden',
     overflowY: 'scroll',
@@ -43,7 +46,7 @@ function TabsList() {
             Recently Closed Tabs
           </Typography>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails className={classes.accordionDetails}>
           <List
             component="div"
             aria-label="Recently Closed Tabs"
@@ -70,7 +73,7 @@ function TabsList() {
               {device.deviceName}
             </Typography>
           </AccordionSummary>
-          <AccordionDetails>
+          <AccordionDetails className={classes.accordionDetails}>
             <List
               component="div"
               aria-label="Recently Closed Tabs"
