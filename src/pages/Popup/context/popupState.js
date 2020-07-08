@@ -46,7 +46,9 @@ function PopupState(props) {
     chrome.history.search(
       {
         text: text,
-        maxResults: 30,
+        maxResults: 50,
+        startTime: 157784760000,
+        endTime: Date.now(),
       },
       (historyItem) => {
         dispatch({
