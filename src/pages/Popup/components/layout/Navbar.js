@@ -14,11 +14,13 @@ import PopupContext from '../../context/popupContext';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    height: 60,
 
     '&:focus-within h6': {
       display: 'none',
     },
+  },
+  nav: {
+    height: 60,
   },
   title: {
     maxWidth: '12ch',
@@ -71,7 +73,7 @@ function Navbar({ title }) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="fixed">
+      <AppBar position="fixed" className={classes.nav}>
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
             {title}
