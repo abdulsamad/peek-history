@@ -1,12 +1,12 @@
 import React from 'react';
-import Navbar from './components/layout/Navbar';
+import Appearance from './components/Appearance';
 
 function Options() {
-  return (
-    <div>
-      <Navbar title="Peek History" />
-    </div>
-  );
+	return (
+		<div className='App'>
+			<Appearance />
+		</div>
+	);
 }
 
 export default Options;

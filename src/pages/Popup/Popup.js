@@ -6,27 +6,27 @@ import PopupState from './context/popupState';
 import Home from './components/home/Home';
 
 const Popup = () => {
-  const theme = useMemo(
-    () =>
-      createMuiTheme({
-        palette: {
-          type: 'light',
-        },
-      }),
-    []
-  );
+	const theme = useMemo(
+		() =>
+			createMuiTheme({
+				palette: {
+					type: 'dark',
+				},
+			}),
+		[],
+	);
 
-  return (
-    <ThemeProvider theme={theme}>
-      <PopupState>
-        <div className="App">
-          <Navbar title="Peek History" />
-          <Home />
-          <BottomNavbar />
-        </div>
-      </PopupState>
-    </ThemeProvider>
-  );
+	return (
+		<ThemeProvider theme={theme}>
+			<PopupState>
+				<div className='App'>
+					<Navbar title='Peek History' />
+					<Home />
+					<BottomNavbar />
+				</div>
+			</PopupState>
+		</ThemeProvider>
+	);
 };
 
 export default Popup;
