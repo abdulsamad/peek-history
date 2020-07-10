@@ -32,16 +32,6 @@ var options = {
 	},
 	module: {
 		rules: [
-			// {
-			//   test: /\.css$/,
-			//   loader: 'style-loader!css-loader',
-			//   exclude: /node_modules/,
-			// },
-			// {
-			//   test: /\.scss$/,
-			//   loader: 'sass-loader',
-			//   exclude: /node_modules/,
-			// },
 			{
 				test: /\.(css|scss)$/,
 				use: [
