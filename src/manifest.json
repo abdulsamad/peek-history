@@ -10,10 +10,7 @@
 	},
 	"permissions": ["chrome://favicon/*", "fontSettings", "tabs", "history", "storage", "sessions"],
 	"optional_permissions": ["http://*/*", "https://*/*", "webRequestBlocking", "webRequest"],
-	"options_ui": {
-		"page": "options.html",
-		"open_in_tab": false
-	},
+	"options_page": "options.html",
 	"background": {
 		"scripts": ["background.js"],
 		"persistant": true
