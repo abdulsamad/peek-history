@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	makeStyles,
-	InputLabel,
 	MenuItem,
 	FormHelperText,
 	FormControl,
@@ -13,51 +12,46 @@ import {
 const useStyles = makeStyles((theme) => ({
 	root: {
 		margin: '1.5rem 0',
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
 	},
 	formControl: {
 		width: '100%',
-		padding: '1rem auto',
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
 	},
 	select: {
-		width: '80%',
-
 		'& > .MuiSelect-root': {
 			padding: 12,
 		},
 	},
-	selectEmpty: {
-		marginTop: theme.spacing(2),
-	},
-	gridItem: {
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
 }));
 
 function Theme() {
+	const [theme, setTheme] = useState('default');
 	const classes = useStyles();
 
+	useEffect(() => {
+		chrome.storage.sync.get(['theme'], (syncTheme) =>
+			syncTheme.theme ? setTheme(syncTheme.theme) : setTheme('default'),
+		);
+	}, []);
+
+	const handleChange = (ev) => {
+		setTheme(ev.target.value);
+		chrome.storage.sync.set({ theme: ev.target.value });
+	};
+
 	return (
-		<Grid container className={classes.root}>
-			<Grid item md={4} className={classes.gridItem}>
-				<Typography variant='subtitle2'>Theme</Typography>
+		<Grid container alignItems='center' className={classes.root}>
+			<Grid item md={6}>
+				<Typography variant='subtitle2' align='center'>
+					Theme
+				</Typography>
 			</Grid>
-			<Grid item md={2}></Grid>
 			<Grid item md={4}>
-				<FormControl variant='filled' className={classes.formControl}>
+				<FormControl variant='filled' className={classes.formControl} hiddenLabel={true}>
 					<Select
-						labelId='theme'
 						id='theme-select-filled'
-						value='default'
+						value={theme}
 						className={classes.select}
-						onChange={(ev) => console.log(ev.target.value)}>
+						onChange={handleChange}>
 						<MenuItem value='default'>Default</MenuItem>
 						<MenuItem value='dark'>Dark</MenuItem>
 						<MenuItem value='light'>Light</MenuItem>

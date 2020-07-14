@@ -36,19 +36,26 @@ export default function SimpleTable() {
 						<TableHead>
 							<TableRow>
 								<TableCell align='center'>Domain</TableCell>
-								<TableCell>URL</TableCell>
-								<TableCell>-</TableCell>
+								<TableCell align='center'>URL</TableCell>
+								<TableCell align='center'>-</TableCell>
 							</TableRow>
 						</TableHead>
 						<TableBody>
 							<TableRow>
-								<TableCell component='th' scope='row'>
+								<TableCell component='th' align='center' scope='row'>
 									Google.com
 								</TableCell>
-								<TableCell>https://google.com</TableCell>
-								<TableCell>
+								<TableCell align='center'>https://google.com</TableCell>
+								<TableCell align='center'>
 									<Button variant='contained' color='secondary'>
 										Delete
+									</Button>
+								</TableCell>
+							</TableRow>
+							<TableRow>
+								<TableCell scope='row' colSpan={3} padding='none'>
+									<Button variant='contained' fullWidth={true}>
+										Delete All
 									</Button>
 								</TableCell>
 							</TableRow>

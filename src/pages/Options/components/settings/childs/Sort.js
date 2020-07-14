@@ -1,54 +1,54 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles, MenuItem, FormControl, Select, Grid, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		margin: '1.5rem 0',
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
 	},
 	formControl: {
 		width: '100%',
 		padding: '1rem auto',
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
 	},
 	select: {
-		width: '80%',
+		width: '100%',
 
 		'& > .MuiSelect-root': {
 			padding: 12,
 		},
 	},
-	selectEmpty: {
-		marginTop: theme.spacing(2),
-	},
-	gridItem: {
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
 }));
 
 function Sort() {
+	const [value, setValue] = useState('last-visit');
 	const classes = useStyles();
 
+	useEffect(() => {
+		chrome.storage.sync.get(['sort'], (syncSort) => {
+			if (!syncSort.sort) return;
+			setValue(syncSort.sort);
+		});
+	}, []);
+
+	const onChange = (ev) => {
+		setValue(ev.target.value);
+		chrome.storage.sync.set({ sort: ev.target.value });
+	};
+
 	return (
-		<Grid container className={classes.root}>
-			<Grid item md={4} className={classes.gridItem}>
-				<Typography variant='subtitle2'>Sort By</Typography>
+		<Grid container alignItems='center' className={classes.root}>
+			<Grid item md={6}>
+				<Typography align='center' variant='subtitle2'>
+					Sort By
+				</Typography>
 			</Grid>
-			<Grid item md={2}></Grid>
 			<Grid item md={4}>
 				<FormControl variant='filled' className={classes.formControl}>
 					<Select
 						labelId='sort-by'
 						id='sort-by-select-filled'
-						value='last-visit'
+						value={value}
 						className={classes.select}
-						onChange={(ev) => console.log(ev.target.value)}>
+						onChange={onChange}>
 						<MenuItem value='last-visit'>By Last Visit</MenuItem>
 						<MenuItem value='most-visit'>By Most Visit</MenuItem>
 					</Select>
