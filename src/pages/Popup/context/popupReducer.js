@@ -14,6 +14,13 @@ export default (state, action) => {
 				historyItems: action.payload,
 			};
 
+		case types.SEARCH_TABS:
+			return {
+				...state,
+				recentTabs: action.payload.recentTabs,
+				otherTabs: action.payload.otherTabs,
+			};
+
 		case types.GET_RECENT_TABS:
 			return {
 				...state,

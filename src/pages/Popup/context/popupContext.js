@@ -44,21 +44,68 @@ function PopupProvider({ children }) {
 		});
 	}, []);
 
-	const searchHistory = (text) => {
-		chrome.history.search(
-			{
-				text: text,
-				maxResults: 50,
-				startTime: 157784760000,
-				endTime: Date.now(),
-			},
-			(historyItem) => {
-				dispatch({
-					type: types.SEARCH_HISTORY,
-					payload: historyItem,
+	const search = (text) => {
+		if (state.activeTabNum === 0) {
+			chrome.history.search(
+				{
+					text: text,
+					maxResults: 50,
+					startTime: 157784760000,
+					endTime: Date.now(),
+				},
+				(historyItem) => {
+					dispatch({
+						type: types.SEARCH_HISTORY,
+						payload: historyItem,
+					});
+				},
+			);
+		} else {
+			const regex = new RegExp(text, 'gi');
+
+			// Filter Recent Tabs
+			const recentTabs = state.recentTabs.filter((obj) => {
+				const tab = obj.tab;
+				let win = obj.window;
+
+				if (win) {
+					const arr = win.tabs.filter(
+						(windowObj) => windowObj.title.match(regex) || windowObj.url.match(regex),
+					);
+
+					if (arr.length > 0) {
+						win.tabs = arr;
+						return obj;
+					}
+				} else if ((tab && tab.title.match(regex)) || tab.url.match(regex)) {
+					return obj;
+				}
+			});
+
+			// Filter Other Tabs
+			const otherTabs = state.otherTabs.filter((obj) => {
+				const arr = obj.sessions.filter((session) => {
+					const arr2 = session.window.tabs.filter(
+						(tab) => tab.title.match(regex) || tab.url.match(regex),
+					);
+
+					if (arr2.length > 0) {
+						session.window.tabs = arr2;
+						return session;
+					}
 				});
-			},
-		);
+
+				if (arr.length > 0) {
+					obj.sessions = arr;
+					return obj;
+				}
+			});
+
+			dispatch({
+				type: types.SEARCH_TABS,
+				payload: { recentTabs, otherTabs },
+			});
+		}
 	};
 
 	const setActiveTabNum = (num) => {
@@ -88,7 +135,7 @@ function PopupProvider({ children }) {
 			}}>
 			<PopupContextDispatch.Provider
 				value={{
-					searchHistory,
+					search,
 					setActiveTabNum,
 					deleteHistory,
 				}}>
