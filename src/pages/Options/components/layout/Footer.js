@@ -20,7 +20,7 @@ function Footer({ title }) {
 				</Link>{' '}
 				If you like this extension and leave a feedback.
 			</Typography>
-			<Typography variant='body1'>&copy;{title}</Typography>
+			<Typography variant='body1'>&copy; {title}</Typography>
 		</footer>
 	);
 }
