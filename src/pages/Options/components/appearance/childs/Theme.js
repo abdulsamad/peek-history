@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useOptionsState, useOptionsDispatch } from '../../../context/optionsContext';
 import {
 	makeStyles,
 	MenuItem,
@@ -24,14 +25,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Theme() {
-	const [theme, setTheme] = useState('default');
+	const { theme } = useOptionsState();
+	const { setTheme } = useOptionsDispatch();
 	const classes = useStyles();
-
-	useEffect(() => {
-		chrome.storage.sync.get(['theme'], (syncTheme) =>
-			syncTheme.theme ? setTheme(syncTheme.theme) : setTheme('default'),
-		);
-	}, []);
 
 	const handleChange = (ev) => {
 		setTheme(ev.target.value);
