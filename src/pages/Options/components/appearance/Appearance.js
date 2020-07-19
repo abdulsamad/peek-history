@@ -1,17 +1,17 @@
 import React from 'react';
-import { Container, makeStyles, Card, Typography, IconButton } from '@material-ui/core';
+import { Container, makeStyles, Paper, Typography, IconButton } from '@material-ui/core';
 import { Looks as LooksIcon } from '@material-ui/icons';
-import Theme from './Theme';
-import Font from './Font';
-import AccentColor from './AccentColor';
-import PopupWidth from './PopupWidth';
-import HideURL from './HideURL';
+import Theme from './childs/Theme';
+import Font from './childs/Font';
+import AccentColor from './childs/AccentColor';
+import PopupWidth from './childs/PopupWidth';
+import HideURL from './childs/HideURL';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		margin: '16 auto',
 	},
-	card: {
+	paper: {
 		padding: 16,
 		margin: 10,
 	},
@@ -22,7 +22,7 @@ function Appearance() {
 
 	return (
 		<Container className={classes.root}>
-			<Card className={classes.card}>
+			<Paper elevation={3} className={classes.paper}>
 				<Typography variant='h6' gutterBottom>
 					<IconButton>
 						<LooksIcon />
@@ -34,7 +34,7 @@ function Appearance() {
 				<AccentColor />
 				<PopupWidth />
 				<HideURL />
-			</Card>
+			</Paper>
 		</Container>
 	);
 }
