@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useOptionsState, useOptionsDispatch } from '../../../context/optionsContext';
 import { makeStyles, Grid, Typography, FormHelperText, TextField } from '@material-ui/core';
 import { Autocomplete, createFilterOptions } from '@material-ui/lab';
 
@@ -12,15 +13,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Fonts() {
-	const [font, setFont] = useState('');
+	const { font } = useOptionsState();
+	const { setFont } = useOptionsDispatch();
 	const [fontList, setFontList] = useState([]);
 	const classes = useStyles();
 
 	useEffect(() => {
 		chrome.fontSettings.getFontList((fonts) => setFontList(fonts));
-		chrome.storage.sync.get(['font'], (syncFont) =>
-			syncFont.font ? setFont(syncFont.font) : setFont(''),
-		);
 	}, []);
 
 	const onInputChange = (ev, value) => {
