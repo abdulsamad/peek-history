@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
 	makeStyles,
 	ListItem,
@@ -43,13 +44,13 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 	listItemSecondaryAction: {
+		width: '47px',
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent: 'space-between',
 
 		'& > span': {
-			whitespace: 'nowrap',
 			backgroundColor: theme.palette.background.paper,
 		},
 	},
@@ -63,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-function HistoryListItem({ title, url, lastVisitTime }) {
+function HistoryListItem({ title, url, lastVisitTime, hideURL }) {
 	const classes = useStyles();
 
 	return (
@@ -98,7 +99,7 @@ function HistoryListItem({ title, url, lastVisitTime }) {
 							)
 						}
 						primaryTypographyProps={{ title: title }}
-						secondary={url}
+						secondary={!hideURL && url}
 						secondaryTypographyProps={{ title: url }}
 					/>
 				</Link>
@@ -106,7 +107,7 @@ function HistoryListItem({ title, url, lastVisitTime }) {
 					<IconButton edge='end' aria-label='delete' className={classes.deleteIcon}>
 						<DeleteModal url={url} />
 					</IconButton>
-					<Typography variant='caption' display='block'>
+					<Typography variant='caption' display='block' noWrap>
 						{ConvertTimeAgo(lastVisitTime)}
 					</Typography>
 				</ListItemSecondaryAction>
@@ -115,5 +116,12 @@ function HistoryListItem({ title, url, lastVisitTime }) {
 		</>
 	);
 }
+
+HistoryListItem.propTypes = {
+	title: PropTypes.string.isRequired,
+	url: PropTypes.string.isRequired,
+	lastVisitTime: PropTypes.number.isRequired,
+	hideURL: PropTypes.bool.isRequired,
+};
 
 export default HistoryListItem;
