@@ -17,9 +17,9 @@ function HideURL() {
 	const classes = useStyles();
 
 	useEffect(() => {
-		chrome.storage.sync.get(['hideURL'], (syncHideURL) => {
-			if (!syncHideURL.hideURL) return;
-			setValue(syncHideURL.hideURL);
+		chrome.storage.sync.get('hideURL', ({ hideURL }) => {
+			if (!hideURL) return;
+			setValue(hideURL);
 		});
 	}, []);
 
@@ -40,8 +40,7 @@ function HideURL() {
 					checked={value}
 					onChange={onChange}
 					color='primary'
-					name='checkedB'
-					inputProps={{ 'aria-label': 'primary checkbox' }}
+					inputProps={{ 'aria-label': "Hide URL's" }}
 				/>
 			</Grid>
 			<Grid item md={2}></Grid>

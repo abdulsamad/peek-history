@@ -12,9 +12,9 @@ function PopupWidth() {
 	const classes = useStyles();
 
 	useEffect(() => {
-		chrome.storage.sync.get(['popupWidth'], (syncWidth) => {
-			if (!syncWidth.popupWidth) return;
-			setValue(syncWidth.popupWidth);
+		chrome.storage.sync.get('popupWidth', ({ popupWidth }) => {
+			if (!popupWidth) return;
+			setValue(popupWidth);
 		});
 	}, []);
 
