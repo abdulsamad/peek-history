@@ -1,16 +1,15 @@
 import React from 'react';
-import { Container, makeStyles, Card, Typography, IconButton } from '@material-ui/core';
+import { Container, makeStyles, Paper, Typography, IconButton } from '@material-ui/core';
 import { Settings as SettingsIcon } from '@material-ui/icons';
-import Sort from './Sort';
-import ExcludeURL from './ExcludeURL';
-import ExcludeURLForm from './ExcludeURLForm';
-import ExcludeURLList from './ExcludeURLList';
+import Sort from './childs/Sort';
+import ExcludeURL from './childs/ExcludeURL';
+import ExcludeURLForm from './childs/ExcludeURLForm';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		margin: '16 auto',
+		margin: '16px auto',
 	},
-	card: {
+	paper: {
 		padding: 16,
 		margin: 10,
 	},
@@ -21,7 +20,7 @@ function Settings() {
 
 	return (
 		<Container className={classes.root}>
-			<Card className={classes.card}>
+			<Paper elevation={3} className={classes.paper}>
 				<Typography variant='h6' gutterBottom>
 					<IconButton>
 						<SettingsIcon />
@@ -31,8 +30,7 @@ function Settings() {
 				<Sort />
 				<ExcludeURL />
 				<ExcludeURLForm />
-				<ExcludeURLList />
-			</Card>
+			</Paper>
 		</Container>
 	);
 }
