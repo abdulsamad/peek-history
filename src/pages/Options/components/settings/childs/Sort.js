@@ -23,9 +23,9 @@ function Sort() {
 	const classes = useStyles();
 
 	useEffect(() => {
-		chrome.storage.sync.get(['sort'], (syncSort) => {
-			if (!syncSort.sort) return;
-			setValue(syncSort.sort);
+		chrome.storage.sync.get('sort', ({ sort }) => {
+			if (!sort) return;
+			setValue(sort);
 		});
 	}, []);
 
@@ -42,9 +42,8 @@ function Sort() {
 				</Typography>
 			</Grid>
 			<Grid item md={4}>
-				<FormControl variant='filled' className={classes.formControl}>
+				<FormControl variant='filled' className={classes.formControl} hiddenLabel={true}>
 					<Select
-						labelId='sort-by'
 						id='sort-by-select-filled'
 						value={value}
 						className={classes.select}
