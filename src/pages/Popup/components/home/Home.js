@@ -1,10 +1,15 @@
 import React from 'react';
+import { usePopupState } from '../../context/popupContext';
 import HistoryList from './history/HistoryList';
 import TabsList from './tab/TabsList';
-import { usePopupState } from '../../context/popupContext';
+import Preloader from '../layout/Preloader';
 
 function Home() {
-	const { activeTabNum } = usePopupState();
+	const { activeTabNum, loading } = usePopupState();
+
+	if (loading) {
+		return <Preloader />;
+	}
 
 	return activeTabNum ? <TabsList /> : <HistoryList />;
 }

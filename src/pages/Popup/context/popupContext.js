@@ -13,6 +13,7 @@ function PopupProvider({ children }) {
 		activeTabNum: 0,
 		hideURL: false,
 		popupWidth: 400,
+		loading: true,
 	};
 
 	const [state, dispatch] = useReducer(PopupReducer, initialState);
@@ -163,6 +164,7 @@ function PopupProvider({ children }) {
 				activeTabNum: state.activeTabNum,
 				hideURL: state.hideURL,
 				popupWidth: state.popupWidth,
+				loading: state.loading,
 			}}>
 			<PopupContextDispatch.Provider
 				value={{

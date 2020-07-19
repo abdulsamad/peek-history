@@ -6,12 +6,14 @@ export default (state, action) => {
 			return {
 				...state,
 				historyItems: action.payload,
+				loading: false,
 			};
 
 		case types.SEARCH_HISTORY:
 			return {
 				...state,
 				historyItems: action.payload,
+				loading: false,
 			};
 
 		case types.SEARCH_TABS:
@@ -19,6 +21,7 @@ export default (state, action) => {
 				...state,
 				recentTabs: action.payload.recentTabs,
 				otherTabs: action.payload.otherTabs,
+				loading: false,
 			};
 
 		case types.GET_RECENT_TABS:
