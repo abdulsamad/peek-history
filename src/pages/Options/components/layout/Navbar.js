@@ -5,13 +5,10 @@ import { AppBar, Toolbar, Typography, makeStyles, Container } from '@material-ui
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
-
-		'&:focus-within h6': {
-			display: 'none',
-		},
 	},
 	title: {
 		maxWidth: '12ch',
+		color: '#fff',
 	},
 }));
 
