@@ -1,19 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import HistoryList from './history/HistoryList';
 import TabsList from './tab/TabsList';
-import PopupContext from '../../context/popupContext';
+import { usePopupState } from '../../context/popupContext';
 
 function Home() {
-	const popupContext = useContext(PopupContext);
-	const { activeTabNum } = popupContext;
+	const { activeTabNum } = usePopupState();
 
-	if (activeTabNum === 0) {
-		return <HistoryList />;
-	}
-
-	if (activeTabNum === 1) {
-		return <TabsList />;
-	}
+	return activeTabNum ? <TabsList /> : <HistoryList />;
 }
 
 export default Home;
