@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useOptionsState, useOptionsDispatch } from '../../../context/optionsContext';
 import { makeStyles, Grid, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -19,13 +20,13 @@ const useStyles = makeStyles((theme) => ({
 			height: 30,
 			width: 30,
 			color: '#000',
-			display: 'flex',
-			alignItems: 'center',
-			justifyContent: 'center',
 			position: 'absolute',
 			top: 0,
 			left: 0,
-			backgroundColor: 'rgba(255,255,255,0.4)',
+			display: 'flex',
+			alignItems: 'center',
+			justifyContent: 'center',
+			backgroundColor: 'rgba(0,0,0,0.3)',
 			borderRadius: '50%',
 		},
 
@@ -36,6 +37,13 @@ const useStyles = makeStyles((theme) => ({
 	roundedInputColor: {
 		height: 30,
 		width: 30,
+		border: 'none',
+		borderRadius: 5,
+		backgroundColor: '#C7C7C7',
+
+		'&.active::after': {
+			outline: '1px solid currentColor',
+		},
 	},
 	btnContainer: {
 		display: 'flex',
@@ -46,42 +54,57 @@ const useStyles = makeStyles((theme) => ({
 
 function AccentColor() {
 	const [accents, setAccents] = useState([
-		{ color: '#E57373', active: false },
 		{ color: '#64B5F6', active: false },
+		{ color: '#E57373', active: false },
 		{ color: '#4db6ac', active: false },
 		{ color: '#4dd0e1', active: false },
 		{ color: '#ffd54f', active: false },
 		{ color: '#f06292', active: false },
 	]);
+	const [customColor, setCustomColor] = useState(false);
+	const { accent } = useOptionsState();
+	const { setAccent } = useOptionsDispatch();
 	const classes = useStyles();
+	const inputColor = useRef();
 
 	useEffect(() => {
-		chrome.storage.sync.get(['accent'], (syncAccent) => {
-			if (!syncAccent.accent) return;
+		chrome.storage.sync.get('accent', ({ accent }) => {
+			if (!accent) return;
 
-			setAccents((prevState) =>
-				prevState.map((accent) => {
-					if (accent.color === syncAccent.accent) {
-						return { color: accent.color, active: true };
-					} else {
-						return { color: accent.color, active: false };
-					}
-				}),
-			);
+			const accentsArr = accents.map((acc) => {
+				if (acc.color === accent) {
+					return { color: acc.color, active: true };
+				} else {
+					return { color: acc.color, active: false };
+				}
+			});
+
+			setAccents(accentsArr);
+
+			const arr = accentsArr.filter((acc) => acc.active === true).length;
+			if (arr === 0) setCustomColor(true);
 		});
 	}, []);
 
 	const onClick = (color) => {
 		chrome.storage.sync.set({ accent: color });
+		setAccent(color);
 		setAccents((prevState) =>
-			prevState.map((accent) => {
-				if (accent.color === color) {
-					return { color: accent.color, active: true };
+			prevState.map((acc) => {
+				if (acc.color === color) {
+					return { color: acc.color, active: true };
 				} else {
-					return { color: accent.color, active: false };
+					return { color: acc.color, active: false };
 				}
 			}),
 		);
+	};
+
+	// TODO: Improve Custom color selection performance
+	const onChange = ({ target: value }) => {
+		setAccent(value);
+		chrome.storage.sync.set({ accent: value });
+		// console.log(value);
 	};
 
 	return (
@@ -99,7 +122,13 @@ function AccentColor() {
 						onClick={() => onClick(color)}
 						style={{ backgroundColor: color }}></button>
 				))}
-				<input className={classes.roundedInputColor} type='color' />
+				<input
+					type='color'
+					onChange={onChange}
+					value={accent}
+					ref={inputColor}
+					className={`${classes.roundedInputColor} ${customColor ? 'active' : ''}`}
+				/>
 			</Grid>
 			<Grid item md={2}></Grid>
 		</Grid>
