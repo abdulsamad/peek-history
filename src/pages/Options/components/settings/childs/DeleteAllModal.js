@@ -8,6 +8,7 @@ import {
 	Slide,
 	Button,
 } from '@material-ui/core';
+import { useOptionsDispatch } from '../../../context/optionsContext';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction='up' ref={ref} {...props} />;
@@ -15,13 +16,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function DeleteAllModal() {
 	const [open, setOpen] = useState(false);
+	const { removeAllExcludedURLs } = useOptionsDispatch();
 
 	const handleClose = () => {
 		setOpen(false);
 	};
 
 	const deleteAll = (ev) => {
-		chrome.storage.sync.remove('excludedObj');
+		removeAllExcludedURLs();
 		setOpen(false);
 	};
 

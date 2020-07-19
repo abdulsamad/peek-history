@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useOptionsState, useOptionsDispatch } from '../../../context/optionsContext';
 import { makeStyles, Grid, Typography, Switch } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -13,19 +14,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ExcludeURL() {
-	const [value, setValue] = useState(false);
+	const { incognito } = useOptionsState();
+	const { setIncognito } = useOptionsDispatch();
 	const classes = useStyles();
 
-	useEffect(() => {
-		chrome.storage.sync.get(['incognito'], (syncIncognito) => {
-			if (!syncIncognito.incognito) return;
-			setValue(syncIncognito.incognito);
-		});
-	}, []);
-
 	const onChange = (ev) => {
-		setValue((prevState) => !prevState);
-		chrome.storage.sync.set({ incognito: ev.target.checked });
+		const checked = ev.target.checked;
 
 		chrome.permissions.request(
 			{
@@ -34,15 +28,17 @@ function ExcludeURL() {
 			},
 			(granted) => {
 				if (granted) {
-					if (this.checked === true) {
+					if (checked === true) {
 						// Checked
+						setIncognito(true);
 						chrome.storage.sync.set({ incognito: true });
 					} else {
 						// Unchecked
+						setIncognito(false);
 						chrome.storage.sync.set({ incognito: false });
 					}
 				} else {
-					this.checked = false;
+					setIncognito(false);
 					chrome.storage.sync.set({ incognito: false });
 				}
 			},
@@ -58,11 +54,10 @@ function ExcludeURL() {
 			</Grid>
 			<Grid item md={4} className={classes.switchGrid}>
 				<Switch
-					checked={value}
+					checked={incognito}
 					onChange={onChange}
 					color='primary'
-					name='checkedB'
-					inputProps={{ 'aria-label': 'primary checkbox' }}
+					inputProps={{ 'aria-label': "Exclude URL's" }}
 				/>
 			</Grid>
 			<Grid item md={2}></Grid>
