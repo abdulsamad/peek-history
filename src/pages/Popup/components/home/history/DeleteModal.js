@@ -1,5 +1,4 @@
-import React, { useContext, useState } from 'react';
-import { Delete as DeleteIcon } from '@material-ui/icons';
+import React, { useState } from 'react';
 import {
 	Button,
 	Dialog,
@@ -9,16 +8,16 @@ import {
 	DialogTitle,
 	Slide,
 } from '@material-ui/core';
-import PopupContext from '../../../context/popupContext';
+import { Delete as DeleteIcon } from '@material-ui/icons';
+import { usePopupDispatch } from '../../../context/popupContext';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction='up' ref={ref} {...props} />;
 });
 
 function DeleteModal({ url }) {
-	const popupContext = useContext(PopupContext);
 	const [open, setOpen] = useState(false);
-	const { deleteHistory } = popupContext;
+	const { deleteHistory } = usePopupDispatch();
 
 	const handleClose = () => {
 		setOpen(false);

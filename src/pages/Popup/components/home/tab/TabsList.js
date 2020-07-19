@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
 import {
 	makeStyles,
@@ -8,7 +8,7 @@ import {
 	AccordionSummary,
 	AccordionDetails,
 } from '@material-ui/core/';
-import PopupContext from '../../../context/popupContext';
+import { usePopupState } from '../../../context/popupContext';
 import RecentsTabsListItem from './RecentsTabsListItem';
 import OtherTabsListItem from './OtherTabsListItem';
 
@@ -30,9 +30,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function TabsList() {
+	const { recentTabs, otherTabs } = usePopupState();
 	const classes = useStyles();
-	const popupContext = useContext(PopupContext);
-	const { recentTabs, otherTabs } = popupContext;
 
 	return (
 		<div className={classes.root}>
@@ -43,12 +42,12 @@ function TabsList() {
 					id='panel1a-header'>
 					<Typography className={classes.heading}>Recently Closed Tabs</Typography>
 				</AccordionSummary>
-				<AccordionDetails className={classes.accordionDetails}>
+				<AccordionDetails>
 					<List component='div' aria-label='Recently Closed Tabs' className={classes.list}>
-						{recentTabs.map((tab) => (
+						{recentTabs.map((tab, index) => (
 							<RecentsTabsListItem
 								{...tab}
-								key={tab.tab ? tab.lastModified : tab.window.sessionId}
+								key={tab.tab ? tab.lastModified + index : tab.window.sessionId + index}
 							/>
 						))}
 					</List>
