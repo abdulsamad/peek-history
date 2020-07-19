@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { makeStyles, List } from '@material-ui/core';
+import { usePopupState } from '../../../context/popupContext';
 import HistoryListItem from './HistoryListItem';
-import PopupContext from '../../../context/popupContext';
+import NotFound from '../misc/NotFound';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -21,9 +22,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function HistoryList() {
+	const { historyItems, hideURL } = usePopupState();
 	const classes = useStyles();
-	const popupContext = useContext(PopupContext);
-	const { historyItems } = popupContext;
+
+	if (historyItems.length <= 0) {
+		return <NotFound />;
+	}
 
 	return (
 		<div className={classes.root}>
@@ -34,6 +38,7 @@ function HistoryList() {
 						lastVisitTime={historyItem.lastVisitTime}
 						title={historyItem.title}
 						url={historyItem.url}
+						hideURL={hideURL}
 					/>
 				))}
 			</List>
