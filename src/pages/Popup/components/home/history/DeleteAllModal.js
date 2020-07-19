@@ -32,10 +32,10 @@ function DeleteModal() {
 				onClose={handleClose}
 				aria-labelledby='alert-dialog-slide-title'
 				aria-describedby='alert-dialog-slide-description'>
-				<DialogTitle id='alert-dialog-slide-title'>{'Delete History Item?'}</DialogTitle>
+				<DialogTitle id='alert-dialog-slide-title'>{'Clear History?'}</DialogTitle>
 				<DialogContent>
 					<DialogContentText id='alert-dialog-slide-description'>
-						<strong>Note:</strong> Deleting this also deletes this from your browser history.
+						<strong>Note:</strong> This will delete all your browsing history.
 					</DialogContentText>
 				</DialogContent>
 				<DialogActions>
