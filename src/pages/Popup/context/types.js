@@ -5,3 +5,5 @@ export const SEARCH_HISTORY = 'SEARCH_HISTORY';
 export const SEARCH_TABS = 'SEARCH_TABS';
 export const UPDATE_ACTIVE_TAB_NUM = 'UPDATE_ACTIVE_TAB_NUM';
 export const DELETE_HISTORY = 'DELETE_HISTORY';
+export const HIDE_URL = 'HIDE_URL';
+export const POPUP_WIDTH = 'POPUP_WIDTH';

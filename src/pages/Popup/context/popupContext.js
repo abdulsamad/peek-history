@@ -11,6 +11,8 @@ function PopupProvider({ children }) {
 		recentTabs: [],
 		otherTabs: [],
 		activeTabNum: 0,
+		hideURL: false,
+		popupWidth: 400,
 	};
 
 	const [state, dispatch] = useReducer(PopupReducer, initialState);
@@ -21,10 +23,19 @@ function PopupProvider({ children }) {
 				text: '',
 				maxResults: 50,
 			},
-			(historyItem) => {
-				dispatch({
-					type: types.GET_HISTORY,
-					payload: historyItem,
+			(historyItems) => {
+				chrome.storage.sync.get('sort', ({ sort }) => {
+					if (sort === 'most-visit') {
+						dispatch({
+							type: types.GET_HISTORY,
+							payload: historyItems.sort((a, b) => b.visitCount - a.visitCount),
+						});
+					} else {
+						dispatch({
+							type: types.GET_HISTORY,
+							payload: historyItems,
+						});
+					}
 				});
 			},
 		);
@@ -41,6 +52,20 @@ function PopupProvider({ children }) {
 				type: types.GET_OTHER_TABS,
 				payload: otherTabs,
 			});
+		});
+
+		chrome.storage.sync.get(['hideURL', 'popupWidth'], ({ hideURL, popupWidth }) => {
+			if (hideURL)
+				dispatch({
+					type: types.HIDE_URL,
+					payload: hideURL,
+				});
+
+			if (popupWidth)
+				dispatch({
+					type: types.POPUP_WIDTH,
+					payload: popupWidth,
+				});
 		});
 	}, []);
 
@@ -68,6 +93,8 @@ function PopupProvider({ children }) {
 				const tab = obj.tab;
 				let win = obj.window;
 
+				if (text === '') return obj;
+
 				if (win) {
 					const arr = win.tabs.filter(
 						(windowObj) => windowObj.title.match(regex) || windowObj.url.match(regex),
@@ -84,6 +111,8 @@ function PopupProvider({ children }) {
 
 			// Filter Other Tabs
 			const otherTabs = state.otherTabs.filter((obj) => {
+				if (text === '') return obj;
+
 				const arr = obj.sessions.filter((session) => {
 					const arr2 = session.window.tabs.filter(
 						(tab) => tab.title.match(regex) || tab.url.match(regex),
@@ -132,6 +161,8 @@ function PopupProvider({ children }) {
 				recentTabs: state.recentTabs,
 				otherTabs: state.otherTabs,
 				activeTabNum: state.activeTabNum,
+				hideURL: state.hideURL,
+				popupWidth: state.popupWidth,
 			}}>
 			<PopupContextDispatch.Provider
 				value={{

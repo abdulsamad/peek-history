@@ -45,6 +45,18 @@ export default (state, action) => {
 				historyItems: state.historyItems.filter((item) => item.url !== action.payload),
 			};
 
+		case types.HIDE_URL:
+			return {
+				...state,
+				hideURL: action.payload,
+			};
+
+		case types.POPUP_WIDTH:
+			return {
+				...state,
+				popupWidth: action.payload,
+			};
+
 		default:
 			return state;
 	}
