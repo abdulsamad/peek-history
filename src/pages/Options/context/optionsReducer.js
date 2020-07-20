@@ -27,7 +27,6 @@ export default (state, action) => {
 			};
 
 		case types.ADD_EXCLUDED_URL:
-			console.log(action.payload, state.excludedURLs);
 			return {
 				...state,
 				excludedURLs: [action.payload, ...state.excludedURLs],
