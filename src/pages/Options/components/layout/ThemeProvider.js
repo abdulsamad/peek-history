@@ -13,7 +13,14 @@ function ThemeProviderContainer({ children }) {
 					MuiCssBaseline: {
 						'@global': {
 							body: {
-								backgroundColor: theme === 'dark' ? '#222222' : '#f5f5f5',
+								backgroundColor:
+									theme === 'default'
+										? prefersDarkMode
+											? '#222'
+											: '#f5f5f5'
+										: theme === 'dark'
+										? '#222'
+										: '#f5f5f5',
 								minHeight: '100vh',
 								width: '100vw',
 								display: 'flex',
@@ -23,7 +30,14 @@ function ThemeProviderContainer({ children }) {
 								margin: '0',
 							},
 							'*::-webkit-scrollbar': {
-								backgroundColor: theme === 'dark' ? '#000' : '#fff',
+								backgroundColor:
+									theme === 'default'
+										? prefersDarkMode
+											? '#000'
+											: '#fff'
+										: theme === 'dark'
+										? '#000'
+										: '#fff',
 								border: 'none',
 							},
 							'*::-webkit-scrollbar-thumb': {
@@ -49,8 +63,22 @@ function ThemeProviderContainer({ children }) {
 						main: '#0044ff',
 					},
 					background: {
-						default: theme === 'dark' ? '#222' : '#f5f5f5',
-						paper: theme === 'dark' ? '#000' : '#f5f5f5',
+						default:
+							theme === 'default'
+								? prefersDarkMode
+									? '#222'
+									: '#f5f5f5'
+								: theme === 'dark'
+								? '#222'
+								: '#f5f5f5',
+						paper:
+							theme === 'default'
+								? prefersDarkMode
+									? '#000'
+									: '#f5f5f5'
+								: theme === 'dark'
+								? '#000'
+								: '#f5f5f5',
 					},
 				},
 				typography: {
