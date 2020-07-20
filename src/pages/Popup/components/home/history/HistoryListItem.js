@@ -18,6 +18,11 @@ import ConvertTimeAgo from '../misc/ConvertTimeAgo';
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
+
+		'&:hover': {
+			background: 'rgba(0,0,0,0.1)',
+			borderLeft: `5px solid ${theme.palette.primary.main}`,
+		},
 	},
 	listItemIcon: {
 		height: 32,
@@ -49,10 +54,6 @@ const useStyles = makeStyles((theme) => ({
 		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent: 'space-between',
-
-		'& > span': {
-			backgroundColor: theme.palette.background.paper,
-		},
 	},
 	deleteIcon: {
 		padding: 0,
