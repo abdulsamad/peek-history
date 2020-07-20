@@ -47,7 +47,7 @@ function TabsList() {
 						{recentTabs.map((tab, index) => (
 							<RecentsTabsListItem
 								{...tab}
-								key={tab.tab ? tab.lastModified + index : tab.window.sessionId + index}
+								key={tab.tab ? tab.lastModified * index : tab.window.sessionId * index}
 							/>
 						))}
 					</List>
