@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
 	title: {
 		maxWidth: '12ch',
 		color: '#f5f5f5',
+		fontWeight: 600,
 	},
 	search: {
 		position: 'relative',

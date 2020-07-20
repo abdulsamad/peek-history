@@ -7,8 +7,11 @@ const useStyles = makeStyles((theme) => ({
 		flexGrow: 1,
 	},
 	title: {
+		margin: 'auto',
 		maxWidth: '12ch',
 		color: '#fff',
+		textShadow: '1px 2px #1f1f1f',
+		fontWeight: 600,
 	},
 }));
 
