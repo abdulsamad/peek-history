@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function PopupWidth() {
-	const [value, setValue] = useState(0);
+	const [value, setValue] = useState(400);
 	const classes = useStyles();
 
 	useEffect(() => {
