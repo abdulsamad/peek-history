@@ -5,14 +5,19 @@ function ThemeProviderContainer({ children }) {
 	const [theme, setTheme] = useState('default');
 	const [accent, setAccent] = useState('#64B5F6');
 	const [width, setWidth] = useState(400);
+	const [font, setFont] = useState('Arial');
 	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
 	useEffect(() => {
-		chrome.storage.sync.get(['theme', 'accent', 'popupWidth'], ({ theme, accent, popupWidth }) => {
-			if (theme) setTheme(theme);
-			if (accent) setAccent(accent);
-			if (popupWidth) setWidth(popupWidth);
-		});
+		chrome.storage.sync.get(
+			['theme', 'accent', 'popupWidth', 'font'],
+			({ theme, accent, popupWidth, font }) => {
+				if (theme) setTheme(theme);
+				if (accent) setAccent(accent);
+				if (popupWidth) setWidth(popupWidth);
+				if (font) setFont(font);
+			},
+		);
 	}, []);
 
 	const customTheme = useMemo(
@@ -58,8 +63,11 @@ function ThemeProviderContainer({ children }) {
 						paper: theme === 'dark' ? '#000' : '#f5f5f5',
 					},
 				},
+				typography: {
+					fontFamily: font,
+				},
 			}),
-		[theme, accent, width, prefersDarkMode],
+		[theme, accent, width, font, prefersDarkMode],
 	);
 
 	return (

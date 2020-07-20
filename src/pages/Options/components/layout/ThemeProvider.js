@@ -3,7 +3,7 @@ import { createMuiTheme, ThemeProvider, CssBaseline, useMediaQuery } from '@mate
 import { useOptionsState } from '../../context/optionsContext';
 
 function ThemeProviderContainer({ children }) {
-	const { theme, accent } = useOptionsState();
+	const { theme, accent, font } = useOptionsState();
 	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
 	const customTheme = useMemo(
@@ -53,8 +53,11 @@ function ThemeProviderContainer({ children }) {
 						paper: theme === 'dark' ? '#000' : '#f5f5f5',
 					},
 				},
+				typography: {
+					fontFamily: font,
+				},
 			}),
-		[theme, accent, prefersDarkMode],
+		[theme, accent, font, prefersDarkMode],
 	);
 
 	return (

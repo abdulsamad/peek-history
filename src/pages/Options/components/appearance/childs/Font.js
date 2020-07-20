@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useOptionsState, useOptionsDispatch } from '../../../context/optionsContext';
+import { useOptionsDispatch } from '../../../context/optionsContext';
 import { makeStyles, Grid, Typography, FormHelperText, TextField } from '@material-ui/core';
 import { Autocomplete, createFilterOptions } from '@material-ui/lab';
 
@@ -13,20 +13,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Fonts() {
-	const { font } = useOptionsState();
 	const { setFont } = useOptionsDispatch();
 	const [fontList, setFontList] = useState([]);
+	const [inputVal, setInputVal] = useState('');
 	const classes = useStyles();
 
 	useEffect(() => {
 		chrome.fontSettings.getFontList((fonts) => setFontList(fonts));
+		chrome.storage.sync.get('font', ({ font }) => font && setInputVal(font));
 	}, []);
 
-	const onInputChange = (ev, value) => {
-		setFont(value);
-	};
-
 	const onChange = (ev, { displayName }) => {
+		setFont(displayName);
 		chrome.storage.sync.set({ font: displayName });
 	};
 
@@ -42,9 +40,11 @@ function Fonts() {
 					size='small'
 					options={fontList}
 					getOptionLabel={(option) => option.displayName}
-					inputValue={font}
-					onInputChange={onInputChange}
+					inputValue={inputVal}
+					onInputChange={(ev, value) => setInputVal(value)}
 					onChange={onChange}
+					blurOnSelect={true}
+					clearOnBlur={false}
 					noOptionsText='No Fonts Available'
 					filterOptions={createFilterOptions({
 						limit: 5,
