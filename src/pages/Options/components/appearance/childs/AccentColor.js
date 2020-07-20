@@ -100,12 +100,12 @@ function AccentColor() {
 		);
 	};
 
-	// TODO: Improve Custom color selection performance
-	const onChange = ({ target: value }) => {
-		setAccent(value);
-		chrome.storage.sync.set({ accent: value });
-		// console.log(value);
-	};
+	// TODO: Ad Custom color
+	// const onChange = ({ target: value }) => {
+	// 	setAccent(value);
+	// 	chrome.storage.sync.set({ accent: value });
+	// 	// console.log(value);
+	// };
 
 	return (
 		<Grid container alignItems='center' className={classes.root}>
@@ -122,13 +122,14 @@ function AccentColor() {
 						onClick={() => onClick(color)}
 						style={{ backgroundColor: color }}></button>
 				))}
-				<input
+				{/* <input
 					type='color'
-					onChange={onChange}
+					onFocus={onFocus}
+					// onChange={onChange}
 					value={accent}
 					ref={inputColor}
 					className={`${classes.roundedInputColor} ${customColor ? 'active' : ''}`}
-				/>
+				/> */}
 			</Grid>
 			<Grid item md={2}></Grid>
 		</Grid>
