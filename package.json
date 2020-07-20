@@ -7,7 +7,7 @@
 	"scripts": {
 		"build": "node utils/build.js",
 		"start": "node utils/webserver.js",
-		"deploy-build": "zip -r ~/Downloads/${npm_package_name}-v${npm_package_version}.zip ./dist/*"
+		"deploy-build": "zip -r ~/Downloads/${npm_package_name}-v${npm_package_version}.zip ./build/*"
 	},
 	"dependencies": {
 		"@hot-loader/react-dom": "^16.13.0",
