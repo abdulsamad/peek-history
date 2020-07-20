@@ -8,7 +8,7 @@ const OptionsContextDispatch = createContext();
 function OptionsProvider({ children }) {
 	const initialState = {
 		theme: 'default',
-		font: 'Arial',
+		font: 'sans-serif',
 		accent: '#64B5F6',
 		excludedURLs: [],
 		incognito: false,

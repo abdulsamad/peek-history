@@ -5,7 +5,7 @@ function ThemeProviderContainer({ children }) {
 	const [theme, setTheme] = useState('default');
 	const [accent, setAccent] = useState('#64B5F6');
 	const [width, setWidth] = useState(400);
-	const [font, setFont] = useState('Arial');
+	const [font, setFont] = useState('sans-serif');
 	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
 	useEffect(() => {
