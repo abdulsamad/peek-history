@@ -21,28 +21,33 @@ function ExcludeURL() {
 	const onChange = (ev) => {
 		const checked = ev.target.checked;
 
-		chrome.permissions.request(
-			{
-				permissions: ['webRequestBlocking', 'webRequest'],
-				origins: ['http://*/*', 'https://*/*'],
-			},
-			(granted) => {
-				if (granted) {
-					if (checked === true) {
-						// Checked
+		if (checked) {
+			chrome.permissions.request(
+				{
+					permissions: ['webRequestBlocking', 'webRequest'],
+					origins: ['http://*/*', 'https://*/*'],
+				},
+				(granted) => {
+					if (granted) {
 						setIncognito(true);
 						chrome.storage.sync.set({ incognito: true });
-					} else {
-						// Unchecked
+					}
+				},
+			);
+		} else {
+			chrome.permissions.remove(
+				{
+					permissions: ['webRequestBlocking', 'webRequest'],
+					origins: ['http://*/*', 'https://*/*'],
+				},
+				(removed) => {
+					if (removed) {
 						setIncognito(false);
 						chrome.storage.sync.set({ incognito: false });
 					}
-				} else {
-					setIncognito(false);
-					chrome.storage.sync.set({ incognito: false });
-				}
-			},
-		);
+				},
+			);
+		}
 	};
 
 	return (

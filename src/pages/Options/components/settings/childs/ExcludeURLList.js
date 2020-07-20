@@ -26,12 +26,12 @@ const useStyles = makeStyles({
 });
 
 function ExcludeURLList() {
-	const { incognito, excludedURLs } = useOptionsState();
+	const { excludedURLs } = useOptionsState();
 	const classes = useStyles();
 
 	return (
 		<>
-			{incognito && excludedURLs.length > 0 && (
+			{excludedURLs.length > 0 && (
 				<Grid container>
 					<Grid item md={1}></Grid>
 					<Grid item md={10}>
