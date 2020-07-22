@@ -38,8 +38,6 @@ function shortcutFunc(ev) {
 	const accordions = document.querySelectorAll('.accordion');
 	const links = document.querySelectorAll('.link');
 
-	if (ev.key !== 'Tab') ev.preventDefault();
-
 	switch (ev.key) {
 		case hotkeys.search:
 			document.querySelector('.search').focus();

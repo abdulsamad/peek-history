@@ -35,7 +35,6 @@ const focusNum = iteratorFunc(-1, 49);
 
 function shortcutFunc(ev) {
 	const links = document.querySelectorAll('.link');
-	if (ev.key !== 'Tab') ev.preventDefault();
 
 	switch (ev.key) {
 		case hotkeys.search:
