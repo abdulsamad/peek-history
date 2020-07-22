@@ -89,7 +89,7 @@ function RecentsTabsListItem(props) {
 			<>
 				<List
 					component='div'
-					aria-label='Recently Closed Window'
+					aria-label='Window on other device'
 					className={classes.list}
 					key={tabs.url}>
 					{tabs.map((tab) => (
@@ -161,7 +161,7 @@ function RecentsTabsListItem(props) {
 				<AccordionDetails>
 					<List
 						component='div'
-						aria-label='Recently Closed Window'
+						aria-label='Tab on other device'
 						className={classes.list}
 						key={tabs.url}>
 						{tabs.map((tab) => (
