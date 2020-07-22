@@ -27,9 +27,13 @@ const useStyles = makeStyles({
 });
 
 function BottomNavbar() {
-	const { activeTabNum } = usePopupState();
+	const { activeTabNum, loading } = usePopupState();
 	const { setActiveTabNum } = usePopupDispatch();
 	const classes = useStyles();
+
+	if (loading) {
+		return null;
+	}
 
 	return (
 		<nav className={classes.nav}>
