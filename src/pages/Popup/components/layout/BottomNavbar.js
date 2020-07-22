@@ -39,10 +39,11 @@ function BottomNavbar() {
 					setActiveTabNum(newValue);
 				}}
 				className={classes.root}>
-				<BottomNavigationAction icon={<HomeIcon />} />
-				<BottomNavigationAction icon={<DevicesIcon />} />
+				<BottomNavigationAction className='home' icon={<HomeIcon />} />
+				<BottomNavigationAction className='tabs' icon={<DevicesIcon />} />
 				<DeleteAllModal />
 				<BottomNavigationAction
+					className='options'
 					onClick={() => chrome.runtime.openOptionsPage()}
 					icon={<SettingsIcon />}
 				/>

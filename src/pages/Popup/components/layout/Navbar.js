@@ -85,7 +85,7 @@ function Navbar({ title }) {
 								input: classes.inputInput,
 							}}
 							onKeyUp={(ev) => search(ev.target.value)}
-							inputProps={{ 'aria-label': 'search' }}
+							inputProps={{ 'aria-label': 'search', className: 'search' }}
 						/>
 					</div>
 				</Toolbar>

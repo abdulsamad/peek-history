@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles, List } from '@material-ui/core';
 import { usePopupState } from '../../../context/popupContext';
 import HistoryListItem from './HistoryListItem';
 import NotFound from '../misc/NotFound';
+import shortcutFunc from './shortcut';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -24,6 +25,14 @@ const useStyles = makeStyles((theme) => ({
 function HistoryList() {
 	const { historyItems, hideURL } = usePopupState();
 	const classes = useStyles();
+
+	useEffect(() => {
+		window.addEventListener('keydown', shortcutFunc, false);
+
+		return () => {
+			window.removeEventListener('keydown', shortcutFunc, false);
+		};
+	}, []);
 
 	if (historyItems.length <= 0) {
 		return <NotFound />;

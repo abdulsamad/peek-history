@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
 import {
 	makeStyles,
@@ -11,6 +11,7 @@ import {
 import { usePopupState } from '../../../context/popupContext';
 import RecentsTabsListItem from './RecentsTabsListItem';
 import OtherTabsListItem from './OtherTabsListItem';
+import shortcutFunc from './shortcut';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -33,10 +34,19 @@ function TabsList() {
 	const { recentTabs, otherTabs } = usePopupState();
 	const classes = useStyles();
 
+	useEffect(() => {
+		window.addEventListener('keydown', shortcutFunc, false);
+
+		return () => {
+			window.removeEventListener('keydown', shortcutFunc, false);
+		};
+	}, []);
+
 	return (
 		<div className={classes.root}>
 			<Accordion>
 				<AccordionSummary
+					className='accordion'
 					expandIcon={<ExpandMoreIcon />}
 					aria-controls='panel1a-content'
 					id='panel1a-header'>
@@ -57,6 +67,7 @@ function TabsList() {
 			{otherTabs.map((device) => (
 				<Accordion key={device.deviceName}>
 					<AccordionSummary
+						className='accordion'
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls='panel1a-content'
 						id='panel1a-header'>

@@ -17,12 +17,22 @@ import {
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-	root: {
-		flexGrow: 1,
-	},
 	list: {
 		width: '100%',
 		padding: 0,
+	},
+	listItem: {
+		flexGrow: 1,
+
+		'&:hover': {
+			background: 'rgba(0,0,0,0.1)',
+			borderLeft: `5px solid ${theme.palette.primary.main}`,
+		},
+
+		'&:hover .link:focus': {
+			background: 'none',
+			borderLeft: 'none',
+		},
 	},
 	listItemIcon: {
 		height: 32,
@@ -60,6 +70,12 @@ const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 		alignItems: 'center',
 		width: '100%',
+
+		'&:focus': {
+			paddingLeft: 15,
+			background: 'rgba(0,0,0,0.1)',
+			borderLeft: `5px solid ${theme.palette.primary.main}`,
+		},
 	},
 }));
 
@@ -78,13 +94,13 @@ function RecentsTabsListItem(props) {
 					key={tabs.url}>
 					{tabs.map((tab) => (
 						<Fragment key={tab.url}>
-							<ListItem className={classes.root}>
+							<ListItem className={classes.listItem}>
 								<Link
 									href='#'
 									color='inherit'
 									block='true'
 									onClick={() => chrome.sessions.restore(tab.sessionId)}
-									className={classes.anchor}
+									className={`link ${classes.anchor}`}
 									underline='none'>
 									<ListItemIcon className={classes.listItemIcon}>
 										<Avatar
@@ -124,6 +140,7 @@ function RecentsTabsListItem(props) {
 		<>
 			<Accordion>
 				<AccordionSummary
+					className='accordion'
 					expandIcon={<ExpandMoreIcon />}
 					aria-controls='panel1a-content'
 					id='panel1a-header'>
@@ -149,13 +166,13 @@ function RecentsTabsListItem(props) {
 						key={tabs.url}>
 						{tabs.map((tab) => (
 							<Fragment key={tab.url}>
-								<ListItem className={classes.root}>
+								<ListItem className={classes.listItem}>
 									<Link
 										href='#'
 										color='inherit'
 										block='true'
 										onClick={() => chrome.sessions.restore(tab.sessionId)}
-										className={classes.anchor}
+										className={`link ${classes.anchor}`}
 										underline='none'>
 										<ListItemIcon className={classes.listItemIcon}>
 											<Avatar

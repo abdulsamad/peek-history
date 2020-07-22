@@ -16,12 +16,17 @@ import DeleteModal from './DeleteModal';
 import ConvertTimeAgo from '../misc/ConvertTimeAgo';
 
 const useStyles = makeStyles((theme) => ({
-	root: {
+	listItem: {
 		flexGrow: 1,
 
 		'&:hover': {
 			background: 'rgba(0,0,0,0.1)',
 			borderLeft: `5px solid ${theme.palette.primary.main}`,
+		},
+
+		'&:hover .link:focus': {
+			background: 'none',
+			borderLeft: 'none',
 		},
 	},
 	listItemIcon: {
@@ -62,6 +67,12 @@ const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 		alignItems: 'center',
 		width: '100%',
+
+		'&:focus': {
+			paddingLeft: 15,
+			background: 'rgba(0,0,0,0.1)',
+			borderLeft: `5px solid ${theme.palette.primary.main}`,
+		},
 	},
 }));
 
@@ -70,14 +81,14 @@ function HistoryListItem({ title, url, lastVisitTime, hideURL }) {
 
 	return (
 		<>
-			<ListItem className={classes.root}>
+			<ListItem className={classes.listItem}>
 				<Link
 					color='inherit'
 					href={url}
 					block='true'
 					target='_blank'
 					rel='noopener noreferrer'
-					className={classes.anchor}
+					className={`link ${classes.anchor}`}
 					underline='none'>
 					<ListItemIcon className={classes.listItemIcon}>
 						<Avatar
