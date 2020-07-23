@@ -40,7 +40,7 @@ function DeleteModal({ url }) {
 					</DialogContentText>
 				</DialogContent>
 				<DialogActions>
-					<Button onClick={handleClose} color='primary'>
+					<Button onClick={handleClose} color='default'>
 						Cancel
 					</Button>
 					<Button

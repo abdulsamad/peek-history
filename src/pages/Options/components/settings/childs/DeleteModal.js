@@ -30,7 +30,7 @@ function DeleteModal({ url }) {
 
 	return (
 		<>
-			<Button variant='contained' color='secondary' onClick={() => setOpen(true)}>
+			<Button variant='contained' onClick={() => setOpen(true)}>
 				Delete
 			</Button>
 			<Dialog
@@ -49,7 +49,7 @@ function DeleteModal({ url }) {
 					</DialogContentText>
 				</DialogContent>
 				<DialogActions>
-					<Button onClick={handleClose} color='primary'>
+					<Button onClick={handleClose} color='default'>
 						Cancel
 					</Button>
 					<Button onClick={deleteURL} color='secondary'>

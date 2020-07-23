@@ -63,7 +63,7 @@ function ThemeProviderContainer({ children }) {
 						main: accent,
 					},
 					secondary: {
-						main: '#0044ff',
+						main: '#F44336',
 					},
 					background: {
 						default:

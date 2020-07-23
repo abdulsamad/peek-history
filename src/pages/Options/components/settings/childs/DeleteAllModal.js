@@ -44,7 +44,8 @@ function DeleteAllModal() {
 				</DialogTitle>
 				{/* <DialogContent>
 					<DialogContentText id='alert-dialog-slide-description'>
-						<strong>Note:</strong> Deleting this also deletes this from your browser history.
+						<strong>Note:</strong> This action will remove all your excluded websites and they will
+						continue to open in a normal tab/default way.
 					</DialogContentText>
 				</DialogContent> */}
 				<DialogActions>
