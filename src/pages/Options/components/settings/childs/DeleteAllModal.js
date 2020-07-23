@@ -42,12 +42,12 @@ function DeleteAllModal() {
 				<DialogTitle id='alert-dialog-slide-title'>
 					{'Are you sure you want to delete all excluded websites?'}
 				</DialogTitle>
-				{/* <DialogContent>
+				<DialogContent>
 					<DialogContentText id='alert-dialog-slide-description'>
 						<strong>Note:</strong> This action will remove all your excluded websites and they will
 						continue to open in a normal tab/default way.
 					</DialogContentText>
-				</DialogContent> */}
+				</DialogContent>
 				<DialogActions>
 					<Button onClick={handleClose} color='primary'>
 						Cancel
