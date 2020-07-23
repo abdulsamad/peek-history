@@ -14,6 +14,7 @@ function PopupProvider({ children }) {
 		hideURL: false,
 		popupWidth: 400,
 		loading: true,
+		searchError: false,
 	};
 
 	const [state, dispatch] = useReducer(PopupReducer, initialState);
@@ -79,11 +80,17 @@ function PopupProvider({ children }) {
 					startTime: 157784760000,
 					endTime: Date.now(),
 				},
-				(historyItem) => {
-					dispatch({
-						type: types.SEARCH_HISTORY,
-						payload: historyItem,
-					});
+				(historyItems) => {
+					if (historyItems.length > 0)
+						dispatch({
+							type: types.SEARCH_HISTORY,
+							payload: historyItems,
+						});
+					else {
+						dispatch({
+							type: types.SEARCH_ERROR,
+						});
+					}
 				},
 			);
 		} else {
@@ -165,6 +172,7 @@ function PopupProvider({ children }) {
 				hideURL: state.hideURL,
 				popupWidth: state.popupWidth,
 				loading: state.loading,
+				searchError: state.searchError,
 			}}>
 			<PopupContextDispatch.Provider
 				value={{

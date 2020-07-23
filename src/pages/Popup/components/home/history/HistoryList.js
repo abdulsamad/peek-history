@@ -1,6 +1,16 @@
 import React, { useEffect } from 'react';
-import { makeStyles, List } from '@material-ui/core';
 import { usePopupState } from '../../../context/popupContext';
+import {
+	makeStyles,
+	List,
+	ListItem,
+	ListItemText,
+	ListItemIcon,
+	ListItemSecondaryAction,
+	IconButton,
+	Divider,
+} from '@material-ui/core';
+import { Skeleton } from '@material-ui/lab';
 import HistoryListItem from './HistoryListItem';
 import NotFound from '../misc/NotFound';
 import shortcutFunc from './shortcut';
@@ -20,10 +30,28 @@ const useStyles = makeStyles((theme) => ({
 		width: '100%',
 		padding: 0,
 	},
+	listItem: {
+		flexGrow: 1,
+	},
+	textContainer: {
+		'& span': {
+			width: 'calc(100% - 25px)',
+		},
+		'& p': {
+			width: 'calc(100% - 20px)',
+		},
+	},
+	listItemSecondaryAction: {
+		width: '47px',
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+	},
 }));
 
 function HistoryList() {
-	const { historyItems, hideURL } = usePopupState();
+	const { historyItems, hideURL, loading, searchError } = usePopupState();
 	const classes = useStyles();
 
 	useEffect(() => {
@@ -34,22 +62,54 @@ function HistoryList() {
 		};
 	}, []);
 
-	if (historyItems.length <= 0) {
+	const loadingElem = () => {
+		let content = [];
+
+		for (let i = 0; i < 10; i++) {
+			content.push(
+				<div key={i}>
+					<ListItem className={classes.listItem}>
+						<ListItemIcon>
+							<Skeleton variant='circle' width={20} height={20} />
+						</ListItemIcon>
+						<ListItemText
+							className={classes.textContainer}
+							primary={<Skeleton />}
+							secondary={<Skeleton />}
+						/>
+						<ListItemSecondaryAction className={classes.listItemSecondaryAction}>
+							<IconButton edge='end'>
+								<Skeleton variant='circle' width={20} height={20} />
+							</IconButton>
+							<Skeleton width={47} />
+						</ListItemSecondaryAction>
+					</ListItem>
+					<Divider />
+				</div>,
+			);
+		}
+		return content;
+	};
+
+	if (searchError) {
 		return <NotFound />;
 	}
 
 	return (
 		<div className={classes.root}>
 			<List component='nav' aria-label='History Items' className={classes.list}>
-				{historyItems.map((historyItem) => (
-					<HistoryListItem
-						key={historyItem.id}
-						lastVisitTime={historyItem.lastVisitTime}
-						title={historyItem.title}
-						url={historyItem.url}
-						hideURL={hideURL}
-					/>
-				))}
+				{loading
+					? loadingElem()
+					: historyItems.map((historyItem) => (
+							<HistoryListItem
+								key={historyItem.id}
+								loading={loading}
+								lastVisitTime={historyItem.lastVisitTime}
+								title={historyItem.title}
+								url={historyItem.url}
+								hideURL={hideURL}
+							/>
+					  ))}
 			</List>
 		</div>
 	);

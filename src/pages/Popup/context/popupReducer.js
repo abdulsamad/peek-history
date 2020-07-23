@@ -14,6 +14,15 @@ export default (state, action) => {
 				...state,
 				historyItems: action.payload,
 				loading: false,
+				searchError: false,
+			};
+
+		case types.SEARCH_ERROR:
+			return {
+				...state,
+				historyItems: [],
+				loading: false,
+				searchError: true,
 			};
 
 		case types.SEARCH_TABS:

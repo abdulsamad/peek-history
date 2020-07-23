@@ -5,6 +5,7 @@ import {
 	Devices as DevicesIcon,
 	Settings as SettingsIcon,
 } from '@material-ui/icons';
+import { Skeleton } from '@material-ui/lab';
 import DeleteAllModal from '../home/history/DeleteAllModal';
 import { usePopupState, usePopupDispatch } from '../../context/popupContext';
 
@@ -31,27 +32,30 @@ function BottomNavbar() {
 	const { setActiveTabNum } = usePopupDispatch();
 	const classes = useStyles();
 
-	if (loading) {
-		return null;
-	}
-
 	return (
 		<nav className={classes.nav}>
-			<BottomNavigation
-				value={activeTabNum}
-				onChange={(event, newValue) => {
-					setActiveTabNum(newValue);
-				}}
-				className={classes.root}>
-				<BottomNavigationAction className='home' icon={<HomeIcon />} />
-				<BottomNavigationAction className='tabs' icon={<DevicesIcon />} />
-				<DeleteAllModal />
-				<BottomNavigationAction
-					className='options'
-					onClick={() => chrome.runtime.openOptionsPage()}
-					icon={<SettingsIcon />}
-				/>
-			</BottomNavigation>
+			{loading ? (
+				<BottomNavigation className={classes.root}>
+					<BottomNavigationAction icon={<Skeleton variant='circle' width={24} height={24} />} />
+					<BottomNavigationAction icon={<Skeleton variant='circle' width={24} height={24} />} />
+					<BottomNavigationAction icon={<Skeleton variant='circle' width={24} height={24} />} />
+					<BottomNavigationAction icon={<Skeleton variant='circle' width={24} height={24} />} />
+				</BottomNavigation>
+			) : (
+				<BottomNavigation
+					className={classes.root}
+					onChange={(event, newValue) => setActiveTabNum(newValue)}
+					value={activeTabNum}>
+					<BottomNavigationAction className='home' icon={<HomeIcon />} />
+					<BottomNavigationAction className='tabs' icon={<DevicesIcon />} />
+					<DeleteAllModal />
+					<BottomNavigationAction
+						className='options'
+						onClick={() => chrome.runtime.openOptionsPage()}
+						icon={<SettingsIcon />}
+					/>
+				</BottomNavigation>
+			)}
 		</nav>
 	);
 }
