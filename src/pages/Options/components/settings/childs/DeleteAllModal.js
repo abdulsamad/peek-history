@@ -29,7 +29,7 @@ function DeleteAllModal() {
 
 	return (
 		<>
-			<Button variant='contained' onClick={() => setOpen(true)} fullWidth={true}>
+			<Button variant='contained' color='secondary' onClick={() => setOpen(true)} fullWidth={true}>
 				Delete All
 			</Button>
 			<Dialog
