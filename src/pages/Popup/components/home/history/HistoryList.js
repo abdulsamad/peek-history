@@ -65,7 +65,7 @@ function HistoryList() {
 	const loadingElem = () => {
 		let content = [];
 
-		for (let i = 0; i < 10; i++) {
+		for (let i = 0; i < 7; i++) {
 			content.push(
 				<div key={i}>
 					<ListItem className={classes.listItem}>
