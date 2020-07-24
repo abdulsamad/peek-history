@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 function AccentColor() {
 	const [accents, setAccents] = useState([
-		{ color: '#64B5F6', active: false },
+		{ color: '#64B5F6', active: true },
 		{ color: '#E57373', active: false },
 		{ color: '#4db6ac', active: false },
 		{ color: '#4dd0e1', active: false },
@@ -100,7 +100,7 @@ function AccentColor() {
 		);
 	};
 
-	// TODO: Ad Custom color
+	// TODO: Add Custom color
 	// const onChange = ({ target: value }) => {
 	// 	setAccent(value);
 	// 	chrome.storage.sync.set({ accent: value });
