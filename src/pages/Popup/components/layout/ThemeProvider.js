@@ -31,7 +31,7 @@ function ThemeProviderContainer({ children }) {
 								width: width,
 								overflow: 'hidden',
 								margin: '0',
-								transition: '0.3s ease',
+								transition: 'width 0.3s ease',
 							},
 							'*::-webkit-scrollbar': {
 								backgroundColor:
