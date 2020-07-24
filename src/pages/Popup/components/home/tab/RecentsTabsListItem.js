@@ -77,6 +77,9 @@ const useStyles = makeStyles((theme) => ({
 			marginLeft: 10,
 		},
 	},
+	button: {
+		color: '#f9f9f9',
+	},
 }));
 
 function RecentsTabsListItem(props) {
@@ -145,6 +148,7 @@ function RecentsTabsListItem(props) {
 							size='small'
 							variant='contained'
 							color='primary'
+							className={classes.button}
 							onClick={() => chrome.sessions.restore(sessionId)}>
 							Restore
 						</Button>
