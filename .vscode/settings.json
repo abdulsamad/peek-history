@@ -1,6 +1,6 @@
 {
-  "editor.formatOnSave": true,
-  "files.associations": {
-    "*.js": "javascriptreact"
-  }
+	"editor.formatOnSave": true,
+	"files.associations": {
+		"*.js": "javascriptreact"
+	}
 }
