@@ -33,7 +33,7 @@ function ExcludeURLForm() {
 	return (
 		incognito && (
 			<>
-				<Grid container className={classes.root}>
+				<Grid container alignItems='center' className={classes.root}>
 					<Grid item md={6}>
 						<Typography align='center' variant='subtitle2'>
 							Add Exclude URL

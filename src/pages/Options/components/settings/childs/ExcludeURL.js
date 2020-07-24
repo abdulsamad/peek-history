@@ -51,7 +51,7 @@ function ExcludeURL() {
 	};
 
 	return (
-		<Grid container className={classes.root}>
+		<Grid container alignItems='center' className={classes.root}>
 			<Grid item md={6}>
 				<Typography align='center' variant='subtitle2'>
 					Exclude URL's
