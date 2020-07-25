@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-function NotFound() {
+function NotFound({ search }) {
 	const classes = useStyles();
 
 	return (
@@ -31,10 +32,18 @@ function NotFound() {
 			<Typography variant='h5' align='center'>
 				No Records Found
 			</Typography>
-			<Typography variant='body1'>Please try searching more specific with more letters.</Typography>
+			{search && (
+				<Typography variant='body1'>
+					Please try searching more specific with more letters.
+				</Typography>
+			)}
 			<br />
 		</div>
 	);
 }
+
+NotFound.propTypes = {
+	search: PropTypes.bool.isRequired,
+};
 
 export default NotFound;

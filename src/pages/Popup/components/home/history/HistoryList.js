@@ -91,9 +91,9 @@ function HistoryList() {
 		return content;
 	};
 
-	if (searchError) {
-		return <NotFound />;
-	}
+	if (searchError) return <NotFound search={true} />;
+
+	if (!loading && historyItems.length <= 0) return <NotFound search={false} />;
 
 	return (
 		<div className={classes.root}>
