@@ -17,14 +17,29 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function DeleteModal() {
 	const [open, setOpen] = useState(false);
+	const [active, setActive] = useState(false);
 
 	const handleClose = () => {
 		setOpen(false);
 	};
 
+	const handleOpen = () => {
+		let count = 0;
+		setOpen(true);
+
+		const interval = setInterval(() => {
+			count++;
+
+			if (count === 5) {
+				setActive(true);
+				clearInterval(interval);
+			}
+		}, 1000);
+	};
+
 	return (
 		<>
-			<BottomNavigationAction onClick={() => setOpen(true)} icon={<DeleteForeverIcon />} />
+			<BottomNavigationAction onClick={handleOpen} icon={<DeleteForeverIcon />} />
 			<Dialog
 				open={open}
 				TransitionComponent={Transition}
@@ -44,8 +59,9 @@ function DeleteModal() {
 					</Button>
 					<Button
 						onClick={() => chrome.history.deleteAll(() => window.location.reload())}
-						color='secondary'>
-						Delete
+						color='secondary'
+						disabled={!active}>
+						{active ? 'Delete' : `Wait...`}
 					</Button>
 				</DialogActions>
 			</Dialog>
