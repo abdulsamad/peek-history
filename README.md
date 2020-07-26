@@ -2,15 +2,16 @@
 
 This extension helps you to quickly peek history in popup that helps you view,search and delete your history without distracting you from your work. It also lets you restore your sessions across devices (Reopen recently closed tabs/windows or tabs/windows on other devices). Add certain tracking websites to the exclusion list to open unwanted URL's automatically in incognito tab.
 
-## Features
+## ✨ Features
 
 - Quickly Peek History in Popup
 - Delete specific or all History
 - Reopen Closed Tabs (Full Session)
 - Restore Sessions from Other Devices
 - Force certain URL to automatically open in Incognito tab
+- Can be fully controlled with keyboard
 
-## Keyboard Shortcuts - ⌨
+## ⌨ Keyboard Shortcuts
 
 - 🔵 Toggle Peek History (Open/Close extension popup) - CTRL + Shift + H
 
