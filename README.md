@@ -21,3 +21,9 @@ This extension helps you to quickly peek history in popup that helps you view,se
 - 📑 See Recently Closed Tabs/Other Tabs - ➡️ Right Arrow (After opening popup)
 
 - 🔢 After opening the popup you can use Number Keys (1 - 9) to open the nth Number of History link or Recently closed tab.
+
+<p align="center">
+  <a href="https://chrome.google.com/webstore/detail/peek-history/gknodemjjckmkncijnedcpogffimkmbm">
+  <img src="./chromewebstore.png" alt="Chrome Web Store" height="58" width="206">
+  </a>
+</p>
