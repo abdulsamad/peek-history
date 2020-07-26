@@ -30,8 +30,11 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 	listItemIcon: {
-		height: 32,
-		minWidth: 32,
+		height: 16,
+		minWidth: 16,
+		marginRight: 16,
+		display: 'flex',
+		alignItems: 'center',
 	},
 	favicon: {
 		borderRadius: 0,
