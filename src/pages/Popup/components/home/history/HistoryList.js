@@ -75,7 +75,7 @@ function HistoryList() {
 						<ListItemText
 							className={classes.textContainer}
 							primary={<Skeleton />}
-							secondary={<Skeleton />}
+							secondary={!hideURL && <Skeleton />}
 						/>
 						<ListItemSecondaryAction className={classes.listItemSecondaryAction}>
 							<IconButton edge='end'>
