@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Peek History",
-	"description": "A simple and minimal extension for quickly peeking and managing history.",
+	"description": "A simple extension for quickly peeking history, restoring sessions and prevent certain 🕵 websites to open in normal tab.",
 	"version": "1.0.0",
 	"browser_action": {
 		"default_popup": "./popup.html",
