@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { usePopupState } from '../../../context/popupContext';
 import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
 import {
 	makeStyles,
@@ -35,8 +36,11 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 	listItemIcon: {
-		height: 32,
-		minWidth: 32,
+		height: 16,
+		minWidth: 16,
+		marginRight: '16px',
+		display: 'flex',
+		alignItems: 'center',
 	},
 	favicon: {
 		borderRadius: 0,
@@ -83,6 +87,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function RecentsTabsListItem(props) {
+	const { hideURL } = usePopupState();
 	const classes = useStyles();
 
 	const { tabs, sessionId } = props.window;
@@ -125,7 +130,7 @@ function RecentsTabsListItem(props) {
 												</Typography>
 											)
 										}
-										secondary={tab.url}
+										secondary={!hideURL && tab.url}
 										secondaryTypographyProps={{ title: tab.url }}
 									/>
 								</Link>
@@ -198,7 +203,7 @@ function RecentsTabsListItem(props) {
 													</Typography>
 												)
 											}
-											secondary={tab.url}
+											secondary={!hideURL && tab.url}
 											secondaryTypographyProps={{ title: tab.url }}
 										/>
 									</Link>
