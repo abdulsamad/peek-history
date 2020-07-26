@@ -1,6 +1,6 @@
-## A simple extension for quickly peeking history, restoring sessions and prevent certain tracking websites to open in normal tab.
+## A simple extension for quickly peeking history, restoring sessions and prevent certain 🕵 websites to open in normal tab.
 
-This extension helps you to quickly peek history in popup that helps you view,search and delete your history without distracting you from your work. It also lets you restore your sessions across devices (Reopen recently closed tabs/windows or tabs/windows on other devices). Add certain tracking websites to the exclusion list to open unwanted URL's automatically in incognito tab.
+This extension helps you to quickly peek history in the popup that helps you view, search, and delete your history without distracting you from your work. It also lets you restore your sessions across devices (Reopen recently closed tabs/windows or tabs/windows on other devices). Add certain websites to the exclusion list to open unwanted URL's automatically in incognito tab to prevent tracking via cookie, accidentally save information confidential data entered in forms, etc.
 
 ## ✨ Features
 
