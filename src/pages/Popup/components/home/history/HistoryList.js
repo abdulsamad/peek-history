@@ -26,6 +26,15 @@ const useStyles = makeStyles((theme) => ({
 		overflowX: 'hidden',
 		overflowY: 'scroll',
 	},
+	loaderRoot: {
+		position: 'absolute',
+		top: 60,
+		bottom: 60,
+		width: '100%',
+		color: theme.palette.text.primary,
+		backgroundColor: theme.palette.background.paper,
+		overflow: 'hidden',
+	},
 	list: {
 		width: '100%',
 		padding: 0,
@@ -64,10 +73,11 @@ function HistoryList() {
 
 	const loadingElem = () => {
 		let content = [];
+		const length = hideURL ? 10 : 7;
 
-		for (let i = 0; i < 7; i++) {
+		for (let i = 0; i < length; i++) {
 			content.push(
-				<div key={i}>
+				<>
 					<ListItem className={classes.listItem}>
 						<ListItemIcon>
 							<Skeleton variant='circle' width={20} height={20} />
@@ -85,31 +95,36 @@ function HistoryList() {
 						</ListItemSecondaryAction>
 					</ListItem>
 					<Divider />
-				</div>,
+				</>,
 			);
 		}
-		return content;
+
+		return (
+			<div className={classes.loaderRoot}>
+				<List>{content}</List>
+			</div>
+		);
 	};
 
 	if (searchError) return <NotFound search={true} />;
 
 	if (!loading && historyItems.length <= 0) return <NotFound search={false} />;
 
-	return (
+	return loading ? (
+		loadingElem()
+	) : (
 		<div className={classes.root}>
-			<List component='nav' aria-label='History Items' className={classes.list}>
-				{loading
-					? loadingElem()
-					: historyItems.map((historyItem) => (
-							<HistoryListItem
-								key={historyItem.id}
-								loading={loading}
-								lastVisitTime={historyItem.lastVisitTime}
-								title={historyItem.title}
-								url={historyItem.url}
-								hideURL={hideURL}
-							/>
-					  ))}
+			<List component='div' aria-label='History Items' className={classes.list}>
+				{historyItems.map((historyItem) => (
+					<HistoryListItem
+						key={historyItem.id}
+						loading={loading}
+						lastVisitTime={historyItem.lastVisitTime}
+						title={historyItem.title}
+						url={historyItem.url}
+						hideURL={hideURL}
+					/>
+				))}
 			</List>
 		</div>
 	);
