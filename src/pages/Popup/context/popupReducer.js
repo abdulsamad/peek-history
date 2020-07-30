@@ -5,7 +5,7 @@ export default (state, action) => {
 		case types.GET_HISTORY:
 			return {
 				...state,
-				historyItems: action.payload,
+				historyItems: state.historyItems.concat(action.payload),
 				loading: false,
 			};
 

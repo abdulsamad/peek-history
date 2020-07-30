@@ -20,27 +20,7 @@ function PopupProvider({ children }) {
 	const [state, dispatch] = useReducer(PopupReducer, initialState);
 
 	useEffect(() => {
-		chrome.history.search(
-			{
-				text: '',
-				maxResults: 50,
-			},
-			(historyItems) => {
-				chrome.storage.sync.get('sort', ({ sort }) => {
-					if (sort === 'most-visit') {
-						dispatch({
-							type: types.GET_HISTORY,
-							payload: historyItems.sort((a, b) => b.visitCount - a.visitCount),
-						});
-					} else {
-						dispatch({
-							type: types.GET_HISTORY,
-							payload: historyItems,
-						});
-					}
-				});
-			},
-		);
+		getHistory({});
 
 		chrome.sessions.getRecentlyClosed((recentTabs) => {
 			dispatch({
@@ -145,6 +125,32 @@ function PopupProvider({ children }) {
 		}
 	};
 
+	const getHistory = ({ text = '', maxResults = 50, startTime = 157784760000, endTime = null }) => {
+		chrome.history.search(
+			{
+				text: text,
+				maxResults: maxResults,
+				startTime: startTime,
+				endTime: endTime,
+			},
+			(historyItems) => {
+				chrome.storage.sync.get('sort', ({ sort }) => {
+					if (sort === 'most-visit') {
+						dispatch({
+							type: types.GET_HISTORY,
+							payload: historyItems.sort((a, b) => b.visitCount - a.visitCount),
+						});
+					} else {
+						dispatch({
+							type: types.GET_HISTORY,
+							payload: historyItems,
+						});
+					}
+				});
+			},
+		);
+	};
+
 	const setActiveTabNum = (num) => {
 		dispatch({
 			type: types.UPDATE_ACTIVE_TAB_NUM,
@@ -177,6 +183,7 @@ function PopupProvider({ children }) {
 			<PopupContextDispatch.Provider
 				value={{
 					search,
+					getHistory,
 					setActiveTabNum,
 					deleteHistory,
 				}}>

@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { usePopupState } from '../../../context/popupContext';
+import React, { useEffect, useRef, useCallback, Fragment } from 'react';
+import { usePopupState, usePopupDispatch } from '../../../context/popupContext';
 import {
 	makeStyles,
 	List,
@@ -61,7 +61,10 @@ const useStyles = makeStyles((theme) => ({
 
 function HistoryList() {
 	const { historyItems, hideURL, loading, searchError } = usePopupState();
+	const { getHistory } = usePopupDispatch();
 	const classes = useStyles();
+	const observer = useRef();
+	const prevLastVisitTime = useRef();
 
 	useEffect(() => {
 		window.addEventListener('keydown', shortcutFunc, false);
@@ -77,7 +80,7 @@ function HistoryList() {
 
 		for (let i = 0; i < length; i++) {
 			content.push(
-				<>
+				<Fragment key={i}>
 					<ListItem className={classes.listItem}>
 						<ListItemIcon>
 							<Skeleton variant='circle' width={20} height={20} />
@@ -95,7 +98,7 @@ function HistoryList() {
 						</ListItemSecondaryAction>
 					</ListItem>
 					<Divider />
-				</>,
+				</Fragment>,
 			);
 		}
 
@@ -106,6 +109,25 @@ function HistoryList() {
 		);
 	};
 
+	const lastElem = useCallback(
+		(node, lastVisitTime) => {
+			if (observer.current) observer.current.disconnect();
+
+			observer.current = new IntersectionObserver((entries) => {
+				if (entries[0].isIntersecting) {
+					getHistory({ endTime: lastVisitTime });
+
+					observer.current.disconnect();
+				}
+			});
+
+			console.count();
+			if (lastVisitTime !== prevLastVisitTime.current && node) observer.current.observe(node);
+			prevLastVisitTime.current = lastVisitTime;
+		},
+		[getHistory],
+	);
+
 	if (searchError) return <NotFound search={true} />;
 
 	if (!loading && historyItems.length <= 0) return <NotFound search={false} />;
@@ -115,16 +137,32 @@ function HistoryList() {
 	) : (
 		<div className={classes.root}>
 			<List component='div' aria-label='History Items' className={classes.list}>
-				{historyItems.map((historyItem) => (
-					<HistoryListItem
-						key={historyItem.id}
-						loading={loading}
-						lastVisitTime={historyItem.lastVisitTime}
-						title={historyItem.title}
-						url={historyItem.url}
-						hideURL={hideURL}
-					/>
-				))}
+				{historyItems.map(({ id, lastVisitTime, title, url }, index) => {
+					if (historyItems.length - 20 === index - 19) {
+						return (
+							<HistoryListItem
+								key={id + index}
+								loading={loading}
+								lastVisitTime={lastVisitTime}
+								title={title}
+								url={url}
+								hideURL={hideURL}
+								ref={(node) => lastElem(node, lastVisitTime)}
+							/>
+						);
+					} else {
+						return (
+							<HistoryListItem
+								key={id + index}
+								loading={loading}
+								lastVisitTime={lastVisitTime}
+								title={title}
+								url={url}
+								hideURL={hideURL}
+							/>
+						);
+					}
+				})}
 			</List>
 		</div>
 	);
