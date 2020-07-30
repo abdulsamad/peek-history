@@ -18,6 +18,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 function DeleteModal() {
 	const [open, setOpen] = useState(false);
 	const [active, setActive] = useState(false);
+	const [countdown, setCountdown] = useState(5);
 
 	const handleClose = () => {
 		setOpen(false);
@@ -29,9 +30,11 @@ function DeleteModal() {
 
 		const interval = setInterval(() => {
 			count++;
+			setCountdown((prevValue) => --prevValue);
 
 			if (count === 5) {
 				setActive(true);
+				setCountdown(0);
 				clearInterval(interval);
 			}
 		}, 1000);
@@ -61,7 +64,7 @@ function DeleteModal() {
 						onClick={() => chrome.history.deleteAll(() => window.location.reload())}
 						color='secondary'
 						disabled={!active}>
-						{active ? 'Delete' : `Wait...`}
+						{active ? 'Delete' : `Wait ${countdown}s`}
 					</Button>
 				</DialogActions>
 			</Dialog>
