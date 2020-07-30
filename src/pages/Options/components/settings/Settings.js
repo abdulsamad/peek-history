@@ -1,9 +1,12 @@
 import React from 'react';
 import { Container, makeStyles, Paper, Typography, IconButton } from '@material-ui/core';
 import { Settings as SettingsIcon } from '@material-ui/icons';
+import Theme from './childs/Theme';
+import Font from './childs/Font';
+import AccentColor from './childs/AccentColor';
+import PopupWidth from './childs/PopupWidth';
+import HideURL from './childs/HideURL';
 import Sort from './childs/Sort';
-import ExcludeURL from './childs/ExcludeURL';
-import ExcludeURLForm from './childs/ExcludeURLForm';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -27,9 +30,12 @@ function Settings() {
 					</IconButton>
 					Settings
 				</Typography>
+				<Theme />
+				<Font />
+				<AccentColor />
+				<PopupWidth />
+				<HideURL />
 				<Sort />
-				<ExcludeURL />
-				<ExcludeURLForm />
 			</Paper>
 		</Container>
 	);

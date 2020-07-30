@@ -20,36 +20,6 @@ export default (state, action) => {
 				accent: action.payload,
 			};
 
-		case types.GET_EXCLUDED_URL:
-			return {
-				...state,
-				excludedURLs: action.payload,
-			};
-
-		case types.ADD_EXCLUDED_URL:
-			return {
-				...state,
-				excludedURLs: [action.payload, ...state.excludedURLs],
-			};
-
-		case types.REMOVE_EXCLUDED_URL:
-			return {
-				...state,
-				excludedURLs: state.excludedURLs.filter((val) => val !== action.payload),
-			};
-
-		case types.REMOVE_ALL_EXCLUDED_URLS:
-			return {
-				...state,
-				excludedURLs: [],
-			};
-
-		case types.SET_INCOGNITO:
-			return {
-				...state,
-				incognito: action.payload,
-			};
-
 		default:
 			return {
 				state,

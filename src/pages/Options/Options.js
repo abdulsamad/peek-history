@@ -3,7 +3,6 @@ import { OptionsProvider } from './context/optionsContext';
 import ThemeProvider from './components/layout/ThemeProvider';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
-import Appearance from './components/appearance/Appearance';
 import Settings from './components/settings/Settings';
 
 function Options() {
@@ -11,7 +10,6 @@ function Options() {
 		<OptionsProvider>
 			<ThemeProvider>
 				<Navbar title='Peek History' />
-				<Appearance />
 				<Settings />
 				<Footer title='Peek History' />
 			</ThemeProvider>

@@ -1,6 +1,6 @@
-## A simple extension for quickly peeking history, restoring sessions, and automatically open specific URLs in an incognito mode.
+## A simple and minimal extension for quickly peeking and managing history.
 
-This extension helps you to quickly peek history in the popup that helps you view, search, and delete your history without distracting you from your work. It also lets you restore your sessions across devices (Reopen recently closed tabs/windows or tabs/windows on other devices). Add certain websites to the exclusion list to open unwanted URL's automatically in incognito tab to prevent tracking via cookie, accidentally save information confidential data entered in forms, etc.
+This extension helps you to quickly peek history in the popup that helps you view, search, and delete your history without distracting you from your work. It also lets you restore your sessions across devices (Reopen recently closed tabs/windows or tabs/windows on other devices).
 
 ## ✨ Features
 
@@ -8,7 +8,6 @@ This extension helps you to quickly peek history in the popup that helps you vie
 - Delete specific or all History
 - Reopen Closed Tabs (Full Session)
 - Restore Sessions from Other Devices
-- Force certain URL to automatically open in Incognito tab
 - Can be fully controlled with keyboard
 
 ## ⌨ Keyboard Shortcuts

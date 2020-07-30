@@ -101,11 +101,6 @@ var options = {
 					to: path.join(__dirname, 'build/assets/'),
 					force: true,
 				},
-				{
-					from: 'src/pages/Background/background.js',
-					to: path.join(__dirname, 'build/'),
-					force: true,
-				},
 			],
 			{
 				logLevel: 'info',

@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 function AccentColor() {
 	const [accents, setAccents] = useState([
-		{ color: '#64B5F6', active: true },
+		{ color: '#64B5F6', active: false },
 		{ color: '#E57373', active: false },
 		{ color: '#4db6ac', active: false },
 		{ color: '#4dd0e1', active: false },
@@ -62,17 +62,15 @@ function AccentColor() {
 		{ color: '#f06292', active: false },
 	]);
 	const [customColor, setCustomColor] = useState(false);
-	const { accent } = useOptionsState();
+	const { accent: defaultAccent } = useOptionsState();
 	const { setAccent } = useOptionsDispatch();
 	const classes = useStyles();
 	const inputColor = useRef();
 
 	useEffect(() => {
 		chrome.storage.sync.get('accent', ({ accent }) => {
-			if (!accent) return;
-
 			const accentsArr = accents.map((acc) => {
-				if (acc.color === accent) {
+				if (acc.color === accent || acc.color === defaultAccent) {
 					return { color: acc.color, active: true };
 				} else {
 					return { color: acc.color, active: false };

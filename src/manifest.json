@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Peek History",
-	"description": "A simple extension for quickly peeking history, restoring sessions, and automatically open specific URLs in an incognito mode.",
+	"description": "A simple and minimal extension for quickly peeking and managing history.",
 	"version": "1.0.0",
 	"browser_action": {
 		"default_popup": "./popup.html",
@@ -9,12 +9,7 @@
 		"default_title": "Peek History"
 	},
 	"permissions": ["chrome://favicon/*", "fontSettings", "tabs", "history", "storage", "sessions"],
-	"optional_permissions": ["http://*/*", "https://*/*", "webRequestBlocking", "webRequest"],
 	"options_page": "options.html",
-	"background": {
-		"scripts": ["background.js"],
-		"persistant": true
-	},
 	"icons": {
 		"128": "./assets/icon128.png",
 		"48": "./assets/icon48.png",
