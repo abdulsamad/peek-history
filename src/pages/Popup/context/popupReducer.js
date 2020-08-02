@@ -25,14 +25,6 @@ export default (state, action) => {
 				searchError: true,
 			};
 
-		case types.SEARCH_TABS:
-			return {
-				...state,
-				recentTabs: action.payload.recentTabs,
-				otherTabs: action.payload.otherTabs,
-				loading: false,
-			};
-
 		case types.GET_RECENT_TABS:
 			return {
 				...state,

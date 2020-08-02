@@ -97,50 +97,59 @@ function PopupProvider({ children }) {
 			const regex = new RegExp(text, 'gi');
 
 			// Filter Recent Tabs
-			const recentTabs = state.recentTabs.filter((obj) => {
-				const tab = obj.tab;
-				let win = obj.window;
+			chrome.sessions.getRecentlyClosed((recentTabs) => {
+				const filteredArr = recentTabs.filter((obj) => {
+					const tab = obj.tab;
+					let win = obj.window;
 
-				if (text === '') return obj;
+					if (text === '') return obj;
 
-				if (win) {
-					const arr = win.tabs.filter(
-						(windowObj) => windowObj.title.match(regex) || windowObj.url.match(regex),
-					);
+					if (tab) if (tab.title.match(regex) || tab.url.match(regex)) return obj;
 
-					if (arr.length > 0) {
-						win.tabs = arr;
-						return obj;
-					}
-				} else if ((tab && tab.title.match(regex)) || tab.url.match(regex)) {
-					return obj;
-				}
-			});
+					if (win) {
+						const arr = win.tabs.filter(
+							(winObj) => winObj.title.match(regex) || winObj.url.match(regex),
+						);
 
-			// Filter Other Tabs
-			const otherTabs = state.otherTabs.filter((obj) => {
-				if (text === '') return obj;
-
-				const arr = obj.sessions.filter((session) => {
-					const arr2 = session.window.tabs.filter(
-						(tab) => tab.title.match(regex) || tab.url.match(regex),
-					);
-
-					if (arr2.length > 0) {
-						session.window.tabs = arr2;
-						return session;
+						if (arr.length > 0) {
+							win.tabs = arr;
+							return obj;
+						}
 					}
 				});
 
-				if (arr.length > 0) {
-					obj.sessions = arr;
-					return obj;
-				}
+				dispatch({
+					type: types.GET_RECENT_TABS,
+					payload: filteredArr,
+				});
 			});
 
-			dispatch({
-				type: types.SEARCH_TABS,
-				payload: { recentTabs, otherTabs },
+			// Filter Other Tabs
+			chrome.sessions.getDevices((otherTabs) => {
+				const filteredArr = otherTabs.filter((obj) => {
+					if (text === '') return obj;
+
+					const arr = obj.sessions.filter((session) => {
+						const arr2 = session.window.tabs.filter(
+							(tab) => tab.title.match(regex) || tab.url.match(regex),
+						);
+
+						if (arr2.length > 0) {
+							session.window.tabs = arr2;
+							return session;
+						}
+					});
+
+					if (arr.length > 0) {
+						obj.sessions = arr;
+						return obj;
+					}
+				});
+
+				dispatch({
+					type: types.GET_OTHER_TABS,
+					payload: filteredArr,
+				});
 			});
 		}
 	};
