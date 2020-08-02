@@ -13,10 +13,10 @@ This extension helps you to quickly peek history in the popup that helps you vie
 ## ⌨ Keyboard Shortcuts
 
 - 🔵 Toggle Peek History (Open/Close extension popup) - <kbd>Ctrl + Shift + H</kbd>
-- 🔍 Quickly Search in History - <kbd>S</kbd> (After opening popup)
-- ⚙️ Open Extension Options/Setttings - <kbd>O</kbd> (After opening popup)
-- 📑 See Recently Closed Tabs/Other Tabs - <kbd>➡️</kbd> Right Arrow (After opening popup)
-- 🔢 After opening the popup you can use Number Keys <kbd>(1 - 9)</kbd> to open the nth Number of History link or Recently closed tab.
+- 🔍 Quickly Search in History - <kbd>Ctrl + S</kbd> (After opening popup)
+- ⚙️ Open Extension Options/Setttings - <kbd>Ctrl + O</kbd> (After opening popup)
+- 📑 See Recently Closed Tabs/Other Tabs - <kbd>Ctrl + ➡️</kbd> Right Arrow (After opening popup)
+- 🔢 After opening the popup you can use Number Keys <kbd>Ctrl + (1 - 9)</kbd> to open the nth Number of History link or Recently closed tab.
 
 <p align="center">
   <a href="https://chrome.google.com/webstore/detail/peek-history/gknodemjjckmkncijnedcpogffimkmbm">

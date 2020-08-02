@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { usePopupState } from '../../../context/popupContext';
 import {
 	makeStyles,
@@ -13,7 +13,6 @@ import {
 import { Skeleton } from '@material-ui/lab';
 import HistoryListItem from './HistoryListItem';
 import NotFound from '../misc/NotFound';
-import shortcutFunc from './shortcut';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -62,14 +61,6 @@ const useStyles = makeStyles((theme) => ({
 function HistoryList() {
 	const { historyItems, hideURL, loading, searchError } = usePopupState();
 	const classes = useStyles();
-
-	useEffect(() => {
-		window.addEventListener('keydown', shortcutFunc, false);
-
-		return () => {
-			window.removeEventListener('keydown', shortcutFunc, false);
-		};
-	}, []);
 
 	const loadingElem = () => {
 		let content = [];
