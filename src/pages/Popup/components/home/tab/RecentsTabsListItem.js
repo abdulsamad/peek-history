@@ -94,120 +94,111 @@ function RecentsTabsListItem(props) {
 		const { title, url, sessionId } = props.tab;
 
 		return (
-			<>
-				<ListItem className={classes.listItem}>
-					<Link
-						href='#'
-						color='inherit'
-						block='true'
-						onClick={() => chrome.sessions.restore(sessionId)}
-						className={`link ${classes.anchor}`}
-						underline='none'>
-						<ListItemIcon className={classes.listItemIcon}>
-							<Avatar
-								src={`chrome://favicon/${url}`}
-								alt={`${url} Favicon`}
-								className={classes.favicon}
-							/>
-						</ListItemIcon>
-						<ListItemText
-							className={classes.textContainer}
-							primary={
-								title ? (
-									<Typography title={title} variant='body1' display='block'>
-										{title}
-									</Typography>
-								) : (
-									<Typography variant='body1' color='error' display='block'>
-										(Title Not Available)
-									</Typography>
-								)
-							}
-							secondary={!hideURL && url}
-							secondaryTypographyProps={{ title: url }}
+			<ListItem className={classes.listItem} divider={true}>
+				<Link
+					href='#'
+					color='inherit'
+					block='true'
+					onClick={() => chrome.sessions.restore(sessionId)}
+					className={`link ${classes.anchor}`}
+					underline='none'>
+					<ListItemIcon className={classes.listItemIcon}>
+						<Avatar
+							src={`chrome://favicon/${url}`}
+							alt={`${url} Favicon`}
+							className={classes.favicon}
 						/>
-					</Link>
-				</ListItem>
-				<Divider />
-			</>
+					</ListItemIcon>
+					<ListItemText
+						className={classes.textContainer}
+						primary={
+							title ? (
+								<Typography title={title} variant='body1' display='block'>
+									{title}
+								</Typography>
+							) : (
+								<Typography variant='body1' color='error' display='block'>
+									(Title Not Available)
+								</Typography>
+							)
+						}
+						secondary={!hideURL && url}
+						secondaryTypographyProps={{ title: url }}
+					/>
+				</Link>
+			</ListItem>
 		);
 	}
 
 	const { tabs, sessionId } = props.window;
 
 	return (
-		<>
-			<Accordion>
-				<AccordionSummary
-					className='accordion'
-					expandIcon={<ExpandMoreIcon />}
-					aria-controls='panel1a-content'
-					id='panel1a-header'>
-					<div className={classes.windowAccordion}>
-						<Typography className={classes.heading}>
-							Window ({tabs.length}
-							{tabs.length > 1 ? 'Tabs' : 'Tab'})
-						</Typography>
+		<Accordion>
+			<AccordionSummary
+				className='accordion'
+				expandIcon={<ExpandMoreIcon />}
+				aria-controls='panel1a-content'
+				id='panel1a-header'>
+				<div className={classes.windowAccordion}>
+					<Typography className={classes.heading}>
+						Window ({tabs.length}
+						{tabs.length > 1 ? 'Tabs' : 'Tab'})
+					</Typography>
 
-						<Button
-							size='small'
-							variant='contained'
-							color='primary'
-							className={classes.button}
-							onClick={() => chrome.sessions.restore(sessionId)}>
-							Restore
-						</Button>
-					</div>
-				</AccordionSummary>
-				<AccordionDetails>
-					<List
-						component='div'
-						aria-label='Recently Closed Window'
-						className={classes.list}
-						key={tabs.url}>
-						{tabs.map((tab) => (
-							<Fragment key={tab.url}>
-								<ListItem className={classes.listItem}>
-									<Link
-										href='#'
-										color='inherit'
-										block='true'
-										className={`link ${classes.anchor}`}
-										underline='none'
-										onClick={() => chrome.sessions.restore(tab.sessionId)}>
-										<ListItemIcon className={classes.listItemIcon}>
-											<Avatar
-												src={`chrome://favicon/${tab.url}`}
-												alt={`${tab.url} Favicon`}
-												className={classes.favicon}
-											/>
-										</ListItemIcon>
-										<ListItemText
-											className={classes.textContainer}
-											primary={
-												tab.title ? (
-													<Typography title={tab.title} variant='body1' display='block'>
-														{tab.title}
-													</Typography>
-												) : (
-													<Typography variant='body1' color='error' display='block'>
-														(Title Not Available)
-													</Typography>
-												)
-											}
-											secondary={!hideURL && tab.url}
-											secondaryTypographyProps={{ title: tab.url }}
-										/>
-									</Link>
-								</ListItem>
-								<Divider />
-							</Fragment>
-						))}
-					</List>
-				</AccordionDetails>
-			</Accordion>
-			<Divider />
-		</>
+					<Button
+						size='small'
+						variant='contained'
+						color='primary'
+						className={classes.button}
+						onClick={() => chrome.sessions.restore(sessionId)}>
+						Restore
+					</Button>
+				</div>
+			</AccordionSummary>
+			<AccordionDetails>
+				<List
+					component='div'
+					aria-label='Recently Closed Window'
+					className={classes.list}
+					key={tabs.url}>
+					{tabs.map((tab) => (
+						<ListItem className={classes.listItem} divider={true} key={tab.url}>
+							<Link
+								href='#'
+								color='inherit'
+								block='true'
+								className={`link ${classes.anchor}`}
+								underline='none'
+								onClick={() => chrome.sessions.restore(tab.sessionId)}>
+								<ListItemIcon className={classes.listItemIcon}>
+									<Avatar
+										src={`chrome://favicon/${tab.url}`}
+										alt={`${tab.url} Favicon`}
+										className={classes.favicon}
+									/>
+								</ListItemIcon>
+								<ListItemText
+									className={classes.textContainer}
+									primary={
+										tab.title ? (
+											<Typography title={tab.title} variant='body1' display='block'>
+												{tab.title}
+											</Typography>
+										) : (
+											<Typography variant='body1' color='error' display='block'>
+												(Title Not Available)
+											</Typography>
+										)
+									}
+									secondary={!hideURL && tab.url}
+									secondaryTypographyProps={{ title: tab.url }}
+								/>
+							</Link>
+						</ListItem>
+					))}
+				</List>
+			</AccordionDetails>
+		</Accordion>
 	);
 }
 

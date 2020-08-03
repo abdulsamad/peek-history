@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
 import {
 	makeStyles,
 	ListItem,
@@ -8,7 +7,6 @@ import {
 	ListItemSecondaryAction,
 	Avatar,
 	IconButton,
-	Divider,
 	Link,
 	Typography,
 } from '@material-ui/core';
@@ -79,64 +77,54 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-function HistoryListItem({ title, url, lastVisitTime, hideURL }) {
+function HistoryListItem({ title, url, lastVisitTime, hideURL }, observerRef) {
 	const classes = useStyles();
 
 	return (
-		<>
-			<ListItem className={classes.listItem}>
-				<Link
-					color='inherit'
-					href={url}
-					block='true'
-					target='_blank'
-					rel='noopener noreferrer'
-					className={`link ${classes.anchor}`}
-					underline='none'>
-					<ListItemIcon className={classes.listItemIcon}>
-						<Avatar
-							src={`chrome://favicon/${url}`}
-							alt={`${url.domain} Favicon`}
-							className={classes.favicon}
-						/>
-					</ListItemIcon>
-					<ListItemText
-						className={classes.textContainer}
-						primary={
-							title ? (
-								<Typography title={title} variant='body1' display='block'>
-									{title}
-								</Typography>
-							) : (
-								<Typography variant='body1' color='error' display='block'>
-									(Title Not Available)
-								</Typography>
-							)
-						}
-						primaryTypographyProps={{ title: title }}
-						secondary={!hideURL && url}
-						secondaryTypographyProps={{ title: url }}
+		<ListItem divider={true} className={classes.listItem} ref={observerRef}>
+			<Link
+				color='inherit'
+				href={url}
+				block='true'
+				target='_blank'
+				rel='noopener noreferrer'
+				className={`link ${classes.anchor}`}
+				underline='none'>
+				<ListItemIcon className={classes.listItemIcon}>
+					<Avatar
+						src={`chrome://favicon/${url}`}
+						alt={`${url.domain} Favicon`}
+						className={classes.favicon}
 					/>
-				</Link>
-				<ListItemSecondaryAction className={classes.listItemSecondaryAction}>
-					<IconButton edge='end' aria-label='delete' className={classes.deleteIcon}>
-						<DeleteModal url={url} />
-					</IconButton>
-					<Typography variant='caption' display='block' noWrap>
-						{ConvertTimeAgo(lastVisitTime)}
-					</Typography>
-				</ListItemSecondaryAction>
-			</ListItem>
-			<Divider />
-		</>
+				</ListItemIcon>
+				<ListItemText
+					className={classes.textContainer}
+					primary={
+						title ? (
+							<Typography title={title} variant='body1' display='block'>
+								{title}
+							</Typography>
+						) : (
+							<Typography variant='body1' color='error' display='block'>
+								(Title Not Available)
+							</Typography>
+						)
+					}
+					primaryTypographyProps={{ title: title }}
+					secondary={!hideURL && url}
+					secondaryTypographyProps={{ title: url }}
+				/>
+			</Link>
+			<ListItemSecondaryAction className={classes.listItemSecondaryAction}>
+				<IconButton edge='end' aria-label='delete' className={classes.deleteIcon}>
+					<DeleteModal url={url} />
+				</IconButton>
+				<Typography variant='caption' display='block' noWrap>
+					{ConvertTimeAgo(lastVisitTime)}
+				</Typography>
+			</ListItemSecondaryAction>
+		</ListItem>
 	);
 }
 
-HistoryListItem.propTypes = {
-	title: PropTypes.string.isRequired,
-	url: PropTypes.string.isRequired,
-	lastVisitTime: PropTypes.number.isRequired,
-	hideURL: PropTypes.bool.isRequired,
-};
-
-export default HistoryListItem;
+export default React.forwardRef(HistoryListItem);

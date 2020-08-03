@@ -94,128 +94,116 @@ function RecentsTabsListItem(props) {
 
 	if (tabs.length === 1) {
 		return (
-			<>
-				<List
-					component='div'
-					aria-label='Window on other device'
-					className={classes.list}
-					key={tabs.url}>
-					{tabs.map((tab) => (
-						<Fragment key={tab.url}>
-							<ListItem className={classes.listItem}>
-								<Link
-									href='#'
-									color='inherit'
-									block='true'
-									onClick={() => chrome.sessions.restore(tab.sessionId)}
-									className={`link ${classes.anchor}`}
-									underline='none'>
-									<ListItemIcon className={classes.listItemIcon}>
-										<Avatar
-											src={`chrome://favicon/${tab.url}`}
-											alt={`${tab.url} Favicon`}
-											className={classes.favicon}
-										/>
-									</ListItemIcon>
-									<ListItemText
-										className={classes.textContainer}
-										primary={
-											tab.title ? (
-												<Typography title={tab.title} variant='body1' display='block'>
-													{tab.title}
-												</Typography>
-											) : (
-												<Typography variant='body1' color='error' display='block'>
-													(Title Not Available)
-												</Typography>
-											)
-										}
-										secondary={!hideURL && tab.url}
-										secondaryTypographyProps={{ title: tab.url }}
-									/>
-								</Link>
-							</ListItem>
-							<Divider />
-						</Fragment>
-					))}
-				</List>
-				<Divider />
-			</>
+			<List
+				component='div'
+				aria-label='Window on other device'
+				className={classes.list}
+				key={tabs.url}>
+				{tabs.map((tab) => (
+					<ListItem className={classes.listItem} divider={true} key={tab.url}>
+						<Link
+							href='#'
+							color='inherit'
+							block='true'
+							onClick={() => chrome.sessions.restore(tab.sessionId)}
+							className={`link ${classes.anchor}`}
+							underline='none'>
+							<ListItemIcon className={classes.listItemIcon}>
+								<Avatar
+									src={`chrome://favicon/${tab.url}`}
+									alt={`${tab.url} Favicon`}
+									className={classes.favicon}
+								/>
+							</ListItemIcon>
+							<ListItemText
+								className={classes.textContainer}
+								primary={
+									tab.title ? (
+										<Typography title={tab.title} variant='body1' display='block'>
+											{tab.title}
+										</Typography>
+									) : (
+										<Typography variant='body1' color='error' display='block'>
+											(Title Not Available)
+										</Typography>
+									)
+								}
+								secondary={!hideURL && tab.url}
+								secondaryTypographyProps={{ title: tab.url }}
+							/>
+						</Link>
+					</ListItem>
+				))}
+			</List>
 		);
 	}
 
 	return (
-		<>
-			<Accordion>
-				<AccordionSummary
-					className='accordion'
-					expandIcon={<ExpandMoreIcon />}
-					aria-controls='panel1a-content'
-					id='panel1a-header'>
-					<div className={classes.windowAccordion}>
-						<Typography className={classes.heading}>
-							Window ({tabs.length}
-							{tabs.length > 1 ? 'Tabs' : 'Tab'})
-						</Typography>
-						<Button
-							size='small'
-							variant='contained'
-							color='primary'
-							className={classes.button}
-							onClick={() => chrome.sessions.restore(sessionId)}>
-							Restore
-						</Button>
-					</div>
-				</AccordionSummary>
-				<AccordionDetails>
-					<List
-						component='div'
-						aria-label='Tab on other device'
-						className={classes.list}
-						key={tabs.url}>
-						{tabs.map((tab) => (
-							<Fragment key={tab.url}>
-								<ListItem className={classes.listItem}>
-									<Link
-										href='#'
-										color='inherit'
-										block='true'
-										onClick={() => chrome.sessions.restore(tab.sessionId)}
-										className={`link ${classes.anchor}`}
-										underline='none'>
-										<ListItemIcon className={classes.listItemIcon}>
-											<Avatar
-												src={`chrome://favicon/${tab.url}`}
-												alt={`${tab.url} Favicon`}
-												className={classes.favicon}
-											/>
-										</ListItemIcon>
-										<ListItemText
-											className={classes.textContainer}
-											primary={
-												tab.title ? (
-													<Typography title={tab.title} variant='body1' display='block'>
-														{tab.title}
-													</Typography>
-												) : (
-													<Typography variant='body1' color='error' display='block'>
-														(Title Not Available)
-													</Typography>
-												)
-											}
-											secondary={!hideURL && tab.url}
-											secondaryTypographyProps={{ title: tab.url }}
-										/>
-									</Link>
-								</ListItem>
-								<Divider />
-							</Fragment>
-						))}
-					</List>
-				</AccordionDetails>
-			</Accordion>
-			<Divider />
-		</>
+		<Accordion>
+			<AccordionSummary
+				className='accordion'
+				expandIcon={<ExpandMoreIcon />}
+				aria-controls='panel1a-content'
+				id='panel1a-header'>
+				<div className={classes.windowAccordion}>
+					<Typography className={classes.heading}>
+						Window ({tabs.length}
+						{tabs.length > 1 ? 'Tabs' : 'Tab'})
+					</Typography>
+					<Button
+						size='small'
+						variant='contained'
+						color='primary'
+						className={classes.button}
+						onClick={() => chrome.sessions.restore(sessionId)}>
+						Restore
+					</Button>
+				</div>
+			</AccordionSummary>
+			<AccordionDetails>
+				<List
+					component='div'
+					aria-label='Tab on other device'
+					className={classes.list}
+					key={tabs.url}>
+					{tabs.map((tab) => (
+						<ListItem className={classes.listItem} divider={true} key={tab.url}>
+							<Link
+								href='#'
+								color='inherit'
+								block='true'
+								onClick={() => chrome.sessions.restore(tab.sessionId)}
+								className={`link ${classes.anchor}`}
+								underline='none'>
+								<ListItemIcon className={classes.listItemIcon}>
+									<Avatar
+										src={`chrome://favicon/${tab.url}`}
+										alt={`${tab.url} Favicon`}
+										className={classes.favicon}
+									/>
+								</ListItemIcon>
+								<ListItemText
+									className={classes.textContainer}
+									primary={
+										tab.title ? (
+											<Typography title={tab.title} variant='body1' display='block'>
+												{tab.title}
+											</Typography>
+										) : (
+											<Typography variant='body1' color='error' display='block'>
+												(Title Not Available)
+											</Typography>
+										)
+									}
+									secondary={!hideURL && tab.url}
+									secondaryTypographyProps={{ title: tab.url }}
+								/>
+							</Link>
+						</ListItem>
+					))}
+				</List>
+			</AccordionDetails>
+		</Accordion>
 	);
 }
 
