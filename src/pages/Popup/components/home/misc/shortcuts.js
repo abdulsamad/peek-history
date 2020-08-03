@@ -3,6 +3,7 @@ const hotkeys = {
 	home: 'ArrowLeft',
 	tabs: 'ArrowRight',
 	options: 'o',
+	deleteAll: 'd',
 	listUp: 'ArrowUp',
 	listDown: 'ArrowDown',
 	one: '1',
@@ -40,6 +41,10 @@ function shortcutFunc({ ev, activeTabNum, linkFocusNum, tabFocusNum }) {
 
 		case ev.ctrlKey && hotkeys.options:
 			document.querySelector('.options').click();
+			break;
+
+		case ev.ctrlKey && hotkeys.deleteAll:
+			document.querySelector('.deleteAll').click();
 			break;
 
 		case hotkeys.listUp:

@@ -42,7 +42,11 @@ function DeleteModal() {
 
 	return (
 		<>
-			<BottomNavigationAction onClick={handleOpen} icon={<DeleteForeverIcon />} />
+			<BottomNavigationAction
+				className='deleteAll'
+				onClick={handleOpen}
+				icon={<DeleteForeverIcon />}
+			/>
 			<Dialog
 				open={open}
 				TransitionComponent={Transition}
@@ -63,8 +67,9 @@ function DeleteModal() {
 					<Button
 						onClick={() => chrome.history.deleteAll(() => window.location.reload())}
 						color='secondary'
+						className='confirmed-deleteAll'
 						disabled={!active}>
-						{active ? 'Delete' : `Wait ${countdown}s`}
+						{active ? 'Delete' : `Wait ${countdown} secs`}
 					</Button>
 				</DialogActions>
 			</Dialog>
