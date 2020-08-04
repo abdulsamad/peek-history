@@ -18,8 +18,7 @@ function HideURL() {
 
 	useEffect(() => {
 		chrome.storage.sync.get('hideURL', ({ hideURL }) => {
-			if (!hideURL) return;
-			setValue(hideURL);
+			if (hideURL) setValue(hideURL);
 		});
 	}, []);
 

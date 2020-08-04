@@ -24,8 +24,7 @@ function Sort() {
 
 	useEffect(() => {
 		chrome.storage.sync.get('sort', ({ sort }) => {
-			if (!sort) return;
-			setValue(sort);
+			if (sort) setValue(sort);
 		});
 	}, []);
 

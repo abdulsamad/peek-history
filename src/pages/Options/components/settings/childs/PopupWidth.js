@@ -26,8 +26,7 @@ function PopupWidth() {
 
 	useEffect(() => {
 		chrome.storage.sync.get('popupWidth', ({ popupWidth }) => {
-			if (!popupWidth) return;
-			setValue(popupWidth);
+			if (popupWidth) setValue(popupWidth);
 		});
 	}, []);
 
