@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { usePopupState } from '../../context/popupContext';
 import HistoryList from './history/HistoryList';
+import HistoryInfiniteList from './history/HistoryInfiniteList';
 import TabsList from './tab/TabsList';
 import shortcutFunc from './misc/shortcuts';
 
@@ -20,8 +21,13 @@ const linkFocusNum = iteratorFunc(-1, Infinity, -1);
 
 function Home() {
 	const { activeTabNum } = usePopupState();
+	const [infiniteScroll, setInfiniteScroll] = useState(false);
 
 	useEffect(() => {
+		chrome.storage.sync.get('infinite', ({ infinite }) => {
+			if (infinite) setInfiniteScroll(infinite);
+		});
+
 		window.addEventListener(
 			'keydown',
 			(ev) => shortcutFunc({ ev, activeTabNum, linkFocusNum, tabFocusNum }),
@@ -33,7 +39,7 @@ function Home() {
 		};
 	}, [activeTabNum]);
 
-	return activeTabNum ? <TabsList /> : <HistoryList />;
+	return activeTabNum ? <TabsList /> : infiniteScroll ? <HistoryInfiniteList /> : <HistoryList />;
 }
 
 export default Home;

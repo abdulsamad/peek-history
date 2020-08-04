@@ -7,6 +7,7 @@ import AccentColor from './childs/AccentColor';
 import PopupWidth from './childs/PopupWidth';
 import HideURL from './childs/HideURL';
 import Sort from './childs/Sort';
+import InfiniteScroll from './childs/InfiniteScroll';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -36,6 +37,7 @@ function Settings() {
 				<PopupWidth />
 				<HideURL />
 				<Sort />
+				<InfiniteScroll />
 			</Paper>
 		</Container>
 	);

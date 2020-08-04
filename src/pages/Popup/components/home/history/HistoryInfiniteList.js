@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import { usePopupState } from '../../../context/popupContext';
+import React, { useRef, useCallback, Fragment } from 'react';
+import { usePopupState, usePopupDispatch } from '../../../context/popupContext';
 import {
 	makeStyles,
 	List,
@@ -60,7 +60,10 @@ const useStyles = makeStyles((theme) => ({
 
 function HistoryList() {
 	const { historyItems, hideURL, loading, searchError } = usePopupState();
+	const { getHistory } = usePopupDispatch();
 	const classes = useStyles();
+	const observer = useRef();
+	const prevLastVisitTime = useRef();
 
 	const loadingElem = () => {
 		let content = [];
@@ -97,6 +100,24 @@ function HistoryList() {
 		);
 	};
 
+	const lastElem = useCallback(
+		(node, lastVisitTime) => {
+			if (observer.current) observer.current.disconnect();
+
+			observer.current = new IntersectionObserver((entries) => {
+				if (entries[0].isIntersecting) {
+					getHistory({ endTime: lastVisitTime });
+
+					observer.current.disconnect();
+				}
+			});
+
+			if (lastVisitTime !== prevLastVisitTime.current && node) observer.current.observe(node);
+			prevLastVisitTime.current = lastVisitTime;
+		},
+		[getHistory],
+	);
+
 	if (searchError) return <NotFound search={true} />;
 
 	if (!loading && historyItems.length <= 0) return <NotFound search={false} />;
@@ -107,16 +128,30 @@ function HistoryList() {
 		<div className={classes.root}>
 			<List component='div' aria-label='History Items' className={classes.list}>
 				{historyItems.map(({ id, lastVisitTime, title, url }, index) => {
-					return (
-						<HistoryListItem
-							key={id + index}
-							loading={loading}
-							lastVisitTime={lastVisitTime}
-							title={title}
-							url={url}
-							hideURL={hideURL}
-						/>
-					);
+					if (historyItems.length === ++index) {
+						return (
+							<HistoryListItem
+								key={id + index}
+								loading={loading}
+								lastVisitTime={lastVisitTime}
+								title={title}
+								url={url}
+								hideURL={hideURL}
+								ref={(node) => lastElem(node, lastVisitTime)}
+							/>
+						);
+					} else {
+						return (
+							<HistoryListItem
+								key={id + index}
+								loading={loading}
+								lastVisitTime={lastVisitTime}
+								title={title}
+								url={url}
+								hideURL={hideURL}
+							/>
+						);
+					}
 				})}
 			</List>
 		</div>
