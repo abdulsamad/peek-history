@@ -3,6 +3,8 @@ import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
 import {
 	makeStyles,
 	List,
+	ListItem,
+	ListItemText,
 	Typography,
 	Accordion,
 	AccordionSummary,
@@ -10,7 +12,9 @@ import {
 } from '@material-ui/core/';
 import { usePopupState } from '../../../context/popupContext';
 import RecentsTabsListItem from './RecentsTabsListItem';
+import RecentsWindowsListItem from './RecentsWindowsListItem';
 import OtherTabsListItem from './OtherTabsListItem';
+import OtherWindowsListItem from './OtherWindowsListItem';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -44,13 +48,27 @@ function TabsList() {
 					<Typography className={classes.heading}>Recently Closed Tabs</Typography>
 				</AccordionSummary>
 				<AccordionDetails>
-					<List component='div' aria-label='Recently Closed Tabs' className={classes.list}>
-						{recentTabs.map((tab, index) => (
-							<RecentsTabsListItem
-								{...tab}
-								key={tab.tab ? tab.lastModified * index : tab.window.sessionId * index}
-							/>
-						))}
+					<List
+						divider={true}
+						component='div'
+						aria-label='Recently Closed Tabs'
+						className={classes.list}>
+						{recentTabs.length <= 0 ? (
+							<ListItem>
+								<ListItemText primary={'No records found.'} />
+							</ListItem>
+						) : (
+							recentTabs.map((recentItem, index) =>
+								recentItem.tab ? (
+									<RecentsTabsListItem {...recentItem.tab} key={recentItem.lastModified * index} />
+								) : (
+									<RecentsWindowsListItem
+										{...recentItem.window}
+										key={recentItem.window.sessionId * index}
+									/>
+								),
+							)
+						)}
 					</List>
 				</AccordionDetails>
 			</Accordion>
@@ -65,10 +83,22 @@ function TabsList() {
 						<Typography className={classes.heading}>{device.deviceName}</Typography>
 					</AccordionSummary>
 					<AccordionDetails className={classes.accordionDetails}>
-						<List component='div' aria-label='Recently Closed Tabs' className={classes.list}>
-							{device.sessions.map((dev) => (
-								<OtherTabsListItem {...dev} key={dev.window.sessionId} />
-							))}
+						<List
+							divider={true}
+							component='div'
+							aria-label='Recently Closed Tabs'
+							className={classes.list}>
+							{device.sessions.map((dev) =>
+								device.sessions.length <= 0 ? (
+									<ListItem>
+										<ListItemText primary={'No records found.'} />
+									</ListItem>
+								) : dev.window.tabs.length === 1 ? (
+									<OtherTabsListItem {...dev.window} key={dev.window.sessionId} />
+								) : (
+									<OtherWindowsListItem {...dev.window} key={dev.window.sessionId} />
+								),
+							)}
 						</List>
 					</AccordionDetails>
 				</Accordion>
