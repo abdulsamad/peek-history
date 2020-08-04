@@ -17,7 +17,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function DeleteModal({ url }) {
 	const [open, setOpen] = useState(false);
-	const { deleteHistory } = usePopupDispatch();
+	const { getHistory, deleteHistory } = usePopupDispatch();
 
 	const handleClose = () => {
 		setOpen(false);
@@ -47,6 +47,7 @@ function DeleteModal({ url }) {
 						onClick={() => {
 							deleteHistory(url);
 							setOpen(false);
+							getHistory({});
 						}}
 						color='secondary'>
 						Delete
