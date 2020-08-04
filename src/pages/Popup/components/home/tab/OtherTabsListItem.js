@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { usePopupState } from '../../../context/popupContext';
 import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
 import {
@@ -7,7 +7,6 @@ import {
 	ListItemText,
 	ListItemIcon,
 	Avatar,
-	Divider,
 	Typography,
 	List,
 	Accordion,
