@@ -119,7 +119,7 @@ function RecentsTabsListItem({ tabs, sessionId }) {
 					className={classes.list}
 					key={tabs.url}>
 					{tabs.map((tab) => (
-						<ListItem className={classes.listItem} divider={true} key={tab.url}>
+						<ListItem divider={true} className={classes.listItem} key={tab.url}>
 							<Link
 								href='#'
 								color='inherit'

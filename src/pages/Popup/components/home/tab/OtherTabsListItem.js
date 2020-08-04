@@ -84,7 +84,7 @@ function RecentsTabsListItem({ tabs, sessionId }) {
 	return (
 		<List component='div' aria-label='Tab on other device' className={classes.list} key={tabs.url}>
 			{tabs.map((tab) => (
-				<ListItem className={classes.listItem} divider={true} key={tab.url}>
+				<ListItem divider={true} className={classes.listItem} key={tab.url}>
 					<Link
 						href='#'
 						color='inherit'

@@ -73,7 +73,7 @@ function RecentsTabsListItem({ title, url, sessionId }) {
 	const classes = useStyles();
 
 	return (
-		<ListItem className={classes.listItem} divider={true}>
+		<ListItem divider={true} className={classes.listItem}>
 			<Link
 				href='#'
 				color='inherit'

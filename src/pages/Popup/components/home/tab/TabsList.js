@@ -48,13 +48,9 @@ function TabsList() {
 					<Typography className={classes.heading}>Recently Closed Tabs</Typography>
 				</AccordionSummary>
 				<AccordionDetails>
-					<List
-						divider={true}
-						component='div'
-						aria-label='Recently Closed Tabs'
-						className={classes.list}>
+					<List component='div' aria-label='Recently Closed Tabs' className={classes.list}>
 						{recentTabs.length <= 0 ? (
-							<ListItem>
+							<ListItem divider={true}>
 								<ListItemText primary={'No records found.'} />
 							</ListItem>
 						) : (
@@ -83,14 +79,10 @@ function TabsList() {
 						<Typography className={classes.heading}>{device.deviceName}</Typography>
 					</AccordionSummary>
 					<AccordionDetails className={classes.accordionDetails}>
-						<List
-							divider={true}
-							component='div'
-							aria-label='Recently Closed Tabs'
-							className={classes.list}>
+						<List component='div' aria-label='Recently Closed Tabs' className={classes.list}>
 							{device.sessions.map((dev) =>
 								device.sessions.length <= 0 ? (
-									<ListItem>
+									<ListItem divider={true}>
 										<ListItemText primary={'No records found.'} />
 									</ListItem>
 								) : dev.window.tabs.length === 1 ? (
