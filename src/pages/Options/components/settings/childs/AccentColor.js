@@ -61,26 +61,34 @@ function AccentColor() {
 		{ color: '#ffd54f', active: false },
 		{ color: '#f06292', active: false },
 	]);
-	const [customColor, setCustomColor] = useState(false);
+	// const [customColor, setCustomColor] = useState(false);
 	const { accent: defaultAccent } = useOptionsState();
 	const { setAccent } = useOptionsDispatch();
 	const classes = useStyles();
-	const inputColor = useRef();
+	// const inputColor = useRef();
 
 	useEffect(() => {
 		chrome.storage.sync.get('accent', ({ accent }) => {
 			const accentsArr = accents.map((acc) => {
-				if (acc.color === accent || acc.color === defaultAccent) {
+				if (acc.color === accent) {
 					return { color: acc.color, active: true };
 				} else {
 					return { color: acc.color, active: false };
 				}
 			});
 
-			setAccents(accentsArr);
+			const defaultAccentArr = accents.map((acc) => {
+				if (acc.color === defaultAccent) {
+					return { color: acc.color, active: true };
+				} else {
+					return { color: acc.color, active: false };
+				}
+			});
 
-			const arr = accentsArr.filter((acc) => acc.active === true).length;
-			if (arr === 0) setCustomColor(true);
+			accent ? setAccents(accentsArr) : setAccents(defaultAccentArr);
+
+			// const arr = accentsArr.filter((acc) => acc.active === true).length;
+			// if (arr === 0) setCustomColor(true);
 		});
 	}, []);
 
@@ -99,11 +107,11 @@ function AccentColor() {
 	};
 
 	// TODO: Add Custom color
-	// const onChange = ({ target: value }) => {
-	// 	setAccent(value);
-	// 	chrome.storage.sync.set({ accent: value });
-	// 	// console.log(value);
-	// };
+	/* const onChange = ({ target: value }) => {
+		setAccent(value);
+		chrome.storage.sync.set({ accent: value });
+		// console.log(value);
+	}; */
 
 	return (
 		<Grid container alignItems='center' className={classes.root}>
