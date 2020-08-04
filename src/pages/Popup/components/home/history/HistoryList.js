@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback, Fragment } from 'react';
+import React, { useRef, useCallback, Fragment } from 'react';
 import { usePopupState, usePopupDispatch } from '../../../context/popupContext';
 import {
 	makeStyles,
@@ -112,7 +112,6 @@ function HistoryList() {
 				}
 			});
 
-			console.count();
 			if (lastVisitTime !== prevLastVisitTime.current && node) observer.current.observe(node);
 			prevLastVisitTime.current = lastVisitTime;
 		},
@@ -129,7 +128,7 @@ function HistoryList() {
 		<div className={classes.root}>
 			<List component='div' aria-label='History Items' className={classes.list}>
 				{historyItems.map(({ id, lastVisitTime, title, url }, index) => {
-					if (historyItems.length - 20 === index - 19) {
+					if (historyItems.length === ++index) {
 						return (
 							<HistoryListItem
 								key={id + index}
