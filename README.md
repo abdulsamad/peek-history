@@ -9,6 +9,7 @@ This extension helps you to quickly peek history in the popup that helps you vie
 - Reopen Closed Tabs (Full Session)
 - Restore Sessions from Other Devices
 - Can be fully controlled with keyboard
+- Infinite Scroll for history items
 
 ## ⌨ Keyboard Shortcuts
 
