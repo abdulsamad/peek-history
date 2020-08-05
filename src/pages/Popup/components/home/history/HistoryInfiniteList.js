@@ -143,6 +143,7 @@ function HistoryList() {
 									url={url}
 									hideURL={hideURL}
 								/>
+								{/* // TODO: Fix small bug - Loader will be shown if exact multiples of 50 historyItems available  */}
 								{historyItems.length % 50 === 0 && (
 									<ListItem
 										divider={true}
