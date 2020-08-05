@@ -69,7 +69,6 @@ function HistoryList() {
 	const classes = useStyles();
 	const observer = useRef();
 	const prevLastVisitTime = useRef();
-	const listRef = useRef();
 
 	const loadingElem = () => {
 		let content = [];
@@ -110,10 +109,11 @@ function HistoryList() {
 			observer.current = new IntersectionObserver((entries) => {
 				if (entries[0].isIntersecting) {
 					node.scrollIntoView();
-					listRef.current.style.overflowY = 'hidden';
-					getHistory({ endTime: lastVisitTime });
-					observer.current.disconnect();
-					listRef.current.style.overflowY = 'scroll';
+
+					setTimeout(() => {
+						getHistory({ endTime: lastVisitTime });
+						observer.current.disconnect();
+					}, 1000);
 				}
 			});
 
@@ -130,7 +130,7 @@ function HistoryList() {
 	return loading ? (
 		loadingElem()
 	) : (
-		<div className={classes.root} ref={listRef}>
+		<div className={classes.root}>
 			<List component='div' aria-label='History Items' className={classes.list}>
 				{historyItems.map(({ id, lastVisitTime, title, url }, index) => {
 					if (historyItems.length === ++index) {
