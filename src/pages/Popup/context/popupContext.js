@@ -20,6 +20,20 @@ function PopupProvider({ children }) {
 	const [state, dispatch] = useReducer(PopupReducer, initialState);
 
 	useEffect(() => {
+		chrome.storage.sync.get(['hideURL', 'popupWidth'], ({ hideURL, popupWidth }) => {
+			if (hideURL)
+				dispatch({
+					type: types.HIDE_URL,
+					payload: hideURL,
+				});
+
+			if (popupWidth)
+				dispatch({
+					type: types.POPUP_WIDTH,
+					payload: popupWidth,
+				});
+		});
+
 		getHistory({});
 
 		chrome.sessions.getRecentlyClosed((recentTabs) => {
@@ -34,20 +48,6 @@ function PopupProvider({ children }) {
 				type: types.GET_OTHER_TABS,
 				payload: otherTabs,
 			});
-		});
-
-		chrome.storage.sync.get(['hideURL', 'popupWidth'], ({ hideURL, popupWidth }) => {
-			if (hideURL)
-				dispatch({
-					type: types.HIDE_URL,
-					payload: hideURL,
-				});
-
-			if (popupWidth)
-				dispatch({
-					type: types.POPUP_WIDTH,
-					payload: popupWidth,
-				});
 		});
 	}, []);
 
