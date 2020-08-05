@@ -46,7 +46,7 @@ function InfiniteScroll() {
 					inputProps={{ 'aria-label': 'infiniteScroll' }}
 				/>
 				<FormHelperText className={classes.formHelperText}>
-					Disable this if you have low end device.
+					Disable this if you have low-end device and facing lag while scrolling.
 				</FormHelperText>
 			</Grid>
 			<Grid item md={2}></Grid>
