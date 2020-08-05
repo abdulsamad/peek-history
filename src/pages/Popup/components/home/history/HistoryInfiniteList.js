@@ -143,15 +143,17 @@ function HistoryList() {
 									url={url}
 									hideURL={hideURL}
 								/>
-								<ListItem
-									divider={true}
-									ref={(node) => lastElem(node, lastVisitTime)}
-									className={classes.listItem}>
-									<ListItemText
-										className={classes.circularProgressContainer}
-										primary={<CircularProgress size='1.5rem' />}
-									/>
-								</ListItem>
+								{historyItems.length % 50 === 0 && (
+									<ListItem
+										divider={true}
+										ref={(node) => lastElem(node, lastVisitTime)}
+										className={classes.listItem}>
+										<ListItemText
+											className={classes.circularProgressContainer}
+											primary={<CircularProgress size='1.5rem' />}
+										/>
+									</ListItem>
+								)}
 							</Fragment>
 						);
 					} else {
