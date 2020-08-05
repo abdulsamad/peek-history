@@ -18,7 +18,14 @@ const hotkeys = {
 };
 
 function shortcutFunc({ ev, activeTabNum, linkFocusNum, tabFocusNum }) {
-	if (ev.ctrlKey) {
+	if (
+		ev.ctrlKey &&
+		ev.key !== 'a' &&
+		ev.key !== 'c' &&
+		ev.key !== 'v' &&
+		ev.key !== 'x' &&
+		ev.key !== 'Backspace'
+	) {
 		ev.preventDefault();
 	}
 
