@@ -8,7 +8,7 @@ import {
 	ListItemIcon,
 	ListItemSecondaryAction,
 	IconButton,
-	Divider,
+	CircularProgress,
 } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import HistoryListItem from './HistoryListItem';
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 		overflowX: 'hidden',
 		overflowY: 'scroll',
 	},
-	loaderRoot: {
+	skeletonLoaderRoot: {
 		position: 'absolute',
 		top: 60,
 		bottom: 60,
@@ -56,6 +56,11 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: 'center',
 		justifyContent: 'space-between',
 	},
+	circularProgressContainer: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
 }));
 
 function HistoryList() {
@@ -64,6 +69,7 @@ function HistoryList() {
 	const classes = useStyles();
 	const observer = useRef();
 	const prevLastVisitTime = useRef();
+	const listRef = useRef();
 
 	const loadingElem = () => {
 		let content = [];
@@ -71,30 +77,27 @@ function HistoryList() {
 
 		for (let i = 0; i < length; i++) {
 			content.push(
-				<Fragment key={i}>
-					<ListItem divider={true} className={classes.listItem}>
-						<ListItemIcon>
+				<ListItem key={i} divider={true} className={classes.listItem}>
+					<ListItemIcon>
+						<Skeleton variant='circle' width={20} height={20} />
+					</ListItemIcon>
+					<ListItemText
+						className={classes.textContainer}
+						primary={<Skeleton />}
+						secondary={!hideURL && <Skeleton />}
+					/>
+					<ListItemSecondaryAction className={classes.listItemSecondaryAction}>
+						<IconButton edge='end'>
 							<Skeleton variant='circle' width={20} height={20} />
-						</ListItemIcon>
-						<ListItemText
-							className={classes.textContainer}
-							primary={<Skeleton />}
-							secondary={!hideURL && <Skeleton />}
-						/>
-						<ListItemSecondaryAction className={classes.listItemSecondaryAction}>
-							<IconButton edge='end'>
-								<Skeleton variant='circle' width={20} height={20} />
-							</IconButton>
-							<Skeleton width={47} />
-						</ListItemSecondaryAction>
-					</ListItem>
-					<Divider />
-				</Fragment>,
+						</IconButton>
+						<Skeleton width={47} />
+					</ListItemSecondaryAction>
+				</ListItem>,
 			);
 		}
 
 		return (
-			<div className={classes.loaderRoot}>
+			<div className={classes.skeletonLoaderRoot}>
 				<List>{content}</List>
 			</div>
 		);
@@ -106,9 +109,11 @@ function HistoryList() {
 
 			observer.current = new IntersectionObserver((entries) => {
 				if (entries[0].isIntersecting) {
+					node.scrollIntoView();
+					listRef.current.style.overflowY = 'hidden';
 					getHistory({ endTime: lastVisitTime });
-
 					observer.current.disconnect();
+					listRef.current.style.overflowY = 'scroll';
 				}
 			});
 
@@ -125,20 +130,29 @@ function HistoryList() {
 	return loading ? (
 		loadingElem()
 	) : (
-		<div className={classes.root}>
+		<div className={classes.root} ref={listRef}>
 			<List component='div' aria-label='History Items' className={classes.list}>
 				{historyItems.map(({ id, lastVisitTime, title, url }, index) => {
 					if (historyItems.length === ++index) {
 						return (
-							<HistoryListItem
-								key={id + index}
-								loading={loading}
-								lastVisitTime={lastVisitTime}
-								title={title}
-								url={url}
-								hideURL={hideURL}
-								ref={(node) => lastElem(node, lastVisitTime)}
-							/>
+							<Fragment key={id + index}>
+								<HistoryListItem
+									loading={loading}
+									lastVisitTime={lastVisitTime}
+									title={title}
+									url={url}
+									hideURL={hideURL}
+								/>
+								<ListItem
+									divider={true}
+									ref={(node) => lastElem(node, lastVisitTime)}
+									className={classes.listItem}>
+									<ListItemText
+										className={classes.circularProgressContainer}
+										primary={<CircularProgress size='1.5rem' />}
+									/>
+								</ListItem>
+							</Fragment>
 						);
 					} else {
 						return (
