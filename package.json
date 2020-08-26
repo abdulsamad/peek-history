@@ -3,7 +3,7 @@
 	"version": "1.0.4",
 	"description": "A simple and minimal extension for quickly peeking and managing history.",
 	"author": "Abdul Samad",
-	"license": "MIT",
+	"license": "GPL-3.0",
 	"scripts": {
 		"build": "node utils/build.js",
 		"start": "node utils/webserver.js",
