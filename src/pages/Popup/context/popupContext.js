@@ -57,7 +57,7 @@ function PopupProvider({ children }) {
 				{
 					text: text,
 					maxResults: 50,
-					startTime: 157784760000,
+					startTime: 0,
 					endTime: Date.now(),
 				},
 				(historyItems) => {
