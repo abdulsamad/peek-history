@@ -1,6 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useOptionsState, useOptionsDispatch } from '../../../context/optionsContext';
+import React, { useState, useEffect } from 'react';
+import {
+	useOptionsState,
+	useOptionsDispatch,
+} from '../../../context/optionsContext';
 import { makeStyles, Grid, Typography } from '@material-ui/core';
+import { useDebouncedFn } from 'beautiful-react-hooks';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -61,11 +65,10 @@ function AccentColor() {
 		{ color: '#ffd54f', active: false },
 		{ color: '#f06292', active: false },
 	]);
-	// const [customColor, setCustomColor] = useState(false);
+	const [customColor, setCustomColor] = useState(null);
 	const { accent: defaultAccent } = useOptionsState();
 	const { setAccent } = useOptionsDispatch();
 	const classes = useStyles();
-	// const inputColor = useRef();
 
 	useEffect(() => {
 		chrome.storage.sync.get('accent', ({ accent }) => {
@@ -87,9 +90,11 @@ function AccentColor() {
 
 			accent ? setAccents(accentsArr) : setAccents(defaultAccentArr);
 
-			// const arr = accentsArr.filter((acc) => acc.active === true).length;
-			// if (arr === 0) setCustomColor(true);
+			const arr = accentsArr.filter((acc) => acc.active === true).length;
+			if (arr === 0) setCustomColor(true);
 		});
+
+		// eslint-disable-next-line
 	}, []);
 
 	const onClick = (color) => {
@@ -106,12 +111,17 @@ function AccentColor() {
 		);
 	};
 
-	// TODO: Add Custom color
-	/* const onChange = ({ target: value }) => {
-		setAccent(value);
-		chrome.storage.sync.set({ accent: value });
-		// console.log(value);
-	}; */
+	const onChange = useDebouncedFn(
+		(color) => {
+			setAccent(color);
+			chrome.storage.sync.set({ accent: color });
+		},
+		500,
+		{
+			leading: false,
+			trailing: true,
+		},
+	);
 
 	return (
 		<Grid container alignItems='center' className={classes.root}>
@@ -128,14 +138,14 @@ function AccentColor() {
 						onClick={() => onClick(color)}
 						style={{ backgroundColor: color }}></button>
 				))}
-				{/* <input
+				<input
 					type='color'
-					onFocus={onFocus}
-					// onChange={onChange}
-					value={accent}
-					ref={inputColor}
-					className={`${classes.roundedInputColor} ${customColor ? 'active' : ''}`}
-				/> */}
+					onChange={({ target: { value } }) => onChange(value)}
+					value={defaultAccent}
+					className={`${classes.roundedInputColor} ${
+						customColor ? 'active' : ''
+					}`}
+				/>
 			</Grid>
 			<Grid item md={2}></Grid>
 		</Grid>
