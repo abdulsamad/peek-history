@@ -16,6 +16,7 @@
 		"@material-ui/lab": "^4.0.0-alpha.56",
 		"@types/chrome": "0.0.104",
 		"@types/react": "^16.9.26",
+		"beautiful-react-hooks": "^0.31.0",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
 		"react-hot-loader": "^4.12.20"
