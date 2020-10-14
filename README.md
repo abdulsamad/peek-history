@@ -1,4 +1,11 @@
-## Peek History
+<p align="center">
+  <a href="">
+    <img alt="Peek History" src="readme/icon.png" width="60" />
+  </a>
+</p>
+<h2 align="center">
+  Peek History
+</h2>
 
 > #### A simple and minimal extension for quickly peeking and managing history.
 
