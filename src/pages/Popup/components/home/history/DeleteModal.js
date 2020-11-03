@@ -47,7 +47,6 @@ function DeleteModal({ url }) {
 						onClick={() => {
 							deleteHistory(url);
 							setOpen(false);
-							getHistory({});
 						}}
 						color='secondary'>
 						Delete
