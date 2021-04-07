@@ -1,6 +1,7 @@
 /* Convert History Timestamp to Humand Readable Time ago */
 
 function convertTimeAgo(value) {
+  const millis = Date.now() - value;
   let strFull = '';
   let seconds = ((millis % 60000) / 1000).toFixed(0);
   let minutes = Math.floor(millis / 60000);
@@ -9,7 +10,6 @@ function convertTimeAgo(value) {
   let weeks = Math.floor(millis / 604800000);
   let months = Math.floor(millis / 604800000);
   let years = Math.floor(millis / 31540000000);
-  const millis = Date.now() - value;
 
   switch (true) {
     // Seconds
