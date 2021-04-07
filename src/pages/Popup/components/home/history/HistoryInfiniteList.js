@@ -136,7 +136,7 @@ function HistoryList() {
         {historyItems.map(({ id, lastVisitTime, title, url }, index) => {
           if (historyItems.length === ++index) {
             return (
-              <Fragment key={id + index}>
+              <Fragment key={id}>
                 <HistoryListItem
                   loading={loading}
                   lastVisitTime={lastVisitTime}

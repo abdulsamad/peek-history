@@ -107,18 +107,16 @@ function HistoryList() {
   ) : (
     <div className={classes.root}>
       <List component='div' aria-label='History Items' className={classes.list}>
-        {historyItems.map(({ id, lastVisitTime, title, url }, index) => {
-          return (
-            <HistoryListItem
-              key={id + index}
-              loading={loading}
-              lastVisitTime={lastVisitTime}
-              title={title}
-              url={url}
-              hideURL={hideURL}
-            />
-          );
-        })}
+        {historyItems.map(({ id, lastVisitTime, title, url }, index) => (
+          <HistoryListItem
+            key={id}
+            loading={loading}
+            lastVisitTime={lastVisitTime}
+            title={title}
+            url={url}
+            hideURL={hideURL}
+          />
+        ))}
       </List>
     </div>
   );
