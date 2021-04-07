@@ -90,8 +90,6 @@ function AccentColor() {
       const arr = accentsArr.filter((acc) => acc.active === true).length;
       if (arr === 0) setCustomColor(true);
     });
-
-    // eslint-disable-next-line
   }, []);
 
   const onClick = (color) => {
