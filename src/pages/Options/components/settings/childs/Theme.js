@@ -1,5 +1,3 @@
-import React from 'react';
-import { useOptionsState, useOptionsDispatch } from '../../../context/optionsContext';
 import {
 	makeStyles,
 	MenuItem,
@@ -9,6 +7,8 @@ import {
 	Grid,
 	Typography,
 } from '@material-ui/core';
+
+import { useOptionsState, useOptionsDispatch } from '../../../context/optionsContext';
 
 const useStyles = makeStyles((theme) => ({
 	root: {

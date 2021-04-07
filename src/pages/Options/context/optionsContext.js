@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import { createContext, useContext, useReducer, useEffect } from 'react';
+
 import OptionsReducer from './optionsReducer';
 import * as types from './types';
 

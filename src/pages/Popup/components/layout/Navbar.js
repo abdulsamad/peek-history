@@ -1,7 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { Search as SearchIcon } from '@material-ui/icons';
 import { AppBar, Toolbar, Typography, InputBase, fade, makeStyles } from '@material-ui/core';
+
 import { usePopupDispatch } from '../../context/popupContext';
 
 const useStyles = makeStyles((theme) => ({

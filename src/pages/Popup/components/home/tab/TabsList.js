@@ -1,4 +1,3 @@
-import React from 'react';
 import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
 import {
 	makeStyles,
@@ -10,11 +9,12 @@ import {
 	AccordionSummary,
 	AccordionDetails,
 } from '@material-ui/core/';
-import { usePopupState } from '../../../context/popupContext';
 import RecentsTabsListItem from './RecentsTabsListItem';
 import RecentsWindowsListItem from './RecentsWindowsListItem';
 import OtherTabsListItem from './OtherTabsListItem';
 import OtherWindowsListItem from './OtherWindowsListItem';
+
+import { usePopupState } from '../../../context/popupContext';
 
 const useStyles = makeStyles((theme) => ({
 	root: {

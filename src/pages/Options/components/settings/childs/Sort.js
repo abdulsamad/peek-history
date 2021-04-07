@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { makeStyles, MenuItem, FormControl, Select, Grid, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({

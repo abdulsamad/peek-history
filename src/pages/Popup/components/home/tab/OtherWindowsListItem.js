@@ -1,5 +1,3 @@
-import React from 'react';
-import { usePopupState } from '../../../context/popupContext';
 import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
 import {
 	makeStyles,
@@ -15,6 +13,8 @@ import {
 	Link,
 	Button,
 } from '@material-ui/core';
+
+import { usePopupState } from '../../../context/popupContext';
 
 const useStyles = makeStyles((theme) => ({
 	list: {

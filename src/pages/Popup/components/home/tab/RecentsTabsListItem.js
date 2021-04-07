@@ -1,5 +1,3 @@
-import React from 'react';
-import { usePopupState } from '../../../context/popupContext';
 import {
 	makeStyles,
 	ListItem,
@@ -9,6 +7,8 @@ import {
 	Typography,
 	Link,
 } from '@material-ui/core';
+
+import { usePopupState } from '../../../context/popupContext';
 
 const useStyles = makeStyles((theme) => ({
 	list: {

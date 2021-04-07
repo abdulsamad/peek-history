@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useOptionsDispatch } from '../../../context/optionsContext';
 import { makeStyles, Grid, Typography, FormHelperText, TextField } from '@material-ui/core';
 import { Autocomplete, createFilterOptions } from '@material-ui/lab';

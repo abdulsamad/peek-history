@@ -1,4 +1,3 @@
-import React from 'react';
 import { Container, makeStyles, Paper, Typography, IconButton } from '@material-ui/core';
 import { Settings as SettingsIcon } from '@material-ui/icons';
 import Theme from './childs/Theme';

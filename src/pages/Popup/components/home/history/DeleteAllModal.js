@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, forwardRef } from 'react';
 import { DeleteForever as DeleteForeverIcon } from '@material-ui/icons';
 import {
 	Button,
@@ -11,7 +11,7 @@ import {
 	BottomNavigationAction,
 } from '@material-ui/core';
 
-const Transition = React.forwardRef(function Transition(props, ref) {
+const Transition = forwardRef(function Transition(props, ref) {
 	return <Slide direction='up' ref={ref} {...props} />;
 });
 

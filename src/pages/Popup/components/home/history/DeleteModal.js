@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, forwardRef } from 'react';
 import {
 	Button,
 	Dialog,
@@ -9,9 +9,10 @@ import {
 	Slide,
 } from '@material-ui/core';
 import { Delete as DeleteIcon } from '@material-ui/icons';
+
 import { usePopupDispatch } from '../../../context/popupContext';
 
-const Transition = React.forwardRef(function Transition(props, ref) {
+const Transition = forwardRef(function Transition(props, ref) {
 	return <Slide direction='up' ref={ref} {...props} />;
 });
 

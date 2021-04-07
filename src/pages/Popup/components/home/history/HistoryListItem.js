@@ -1,4 +1,4 @@
-import React from 'react';
+import { forwardRef } from 'react';
 import {
 	makeStyles,
 	ListItem,
@@ -10,6 +10,7 @@ import {
 	Link,
 	Typography,
 } from '@material-ui/core';
+
 import DeleteModal from './DeleteModal';
 import ConvertTimeAgo from '../misc/ConvertTimeAgo';
 
@@ -127,4 +128,4 @@ function HistoryListItem({ title, url, lastVisitTime, hideURL }, observerRef) {
 	);
 }
 
-export default React.forwardRef(HistoryListItem);
+export default forwardRef(HistoryListItem);

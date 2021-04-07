@@ -1,4 +1,3 @@
-import React from 'react';
 import { PopupProvider } from './context/popupContext';
 import ThemeProvider from './components/layout/ThemeProvider';
 import Navbar from './components/layout/Navbar';

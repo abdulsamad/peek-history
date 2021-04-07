@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { createMuiTheme, ThemeProvider, CssBaseline, useMediaQuery } from '@material-ui/core';
 
 function ThemeProviderContainer({ children }) {

@@ -1,5 +1,4 @@
-import React, { useRef, useCallback, Fragment } from 'react';
-import { usePopupState, usePopupDispatch } from '../../../context/popupContext';
+import { useRef, useCallback, Fragment } from 'react';
 import {
 	makeStyles,
 	List,
@@ -11,6 +10,8 @@ import {
 	CircularProgress,
 } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
+
+import { usePopupState, usePopupDispatch } from '../../../context/popupContext';
 import HistoryListItem from './HistoryListItem';
 import NotFound from '../misc/NotFound';
 

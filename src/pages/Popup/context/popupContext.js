@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useEffect, useReducer } from 'react';
+import { createContext, useContext, useEffect, useReducer } from 'react';
+
 import PopupReducer from './popupReducer';
 import * as types from './types';
 

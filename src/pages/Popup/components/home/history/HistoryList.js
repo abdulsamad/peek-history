@@ -1,5 +1,4 @@
-import React, { Fragment } from 'react';
-import { usePopupState } from '../../../context/popupContext';
+import { Fragment } from 'react';
 import {
 	makeStyles,
 	List,
@@ -11,6 +10,8 @@ import {
 	Divider,
 } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
+
+import { usePopupState } from '../../../context/popupContext';
 import HistoryListItem from './HistoryListItem';
 import NotFound from '../misc/NotFound';
 

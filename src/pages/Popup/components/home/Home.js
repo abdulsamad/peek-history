@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { usePopupState } from '../../context/popupContext';
 import HistoryList from './history/HistoryList';
 import HistoryInfiniteList from './history/HistoryInfiniteList';

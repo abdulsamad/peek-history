@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { createMuiTheme, ThemeProvider, CssBaseline, useMediaQuery } from '@material-ui/core';
 import { useOptionsState } from '../../context/optionsContext';
 

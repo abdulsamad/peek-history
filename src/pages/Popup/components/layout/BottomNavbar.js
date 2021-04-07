@@ -1,4 +1,3 @@
-import React from 'react';
 import { makeStyles, BottomNavigation, BottomNavigationAction } from '@material-ui/core';
 import {
 	Home as HomeIcon,
@@ -6,8 +5,9 @@ import {
 	Settings as SettingsIcon,
 } from '@material-ui/icons';
 import { Skeleton } from '@material-ui/lab';
-import DeleteAllModal from '../home/history/DeleteAllModal';
+
 import { usePopupState, usePopupDispatch } from '../../context/popupContext';
+import DeleteAllModal from '../home/history/DeleteAllModal';
 
 const useStyles = makeStyles({
 	root: {
