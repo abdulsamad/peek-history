@@ -5,15 +5,15 @@ import BottomNavbar from './components/layout/BottomNavbar';
 import Home from './components/home/Home';
 
 function Popup() {
-	return (
-		<PopupProvider>
-			<ThemeProvider>
-				<Navbar title='Peek History' />
-				<Home />
-				<BottomNavbar />
-			</ThemeProvider>
-		</PopupProvider>
-	);
+  return (
+    <PopupProvider>
+      <ThemeProvider>
+        <Navbar title='Peek History' />
+        <Home />
+        <BottomNavbar />
+      </ThemeProvider>
+    </PopupProvider>
+  );
 }
 
 export default Popup;

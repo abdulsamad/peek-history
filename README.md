@@ -30,11 +30,11 @@ This extension helps you to quickly peek history in the popup that helps you vie
 
 ### Screenshots
 
-![peek_history screenshot](readme/normal_screenshot.png "normal screenshot")
----
-![peek_history theme screenshot](readme/theme_screenshot.png "themes")
----
-![peek_history options screenshot](readme/options_screenshot.png "options")
+## ![peek_history screenshot](readme/normal_screenshot.png 'normal screenshot')
+
+## ![peek_history theme screenshot](readme/theme_screenshot.png 'themes')
+
+![peek_history options screenshot](readme/options_screenshot.png 'options')
 <br>
 
 <p align="center" >
