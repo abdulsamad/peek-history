@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useEffect } from 'react';
+import { createContext, useContext, useReducer, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import OptionsReducer from './optionsReducer';
@@ -15,7 +15,7 @@ function OptionsProvider({ children }) {
   };
   const [state, dispatch] = useReducer(OptionsReducer, initialState);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     chrome.storage.sync.get(null, ({ theme, font, accent }) => {
       if (theme) setTheme(theme);
       if (font) setFont(font);
