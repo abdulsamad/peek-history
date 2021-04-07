@@ -1,24 +1,28 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { createMuiTheme, ThemeProvider, CssBaseline, useMediaQuery } from '@material-ui/core';
 
-function ThemeProviderContainer({ children }) {
-  const [theme, setTheme] = useState('default');
-  const [accent, setAccent] = useState('#64B5F6');
-  const [width, setWidth] = useState(400);
-  const [font, setFont] = useState('sans-serif');
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+const stateDefaultValues = {
+  theme: 'default',
+  accent: '#64B5F6',
+  width: 400,
+  font: 'sans-serif',
+};
 
-  useEffect(() => {
-    chrome.storage.sync.get(
-      ['theme', 'accent', 'popupWidth', 'font'],
-      ({ theme, accent, popupWidth, font }) => {
-        if (theme) setTheme(theme);
-        if (accent) setAccent(accent);
-        if (popupWidth) setWidth(popupWidth);
-        if (font) setFont(font);
-      },
-    );
-  }, []);
+function ThemeProviderContainer({ children }) {
+  const [state, setState] = useState(stateDefaultValues);
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const { theme, accent, width, font } = state;
+
+  chrome.storage.sync.get(null, ({ theme, accent, popupWidth, font }) => {
+    if (theme || accent || popupWidth || font) {
+      setState({
+        theme: theme ? theme : stateDefaultValues.theme,
+        accent: accent ? accent : stateDefaultValues.accent,
+        width: popupWidth ? popupWidth : stateDefaultValues.width,
+        font: font ? font : stateDefaultValues.font,
+      });
+    }
+  });
 
   const customTheme = useMemo(
     () =>
@@ -93,10 +97,14 @@ function ThemeProviderContainer({ children }) {
   );
 
   return (
-    <ThemeProvider theme={customTheme}>
-      <CssBaseline />
-      {children}
-    </ThemeProvider>
+    <>
+      //{' '}
+      <ThemeProvider theme={customTheme}>
+        <CssBaseline />
+        {children}
+        //{' '}
+      </ThemeProvider>
+    </>
   );
 }
 

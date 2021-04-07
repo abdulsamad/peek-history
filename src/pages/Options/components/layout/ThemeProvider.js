@@ -1,10 +1,26 @@
-import { useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { createMuiTheme, ThemeProvider, CssBaseline, useMediaQuery } from '@material-ui/core';
-import { useOptionsState } from '../../context/optionsContext';
+
+const stateDefaultValues = {
+  theme: 'default',
+  accent: '#64B5F6',
+  font: 'sans-serif',
+};
 
 function ThemeProviderContainer({ children }) {
-  const { theme, accent, font } = useOptionsState();
+  const [state, setState] = useState(stateDefaultValues);
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const { theme, accent, font } = state;
+
+  chrome.storage.sync.get(null, ({ theme, accent, font }) => {
+    if (theme || accent || font) {
+      setState({
+        theme: theme ? theme : stateDefaultValues.theme,
+        accent: accent ? accent : stateDefaultValues.accent,
+        font: font ? font : stateDefaultValues.font,
+      });
+    }
+  });
 
   const customTheme = useMemo(
     () =>
