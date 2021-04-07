@@ -1,4 +1,5 @@
 import { useState, forwardRef } from 'react';
+import PropTypes from 'prop-types';
 import {
   Button,
   Dialog,
@@ -18,7 +19,7 @@ const Transition = forwardRef(function Transition(props, ref) {
 
 function DeleteModal({ url }) {
   const [open, setOpen] = useState(false);
-  const { getHistory, deleteHistory } = usePopupDispatch();
+  const { deleteHistory } = usePopupDispatch();
 
   const handleClose = () => {
     setOpen(false);
@@ -57,4 +58,9 @@ function DeleteModal({ url }) {
     </div>
   );
 }
+
+DeleteModal.propTypes = {
+  url: PropTypes.string.isRequired,
+};
+
 export default DeleteModal;

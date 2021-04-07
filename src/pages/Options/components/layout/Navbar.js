@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { AppBar, Toolbar, Typography, makeStyles, Container } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
   },
@@ -31,7 +31,7 @@ function Navbar({ title }) {
   );
 }
 
-Navbar.propType = {
+Navbar.propTypes = {
   title: PropTypes.string.isRequired,
 };
 

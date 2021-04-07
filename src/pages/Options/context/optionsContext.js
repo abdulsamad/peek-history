@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import OptionsReducer from './optionsReducer';
 import * as types from './types';
@@ -81,6 +82,10 @@ const useOptionsDispatch = () => {
   }
 
   return context;
+};
+
+OptionsProvider.propTypes = {
+  children: PropTypes.element,
 };
 
 export { OptionsProvider, useOptionsState, useOptionsDispatch };

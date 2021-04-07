@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { makeStyles, Grid, Typography, Switch } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     margin: '1.5rem 0',
   },

@@ -8,7 +8,7 @@ import HideURL from './childs/HideURL';
 import Sort from './childs/Sort';
 import InfiniteScroll from './childs/InfiniteScroll';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     margin: '16px auto',
   },

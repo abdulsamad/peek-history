@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { createMuiTheme, ThemeProvider, CssBaseline, useMediaQuery } from '@material-ui/core';
 
 const stateDefaultValues = {
@@ -97,15 +98,15 @@ function ThemeProviderContainer({ children }) {
   );
 
   return (
-    <>
-      //{' '}
-      <ThemeProvider theme={customTheme}>
-        <CssBaseline />
-        {children}
-        //{' '}
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={customTheme}>
+      <CssBaseline />
+      {children}
+    </ThemeProvider>
   );
 }
+
+ThemeProviderContainer.propTypes = {
+  children: PropTypes.element.isRequired,
+};
 
 export default ThemeProviderContainer;

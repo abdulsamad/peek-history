@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   makeStyles,
   ListItem,
@@ -77,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function RecentsTabsListItem({ tabs, sessionId }) {
+function RecentsTabsListItem({ tabs }) {
   const { hideURL } = usePopupState();
   const classes = useStyles();
 
@@ -121,5 +122,9 @@ function RecentsTabsListItem({ tabs, sessionId }) {
     </List>
   );
 }
+
+RecentsTabsListItem.propTypes = {
+  tabs: PropTypes.array.isRequired,
+};
 
 export default RecentsTabsListItem;

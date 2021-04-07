@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
+import PropTypes from 'prop-types';
 
 import PopupReducer from './popupReducer';
 import * as types from './types';
@@ -221,6 +222,10 @@ const usePopupDispatch = () => {
   }
 
   return context;
+};
+
+PopupProvider.propTypes = {
+  children: PropTypes.element.isRequired,
 };
 
 export { PopupProvider, usePopupState, usePopupDispatch };

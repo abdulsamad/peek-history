@@ -1,4 +1,5 @@
 import { forwardRef } from 'react';
+import PropTypes from 'prop-types';
 import {
   makeStyles,
   ListItem,
@@ -127,5 +128,12 @@ function HistoryListItem({ title, url, lastVisitTime, hideURL }, observerRef) {
     </ListItem>
   );
 }
+
+HistoryListItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+  lastVisitTime: PropTypes.number.isRequired,
+  hideURL: PropTypes.bool.isRequired,
+};
 
 export default forwardRef(HistoryListItem);

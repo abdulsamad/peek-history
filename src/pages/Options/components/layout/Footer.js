@@ -1,13 +1,12 @@
-import PropTypes from 'prop-types';
 import { makeStyles, Typography, Link } from '@material-ui/core';
 
-const useStyle = makeStyles((theme) => ({
+const useStyle = makeStyles(() => ({
   center: {
     textAlign: 'center',
   },
 }));
 
-function Footer({ title }) {
+function Footer() {
   const classes = useStyle();
 
   return (
@@ -24,9 +23,5 @@ function Footer({ title }) {
     </footer>
   );
 }
-
-Footer.propType = {
-  title: PropTypes.string.isRequired,
-};
 
 export default Footer;

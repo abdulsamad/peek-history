@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   makeStyles,
   ListItem,
@@ -108,5 +109,11 @@ function RecentsTabsListItem({ title, url, sessionId }) {
     </ListItem>
   );
 }
+
+RecentsTabsListItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+  sessionId: PropTypes.string.isRequired,
+};
 
 export default RecentsTabsListItem;

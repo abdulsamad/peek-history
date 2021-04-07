@@ -3,7 +3,7 @@ import { useOptionsDispatch } from '../../../context/optionsContext';
 import { makeStyles, Grid, Typography, FormHelperText, TextField } from '@material-ui/core';
 import { Autocomplete, createFilterOptions } from '@material-ui/lab';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     margin: '1.5rem 0',
   },

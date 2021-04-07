@@ -3,7 +3,7 @@ import { useOptionsState, useOptionsDispatch } from '../../../context/optionsCon
 import { makeStyles, Grid, Typography } from '@material-ui/core';
 import { useDebouncedFn } from 'beautiful-react-hooks';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     margin: '1.5rem 0',
   },

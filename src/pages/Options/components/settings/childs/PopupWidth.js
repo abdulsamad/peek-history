@@ -8,7 +8,7 @@ import {
   FormControl,
 } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     margin: '1.5rem 0',
   },

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
 import {
   makeStyles,
@@ -158,5 +159,10 @@ function RecentsTabsListItem({ tabs, sessionId }) {
     </Accordion>
   );
 }
+
+RecentsTabsListItem.propTypes = {
+  tabs: PropTypes.array.isRequired,
+  sessionId: PropTypes.string.isRequired,
+};
 
 export default RecentsTabsListItem;

@@ -94,7 +94,7 @@ function Navbar({ title }) {
   );
 }
 
-Navbar.propType = {
+Navbar.propTypes = {
   title: PropTypes.string.isRequired,
 };
 
