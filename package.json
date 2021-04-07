@@ -2,7 +2,7 @@
   "name": "peek-history",
   "version": "1.0.7",
   "description": "A simple and minimal extension for quickly peeking and managing history.",
-  "author": "Abdul Samad",
+  "author": "AbdulSamad",
   "license": "GPL-3.0",
   "scripts": {
     "start": "node utils/webserver.js",
