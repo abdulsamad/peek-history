@@ -17,7 +17,7 @@ This extension helps you to quickly peek history in the popup that helps you vie
 - Delete specific or all history
 - Reopen closed tabs (Full session)
 - Restore sessions from other devices
-- Can be fully controlled with keyboard
+- Can be fully controlled with a keyboard
 - Infinite scrolling
 
 ### ⌨ Keyboard Shortcuts
