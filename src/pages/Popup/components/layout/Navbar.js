@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Search as SearchIcon } from '@material-ui/icons';
-import { AppBar, Toolbar, Typography, InputBase, fade, makeStyles } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, InputBase, alpha, makeStyles } from '@material-ui/core';
 
 import { usePopupDispatch } from '../../context/popupContext';
 
@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
 
     '&:focus': {
-      backgroundColor: fade(theme.palette.common.white, 0.15),
+      backgroundColor: alpha(theme.palette.common.white, 0.15),
       width: '100%',
       cursor: 'text',
     },

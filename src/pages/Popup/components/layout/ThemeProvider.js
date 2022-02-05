@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { createMuiTheme, ThemeProvider, CssBaseline, useMediaQuery } from '@material-ui/core';
+import { createTheme, ThemeProvider, CssBaseline, useMediaQuery } from '@material-ui/core';
 
 const stateDefaultValues = {
   theme: 'default',
@@ -27,7 +27,7 @@ function ThemeProviderContainer({ children }) {
 
   const customTheme = useMemo(
     () =>
-      createMuiTheme({
+      createTheme({
         overrides: {
           MuiCssBaseline: {
             '@global': {
@@ -106,7 +106,7 @@ function ThemeProviderContainer({ children }) {
 }
 
 ThemeProviderContainer.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.array,
 };
 
 export default ThemeProviderContainer;
