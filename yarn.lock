@@ -1738,10 +1738,10 @@ batch@0.6.1:
   resolved "https://registry.yarnpkg.com/batch/-/batch-0.6.1.tgz#dc34314f4e679318093fc760272525f94bf25c16"
   integrity sha1-3DQxT05nkxgJP8dgJyUl+UvyXBY=
 
-beautiful-react-hooks@^0.31.1:
-  version "0.31.1"
-  resolved "https://registry.yarnpkg.com/beautiful-react-hooks/-/beautiful-react-hooks-0.31.1.tgz#16651cd47d36f804a4dc3a9de4b2bcdad9ad9054"
-  integrity sha512-fanSUMCPCRYkTH7aPSKM47aVu6m1Uuaz6rLw0YDP6VUVUwXXuAmwCldRwB+AiNO2x/RV/LWh4izfNcfQRT/yVA==
+beautiful-react-hooks@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/beautiful-react-hooks/-/beautiful-react-hooks-1.0.5.tgz#e5c99bce4e7d7f0e70c569382c99514e65ddde61"
+  integrity sha512-oYfZn5/cu9xd1GALzfMGG+7QyRMZiAFmw5uPU3zsQUg/CHJw/9cFPa4cHvRjR+bKr1/9Rgn3gzFgvVtHi4snHg==
   dependencies:
     lodash.debounce "^4.0.8"
     lodash.throttle "^4.1.1"
