@@ -1,4 +1,6 @@
 ## Changelog
+### [1.0.8] - 08-04-2021
+- Switch from node-sass to sass (dart sass)
 
 ### [1.0.7] - 07-04-2020
 
