@@ -1,24 +1,31 @@
 {
-  "manifest_version": 2,
-  "name": "Peek History",
-  "description": "A simple and minimal extension for quickly peeking and managing history.",
+  "manifest_version": 3,
   "version": "1.0.8",
-  "browser_action": {
+  "name": "Peek History",
+  "description": "A simple and minimal extension for quickly peeking and managing history",
+  "author": "AbdulSamad Ansari",
+  "action": {
+    "default_title": "Peek History",
     "default_popup": "./popup.html",
-    "default_icon": "./assets/icon128.png",
-    "default_title": "Peek History"
+    "default_icon": {
+      "128": "./assets/icon128.png",
+      "48": "./assets/icon48.png",
+      "32": "./assets/icon32.png",
+      "16": "./assets/icon16.png"
+    }
   },
-  "permissions": ["chrome://favicon/*", "fontSettings", "tabs", "history", "storage", "sessions"],
-  "options_page": "options.html",
+  "options_ui": { "page": "options.html", "open_in_tab": true },
   "icons": {
     "128": "./assets/icon128.png",
     "48": "./assets/icon48.png",
     "32": "./assets/icon32.png",
     "16": "./assets/icon16.png"
   },
-  "web_accessible_resources": ["icon128.png", "icon32.png"],
+  "permissions": ["fontSettings", "tabs", "history", "storage", "sessions"],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
   "incognito": "not_allowed",
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {
