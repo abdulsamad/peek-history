@@ -2,7 +2,6 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 import makeManifest from "./utils/plugins/make-manifest";
-import copyContentStyle from "./utils/plugins/copy-content-style";
 
 const root = resolve(__dirname, "src");
 const pagesDir = resolve(root, "pages");
@@ -18,7 +17,7 @@ export default defineConfig({
       "@pages": pagesDir,
     },
   },
-  plugins: [react(), makeManifest(), copyContentStyle()],
+  plugins: [react(), makeManifest()],
   publicDir,
   build: {
     outDir,
