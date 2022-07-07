@@ -4,7 +4,7 @@ import Options from "@pages/options/Options";
 import "@pages/options/index.css";
 
 function init() {
-  const appContainer = document.querySelector("#app-container");
+  const appContainer = document.querySelector("#app");
   if (!appContainer) {
     throw new Error("Can not find AppContainer");
   }
