@@ -1,25 +1,26 @@
-import React from "react";
-import logo from "@assets/img/logo.svg";
-import "@pages/popup/Popup.css";
+import { useEffect } from "react";
+import { Provider } from "react-redux";
+
+import store from "./redux/store";
+
+import Navbar from "./layout/Navbar";
+import BottomNavBar from "./layout/BottomNavbar";
+import MainContainer from "./layout/utils/MainContainer";
+import Content from "./layout/Content";
 
 const Popup = () => {
+  useEffect(() => {
+    //
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/pages/popup/Popup.jsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React!
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <MainContainer>
+        <Navbar title="Peek History" />
+        <Content />
+        <BottomNavBar />
+      </MainContainer>
+    </Provider>
   );
 };
 
