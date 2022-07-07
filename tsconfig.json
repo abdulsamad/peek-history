@@ -3,7 +3,7 @@
     "target": "esnext",
     "types": ["vite/client", "node"],
     "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": false,
+    "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -22,6 +22,5 @@
       "@pages/*": ["src/pages/*"]
     }
   },
-  "include": ["src",
-    "utils", "vite.config.ts"],
+  "include": ["src", "utils", "vite.config.ts"]
 }
