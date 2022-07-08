@@ -1,26 +1,14 @@
 import React from "react";
-import {
-  ListItem,
-  ListItemText,
-  ListItemIcon,
-  Link,
-  Avatar,
-  Typography,
-  ListItemSecondaryAction,
-  IconButton,
-} from "@mui/material";
+import { Typography, ListItemSecondaryAction, IconButton } from "@mui/material";
+import { Delete as DeleteIcon } from "@mui/icons-material";
 import TimeAgo from "timeago-react";
-import styled from "@emotion/styled";
 
-const StyledAvatar = styled(Avatar)`
-  height: 16px;
-  width: 16px;
-`;
-
-const StyledListItem = styled(ListItem)`
-  display: flex;
-  align-items: center;
-`;
+import {
+  StyledAvatar,
+  StyledListItem,
+  StyledListItemIcon,
+  StyledListItemText,
+} from "./Styles";
 
 interface IHistoryItem {
   title: string;
@@ -32,13 +20,13 @@ interface IHistoryItem {
 const HistoryItem = ({ title, url, lastVisitTime, hideURL }: IHistoryItem) => {
   return (
     <StyledListItem divider={true}>
-      <ListItemIcon>
+      <StyledListItemIcon>
         <StyledAvatar
           // src={`chrome://favicon/${url.href}`}
           alt={`${url.hostname} Favicon`}
         />
-      </ListItemIcon>
-      <ListItemText
+      </StyledListItemIcon>
+      <StyledListItemText
         primary={
           title ? (
             <Typography title={title} variant="body1" display="block">
@@ -54,12 +42,12 @@ const HistoryItem = ({ title, url, lastVisitTime, hideURL }: IHistoryItem) => {
         secondary={!hideURL && url.href}
         secondaryTypographyProps={{ title: url.href }}
       />
-      <ListItemSecondaryAction>
+      <ListItemSecondaryAction sx={{ textAlign: "right" }}>
         <IconButton edge="end" aria-label="delete">
+          <DeleteIcon fontSize="small" />
           {/* <DeleteModal url={url} /> */}
         </IconButton>
         <Typography variant="caption" display="block" noWrap>
-          {/* {ConvertTimeAgo(lastVisitTime)} */}
           <TimeAgo datetime={lastVisitTime} />
         </Typography>
       </ListItemSecondaryAction>
