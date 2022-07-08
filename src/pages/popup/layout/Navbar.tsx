@@ -8,7 +8,7 @@ const Navbar = ({ title }: { title: string }) => {
   const state = useSelector((state: RootState) => state);
 
   return (
-    <AppBar>
+    <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" noWrap>
           {title}
