@@ -1,6 +1,21 @@
-import { Action } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import { getHistory } from "./thunks";
 
-const initialSate = {
+interface historyItem {
+  id: string;
+  lastVisitTime: number;
+  title: string;
+  typedCount: number;
+  url: string;
+  visitCount: number;
+}
+
+interface historyState {
+  loading: boolean;
+  items: historyItem[];
+}
+
+const initialState: historyState = {
   loading: false,
   items: [
     {
@@ -27,57 +42,27 @@ const initialSate = {
       url: "https://blog.finxter.com/freelance-developer-job-description/",
       visitCount: 1,
     },
-    {
-      id: "54974",
-      lastVisitTime: 1657175239717.4329,
-      title: "YouTube",
-      typedCount: 0,
-      url: "https://www.youtube.com/",
-      visitCount: 1809,
-    },
-    {
-      id: "62900",
-      lastVisitTime: 1657175235055.017,
-      title: 'Sia " Unstoppable " - YouTube',
-      typedCount: 0,
-      url: "https://www.youtube.com/watch?v=swO_840dx-A",
-      visitCount: 1,
-    },
-    {
-      id: "62899",
-      lastVisitTime: 1657174856823.453,
-      title: "$1 Salary Exposed - YouTube",
-      typedCount: 0,
-      url: "https://www.youtube.com/watch?v=f9a-OXKe1e8",
-      visitCount: 1,
-    },
-    {
-      id: "767",
-      lastVisitTime: 1657174774717.246,
-      title: "Feed | LinkedIn",
-      typedCount: 1,
-      url: "https://www.linkedin.com/feed/",
-      visitCount: 294,
-    },
   ],
 };
 
-const historyReducer = (state = initialSate, action: any) => {
-  switch (action.type) {
-    case "FETCH_HISTORY":
-      return {
-        ...state,
-        items: action,
-      };
+const historySlice = createSlice({
+  name: "history",
+  initialState,
+  reducers: {
+    deleteHistory(state) {
+      console.log(state);
+    },
+  },
+  extraReducers: {
+    [`${getHistory.pending}`]: (state) => {
+      state.loading = true;
+    },
+    [`${getHistory.fulfilled}`]: (state, action) => {
+      state.loading = true;
+      state.items = action.payload;
+    },
+  },
+});
 
-    case "UPDATE_HISTORY":
-      return {
-        ...state,
-      };
-
-    default:
-      return state;
-  }
-};
-
-export default historyReducer;
+export const { deleteHistory } = historySlice.actions;
+export default historySlice.reducer;
