@@ -1,12 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 
-import { historyReducer, tabsReducer } from "./reducers";
+import history from "./history";
 
 const store = configureStore({
   reducer: {
-    history: historyReducer,
-    tabs: tabsReducer,
+    history,
   },
 });
 
