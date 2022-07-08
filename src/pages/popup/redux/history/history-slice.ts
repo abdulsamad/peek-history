@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getHistory } from "./thunks";
 
-interface historyItem {
+interface IHistoryItem {
   id: string;
   lastVisitTime: number;
   title: string;
@@ -12,7 +12,7 @@ interface historyItem {
 
 interface historyState {
   loading: boolean;
-  items: historyItem[];
+  items: IHistoryItem[];
 }
 
 const initialState: historyState = {

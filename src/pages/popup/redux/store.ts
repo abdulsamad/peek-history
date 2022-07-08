@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 
-import history from "./history";
+import history from "./history/history-slice";
+import { getHistory } from "./history/thunks";
 
 const store = configureStore({
   reducer: {
@@ -9,7 +10,9 @@ const store = configureStore({
   },
 });
 
-// To prevent name collision
+// Load inital history
+store.dispatch(getHistory());
+
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatach: () => AppDispatch = useDispatch;
 
