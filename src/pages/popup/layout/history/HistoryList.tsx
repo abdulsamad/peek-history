@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { useSelector } from "react-redux";
 
-import HistoryItem from "./HistoryItem";
+import HistoryItem from "../utils/ListItem";
 import { RootState } from "../../redux/store";
 
 const HistoryList = () => {
@@ -18,9 +18,9 @@ const HistoryList = () => {
 
   return (
     <List>
-      {history.map(({ title, url, lastVisitTime }) => (
+      {history.items.map(({ id, title, url, lastVisitTime }) => (
         <HistoryItem
-          key={url}
+          key={id}
           title={title}
           url={new URL(url)}
           lastVisitTime={lastVisitTime}
