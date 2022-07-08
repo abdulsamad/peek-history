@@ -9,6 +9,7 @@ import {
   Settings as SettingsIcon,
   Home as HomeIcon,
   Devices as DevicesIcon,
+  DeleteForever as DeleteForeverIcon,
 } from "@mui/icons-material";
 
 const BottomNavbar = () => {
@@ -39,7 +40,7 @@ const BottomNavbar = () => {
       >
         <BottomNavigationAction className="home" icon={<HomeIcon />} />
         <BottomNavigationAction className="tabs" icon={<DevicesIcon />} />
-        <BottomNavigationAction className="tabs" icon={<DevicesIcon />} />
+        <BottomNavigationAction className="tabs" icon={<DeleteForeverIcon />} />
         <BottomNavigationAction
           className="options"
           onClick={() => chrome.runtime.openOptionsPage()}
