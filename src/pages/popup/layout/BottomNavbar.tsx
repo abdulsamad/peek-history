@@ -1,10 +1,6 @@
 import React from "react";
-import {
-  BottomNavigation,
-  BottomNavigationAction,
-  Skeleton,
-  Paper,
-} from "@mui/material";
+import { useSelector } from "react-redux";
+import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 import {
   Settings as SettingsIcon,
   Home as HomeIcon,
@@ -12,37 +8,28 @@ import {
   DeleteForever as DeleteForeverIcon,
 } from "@mui/icons-material";
 
+import { RootState, useAppDispatach } from "../redux/store";
+import { switchActiveView } from "../redux/ui/ui-slice";
+
 const BottomNavbar = () => {
-  // if (loading) {
-  //   return (
-  //     <BottomNavigation>
-  //       <BottomNavigationAction
-  //         icon={<Skeleton variant="circular" width={24} height={24} />}
-  //       />
-  //       <BottomNavigationAction
-  //         icon={<Skeleton variant="circular" width={24} height={24} />}
-  //       />
-  //       <BottomNavigationAction
-  //         icon={<Skeleton variant="circular" width={24} height={24} />}
-  //       />
-  //       <BottomNavigationAction
-  //         icon={<Skeleton variant="circular" width={24} height={24} />}
-  //       />
-  //     </BottomNavigation>
-  //   );
-  // }
+  const UIState = useSelector((state: RootState) => state.ui);
+  const dispatch = useAppDispatach();
 
   return (
     <Paper>
       <BottomNavigation
-        // onChange={(event, newValue) => setActiveTabNum(newValue)}
-        value={0}
+        onChange={(event, newValue) => {
+          // Because there are only 2 views History and Tabs. Delete and Settings icon are only for actions.
+          if (newValue > 1) return;
+
+          dispatch(switchActiveView(newValue));
+        }}
+        value={UIState.active}
       >
-        <BottomNavigationAction className="home" icon={<HomeIcon />} />
-        <BottomNavigationAction className="tabs" icon={<DevicesIcon />} />
-        <BottomNavigationAction className="tabs" icon={<DeleteForeverIcon />} />
+        <BottomNavigationAction icon={<HomeIcon />} />
+        <BottomNavigationAction icon={<DevicesIcon />} />
+        <BottomNavigationAction icon={<DeleteForeverIcon />} />
         <BottomNavigationAction
-          className="options"
           onClick={() => chrome.runtime.openOptionsPage()}
           icon={<SettingsIcon />}
         />
