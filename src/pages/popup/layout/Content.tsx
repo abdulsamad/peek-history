@@ -1,7 +1,11 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { useSelector } from "react-redux";
 
 import HistoryList from "./history/HistoryList";
+import TabsList from "./tabs/TabsList";
+import { RootState } from "../redux/store";
+import { Active } from "../redux/ui/ui-slice";
 
 const ContentContainer = styled.div`
   height: calc(100% - 56px);
@@ -11,9 +15,12 @@ const ContentContainer = styled.div`
 `;
 
 const Content = () => {
+  const UIState = useSelector((state: RootState) => state.ui);
+
   return (
     <ContentContainer>
-      <HistoryList />
+      {UIState.active === Active.HISTORY && <HistoryList />}
+      {UIState.active === Active.TABS && <TabsList />}
     </ContentContainer>
   );
 };
