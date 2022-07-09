@@ -15,8 +15,9 @@ const StyledSearchIcon = styled(SearchIcon)`
   color: #f5f5f5;
 `;
 
-const StyledInputBase = styled(InputBase)<{ open: boolean }>`
-  transition: all 0.3s ease;
+const StyledInputBase = styled(InputBase)(
+  ({ open }: { open: boolean }) => `
+  transition: all 0.3s ease-out;
   trasform-origin: left;
   background: transparent;
   cursor: pointer;
@@ -24,10 +25,12 @@ const StyledInputBase = styled(InputBase)<{ open: boolean }>`
   top: 0;
   right: 0;
   bottom: 0;
-  width: ${({ open }) => (open ? "100%" : 0)};
+  width: ${open ? "100%" : 0};
   padding: 8px 1rem;
-  z-index: ${({ open }) => (open ? 10 : -1)};
-`;
+  z-index: ${open ? 10 : -1};
+  background-color: white;
+`
+);
 
 const Search = () => {
   const [open, setOpen] = useState(false);
