@@ -1,5 +1,5 @@
 import React, { MouseEventHandler } from "react";
-import { Typography, ListItemSecondaryAction, IconButton } from "@mui/material";
+import { Typography, ListItemSecondaryAction } from "@mui/material";
 import { Delete as DeleteIcon } from "@mui/icons-material";
 import TimeAgo from "timeago-react";
 
