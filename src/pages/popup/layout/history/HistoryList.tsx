@@ -16,7 +16,7 @@ const HistoryList = () => {
   }
 
   return (
-    <List>
+    <List sx={{ padding: 0 }}>
       {history.items.map(({ id, title, url, lastVisitTime }) => (
         <HistoryItem
           key={id}
