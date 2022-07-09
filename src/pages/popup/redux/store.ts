@@ -11,7 +11,7 @@ const store = configureStore({
 });
 
 // Load inital history
-store.dispatch(getHistory());
+store.dispatch(getHistory({}));
 
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatach: () => AppDispatch = useDispatch;

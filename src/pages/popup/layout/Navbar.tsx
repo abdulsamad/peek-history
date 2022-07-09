@@ -1,18 +1,16 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { AppBar, Toolbar, Typography } from "@mui/material";
 
-import { RootState } from "../redux/store";
+import Search from "./Search";
 
 const Navbar = ({ title }: { title: string }) => {
-  const state = useSelector((state: RootState) => state);
-
   return (
-    <AppBar position="static">
-      <Toolbar>
+    <AppBar position="relative">
+      <Toolbar sx={{ justifyContent: "space-between" }}>
         <Typography variant="h6" noWrap>
           {title}
         </Typography>
+        <Search />
       </Toolbar>
     </AppBar>
   );
