@@ -58,7 +58,7 @@ const Search = () => {
           const target = ev.target as HTMLInputElement;
           dispatch(getHistory({ text: target.value }));
         }}
-        onBlur={() => setSearchOpened(false)}
+        onBlur={() => dispatch(setSearchOpened(false))}
         open={searchOpened}
       />
     </div>
