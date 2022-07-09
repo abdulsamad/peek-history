@@ -1,8 +1,9 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 import { Typography, ListItemSecondaryAction, IconButton } from "@mui/material";
 import { Delete as DeleteIcon } from "@mui/icons-material";
 import TimeAgo from "timeago-react";
 
+import ConfirmationModal from "../ConfirmationModal";
 import {
   StyledAvatar,
   StyledListItem,
@@ -15,13 +16,25 @@ interface IHistoryItem {
   url: URL;
   lastVisitTime: number;
   hideURL: boolean;
+  onClick: MouseEventHandler<HTMLLIElement>;
+  showSecondary?: boolean;
+  onItemDelete?: () => void;
 }
 
-const HistoryItem = ({ title, url, lastVisitTime, hideURL }: IHistoryItem) => {
+const HistoryItem = ({
+  title,
+  url,
+  lastVisitTime,
+  hideURL,
+  onClick,
+  showSecondary,
+  onItemDelete,
+}: IHistoryItem) => {
   return (
-    <StyledListItem divider={true}>
+    <StyledListItem divider={true} onClick={onClick}>
       <StyledListItemIcon>
         <StyledAvatar
+          // TODO: Add new favicon API when chrome adds it
           // src={`chrome://favicon/${url.href}`}
           alt={`${url.hostname} Favicon`}
         />
@@ -42,15 +55,25 @@ const HistoryItem = ({ title, url, lastVisitTime, hideURL }: IHistoryItem) => {
         secondary={!hideURL && url.href}
         secondaryTypographyProps={{ title: url.href }}
       />
-      <ListItemSecondaryAction sx={{ textAlign: "right" }}>
-        <IconButton edge="end" aria-label="delete">
-          <DeleteIcon fontSize="small" />
-          {/* <DeleteModal url={url} /> */}
-        </IconButton>
-        <Typography variant="caption" display="block" noWrap>
-          <TimeAgo datetime={lastVisitTime} />
-        </Typography>
-      </ListItemSecondaryAction>
+      {showSecondary && onItemDelete && (
+        <ListItemSecondaryAction sx={{ textAlign: "right" }}>
+          <ConfirmationModal
+            icon={<DeleteIcon fontSize="small" />}
+            iconButtonProps={{ edge: "end", "aria-label": "delete" }}
+            question="Delete History Item?"
+            warning={
+              <>
+                <strong>Note:</strong> Deleting this also deletes this from your
+                browser history.
+              </>
+            }
+            onConfirm={onItemDelete}
+          />
+          <Typography variant="caption" display="block" noWrap>
+            <TimeAgo datetime={lastVisitTime} />
+          </Typography>
+        </ListItemSecondaryAction>
+      )}
     </StyledListItem>
   );
 };
