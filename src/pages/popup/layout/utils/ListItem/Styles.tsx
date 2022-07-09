@@ -14,19 +14,20 @@ const StyledAvatar = styled(Avatar)`
 const StyledListItem = styled(ListItem)`
   display: flex;
   align-items: center;
+  padding: 8px 16px;
 `;
 
 const StyledListItemText = styled(ListItemText)`
   white-space: nowrap;
 
   p {
-    width: calc(100% - 0.3rem);
+    width: calc(100% - 1.2rem);
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   .MuiListItemText-secondary {
-    width: calc(100% - 8ch);
+    width: calc(100% - 11ch);
   }
 `;
 
