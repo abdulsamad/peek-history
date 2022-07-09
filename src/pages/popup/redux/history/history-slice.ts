@@ -24,8 +24,12 @@ const historySlice = createSlice({
   name: "history",
   initialState,
   reducers: {
-    deleteHistory(state) {
-      console.log(state);
+    deleteItem(state, action) {
+      // Delete item
+      chrome.history.deleteUrl({ url: action.payload }, () => {
+        // Filter out the deleted history item
+        return state.items.filter((item) => item.url !== action.payload);
+      });
     },
   },
   extraReducers: {
@@ -35,9 +39,10 @@ const historySlice = createSlice({
     [`${getHistory.fulfilled}`]: (state, action) => {
       state.loading = true;
       state.items = action.payload;
+      state.loading = false;
     },
   },
 });
 
-export const { deleteHistory } = historySlice.actions;
+export const { deleteItem } = historySlice.actions;
 export default historySlice.reducer;

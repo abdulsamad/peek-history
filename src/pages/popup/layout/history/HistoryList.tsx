@@ -1,20 +1,19 @@
 import React from "react";
-import {
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemSecondaryAction,
-  Divider,
-  Skeleton,
-  IconButton,
-} from "@mui/material";
+import { List } from "@mui/material";
 import { useSelector } from "react-redux";
 
 import HistoryItem from "../utils/ListItem";
-import { RootState } from "../../redux/store";
+import { deleteItem } from "../../redux/history/history-slice";
+import { RootState, useAppDispatach } from "../../redux/store";
+import Preloader from "./Preloader";
 
 const HistoryList = () => {
   const history = useSelector((state: RootState) => state.history);
+  const dispatch = useAppDispatach();
+
+  if (history.loading) {
+    return <Preloader hideURL={false} />;
+  }
 
   return (
     <List>
@@ -25,6 +24,14 @@ const HistoryList = () => {
           url={new URL(url)}
           lastVisitTime={lastVisitTime}
           hideURL={false}
+          showSecondary
+          onClick={async () => {
+            // await chrome.tabs.update({ url });
+            await chrome.tabs.create({ url });
+          }}
+          onItemDelete={() => {
+            dispatch(deleteItem(url));
+          }}
         />
       ))}
     </List>
