@@ -12,7 +12,7 @@ import { RootState, useAppDispatach } from "../redux/store";
 import { switchActiveView } from "../redux/ui/ui-slice";
 
 const BottomNavbar = () => {
-  const UIState = useSelector((state: RootState) => state.ui);
+  const { active } = useSelector((state: RootState) => state.ui);
   const dispatch = useAppDispatach();
 
   return (
@@ -24,7 +24,7 @@ const BottomNavbar = () => {
 
           dispatch(switchActiveView(newValue));
         }}
-        value={UIState.active}
+        value={active}
       >
         <BottomNavigationAction icon={<HomeIcon />} />
         <BottomNavigationAction icon={<DevicesIcon />} />
