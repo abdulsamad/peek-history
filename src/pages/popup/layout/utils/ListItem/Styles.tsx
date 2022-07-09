@@ -15,6 +15,7 @@ const StyledListItem = styled(ListItem)`
   display: flex;
   align-items: center;
   padding: 8px 16px;
+  cursor: pointer;
 `;
 
 const StyledListItemText = styled(ListItemText)`
@@ -27,7 +28,7 @@ const StyledListItemText = styled(ListItemText)`
   }
 
   .MuiListItemText-secondary {
-    width: calc(100% - 11ch);
+    width: calc(100% - 11.5ch);
   }
 `;
 
