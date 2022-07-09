@@ -1,10 +1,12 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
+import { useSelector } from "react-redux";
 import { InputBase } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
 import styled from "@emotion/styled";
 
-import { useAppDispatach } from "../redux/store";
+import { RootState, useAppDispatach } from "../redux/store";
 import { getHistory } from "../redux/history/thunks";
+import { setSearchOpened } from "../redux/ui/ui-slice";
 
 const StyledSearchIcon = styled(SearchIcon)`
   height: 100%;
@@ -34,7 +36,7 @@ const StyledInputBase = styled(InputBase)(
 );
 
 const Search = () => {
-  const [open, setOpen] = useState(false);
+  const { searchOpened } = useSelector((state: RootState) => state.ui);
   const dispatch = useAppDispatach();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -42,7 +44,7 @@ const Search = () => {
     <div>
       <StyledSearchIcon
         onClick={() => {
-          setOpen((prevState) => !prevState);
+          dispatch(setSearchOpened(!searchOpened));
           inputRef.current?.focus();
         }}
       />
@@ -50,14 +52,14 @@ const Search = () => {
         placeholder="Search History…"
         inputProps={{ "aria-label": "search history" }}
         inputRef={inputRef}
-        style={{ width: open ? "100%" : 0 }}
+        style={{ width: searchOpened ? "100%" : 0 }}
         onKeyUp={(ev) => {
           // Update history
           const target = ev.target as HTMLInputElement;
           dispatch(getHistory({ text: target.value }));
         }}
-        onBlur={() => setOpen(false)}
-        open={open}
+        onBlur={() => setSearchOpened(!searchOpened)}
+        open={searchOpened}
       />
     </div>
   );

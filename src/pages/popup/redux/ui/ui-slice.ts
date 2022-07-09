@@ -10,12 +10,12 @@ export enum Active {
 }
 
 interface UIState {
-  loading: boolean;
+  searchOpened: boolean;
   active: Active;
 }
 
 const initialState: UIState = {
-  loading: false,
+  searchOpened: false,
   active: Active.HISTORY,
 };
 
@@ -23,11 +23,14 @@ const UISlice = createSlice({
   name: "ui",
   initialState,
   reducers: {
-    switchActiveView: (state, action: { type: string; payload: Active }) => {
-      state.active = action.payload;
+    switchActiveView: (state, { payload }: { payload: Active }) => {
+      state.active = payload;
+    },
+    setSearchOpened: (state, { payload }: { payload: boolean }) => {
+      state.searchOpened = payload;
     },
   },
 });
 
-export const { switchActiveView } = UISlice.actions;
+export const { switchActiveView, setSearchOpened } = UISlice.actions;
 export default UISlice.reducer;
