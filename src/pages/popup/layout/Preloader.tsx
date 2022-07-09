@@ -9,12 +9,10 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-function Preloader() {
-  return (
-    <Container>
-      <CircularProgress />
-    </Container>
-  );
-}
+const Preloader = () => (
+  <Container>
+    <CircularProgress />
+  </Container>
+);
 
 export default Preloader;

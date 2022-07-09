@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { InputBase, Theme } from "@mui/material";
+import { InputBase } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
 import styled from "@emotion/styled";
 
@@ -25,6 +25,7 @@ const StyledInputBase = styled(InputBase)(
   top: 0;
   right: 0;
   bottom: 0;
+  height: 60px;
   width: ${open ? "100%" : 0};
   padding: 8px 1rem;
   z-index: ${open ? 10 : -1};
