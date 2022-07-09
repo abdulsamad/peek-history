@@ -3,10 +3,15 @@ import { useDispatch } from "react-redux";
 
 import history from "./history/history-slice";
 import { getHistory } from "./history/thunks";
+import tabs from "./tabs/tabs-slice";
+import {} from "./tabs/thunks";
+import ui from "./ui/ui-slice";
 
 const store = configureStore({
   reducer: {
     history,
+    tabs,
+    ui,
   },
 });
 
