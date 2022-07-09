@@ -16,6 +16,11 @@ const StyledListItem = styled(ListItem)`
   align-items: center;
   padding: 8px 16px;
   cursor: pointer;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #3b5998;
+  }
 `;
 
 const StyledListItemText = styled(ListItemText)`
