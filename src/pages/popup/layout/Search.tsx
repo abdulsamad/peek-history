@@ -55,8 +55,6 @@ const Search = () => {
           // Update history
           const target = ev.target as HTMLInputElement;
           dispatch(getHistory({ text: target.value }));
-
-          if (ev.key.toLowerCase() === "escape") setOpen(false);
         }}
         onBlur={() => setOpen(false)}
         open={open}
