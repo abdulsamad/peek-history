@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getHistory } from "./thunks";
 
-interface IHistoryItem {
+export interface IHistoryItem {
   id: string;
   lastVisitTime?: number;
   title?: string;

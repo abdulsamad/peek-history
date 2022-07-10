@@ -4,6 +4,7 @@ import { Delete as DeleteIcon } from "@mui/icons-material";
 import TimeAgo from "timeago-react";
 
 import ConfirmationModal from "../ConfirmationModal";
+import { IHistoryItem } from "../../../redux/history/history-slice";
 import {
   StyledAvatar,
   StyledListItem,
@@ -11,10 +12,10 @@ import {
   StyledListItemText,
 } from "./Styles";
 
-interface IHistoryItem {
-  title: string;
-  url: URL;
-  lastVisitTime: number;
+// Filter id field from historyItem because we don't want it as prop
+type IFilteredHistoryItem = Omit<IHistoryItem, "id">;
+
+interface INewHistoryItem extends IFilteredHistoryItem {
   hideURL: boolean;
   onClick: MouseEventHandler<HTMLLIElement>;
   showSecondary?: boolean;
@@ -29,14 +30,14 @@ const HistoryItem = ({
   onClick,
   showSecondary,
   onItemDelete,
-}: IHistoryItem) => {
+}: INewHistoryItem) => {
   return (
     <StyledListItem divider={true} onClick={onClick}>
       <StyledListItemIcon>
         <StyledAvatar
           // TODO: Add new favicon API when chrome adds it
           // src={`chrome://favicon/${url.href}`}
-          alt={`${url.hostname} Favicon`}
+          alt={`${url} Favicon`}
         />
       </StyledListItemIcon>
       <StyledListItemText
@@ -52,8 +53,8 @@ const HistoryItem = ({
           )
         }
         primaryTypographyProps={{ title }}
-        secondary={!hideURL && url.href}
-        secondaryTypographyProps={{ title: url.href }}
+        secondary={!hideURL && url}
+        secondaryTypographyProps={{ title: url }}
       />
       {showSecondary && onItemDelete && (
         <ListItemSecondaryAction sx={{ textAlign: "right" }}>
@@ -69,9 +70,11 @@ const HistoryItem = ({
             }
             onConfirm={onItemDelete}
           />
-          <Typography variant="caption" display="block" noWrap>
-            <TimeAgo datetime={lastVisitTime} />
-          </Typography>
+          {lastVisitTime && (
+            <Typography variant="caption" display="block" noWrap>
+              <TimeAgo datetime={lastVisitTime} />
+            </Typography>
+          )}
         </ListItemSecondaryAction>
       )}
     </StyledListItem>

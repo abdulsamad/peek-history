@@ -21,7 +21,7 @@ const HistoryList = () => {
         <HistoryItem
           key={id}
           title={title}
-          url={new URL(url)}
+          url={url}
           lastVisitTime={lastVisitTime}
           hideURL={false}
           showSecondary
@@ -30,6 +30,8 @@ const HistoryList = () => {
             await chrome.tabs.create({ url });
           }}
           onItemDelete={() => {
+            if (!url) throw new Error("URL is not found!");
+
             dispatch(deleteItem(url));
           }}
         />
