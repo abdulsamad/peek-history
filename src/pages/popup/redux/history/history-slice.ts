@@ -1,13 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getHistory } from "./thunks";
 
 interface IHistoryItem {
   id: string;
-  lastVisitTime: number;
-  title: string;
-  typedCount: number;
-  url: string;
-  visitCount: number;
+  lastVisitTime?: number;
+  title?: string;
+  typedCount?: number;
+  url?: string;
+  visitCount?: number;
 }
 
 interface historyState {
@@ -24,7 +24,7 @@ const historySlice = createSlice({
   name: "history",
   initialState,
   reducers: {
-    deleteItem(state, action) {
+    deleteItem(state, action: PayloadAction<string>) {
       // Delete item
       chrome.history.deleteUrl({ url: action.payload }, () => {
         // Filter out the deleted history item
@@ -32,15 +32,14 @@ const historySlice = createSlice({
       });
     },
   },
-  extraReducers: {
-    [`${getHistory.pending}`]: (state) => {
+  extraReducers: (builder) => {
+    builder.addCase(getHistory.pending, (state) => {
       state.loading = true;
-    },
-    [`${getHistory.fulfilled}`]: (state, action) => {
-      state.loading = true;
-      state.items = action.payload;
-      state.loading = false;
-    },
+    }),
+      builder.addCase(getHistory.fulfilled, (state, action) => {
+        state.items = action.payload;
+        state.loading = false;
+      });
   },
 });
 
