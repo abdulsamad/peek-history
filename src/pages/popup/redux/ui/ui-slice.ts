@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 /**
  * All settings such as extension options, views should be in UI State
@@ -23,10 +23,10 @@ const UISlice = createSlice({
   name: "ui",
   initialState,
   reducers: {
-    switchActiveView: (state, { payload }: { payload: Active }) => {
+    switchActiveView: (state, { payload }: PayloadAction<Active>) => {
       state.active = payload;
     },
-    setSearchOpened: (state, { payload }: { payload: boolean }) => {
+    setSearchOpened: (state, { payload }: PayloadAction<boolean>) => {
       state.searchOpened = payload;
     },
   },
