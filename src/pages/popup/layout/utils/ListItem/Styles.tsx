@@ -6,10 +6,10 @@ const StyledListItemIcon = styled(ListItemIcon)`
   width: 32px;
 `;
 
-const StyledAvatar = styled(Avatar)`
-  height: 16px;
-  width: 16px;
-`;
+const StyledAvatar = styled(Avatar)(() => ({
+  height: 16,
+  width: 16,
+}));
 
 const StyledListItem = styled(ListItem)(
   ({ theme }) => `
@@ -25,18 +25,20 @@ const StyledListItem = styled(ListItem)(
 `
 );
 
-const StyledListItemText = styled(ListItemText)`
-  white-space: nowrap;
+const StyledListItemText = styled(ListItemText)<{
+  showSecondary: boolean | undefined;
+}>(({ showSecondary }) => ({
+  whiteSpace: "nowrap",
 
-  p {
-    width: calc(100% - 1.2rem);
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+  "& p": {
+    width: showSecondary ? "calc(100% - 1.2rem)" : "100%",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  },
 
-  .MuiListItemText-secondary {
-    width: calc(100% - 11.5ch);
-  }
-`;
+  "& .MuiListItemText-secondary": {
+    width: showSecondary ? "calc(100% - 9.5ch)" : "100%",
+  },
+}));
 
 export { StyledAvatar, StyledListItem, StyledListItemText, StyledListItemIcon };

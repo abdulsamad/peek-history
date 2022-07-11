@@ -41,6 +41,7 @@ const HistoryItem = ({
         />
       </StyledListItemIcon>
       <StyledListItemText
+        showSecondary={showSecondary}
         primary={
           title ? (
             <Typography title={title} variant="body1" display="block">
