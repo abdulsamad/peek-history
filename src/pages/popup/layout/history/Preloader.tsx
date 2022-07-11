@@ -28,6 +28,7 @@ const Preloader = ({ hideURL }: IPreloader) => {
         <StyledListItemText
           primary={<Skeleton sx={{ width: "calc(100% - 1.2rem)" }} />}
           secondary={!hideURL && <Skeleton />}
+          showSecondary
         />
         <ListItemSecondaryAction sx={{ textAlign: "right" }}>
           <IconButton edge="end">
