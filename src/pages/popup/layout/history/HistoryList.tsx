@@ -24,7 +24,6 @@ const HistoryList = () => {
           url={url}
           lastVisitTime={lastVisitTime}
           hideURL={false}
-          showSecondary
           onClick={async () => {
             // await chrome.tabs.update({ url });
             await chrome.tabs.create({ url });
@@ -34,6 +33,7 @@ const HistoryList = () => {
 
             dispatch(deleteItem(url));
           }}
+          showSecondary
         />
       ))}
     </List>
