@@ -16,7 +16,7 @@ const HistoryList = () => {
   }
 
   return (
-    <List sx={{ padding: 0 }}>
+    <List sx={{ padding: 0 }} aria-label="History Items">
       {history.items.map(({ id, title, url, lastVisitTime }) => (
         <HistoryItem
           key={id}
