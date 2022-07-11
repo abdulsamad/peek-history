@@ -31,16 +31,16 @@ const historySlice = createSlice({
     }),
       builder.addCase(
         getHistory.fulfilled,
-        (state, action: PayloadAction<IHistoryItem[]>) => {
-          state.items = action.payload;
+        (state, { payload }: PayloadAction<IHistoryItem[]>) => {
+          state.items = payload;
           state.loading = false;
         }
       ),
       builder.addCase(
         deleteItem.fulfilled,
-        (state, action: PayloadAction<string>) => {
+        (state, { payload }: PayloadAction<string>) => {
           const filteredHistory = state.items.filter(
-            (item) => item.url !== action.payload
+            (item) => item.url !== payload
           );
 
           state.items = filteredHistory;
