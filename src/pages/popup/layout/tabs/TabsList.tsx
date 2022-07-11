@@ -82,7 +82,7 @@ const TabsList = () => {
           </AccordionSummary>
           <AccordionDetails>
             <List aria-label="Tabs on other devices">
-              {device.sessions.map((session: ISession) => {
+              {device.sessions.map((session) => {
                 const { window } = session;
 
                 // Session contains window
@@ -97,7 +97,7 @@ const TabsList = () => {
                     />
                   );
 
-                // Session contains tab (Other Tab (Tab form other device) will still have structure like window)
+                // Session also contains tab (Other Tab (Tab form other device) will still have structure like window)
                 return (
                   <TabItem
                     key={window.tabs[0].title}

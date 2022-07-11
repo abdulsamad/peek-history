@@ -43,9 +43,14 @@ export interface ITabItem {
   windowId: number;
 }
 
+export interface IDevice {
+  deviceName: string;
+  sessions: ISession[];
+}
+
 interface tabsState {
   recent: ISession[];
-  other: any[];
+  other: IDevice[];
 }
 
 const initialState: tabsState = {
@@ -75,5 +80,5 @@ const tabsSlice = createSlice({
   },
 });
 
-// export const { getRecentlyClosed } = tabsSlice.actions;
+// export const {  } = tabsSlice.actions;
 export default tabsSlice.reducer;
