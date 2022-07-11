@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import history from "./history/history-slice";
 import { getHistory } from "./history/thunks";
 import tabs from "./tabs/tabs-slice";
-import {} from "./tabs/thunks";
+import { getRecentlyClosed, getDevices } from "./tabs/thunks";
 import ui from "./ui/ui-slice";
 
 const store = configureStore({
@@ -15,8 +15,10 @@ const store = configureStore({
   },
 });
 
-// Load inital history
+// Load inital data
 store.dispatch(getHistory({}));
+store.dispatch(getRecentlyClosed());
+store.dispatch(getDevices());
 
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatach: () => AppDispatch = useDispatch;
