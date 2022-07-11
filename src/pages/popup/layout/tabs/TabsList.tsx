@@ -18,13 +18,13 @@ import { OpenURL } from "../../redux/ui/ui-slice";
 
 const TabsList = () => {
   const tabs = useSelector((state: RootState) => state.tabs);
-  const ui = useSelector((state: RootState) => state.ui);
+  const UI = useSelector((state: RootState) => state.ui);
 
   const dispatch = useAppDispatach();
 
   const onTabClick = async (url: string) => {
     // Open link in new tab
-    if (ui.openURL === OpenURL.NEW_TAB) {
+    if (UI.openURL === OpenURL.NEW_TAB) {
       await chrome.tabs.create({ url });
       return;
     }
