@@ -66,14 +66,14 @@ const tabsSlice = createSlice({
     // Recently Closed Tabs
     builder.addCase(
       getRecentlyClosed.fulfilled,
-      (state, { payload }: PayloadAction<any>) => {
+      (state, { payload }: PayloadAction<ISession[]>) => {
         state.recent = payload;
       }
     ),
       // Tabs from other Devices
       builder.addCase(
         getDevices.fulfilled,
-        (state, { payload }: PayloadAction<any>) => {
+        (state, { payload }: PayloadAction<IDevice[]>) => {
           state.other = payload;
         }
       );
