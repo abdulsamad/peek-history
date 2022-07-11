@@ -3,7 +3,7 @@ import { List } from "@mui/material";
 import { useSelector } from "react-redux";
 
 import HistoryItem from "../utils/ListItem";
-import { deleteItem } from "../../redux/history/history-slice";
+import { deleteItem } from "../../redux/history/thunks";
 import { RootState, useAppDispatach } from "../../redux/store";
 import Preloader from "./Preloader";
 import { OpenURL } from "../../redux/ui/ui-slice";
@@ -38,9 +38,13 @@ const HistoryList = () => {
           url={url}
           lastVisitTime={lastVisitTime}
           hideURL={false}
-          onClick={() => onClick(url)}
+          onClick={() => {
+            if (!url) throw new Error("URL not found!");
+
+            onClick(url);
+          }}
           onItemDelete={() => {
-            if (!url) throw new Error("URL is not found!");
+            if (!url) throw new Error("URL not found!");
 
             dispatch(deleteItem(url));
           }}

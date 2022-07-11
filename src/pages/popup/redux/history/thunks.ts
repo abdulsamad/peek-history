@@ -23,3 +23,13 @@ export const getHistory = createAsyncThunk(
     return historyItems;
   }
 );
+
+export const deleteItem = createAsyncThunk(
+  "history/deleteItem",
+  async (url: string) => {
+    // Delete URL occurrences of the URL
+    await chrome.history.deleteUrl({ url });
+
+    return url;
+  }
+);
