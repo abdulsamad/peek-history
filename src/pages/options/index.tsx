@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import Options from "@pages/options/Options";
+import Options from "@src/pages/options/Options";
 
 function init() {
   const appContainer = document.querySelector("#app");
