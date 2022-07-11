@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { getRecentlyClosed, getDevices, restoreSession } from "./thunks";
+import { getRecentlyClosed, getDevices } from "./thunks";
 
 interface ITabSession {
   lastModified: number;
