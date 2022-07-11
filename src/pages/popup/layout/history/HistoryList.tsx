@@ -9,6 +9,8 @@ import Preloader from "./Preloader";
 
 const HistoryList = () => {
   const history = useSelector((state: RootState) => state.history);
+  const UI = useSelector((state: RootState) => state.ui);
+
   const dispatch = useAppDispatach();
 
   if (history.loading) {
