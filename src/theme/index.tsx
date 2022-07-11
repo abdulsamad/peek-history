@@ -4,6 +4,8 @@ import {
   ThemeProvider as MUIThemeProvider,
   CssBaseline,
   useMediaQuery,
+  lighten,
+  darken,
 } from "@mui/material";
 
 const defaultConfig = {
@@ -38,10 +40,24 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
               ? "dark"
               : "light",
           primary: {
+            light: lighten(accent, 5),
             main: accent,
+            dark: darken(accent, 5),
           },
-          secondary: {
+          error: {
+            light: lighten("#F44336", 5),
             main: "#F44336",
+            dark: darken("#F44336", 5),
+          },
+          warning: {
+            light: lighten("#FFC107", 5),
+            main: "#FFC107",
+            dark: darken("#FFC107", 5),
+          },
+          success: {
+            light: lighten("#4CAF50", 5),
+            main: "#4CAF50",
+            dark: darken("#4CAF50", 5),
           },
           background: {
             default:
@@ -64,6 +80,37 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
         },
         typography: {
           fontFamily: font,
+        },
+        components: {
+          MuiCssBaseline: {
+            styleOverrides: {
+              body: {
+                height: 600,
+                width: width,
+                overflow: "hidden",
+              },
+              "#app": {
+                height: 600,
+                width: width,
+                overflow: "hidden",
+              },
+              "*::-webkit-scrollbar": {
+                backgroundColor:
+                  theme === "default"
+                    ? prefersDarkMode
+                      ? "#373737"
+                      : "#edecec"
+                    : theme === "dark"
+                    ? "#373737"
+                    : "#edecec",
+                border: "none",
+              },
+              "*::-webkit-scrollbar-thumb": {
+                backgroundColor: accent,
+                borderRadius: 6,
+              },
+            },
+          },
         },
       }),
     []

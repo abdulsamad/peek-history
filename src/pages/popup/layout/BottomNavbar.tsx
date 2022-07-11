@@ -26,10 +26,11 @@ const BottomNavbar = () => {
         }}
         value={active}
       >
-        <BottomNavigationAction icon={<HomeIcon />} />
-        <BottomNavigationAction icon={<DevicesIcon />} />
-        <BottomNavigationAction icon={<DeleteForeverIcon />} />
+        <BottomNavigationAction label="Home" icon={<HomeIcon />} />
+        <BottomNavigationAction label="Tabs" icon={<DevicesIcon />} />
+        <BottomNavigationAction label="Delete" icon={<DeleteForeverIcon />} />
         <BottomNavigationAction
+          label="Settings"
           onClick={() => chrome.runtime.openOptionsPage()}
           icon={<SettingsIcon />}
         />

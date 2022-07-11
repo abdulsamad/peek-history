@@ -1,38 +1,37 @@
 import React, { useRef } from "react";
 import { useSelector } from "react-redux";
-import { InputBase } from "@mui/material";
+import { InputBase, styled } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
-import styled from "@emotion/styled";
 
 import { RootState, useAppDispatach } from "../redux/store";
 import { getHistory } from "../redux/history/thunks";
 import { setSearchOpened } from "../redux/ui/ui-slice";
 
-const StyledSearchIcon = styled(SearchIcon)`
-  height: 100%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #f5f5f5;
-`;
+const StyledSearchIcon = styled(SearchIcon)(({ theme }) => ({
+  height: "100%",
+  cursor: "pointer",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  color: theme.palette.primary.light,
+}));
 
-const StyledInputBase = styled(InputBase)(
-  ({ open }: { open: boolean }) => `
-  transition: all 0.3s ease-out;
-  trasform-origin: left;
-  background: transparent;
-  cursor: pointer;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  height: 60px;
-  width: ${open ? "100%" : 0};
-  padding: 8px 1rem;
-  z-index: ${open ? 10 : -1};
-  background-color: white;
-`
+const StyledInputBase = styled(InputBase)<{ open: boolean }>(
+  ({ theme, open }) => ({
+    transition: "all 0.3s ease-out",
+    trasformOrigin: "left",
+    background: "transparent",
+    cursor: "pointer",
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    height: 60,
+    width: open ? "100%" : 0,
+    padding: "8px 1rem",
+    zIndex: open ? 10 : -1,
+    backgroundColor: theme.palette.background.default,
+  })
 );
 
 const Search = () => {
@@ -49,7 +48,7 @@ const Search = () => {
         }}
       />
       <StyledInputBase
-        placeholder="Search History…"
+        placeholder="Enter search keyword or URL"
         inputProps={{ "aria-label": "search history" }}
         inputRef={inputRef}
         style={{ width: searchOpened ? "100%" : 0 }}

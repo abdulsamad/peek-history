@@ -1,13 +1,13 @@
 import React from "react";
-import styled from "@emotion/styled";
+import { styled } from "@mui/material";
 
-const Container = styled.div`
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-`;
+const Container = styled("div")({
+  height: "100%",
+  width: "100%",
+  display: "flex",
+  flexDirection: "column",
+  overflow: "hidden",
+});
 
 interface IMainContainer {
   children: React.ReactNode;

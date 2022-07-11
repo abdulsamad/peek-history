@@ -1,5 +1,5 @@
 import { Avatar, ListItem, ListItemText, ListItemIcon } from "@mui/material";
-import styled from "@emotion/styled";
+import { styled } from "@mui/material";
 
 const StyledListItemIcon = styled(ListItemIcon)`
   min-width: 32px;
@@ -11,7 +11,8 @@ const StyledAvatar = styled(Avatar)`
   width: 16px;
 `;
 
-const StyledListItem = styled(ListItem)`
+const StyledListItem = styled(ListItem)(
+  ({ theme }) => `
   display: flex;
   align-items: center;
   padding: 8px 16px;
@@ -19,9 +20,10 @@ const StyledListItem = styled(ListItem)`
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
-    border-left: 5px solid #3b5998;
+    border-left: 5px solid ${theme.palette.primary.main};
   }
-`;
+`
+);
 
 const StyledListItemText = styled(ListItemText)`
   white-space: nowrap;

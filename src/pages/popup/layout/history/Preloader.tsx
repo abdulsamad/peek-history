@@ -5,7 +5,6 @@ import {
   IconButton,
   Skeleton,
 } from "@mui/material";
-import styled from "@emotion/styled";
 import {
   StyledListItem,
   StyledListItemIcon,
