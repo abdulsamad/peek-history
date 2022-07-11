@@ -17,7 +17,7 @@ interface historyState {
 }
 
 const initialState: historyState = {
-  loading: false,
+  loading: true,
   items: [],
 };
 
@@ -26,16 +26,13 @@ const historySlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getHistory.pending, (state) => {
-      state.loading = true;
-    }),
-      builder.addCase(
-        getHistory.fulfilled,
-        (state, { payload }: PayloadAction<IHistoryItem[]>) => {
-          state.items = payload;
-          state.loading = false;
-        }
-      ),
+    builder.addCase(
+      getHistory.fulfilled,
+      (state, { payload }: PayloadAction<IHistoryItem[]>) => {
+        state.items = payload;
+        state.loading = false;
+      }
+    ),
       builder.addCase(
         deleteItem.fulfilled,
         (state, { payload }: PayloadAction<string>) => {
