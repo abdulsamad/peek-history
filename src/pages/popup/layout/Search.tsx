@@ -5,7 +5,9 @@ import { Search as SearchIcon } from "@mui/icons-material";
 
 import { RootState, useAppDispatach } from "../redux/store";
 import { getHistory } from "../redux/history/thunks";
-import { setSearchOpened } from "../redux/ui/ui-slice";
+import { setSearchOpened, Active } from "../redux/ui/ui-slice";
+import { filter } from "../redux/tabs/tabs-slice";
+import { getDevices, getRecentlyClosed } from "../redux/tabs/thunks";
 
 const StyledSearchIcon = styled(SearchIcon)(({ theme }) => ({
   height: "100%",
@@ -35,7 +37,7 @@ const StyledInputBase = styled(InputBase)<{ open: boolean }>(
 );
 
 const Search = () => {
-  const { searchOpened } = useSelector((state: RootState) => state.ui);
+  const UI = useSelector((state: RootState) => state.ui);
   const dispatch = useAppDispatach();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -43,7 +45,7 @@ const Search = () => {
     <div>
       <StyledSearchIcon
         onClick={() => {
-          dispatch(setSearchOpened(!searchOpened));
+          dispatch(setSearchOpened(!UI.searchOpened));
           inputRef.current?.focus();
         }}
       />
@@ -51,14 +53,26 @@ const Search = () => {
         placeholder="Enter search keyword or URL"
         inputProps={{ "aria-label": "search history" }}
         inputRef={inputRef}
-        style={{ width: searchOpened ? "100%" : 0 }}
-        onKeyUp={(ev) => {
-          // Update history
+        style={{ width: UI.searchOpened ? "100%" : 0 }}
+        onKeyUp={async (ev) => {
           const target = ev.target as HTMLInputElement;
-          dispatch(getHistory({ text: target.value }));
+
+          if (UI.active === Active.HISTORY) {
+            // Update history
+            await dispatch(getHistory({ text: target.value }));
+            return;
+          }
+
+          // ! BUG: Fix state not properly updating because of Immer in tabSlice. Other Tabs filtering also needs work.
+          // Refresh data (because filtering removed the data from tabSlice state)
+          dispatch(getRecentlyClosed());
+          dispatch(getDevices());
+
+          // Update Tabs
+          dispatch(filter(target.value));
         }}
         onBlur={() => dispatch(setSearchOpened(false))}
-        open={searchOpened}
+        open={UI.searchOpened}
       />
     </div>
   );
