@@ -15,7 +15,7 @@ const store = configureStore({
   },
 });
 
-// Load inital {History, Recently Closed Tabs, Tabs from other devices}
+// Load inital {History, Recently Closed Tabs, Tabs from Other Devices}
 store.dispatch(getHistory({}));
 store.dispatch(getRecentlyClosed());
 store.dispatch(getDevices());
