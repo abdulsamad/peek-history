@@ -16,7 +16,13 @@ const defaultConfig = {
   hideURL: false,
 };
 
-const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
+const ThemeProvider = ({
+  children,
+  fullWidth,
+}: {
+  children: React.ReactNode;
+  fullWidth?: boolean;
+}) => {
   const [config, setConfig] = useState(defaultConfig);
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
@@ -85,13 +91,13 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
           MuiCssBaseline: {
             styleOverrides: {
               body: {
-                height: 600,
-                width: width,
+                height: fullWidth ? "auto" : 600,
+                width: fullWidth ? "100%" : width,
                 overflow: "hidden",
               },
               "#app": {
-                height: 600,
-                width: width,
+                height: fullWidth ? "auto" : 600,
+                width: fullWidth ? "100%" : width,
                 overflow: "hidden",
               },
               "*::-webkit-scrollbar": {
