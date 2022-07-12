@@ -4,11 +4,15 @@ import {
   AccordionSummary,
   AccordionDetails,
   Typography,
-  Button,
+  IconButton,
   List,
+  Tooltip,
   styled,
 } from "@mui/material";
-import { ExpandMore as ExpandMoreIcon } from "@mui/icons-material";
+import {
+  ExpandMore as ExpandMoreIcon,
+  Launch as LauchIcon,
+} from "@mui/icons-material";
 
 import { ITabItem, IWindowItem } from "../../redux/tabs/tabs-slice";
 import TabItem from "./ListItem";
@@ -16,7 +20,7 @@ import TabItem from "./ListItem";
 const StyledAccordionSummary = styled(AccordionSummary)(() => ({
   ".MuiAccordionSummary-content": {
     flexBasis: "100%",
-    justifyContent: "space-around",
+    justifyContent: "flex-start",
     alignItems: "center",
   },
 }));
@@ -45,17 +49,19 @@ const WindowItem = ({
           Window &#40;{`${tabs.length} ${tabs.length > 1 ? "Tabs" : "Tab"}`}
           &#41;
         </Typography>
-        <Button
-          size="small"
-          variant="contained"
-          color="primary"
-          onClick={(ev) => {
-            ev.stopPropagation();
-            onRestoreClick();
-          }}
-        >
-          Restore
-        </Button>
+        <Tooltip title="Restore Window" placement="top">
+          <IconButton
+            size="small"
+            color="primary"
+            sx={{ marginLeft: "6px" }}
+            onClick={(ev) => {
+              ev.stopPropagation();
+              onRestoreClick();
+            }}
+          >
+            <LauchIcon />
+          </IconButton>
+        </Tooltip>
       </StyledAccordionSummary>
       <AccordionDetails sx={{ padding: 0 }}>
         <List
