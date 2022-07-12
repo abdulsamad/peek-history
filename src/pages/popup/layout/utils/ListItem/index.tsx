@@ -15,6 +15,10 @@ import {
 // Filter id field from historyItem because we don't want it as prop
 type IFilteredHistoryItem = Omit<IHistoryItem, "id">;
 
+/**
+ * This can be used for History Item as well as Tab Item
+ */
+
 interface INewHistoryItem extends IFilteredHistoryItem {
   hideURL: boolean;
   onClick: MouseEventHandler<HTMLLIElement>;
