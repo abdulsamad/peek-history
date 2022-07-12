@@ -1,11 +1,21 @@
 import React from "react";
+import { Provider } from "react-redux";
 
-const Options: React.FC = () => {
-  return (
-    <div>
-      <h1>Hello Wrold</h1>
-    </div>
-  );
-};
+import store from "./redux/store";
+
+import ThemeProvider from "@src/theme";
+import Navbar from "./layout/Navbar";
+import Content from "./layout/Content";
+import Footer from "./layout/Footer";
+
+const Options: React.FC = () => (
+  <Provider store={store}>
+    <ThemeProvider fullWidth>
+      <Navbar title="Peek History" />
+      <Content />
+      <Footer />
+    </ThemeProvider>
+  </Provider>
+);
 
 export default Options;
