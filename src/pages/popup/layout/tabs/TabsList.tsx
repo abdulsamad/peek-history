@@ -54,7 +54,7 @@ const TabsList = () => {
                     window={window}
                     hideURL={false}
                     onRestoreClick={() => onRestoreClick(window.sessionId)}
-                    onTabClick={() => onTabClick("https://google.com")}
+                    onTabClick={onTabClick}
                   />
                 );
 
@@ -92,7 +92,7 @@ const TabsList = () => {
                       window={window}
                       hideURL={false}
                       onRestoreClick={() => onRestoreClick(window.sessionId)}
-                      onTabClick={() => onTabClick("https://google.com")}
+                      onTabClick={onTabClick}
                     />
                   );
 

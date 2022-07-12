@@ -29,7 +29,7 @@ const WindowItem = ({
 }: {
   window: IWindowItem;
   onRestoreClick: () => void;
-  onTabClick: () => void;
+  onTabClick: (url: string) => void;
   hideURL: boolean;
 }) => {
   const { tabs, sessionId } = window;
@@ -69,7 +69,7 @@ const WindowItem = ({
               title={tab.title}
               url={tab.url}
               hideURL={hideURL}
-              onClick={onTabClick}
+              onClick={() => onTabClick(tab.url)}
             />
           ))}
         </List>
