@@ -35,7 +35,7 @@ const WindowItem = ({
   const { tabs, sessionId } = window;
 
   return (
-    <Accordion>
+    <Accordion TransitionProps={{ unmountOnExit: true }}>
       <StyledAccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-label="Window on Other Device"

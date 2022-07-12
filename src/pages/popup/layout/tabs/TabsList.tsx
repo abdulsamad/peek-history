@@ -39,7 +39,7 @@ const TabsList = () => {
   return (
     <div>
       {/* Recently Closed Tabs */}
-      <Accordion>
+      <Accordion TransitionProps={{ unmountOnExit: true }}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>Recently Closed Tabs</Typography>
         </AccordionSummary>
@@ -75,7 +75,10 @@ const TabsList = () => {
 
       {/* Other Tabs (Remote devices tabs and sessions) */}
       {tabs.other.map((device) => (
-        <Accordion key={device.deviceName}>
+        <Accordion
+          key={device.deviceName}
+          TransitionProps={{ unmountOnExit: true }}
+        >
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Typography>{device.deviceName}</Typography>
           </AccordionSummary>
