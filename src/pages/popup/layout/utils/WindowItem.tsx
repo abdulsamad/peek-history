@@ -11,7 +11,7 @@ import {
 import { ExpandMore as ExpandMoreIcon } from "@mui/icons-material";
 
 import { ITabItem, IWindowItem } from "../../redux/tabs/tabs-slice";
-import TabItem from "../utils/ListItem";
+import TabItem from "./ListItem";
 
 const StyledAccordionSummary = styled(AccordionSummary)(() => ({
   ".MuiAccordionSummary-content": {

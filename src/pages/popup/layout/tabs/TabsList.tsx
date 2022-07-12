@@ -10,9 +10,8 @@ import { Accordion } from "@mui/material";
 import { ExpandMore as ExpandMoreIcon } from "@mui/icons-material";
 
 import TabItem from "../utils/ListItem";
+import WindowItem from "../utils/WindowItem";
 import { RootState, useAppDispatach } from "../../redux/store";
-import WindowItem from "./WindowItem";
-import { ISession } from "../../redux/tabs/tabs-slice";
 import { restoreSession } from "../../redux/tabs/thunks";
 import { OpenURL } from "../../redux/ui/ui-slice";
 
