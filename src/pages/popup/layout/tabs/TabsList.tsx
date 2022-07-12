@@ -99,7 +99,7 @@ const TabsList = () => {
                     />
                   );
 
-                // Session also contains tab (Other Tab (Tab form other device) will still have structure like window)
+                // Session also contains tab {Other Tab (Tab form other device) will still have structure like window}
                 return (
                   <TabItem
                     key={window.tabs[0].title}
