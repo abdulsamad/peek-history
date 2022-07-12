@@ -11,7 +11,7 @@ import Footer from "./layout/Footer";
 const Options: React.FC = () => (
   <Provider store={store}>
     <ThemeProvider fullWidth>
-      <Navbar title="Peek History" />
+      <Navbar title={import.meta.env.VITE_EXTENSION_TITLE} />
       <Content />
       <Footer />
     </ThemeProvider>

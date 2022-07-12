@@ -6,10 +6,7 @@ const Footer = () => {
     <Container component="footer" sx={{ textAlign: "center" }}>
       <Typography variant="subtitle1">
         Please leave a positive rating on the{" "}
-        <Link
-          underline="none"
-          href="https://chrome.google.com/webstore/detail/peek-history/gknodemjjckmkncijnedcpogffimkmbm?from=options"
-        >
+        <Link underline="none" href={import.meta.env.VITE_EXTENSION_URL}>
           Chrome Web Store,
         </Link>{" "}
         If you like this extension and leave a feedback.

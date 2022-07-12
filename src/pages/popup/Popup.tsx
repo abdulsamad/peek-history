@@ -13,7 +13,7 @@ const Popup = () => (
   <Provider store={store}>
     <ThemeProvider>
       <MainContainer>
-        <Navbar title="Peek History" />
+        <Navbar title={import.meta.env.VITE_EXTENSION_TITLE} />
         <Content />
         <BottomNavBar />
       </MainContainer>
