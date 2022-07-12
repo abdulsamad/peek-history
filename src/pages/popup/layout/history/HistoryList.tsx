@@ -7,6 +7,7 @@ import { deleteItem } from "../../redux/history/thunks";
 import { RootState, useAppDispatach } from "../../redux/store";
 import Preloader from "./Preloader";
 import { OpenURL } from "../../redux/ui/ui-slice";
+import NotFound from "../utils/NotFound";
 
 const HistoryList = () => {
   const history = useSelector((state: RootState) => state.history);
@@ -28,6 +29,12 @@ const HistoryList = () => {
   if (history.loading) {
     return <Preloader hideURL={false} />;
   }
+
+  // User search for history item
+  if (UI.searchOpened && history.items.length < 1) return <NotFound search />;
+
+  // User does not have history
+  if (history.items.length < 1) return <NotFound />;
 
   return (
     <List sx={{ padding: 0 }} aria-label="History Items">
