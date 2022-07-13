@@ -4,7 +4,7 @@ import { styled } from "@mui/material";
 import SettingItem from "../utils/SettingItem";
 
 const accents = [
-  { color: "#64B5F6", active: false },
+  { color: "#64B5F6", active: true },
   { color: "#E57373", active: false },
   { color: "#4db6ac", active: false },
   { color: "#4dd0e1", active: false },
@@ -12,7 +12,7 @@ const accents = [
   { color: "#f06292", active: false },
 ];
 
-const Button = styled("button")(() => ({
+const Button = styled("button")<{ active?: boolean }>(({ active }) => ({
   height: 30,
   width: 30,
   border: "none",
@@ -20,7 +20,7 @@ const Button = styled("button")(() => ({
   position: "relative",
   cursor: "pointer",
 
-  "&.active::after": {
+  "&::after": {
     content: '"\\2714"',
     fontSize: 15,
     height: 30,
@@ -29,7 +29,7 @@ const Button = styled("button")(() => ({
     position: "absolute",
     top: 0,
     left: 0,
-    display: "flex",
+    display: active ? "flex" : "none",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "rgba(0,0,0,0.3)",
@@ -67,12 +67,15 @@ const Accent = () => {
     <SettingItem label="Accent">
       <ButtonGroup>
         {accents.map(({ color, active }) => (
-          <Button
-            key={color}
-            onClick={() => null}
-            style={{ backgroundColor: color }}
-            aria-label={`${color} color`}
-          />
+          <>
+            <Button
+              key={color}
+              onClick={() => null}
+              style={{ backgroundColor: color }}
+              aria-label={`${color} color`}
+              active={active}
+            />
+          </>
         ))}
         <RoundedInput type="color" value={color} onChange={(ev) => null} />
       </ButtonGroup>
