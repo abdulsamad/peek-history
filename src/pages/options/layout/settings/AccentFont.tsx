@@ -5,7 +5,10 @@ import SettingItem from "../utils/SettingItem";
 
 const AccentFont = () => {
   return (
-    <SettingItem label="Accent Font Color">
+    <SettingItem
+      label="Accent Font Color"
+      info="Font color on elements that have accent background. Such as Navbar, Buttons, etc."
+    >
       <FormControl sx={{ width: "100%" }} hiddenLabel={true}>
         <Select value={"#f5f5f5"} onChange={() => null}>
           <MenuItem value="#f5f5f5">Light</MenuItem>
