@@ -94,11 +94,13 @@ const ThemeProvider = ({
                 height: fullWidth ? "auto" : 600,
                 width: fullWidth ? "100%" : width,
                 overflow: "hidden",
+                overflowY: fullWidth ? "auto" : "hidden",
               },
               "#app": {
                 height: fullWidth ? "auto" : 600,
                 width: fullWidth ? "100%" : width,
                 overflow: "hidden",
+                overflowY: fullWidth ? "auto" : "hidden",
               },
               "*::-webkit-scrollbar": {
                 backgroundColor:
