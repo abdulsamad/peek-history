@@ -5,11 +5,11 @@ import {
   Settings as SettingsIcon,
   Home as HomeIcon,
   Devices as DevicesIcon,
-  DeleteForever as DeleteForeverIcon,
 } from "@mui/icons-material";
 
 import { RootState, useAppDispatach } from "../redux/store";
 import { switchActiveView } from "../redux/ui/ui-slice";
+import DeleteMultiple from "./utils/DeleteMultiple";
 
 const BottomNavbar = () => {
   const { active } = useSelector((state: RootState) => state.ui);
@@ -28,11 +28,15 @@ const BottomNavbar = () => {
       >
         <BottomNavigationAction label="Home" icon={<HomeIcon />} />
         <BottomNavigationAction label="Tabs" icon={<DevicesIcon />} />
-        <BottomNavigationAction label="Delete" icon={<DeleteForeverIcon />} />
+        <BottomNavigationAction
+          label="Delete All"
+          icon={<DeleteMultiple />}
+          sx={{ padding: 0 }}
+        />
         <BottomNavigationAction
           label="Settings"
-          onClick={() => chrome.runtime.openOptionsPage()}
           icon={<SettingsIcon />}
+          onClick={() => chrome.runtime.openOptionsPage()}
         />
       </BottomNavigation>
     </Paper>

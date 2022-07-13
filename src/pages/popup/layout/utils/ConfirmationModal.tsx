@@ -1,6 +1,7 @@
 import React, { useState, forwardRef } from "react";
 import {
   Button,
+  ButtonBase,
   Dialog,
   DialogActions,
   DialogContent,
@@ -8,6 +9,7 @@ import {
   DialogTitle,
   IconButton,
   Slide,
+  styled,
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
 
@@ -21,28 +23,41 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+const Container = styled("div")(() => ({
+  padding: 0,
+}));
+
 interface IConfirmationModal {
-  icon: React.ReactNode;
-  iconButtonProps: any;
   question: string;
   warning: React.ReactNode;
   onConfirm: () => void;
+  icon?: React.ReactNode;
+  text?: string;
+  ButtonProps?: any;
 }
 
 const ConfirmationModal = ({
-  icon,
-  iconButtonProps,
   question,
   warning,
+  icon,
+  text,
+  ButtonProps,
   onConfirm,
 }: IConfirmationModal) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div>
-      <IconButton onClick={() => setOpen(true)} {...iconButtonProps}>
-        {icon}
-      </IconButton>
+    <Container>
+      {icon && (
+        <IconButton onClick={() => setOpen(true)} {...ButtonProps}>
+          {icon}
+        </IconButton>
+      )}
+      {text && (
+        <ButtonBase onClick={() => setOpen(true)} {...ButtonProps}>
+          {text}
+        </ButtonBase>
+      )}
       <Dialog
         open={open}
         TransitionComponent={Transition}
@@ -68,7 +83,7 @@ const ConfirmationModal = ({
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </Container>
   );
 };
 

@@ -65,7 +65,7 @@ const HistoryItem = ({
         <ListItemSecondaryAction sx={{ textAlign: "right" }}>
           <ConfirmationModal
             icon={<DeleteIcon fontSize="small" />}
-            iconButtonProps={{ edge: "end", "aria-label": "delete" }}
+            ButtonProps={{ edge: "end", "aria-label": "delete" }}
             question="Delete History Item?"
             warning={
               <>
