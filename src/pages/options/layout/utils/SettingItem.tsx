@@ -5,7 +5,12 @@ import {
   FormHelperText,
   SxProps,
   Theme,
+  styled,
 } from "@mui/material";
+
+const StyledGrid = styled(Grid)(() => ({
+  margin: "1.5rem 0",
+}));
 
 interface ISettingsItem {
   label: string;
@@ -19,22 +24,28 @@ const SettingItem = ({
   children,
   helperText,
   helperTextSX,
-}: ISettingsItem) => {
-  return (
-    <Grid alignItems="center" container>
-      <Grid item md={6}>
-        <Typography variant="subtitle1" align="center">
-          {label}
-        </Typography>
-      </Grid>
-      <Grid item md={4}>
-        {children}
-        {helperText && (
-          <FormHelperText sx={helperTextSX}>{helperText}</FormHelperText>
-        )}
-      </Grid>
+}: ISettingsItem) => (
+  <StyledGrid alignItems="center" justifyContent="center" container>
+    <Grid md={6} item>
+      <Typography variant="subtitle1" align="center">
+        {label}
+      </Typography>
     </Grid>
-  );
-};
+    <Grid md={4} textAlign="center" item>
+      {children}
+      {helperText && (
+        <FormHelperText
+          sx={{
+            textAlign: "center",
+            marginTop: "6px",
+            ...helperTextSX,
+          }}
+        >
+          {helperText}
+        </FormHelperText>
+      )}
+    </Grid>
+  </StyledGrid>
+);
 
 export default SettingItem;
