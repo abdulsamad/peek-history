@@ -11,6 +11,7 @@ import Sort from "./settings/Sort";
 import InfiniteScroll from "./settings/InfiniteScroll";
 import OpenURL from "./settings/OpenURL";
 import HideTime from "./settings/HideTime";
+import AccentFont from "./settings/AccentFont";
 
 const Content = () => {
   return (
@@ -34,6 +35,7 @@ const Content = () => {
         <InfiniteScroll />
         <OpenURL />
         <HideTime />
+        <AccentFont />
       </Paper>
     </Container>
   );
