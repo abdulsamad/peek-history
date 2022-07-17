@@ -9,10 +9,10 @@ import {
 
 import { RootState, useAppDispatach } from "../redux/store";
 import { switchActiveView } from "../redux/ui/ui-slice";
-import DeleteMultiple from "./utils/DeleteMultiple";
+import DeleteMultiple from "./history/DeleteMultiple";
 
 const BottomNavbar = () => {
-  const { active } = useSelector((state: RootState) => state.ui);
+  const UI = useSelector((state: RootState) => state.ui);
   const dispatch = useAppDispatach();
 
   return (
@@ -24,7 +24,7 @@ const BottomNavbar = () => {
 
           dispatch(switchActiveView(newValue));
         }}
-        value={active}
+        value={UI.active}
       >
         <BottomNavigationAction label="Home" icon={<HomeIcon />} />
         <BottomNavigationAction label="Tabs" icon={<DevicesIcon />} />
