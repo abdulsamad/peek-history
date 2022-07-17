@@ -33,3 +33,24 @@ export const deleteItem = createAsyncThunk(
     return url;
   }
 );
+
+export const deleteAll = createAsyncThunk("history/deleteAll", async () => {
+  await chrome.history.deleteAll();
+
+  return true;
+});
+
+export const deleteRange = createAsyncThunk(
+  "history/deleteRange",
+  async ({
+    startTime,
+    endTime = Date.now(),
+  }: {
+    startTime: number;
+    endTime?: number;
+  }) => {
+    await chrome.history.deleteRange({ startTime, endTime });
+
+    return true;
+  }
+);
