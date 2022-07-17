@@ -1,14 +1,21 @@
 import React from "react";
 import { Menu, MenuItem, ButtonBase } from "@mui/material";
 import { DeleteForever as DeleteForeverIcon } from "@mui/icons-material";
-import ConfirmationModal from "./ConfirmationModal";
+import dayjs from "dayjs";
+
+import ConfirmationModal from "../utils/ConfirmationModal";
+import { deleteRange, deleteAll } from "../../redux/history/thunks";
+import { useAppDispatach } from "@src/pages/options/redux/store";
 
 const DeleteMultiple = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const dispatch = useAppDispatach();
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -33,9 +40,48 @@ const DeleteMultiple = () => {
         anchorOrigin={{ vertical: "top", horizontal: "left" }}
         transformOrigin={{ vertical: "top", horizontal: "left" }}
       >
-        <MenuItem>Last 30 Mins</MenuItem>
-        <MenuItem>Last 1 Hour</MenuItem>
-        <MenuItem>Last 24 Hours</MenuItem>
+        <MenuItem
+          onClick={() => {
+            const time30MinsAgo = dayjs().subtract(30, "minute").valueOf();
+
+            dispatch(
+              deleteRange({
+                startTime: time30MinsAgo,
+                endTime: dayjs().valueOf(),
+              })
+            );
+          }}
+        >
+          Last 30 Mins
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            const timeHourAgo = dayjs().subtract(1, "hours").valueOf();
+
+            dispatch(
+              deleteRange({
+                startTime: timeHourAgo,
+                endTime: dayjs().valueOf(),
+              })
+            );
+          }}
+        >
+          Last 1 Hour
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            const time24HoursAgo = dayjs().subtract(24, "hours").valueOf();
+
+            dispatch(
+              deleteRange({
+                startTime: time24HoursAgo,
+                endTime: dayjs().valueOf(),
+              })
+            );
+          }}
+        >
+          Last 24 Hours
+        </MenuItem>
         <MenuItem>
           <ConfirmationModal
             text="Delete All"
@@ -46,7 +92,7 @@ const DeleteMultiple = () => {
                 history.
               </>
             }
-            onConfirm={() => console.log("hello")}
+            onConfirm={() => dispatch(deleteAll())}
           />
         </MenuItem>
       </Menu>
