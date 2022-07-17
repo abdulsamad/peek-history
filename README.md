@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="">
+  <a href="https://chrome.google.com/webstore/detail/peek-history/gknodemjjckmkncijnedcpogffimkmbm">
     <img alt="Peek History" src="readme/icon.png" width="60" />
   </a>
 </p>
