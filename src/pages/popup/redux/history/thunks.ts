@@ -1,11 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import dayjs from "dayjs";
 
 export const getHistory = createAsyncThunk(
   "history/getHistory",
   async ({
     text = "",
     maxResults = 50,
-    startTime = 157784760000, // 1975
+    startTime = dayjs("01-01-1970").valueOf(),
     endTime,
   }: {
     text?: string;
