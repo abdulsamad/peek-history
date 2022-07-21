@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useLayoutEffect } from "react";
 import {
   createTheme,
   ThemeProvider as MUIThemeProvider,
@@ -23,8 +23,15 @@ const ThemeProvider = ({
   // Destructure config
   const { theme, accent, popupWidth, font } = config;
 
-  useEffect(() => {
-    //
+  useLayoutEffect(() => {
+    (async () => {
+      // Get all variables
+      const syncVariables = (await chrome.storage.sync.get(null)) as any;
+      setConfig(syncVariables);
+
+      // ! Log
+      console.log(syncVariables);
+    })();
   }, []);
 
   const customTheme = useMemo(
