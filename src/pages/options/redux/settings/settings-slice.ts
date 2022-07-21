@@ -1,0 +1,56 @@
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { settings as initialState } from "./defaults";
+
+const settingsSlice = createSlice({
+  name: "settings",
+  initialState,
+  reducers: {
+    setTheme(state, { payload }: PayloadAction<"default" | "dark" | "light">) {
+      state.theme = payload;
+    },
+    setFont(state, { payload }: PayloadAction<string>) {
+      state.font = payload;
+    },
+    setAccent(state, { payload }: PayloadAction<string>) {
+      state.accent = payload;
+    },
+    setAccentFontColor(state, { payload }: PayloadAction<string>) {
+      state.accentFont = payload;
+    },
+    setPopupWidth(state, { payload }: PayloadAction<number>) {
+      state.popupWidth = payload;
+    },
+    setHideURL(state, { payload }: PayloadAction<boolean>) {
+      state.hideURL = payload;
+    },
+    setSort(state, { payload }: PayloadAction<"last-visit" | "most-visit">) {
+      state.sort = payload;
+    },
+    setInfinite(state, { payload }: PayloadAction<boolean>) {
+      state.infinite = payload;
+    },
+    setOpenURL(
+      state,
+      { payload }: PayloadAction<"new-tab" | "current-tab" | "background-tab">
+    ) {
+      state.openURL = payload;
+    },
+    setHideTime(state, { payload }: PayloadAction<boolean>) {
+      state.hideTime = payload;
+    },
+  },
+});
+
+export const {
+  setTheme,
+  setAccent,
+  setAccentFontColor,
+  setFont,
+  setHideTime,
+  setHideURL,
+  setInfinite,
+  setOpenURL,
+  setPopupWidth,
+  setSort,
+} = settingsSlice.actions;
+export default settingsSlice.reducer;
