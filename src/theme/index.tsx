@@ -8,13 +8,7 @@ import {
   darken,
 } from "@mui/material";
 
-const defaultConfig = {
-  theme: "default",
-  accent: "#64B5F6",
-  width: 400,
-  font: "sans-serif",
-  hideURL: false,
-};
+import { settings } from "../pages/options/redux/settings/defaults";
 
 const ThemeProvider = ({
   children,
@@ -23,11 +17,11 @@ const ThemeProvider = ({
   children: React.ReactNode;
   fullWidth?: boolean;
 }) => {
-  const [config, setConfig] = useState(defaultConfig);
+  const [config, setConfig] = useState(settings);
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   // Destructure config
-  const { theme, accent, width, font, hideURL } = config;
+  const { theme, accent, popupWidth, font } = config;
 
   useEffect(() => {
     //
@@ -92,13 +86,13 @@ const ThemeProvider = ({
             styleOverrides: {
               body: {
                 height: fullWidth ? "auto" : 600,
-                width: fullWidth ? "100%" : width,
+                width: fullWidth ? "100%" : popupWidth,
                 overflow: "hidden",
                 overflowY: fullWidth ? "auto" : "hidden",
               },
               "#app": {
                 height: fullWidth ? "auto" : 600,
-                width: fullWidth ? "100%" : width,
+                width: fullWidth ? "100%" : popupWidth,
                 overflow: "hidden",
                 overflowY: fullWidth ? "auto" : "hidden",
               },
