@@ -25,7 +25,7 @@ const ThemeProvider = ({
 
   useLayoutEffect(() => {
     (async () => {
-      // Get all variables
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const syncVariables = (await chrome.storage.sync.get(null)) as any;
       setConfig(syncVariables);
 
