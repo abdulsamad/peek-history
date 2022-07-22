@@ -1,16 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { styled } from "@mui/material";
 
 import SettingItem from "../utils/SettingItem";
-
-const accents = [
-  { color: "#64B5F6", active: true },
-  { color: "#E57373", active: false },
-  { color: "#4db6ac", active: false },
-  { color: "#4dd0e1", active: false },
-  { color: "#ffd54f", active: false },
-  { color: "#f06292", active: false },
-];
+import { accents } from "../../redux/settings/defaults";
+import { useAppDispatach } from "../../redux/store";
+import { setAccent } from "../../redux/settings/settings-slice";
 
 const Button = styled("button")<{ active?: boolean }>(({ active }) => ({
   height: 30,
@@ -60,24 +54,27 @@ const RoundedInput = styled("input")(() => ({
   },
 }));
 
-const Accent = () => {
-  const [color, setColor] = useState("");
+const Accent = ({ value }: { value: string }) => {
+  const dispatch = useAppDispatach();
 
   return (
     <SettingItem label="Accent">
       <ButtonGroup>
-        {accents.map(({ color, active }) => (
-          <>
-            <Button
-              key={color}
-              onClick={() => null}
-              style={{ backgroundColor: color }}
-              aria-label={`${color} color`}
-              active={active}
-            />
-          </>
+        {accents.map(({ color }) => (
+          <Button
+            key={color}
+            onClick={() => dispatch(setAccent(color))}
+            style={{ backgroundColor: color }}
+            aria-label={`${color} color`}
+            active={color === value}
+          />
         ))}
-        <RoundedInput type="color" value={color} onChange={(ev) => null} />
+        <RoundedInput
+          type="color"
+          value={value}
+          // TODO: Add debounce to improve performance
+          onChange={(ev) => dispatch(setAccent(ev.target.value))}
+        />
       </ButtonGroup>
     </SettingItem>
   );

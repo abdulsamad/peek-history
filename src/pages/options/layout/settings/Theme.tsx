@@ -1,9 +1,13 @@
 import React from "react";
 import { FormControl, Select, MenuItem } from "@mui/material";
 
+import { useAppDispatach } from "../../redux/store";
+import { setTheme } from "../../redux/settings/settings-slice";
 import SettingItem from "../utils/SettingItem";
 
-const Theme = () => {
+const Theme = ({ value }: { value: "default" | "dark" | "light" }) => {
+  const dispatch = useAppDispatach();
+
   return (
     <SettingItem
       label="Theme"
@@ -11,8 +15,13 @@ const Theme = () => {
     >
       <FormControl sx={{ width: "100%" }} hiddenLabel={true}>
         <Select
-          value={"default"}
-          // onChange={handleChange}
+          value={value}
+          onChange={(ev) => {
+            // Typecase to prevent typescript error
+            const newValue = ev.target.value as "default" | "dark" | "light";
+
+            dispatch(setTheme(newValue));
+          }}
         >
           <MenuItem value="default">Default</MenuItem>
           <MenuItem value="dark">Dark</MenuItem>

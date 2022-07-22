@@ -2,15 +2,22 @@ import React from "react";
 import { FormControl, Select, MenuItem } from "@mui/material";
 
 import SettingItem from "../utils/SettingItem";
+import { useAppDispatach } from "../../redux/store";
+import { setAccentFontColor } from "../../redux/settings/settings-slice";
 
-const AccentFont = () => {
+const AccentFont = ({ value }: { value: string }) => {
+  const dispatch = useAppDispatach();
+
   return (
     <SettingItem
       label="Accent Font Color"
       info="Font color on elements that have accent background. Such as Navbar, Buttons, etc."
     >
       <FormControl sx={{ width: "100%" }} hiddenLabel={true}>
-        <Select value={"#f5f5f5"} onChange={() => null}>
+        <Select
+          value={value}
+          onChange={(ev) => dispatch(setAccentFontColor(ev.target.value))}
+        >
           <MenuItem value="#f5f5f5">Light</MenuItem>
           <MenuItem value="#2f2f2f">Dark</MenuItem>
         </Select>

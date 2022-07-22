@@ -2,15 +2,20 @@ import React, { useState, useLayoutEffect } from "react";
 import {
   Autocomplete,
   createFilterOptions,
-  Typography,
   TextField,
+  Alert,
+  Snackbar,
 } from "@mui/material";
 
 import SettingItem from "../utils/SettingItem";
+import { useAppDispatach } from "../../redux/store";
+import { setFont } from "../../redux/settings/settings-slice";
 
-const Font = () => {
+const Font = ({ value }: { value: string }) => {
   const [fontList, setFontList] = useState<chrome.fontSettings.FontName[]>([]);
-  const [inputVal, setInputVal] = useState("");
+  const [error, setError] = useState(false);
+
+  const dispatch = useAppDispatach();
 
   useLayoutEffect(() => {
     // Get all system fonts
@@ -27,28 +32,51 @@ const Font = () => {
       }
     >
       <Autocomplete
-        size="small"
         options={fontList}
         getOptionLabel={(option) => option.displayName}
-        inputValue={inputVal}
-        onInputChange={(ev, value) => setInputVal(value)}
-        // onChange={onChange}
-        blurOnSelect={true}
-        clearOnBlur={false}
-        noOptionsText="No Fonts Available"
         filterOptions={createFilterOptions({ limit: 5 })}
-        renderOption={(element, option) => (
-          <Typography
-            variant="body1"
-            style={{ fontFamily: option.displayName }}
-          >
-            {option.displayName}
-          </Typography>
-        )}
+        defaultValue={
+          fontList.filter(({ displayName }) => displayName === value)[0]
+        }
+        onBlur={(ev) => {
+          const newValue = (ev.target as HTMLInputElement).value;
+
+          if (
+            fontList.find(({ displayName }) => displayName === newValue) ||
+            newValue === ""
+          ) {
+            dispatch(setFont(newValue));
+            return;
+          }
+
+          setError(true);
+        }}
+        onChange={(ev, newValue) => {
+          if (!newValue) return null;
+
+          // Update font
+          dispatch(setFont(newValue.displayName));
+        }}
         renderInput={(params) => (
-          <TextField {...params} label="Enter Font Name" variant="filled" />
+          <TextField label="Enter Font Name" {...params} />
         )}
       />
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        open={error}
+        autoHideDuration={3000}
+        onClose={(ev, reason) => {
+          if (reason === "timeout") setError(false);
+        }}
+      >
+        <Alert
+          onClose={() => setError(false)}
+          severity="error"
+          sx={{ marginTop: "30px", width: "100%" }}
+        >
+          Font is not installed on your device.
+        </Alert>
+      </Snackbar>
     </SettingItem>
   );
 };

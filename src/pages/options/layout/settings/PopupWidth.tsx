@@ -2,8 +2,12 @@ import React from "react";
 import { FormControl, Slider } from "@mui/material";
 
 import SettingItem from "../utils/SettingItem";
+import { useAppDispatach } from "../../redux/store";
+import { setPopupWidth } from "../../redux/settings/settings-slice";
 
-const PopupWidth = () => {
+const PopupWidth = ({ value }: { value: number }) => {
+  const dispatch = useAppDispatach();
+
   return (
     <SettingItem label="Popup Width" helperText="Default value is 400.">
       <FormControl sx={{ width: "100%" }} hiddenLabel={true}>
@@ -11,9 +15,11 @@ const PopupWidth = () => {
           aria-labelledby="popup-width-slider"
           min={250}
           max={700}
-          step={10}
-          value={400}
-          onChange={() => null}
+          step={5}
+          value={value}
+          onChange={(ev, newValue) =>
+            dispatch(setPopupWidth(newValue as number))
+          }
           valueLabelDisplay="auto"
         />
       </FormControl>
