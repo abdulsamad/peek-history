@@ -1825,6 +1825,11 @@ hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.1, hoist-non-react-
   dependencies:
     react-is "^16.7.0"
 
+hotkeys-js@^3.8.1:
+  version "3.9.4"
+  resolved "https://registry.yarnpkg.com/hotkeys-js/-/hotkeys-js-3.9.4.tgz#ce1aa4c3a132b6a63a9dd5644fc92b8a9b9cbfb9"
+  integrity sha512-2zuLt85Ta+gIyvs4N88pCYskNrxf1TFv3LR9t5mdAZIX8BcgQQ48F2opUptvHa6m8zsy5v/a0i9mWzTrlNWU0Q==
+
 ignore-by-default@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ignore-by-default/-/ignore-by-default-1.0.1.tgz#48ca6d72f6c6a3af00a9ad4ae6876be3889e2b09"
@@ -2368,7 +2373,7 @@ prettier@^2.5.1:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.7.1.tgz#e235806850d057f97bb08368a4f7d899f7760c64"
   integrity sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==
 
-prop-types@^15.6.2, prop-types@^15.8.1:
+prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -2399,6 +2404,14 @@ react-dom@^18.0.0:
   dependencies:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
+
+react-hot-keys@^2.7.2:
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/react-hot-keys/-/react-hot-keys-2.7.2.tgz#7d2b02b7e2cf69182ea71ca01885446ebfae01d2"
+  integrity sha512-Z7eSh7SU6s52+zP+vkfFoNk0x4kgEmnwqDiyACKv53crK2AZ7FUaBLnf+vxLor3dvtId9murLmKOsrJeYgeHWw==
+  dependencies:
+    hotkeys-js "^3.8.1"
+    prop-types "^15.7.2"
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
