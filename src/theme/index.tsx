@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useLayoutEffect } from "react";
+import React, { useMemo } from "react";
 import {
   createTheme,
   ThemeProvider as MUIThemeProvider,
@@ -8,31 +8,16 @@ import {
   darken,
 } from "@mui/material";
 
-import { settings } from "../pages/options/redux/settings/defaults";
+import useConfig from "@src/hooks/useStorageConfig";
 
-const ThemeProvider = ({
-  children,
-  fullWidth,
-}: {
+interface IThemeProvider {
   children: React.ReactNode;
   fullWidth?: boolean;
-}) => {
-  const [config, setConfig] = useState(settings);
+}
+
+const ThemeProvider = ({ children, fullWidth }: IThemeProvider) => {
+  const { theme, accent, popupWidth, font } = useConfig();
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-
-  // Destructure config
-  const { theme, accent, popupWidth, font } = config;
-
-  useLayoutEffect(() => {
-    (async () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const syncVariables = (await chrome.storage.sync.get(null)) as any;
-      setConfig(syncVariables);
-
-      // ! Log
-      console.log(syncVariables);
-    })();
-  }, []);
 
   const customTheme = useMemo(
     () =>
@@ -122,7 +107,7 @@ const ThemeProvider = ({
           },
         },
       }),
-    []
+    [theme, accent, popupWidth, font]
   );
 
   return (
