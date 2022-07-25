@@ -8,7 +8,7 @@ type nextType = (action: PayloadAction) => void;
 const saveChromeStorage =
   () => (next: nextType) => async (action: PayloadAction) => {
     // Action is dispatched on settings slice
-    if (action.type.includes("settings")) {
+    if (action.type && action.type.includes("settings")) {
       const filteredSliceName = action.type.replace("settings/set", "");
       const lowercasedFirstLetter = filteredSliceName.charAt(0).toLowerCase();
       const key = lowercasedFirstLetter + filteredSliceName.slice(1);

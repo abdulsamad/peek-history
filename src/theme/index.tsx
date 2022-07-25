@@ -8,16 +8,16 @@ import {
   darken,
 } from "@mui/material";
 
-import useConfig from "@src/hooks/useStorageConfig";
-
 interface IThemeProvider {
   children: React.ReactNode;
+  settings: any;
   fullWidth?: boolean;
 }
 
-const ThemeProvider = ({ children, fullWidth }: IThemeProvider) => {
-  const { theme, accent, popupWidth, font } = useConfig();
+const ThemeProvider = ({ children, fullWidth, settings }: IThemeProvider) => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+
+  const { theme, accent, popupWidth, font } = settings;
 
   const customTheme = useMemo(
     () =>

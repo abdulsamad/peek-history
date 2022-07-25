@@ -2,11 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 
 import settings from "./settings/settings-slice";
-import saveChromeStorage from "./middleware/save-chrome-storage";
+import saveStorage from "./middleware/save-chrome-storage";
 
 const store = configureStore({
   reducer: { settings },
-  middleware: [saveChromeStorage],
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(saveStorage),
 });
 
 export type AppDispatch = typeof store.dispatch;

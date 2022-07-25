@@ -16,7 +16,7 @@ const settingsSlice = createSlice({
     setAccent(state, { payload }: PayloadAction<string>) {
       state.accent = payload;
     },
-    setAccentFontColor(state, { payload }: PayloadAction<string>) {
+    setAccentFont(state, { payload }: PayloadAction<string>) {
       state.accentFont = payload;
     },
     setPopupWidth(state, { payload }: PayloadAction<number>) {
@@ -63,7 +63,7 @@ const settingsSlice = createSlice({
 export const {
   setTheme,
   setAccent,
-  setAccentFontColor,
+  setAccentFont,
   setFont,
   setHideTime,
   setHideURL,

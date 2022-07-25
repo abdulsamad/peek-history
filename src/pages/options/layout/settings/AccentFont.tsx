@@ -3,7 +3,7 @@ import { FormControl, Select, MenuItem } from "@mui/material";
 
 import SettingItem from "../utils/SettingItem";
 import { useAppDispatach } from "../../redux/store";
-import { setAccentFontColor } from "../../redux/settings/settings-slice";
+import { setAccentFont } from "../../redux/settings/settings-slice";
 
 const AccentFont = ({ value }: { value: string }) => {
   const dispatch = useAppDispatach();
@@ -16,7 +16,7 @@ const AccentFont = ({ value }: { value: string }) => {
       <FormControl sx={{ width: "100%" }} hiddenLabel={true}>
         <Select
           value={value}
-          onChange={(ev) => dispatch(setAccentFontColor(ev.target.value))}
+          onChange={(ev) => dispatch(setAccentFont(ev.target.value))}
         >
           <MenuItem value="#f5f5f5">Light</MenuItem>
           <MenuItem value="#2f2f2f">Dark</MenuItem>
