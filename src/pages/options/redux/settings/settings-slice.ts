@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { settings as initialState } from "./defaults";
+
+import { ISettings, settings as initialState } from "./defaults";
+import { getSettingsFromStorage } from "./thunks";
 
 const settingsSlice = createSlice({
   name: "settings",
@@ -38,6 +40,23 @@ const settingsSlice = createSlice({
     setHideTime(state, { payload }: PayloadAction<boolean>) {
       state.hideTime = payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(
+      getSettingsFromStorage.fulfilled,
+      (state, { payload }: PayloadAction<ISettings>) => {
+        state.theme = payload.theme;
+        state.accent = payload.accent;
+        state.accentFont = payload.accentFont;
+        state.font = payload.font;
+        state.hideTime = payload.hideTime;
+        state.hideURL = payload.hideURL;
+        state.infinite = payload.infinite;
+        state.openURL = payload.openURL;
+        state.popupWidth = payload.popupWidth;
+        state.sort = payload.sort;
+      }
+    );
   },
 });
 
