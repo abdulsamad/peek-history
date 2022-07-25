@@ -37,7 +37,7 @@ const StyledListItemText = styled(ListItemText)<{
   },
 
   "& .MuiListItemText-secondary": {
-    width: showSecondary ? "calc(100% - 9.5ch)" : "100%",
+    width: showSecondary ? "calc(100% - 11ch)" : "100%",
   },
 }));
 
