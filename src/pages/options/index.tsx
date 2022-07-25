@@ -1,5 +1,8 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
+
+import store from "./redux/store";
 import Options from "@src/pages/options/Options";
 
 function init() {
@@ -8,7 +11,11 @@ function init() {
     throw new Error("Can not find AppContainer");
   }
   const root = createRoot(appContainer);
-  root.render(<Options />);
+  root.render(
+    <Provider store={store}>
+      <Options />
+    </Provider>
+  );
 }
 
 init();
