@@ -3,7 +3,7 @@ import { FormControl, Select, MenuItem } from "@mui/material";
 
 import SettingItem from "../utils/SettingItem";
 import { useAppDispatach } from "../../redux/store";
-import { setAccentFont } from "../../redux/settings/settings-slice";
+import { setAccentFont } from "../../../../common/redux/settings/settings-slice";
 
 const AccentFont = ({ value }: { value: string }) => {
   const dispatch = useAppDispatach();

@@ -9,7 +9,7 @@ import {
 
 import SettingItem from "../utils/SettingItem";
 import { useAppDispatach } from "../../redux/store";
-import { setFont } from "../../redux/settings/settings-slice";
+import { setFont } from "../../../../common/redux/settings/settings-slice";
 
 const Font = ({ value }: { value: string }) => {
   const [fontList, setFontList] = useState<chrome.fontSettings.FontName[]>([]);

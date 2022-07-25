@@ -3,7 +3,7 @@ import { FormControl, Slider } from "@mui/material";
 
 import SettingItem from "../utils/SettingItem";
 import { useAppDispatach } from "../../redux/store";
-import { setPopupWidth } from "../../redux/settings/settings-slice";
+import { setPopupWidth } from "../../../../common/redux/settings/settings-slice";
 
 const PopupWidth = ({ value }: { value: number }) => {
   const dispatch = useAppDispatach();

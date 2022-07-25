@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 
-import settings from "./settings/settings-slice";
+import settings from "../../../common/redux/settings/settings-slice";
 import saveStorage from "./middleware/save-chrome-storage";
 
 const store = configureStore({

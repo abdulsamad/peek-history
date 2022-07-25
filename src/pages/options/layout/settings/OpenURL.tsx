@@ -3,7 +3,7 @@ import { FormControl, Select, MenuItem } from "@mui/material";
 
 import SettingItem from "../utils/SettingItem";
 import { useAppDispatach } from "../../redux/store";
-import { setOpenURL } from "../../redux/settings/settings-slice";
+import { setOpenURL } from "../../../../common/redux/settings/settings-slice";
 
 const OpenURL = ({
   value,

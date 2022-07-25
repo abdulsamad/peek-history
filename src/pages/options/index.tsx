@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 
 import store from "./redux/store";
-import { getSettingsFromStorage } from "./redux/settings/thunks";
+import { getSettingsFromStorage } from "../../common/redux/settings/thunks";
 import Options from "@src/pages/options/Options";
 
 // Load initial settings in chrome storage
