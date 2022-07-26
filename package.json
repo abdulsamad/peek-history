@@ -8,7 +8,7 @@
     "start": "nodemon",
     "build": "tsc --noEmit && vite build",
     "format": "prettier --write src/**/*.js",
-    "deploy-build": "zip -r ~/Downloads/${npm_package_name}-v${npm_package_version}.zip ./dist/*"
+    "deploy-build": "bestzip ${npm_package_name}-v${npm_package_version}.zip dist/*"
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",
@@ -31,6 +31,7 @@
     "@typescript-eslint/eslint-plugin": "^5.18.0",
     "@typescript-eslint/parser": "^5.18.0",
     "@vitejs/plugin-react": "^1.3.0",
+    "bestzip": "^2.2.1",
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.25.4",
