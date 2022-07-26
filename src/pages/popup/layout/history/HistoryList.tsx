@@ -1,8 +1,9 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useCallback } from "react";
 import { CircularProgress, List, ListItem } from "@mui/material";
 import { useSelector } from "react-redux";
 
 import { ISettings } from "@src/commons/redux/settings/defaults";
+import { IHistoryItem } from "../../redux/history/history-slice";
 import HistoryItem from "../utils/ListItem";
 import { deleteItem, addHistory } from "../../redux/history/thunks";
 import { RootState, useAppDispatch } from "../../redux/store";
@@ -13,6 +14,8 @@ import useInfiniteScroll from "@src/hooks/useInfiniteScroll";
 const HistoryList = ({ settings }: { settings: ISettings }) => {
   const history = useSelector((state: RootState) => state.history);
   const UI = useSelector((state: RootState) => state.ui);
+
+  const dispatch = useAppDispatch();
 
   const onClick = async (url: string) => {
     // Open link in new tab
@@ -27,6 +30,36 @@ const HistoryList = ({ settings }: { settings: ISettings }) => {
     // Open link in current tab
     await chrome.tabs.update({ url });
   };
+
+  const historyItemBlock = useCallback(
+    ({
+      id,
+      title,
+      url,
+      lastVisitTime,
+    }: Omit<IHistoryItem, "typedCount" | "visitCount">) => (
+      <HistoryItem
+        key={id}
+        title={title}
+        url={url}
+        lastVisitTime={lastVisitTime}
+        hideURL={settings.hideURL}
+        hideTime={settings.hideTime}
+        onClick={() => {
+          if (!url) throw new Error("URL not found!");
+
+          onClick(url);
+        }}
+        onItemDelete={() => {
+          if (!url) throw new Error("URL not found!");
+
+          dispatch(deleteItem(url));
+        }}
+        showSecondary
+      />
+    ),
+    [settings]
+  );
 
   if (history.loading) {
     return (
@@ -46,71 +79,66 @@ const HistoryList = ({ settings }: { settings: ISettings }) => {
         <HistoryItemsList
           history={history}
           settings={settings}
-          onClick={onClick}
+          historyItemBlock={historyItemBlock}
         />
       ) : (
         <InfiniteHistoryItemsList
           history={history}
           settings={settings}
-          onClick={onClick}
+          historyItemBlock={historyItemBlock}
         />
       )}
     </List>
   );
 };
 
+/**
+ * History items list with sorting and normal
+ */
 const HistoryItemsList = ({
   history,
   settings,
-  onClick,
+  historyItemBlock,
 }: {
   history: RootState["history"];
   settings: ISettings;
-  onClick: (url: string) => Promise<void>;
-}) => {
-  const dispatch = useAppDispatch();
+  historyItemBlock: ({
+    id,
+    title,
+    url,
+    lastVisitTime,
+  }: Omit<IHistoryItem, "typedCount" | "visitCount">) => JSX.Element;
+}) => (
+  <>
+    {settings.sort === "most-visit"
+      ? // Sort By Most Visits
+        history.items
+          .slice() // Slicing before sorting before array is frozen in strict mode
+          .sort((a, b) => {
+            if (!b.visitCount || !a.visitCount) return 0;
+            return b.visitCount - a.visitCount;
+          })
+          .map(historyItemBlock)
+      : // Sort by Last Visit
+        history.items.map(historyItemBlock)}
+  </>
+);
 
-  return (
-    <>
-      {history.items
-        .slice() // Slicing before sorting before array is frozen in strict mode
-        .sort((a, b) => {
-          if (!b.visitCount || !a.visitCount) return 0;
-          return b.visitCount - a.visitCount;
-        })
-        .map(({ id, title, url, lastVisitTime }) => (
-          <HistoryItem
-            key={id}
-            title={title}
-            url={url}
-            lastVisitTime={lastVisitTime}
-            hideURL={settings.hideURL}
-            hideTime={settings.hideTime}
-            onClick={() => {
-              if (!url) throw new Error("URL not found!");
-
-              onClick(url);
-            }}
-            onItemDelete={() => {
-              if (!url) throw new Error("URL not found!");
-
-              dispatch(deleteItem(url));
-            }}
-            showSecondary
-          />
-        ))}
-    </>
-  );
-};
-
+/**
+ * Infinite scroll for history items list
+ */
 const InfiniteHistoryItemsList = ({
   history,
-  settings,
-  onClick,
+  historyItemBlock,
 }: {
   history: RootState["history"];
   settings: ISettings;
-  onClick: (url: string) => Promise<void>;
+  historyItemBlock: ({
+    id,
+    title,
+    url,
+    lastVisitTime,
+  }: Omit<IHistoryItem, "typedCount" | "visitCount">) => JSX.Element;
 }) => {
   const dispatch = useAppDispatch();
   const { lastElemRef } = useInfiniteScroll({
@@ -127,24 +155,7 @@ const InfiniteHistoryItemsList = ({
         if (++index === historyLength) {
           return (
             <Fragment key={id}>
-              <HistoryItem
-                title={title}
-                url={url}
-                lastVisitTime={lastVisitTime}
-                hideURL={settings.hideURL}
-                hideTime={settings.hideTime}
-                onClick={() => {
-                  if (!url) throw new Error("URL not found!");
-
-                  onClick(url);
-                }}
-                onItemDelete={() => {
-                  if (!url) throw new Error("URL not found!");
-
-                  dispatch(deleteItem(url));
-                }}
-                showSecondary
-              />
+              <>{historyItemBlock({ id, title, url, lastVisitTime })}</>
               <ListItem
                 key={id}
                 ref={(node: HTMLLIElement) => lastElemRef(node, lastVisitTime)}
@@ -157,27 +168,7 @@ const InfiniteHistoryItemsList = ({
           );
         }
 
-        return (
-          <HistoryItem
-            key={id}
-            title={title}
-            url={url}
-            lastVisitTime={lastVisitTime}
-            hideURL={settings.hideURL}
-            hideTime={settings.hideTime}
-            onClick={() => {
-              if (!url) throw new Error("URL not found!");
-
-              onClick(url);
-            }}
-            onItemDelete={() => {
-              if (!url) throw new Error("URL not found!");
-
-              dispatch(deleteItem(url));
-            }}
-            showSecondary
-          />
-        );
+        return historyItemBlock({ id, title, url, lastVisitTime });
       })}
     </>
   );
