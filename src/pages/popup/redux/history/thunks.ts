@@ -25,6 +25,30 @@ export const getHistory = createAsyncThunk(
   }
 );
 
+export const addHistory = createAsyncThunk(
+  "history/addHistory",
+  async ({
+    text = "",
+    maxResults = 50,
+    startTime = dayjs("01-01-1970").valueOf(),
+    endTime,
+  }: {
+    text?: string;
+    maxResults?: number;
+    startTime?: number;
+    endTime?: number;
+  }) => {
+    const historyItems = await chrome.history.search({
+      text,
+      maxResults,
+      startTime,
+      endTime,
+    });
+
+    return historyItems;
+  }
+);
+
 export const deleteItem = createAsyncThunk(
   "history/deleteItem",
   async (url: string) => {

@@ -1,6 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { deleteAll, deleteItem, deleteRange, getHistory } from "./thunks";
+import {
+  addHistory,
+  deleteAll,
+  deleteItem,
+  deleteRange,
+  getHistory,
+} from "./thunks";
 
 export interface IHistoryItem {
   id: string;
@@ -33,6 +39,12 @@ const historySlice = createSlice({
         state.loading = false;
       }
     ),
+      builder.addCase(
+        addHistory.fulfilled,
+        (state, { payload }: PayloadAction<IHistoryItem[]>) => {
+          state.items.push(...payload);
+        }
+      ),
       builder.addCase(
         deleteItem.fulfilled,
         (state, { payload }: PayloadAction<string>) => {

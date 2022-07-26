@@ -1,19 +1,18 @@
-import React from "react";
-import { List } from "@mui/material";
+import React, { Fragment } from "react";
+import { CircularProgress, List, ListItem } from "@mui/material";
 import { useSelector } from "react-redux";
 
 import { ISettings } from "@src/commons/redux/settings/defaults";
 import HistoryItem from "../utils/ListItem";
-import { deleteItem } from "../../redux/history/thunks";
+import { deleteItem, addHistory } from "../../redux/history/thunks";
 import { RootState, useAppDispatch } from "../../redux/store";
 import Preloader from "./Preloader";
 import NotFound from "../utils/NotFound";
+import useInfiniteScroll from "@src/hooks/useInfiniteScroll";
 
 const HistoryList = ({ settings }: { settings: ISettings }) => {
   const history = useSelector((state: RootState) => state.history);
   const UI = useSelector((state: RootState) => state.ui);
-
-  const dispatch = useAppDispatch();
 
   const onClick = async (url: string) => {
     // Open link in new tab
@@ -43,16 +42,92 @@ const HistoryList = ({ settings }: { settings: ISettings }) => {
 
   return (
     <List sx={{ padding: 0 }} aria-label="History Items">
-      {settings.sort === "most-visit"
-        ? history.items
-            .slice() // Slicing before sorting before array is frozen in strict mode
-            .sort((a, b) => {
-              if (!b.visitCount || !a.visitCount) return 0;
-              return b.visitCount - a.visitCount;
-            })
-            .map(({ id, title, url, lastVisitTime }) => (
+      {settings.sort === "most-visit" || !settings.infinite ? (
+        <HistoryItemsList
+          history={history}
+          settings={settings}
+          onClick={onClick}
+        />
+      ) : (
+        <InfiniteHistoryItemsList
+          history={history}
+          settings={settings}
+          onClick={onClick}
+        />
+      )}
+    </List>
+  );
+};
+
+const HistoryItemsList = ({
+  history,
+  settings,
+  onClick,
+}: {
+  history: RootState["history"];
+  settings: ISettings;
+  onClick: (url: string) => Promise<void>;
+}) => {
+  const dispatch = useAppDispatch();
+
+  return (
+    <>
+      {history.items
+        .slice() // Slicing before sorting before array is frozen in strict mode
+        .sort((a, b) => {
+          if (!b.visitCount || !a.visitCount) return 0;
+          return b.visitCount - a.visitCount;
+        })
+        .map(({ id, title, url, lastVisitTime }) => (
+          <HistoryItem
+            key={id}
+            title={title}
+            url={url}
+            lastVisitTime={lastVisitTime}
+            hideURL={settings.hideURL}
+            hideTime={settings.hideTime}
+            onClick={() => {
+              if (!url) throw new Error("URL not found!");
+
+              onClick(url);
+            }}
+            onItemDelete={() => {
+              if (!url) throw new Error("URL not found!");
+
+              dispatch(deleteItem(url));
+            }}
+            showSecondary
+          />
+        ))}
+    </>
+  );
+};
+
+const InfiniteHistoryItemsList = ({
+  history,
+  settings,
+  onClick,
+}: {
+  history: RootState["history"];
+  settings: ISettings;
+  onClick: (url: string) => Promise<void>;
+}) => {
+  const dispatch = useAppDispatch();
+  const { lastElemRef } = useInfiniteScroll({
+    next: (prevLastVisitTime) => {
+      dispatch(addHistory({ endTime: prevLastVisitTime }));
+    },
+  });
+
+  const historyLength = history.items.length;
+
+  return (
+    <>
+      {history.items.map(({ id, title, url, lastVisitTime }, index) => {
+        if (++index === historyLength) {
+          return (
+            <Fragment key={id}>
               <HistoryItem
-                key={id}
                 title={title}
                 url={url}
                 lastVisitTime={lastVisitTime}
@@ -70,29 +145,41 @@ const HistoryList = ({ settings }: { settings: ISettings }) => {
                 }}
                 showSecondary
               />
-            ))
-        : history.items.map(({ id, title, url, lastVisitTime }) => (
-            <HistoryItem
-              key={id}
-              title={title}
-              url={url}
-              lastVisitTime={lastVisitTime}
-              hideURL={settings.hideURL}
-              hideTime={settings.hideTime}
-              onClick={() => {
-                if (!url) throw new Error("URL not found!");
+              <ListItem
+                key={id}
+                ref={(node: HTMLLIElement) => lastElemRef(node, lastVisitTime)}
+                alignItems="center"
+                sx={{ justifyContent: "center", padding: "10px 0" }}
+              >
+                <CircularProgress size={16} />
+              </ListItem>
+            </Fragment>
+          );
+        }
 
-                onClick(url);
-              }}
-              onItemDelete={() => {
-                if (!url) throw new Error("URL not found!");
+        return (
+          <HistoryItem
+            key={id}
+            title={title}
+            url={url}
+            lastVisitTime={lastVisitTime}
+            hideURL={settings.hideURL}
+            hideTime={settings.hideTime}
+            onClick={() => {
+              if (!url) throw new Error("URL not found!");
 
-                dispatch(deleteItem(url));
-              }}
-              showSecondary
-            />
-          ))}
-    </List>
+              onClick(url);
+            }}
+            onItemDelete={() => {
+              if (!url) throw new Error("URL not found!");
+
+              dispatch(deleteItem(url));
+            }}
+            showSecondary
+          />
+        );
+      })}
+    </>
   );
 };
 
