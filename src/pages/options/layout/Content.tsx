@@ -16,11 +16,11 @@ import { ISettings } from "../../../commons/redux/settings/defaults";
 
 const Content = ({ settings }: { settings: ISettings }) => (
   <Container sx={{ margin: "1rem auto" }}>
+    <Typography variant="h5" display="flex" alignItems="center" gutterBottom>
+      <SettingsIcon sx={{ marginRight: "5px" }} />
+      Settings
+    </Typography>
     <Paper sx={{ padding: "1rem 3rem" }} elevation={4}>
-      <Typography variant="h6" display="flex" alignItems="center" gutterBottom>
-        <SettingsIcon sx={{ marginRight: "5px" }} />
-        Settings
-      </Typography>
       <Theme value={settings.theme} />
       <Font value={settings.font} />
       <Accent value={settings.accent} />
