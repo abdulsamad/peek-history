@@ -8,14 +8,14 @@ import {
 } from "@mui/material";
 
 import SettingItem from "../utils/SettingItem";
-import { useAppDispatach } from "../../redux/store";
+import { useAppDispatch } from "../../redux/store";
 import { setFont } from "../../../../commons/redux/settings/settings-slice";
 
 const Font = ({ value }: { value: string }) => {
   const [fontList, setFontList] = useState<chrome.fontSettings.FontName[]>([]);
   const [error, setError] = useState(false);
 
-  const dispatch = useAppDispatach();
+  const dispatch = useAppDispatch();
 
   useLayoutEffect(() => {
     // Get all system fonts

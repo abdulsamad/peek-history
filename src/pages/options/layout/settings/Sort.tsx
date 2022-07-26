@@ -2,11 +2,11 @@ import React from "react";
 import { FormControl, Select, MenuItem } from "@mui/material";
 
 import SettingItem from "../utils/SettingItem";
-import { useAppDispatach } from "../../redux/store";
+import { useAppDispatch } from "../../redux/store";
 import { setSort } from "../../../../commons/redux/settings/settings-slice";
 
 const Sort = ({ value }: { value: "last-visit" | "most-visit" }) => {
-  const dispatch = useAppDispatach();
+  const dispatch = useAppDispatch();
 
   return (
     <SettingItem label="Sort By">

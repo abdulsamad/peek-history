@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { InputBase, styled } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
 
-import { RootState, useAppDispatach } from "../redux/store";
+import { RootState, useAppDispatch } from "../redux/store";
 import { getHistory } from "../redux/history/thunks";
 import { setSearchOpened, Active } from "../redux/ui/ui-slice";
 import { filter } from "../redux/tabs/tabs-slice";
@@ -38,7 +38,7 @@ const StyledInputBase = styled(InputBase)<{ open: boolean }>(
 
 const Search = () => {
   const UI = useSelector((state: RootState) => state.ui);
-  const dispatch = useAppDispatach();
+  const dispatch = useAppDispatch();
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (

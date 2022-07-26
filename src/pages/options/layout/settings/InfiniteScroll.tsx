@@ -2,11 +2,11 @@ import React from "react";
 import { Switch } from "@mui/material";
 
 import SettingItem from "../utils/SettingItem";
-import { useAppDispatach } from "../../redux/store";
+import { useAppDispatch } from "../../redux/store";
 import { setInfinite } from "../../../../commons/redux/settings/settings-slice";
 
 const InfiniteScroll = ({ value }: { value: boolean }) => {
-  const dispatch = useAppDispatach();
+  const dispatch = useAppDispatch();
 
   return (
     <SettingItem label="Infinite Scroll">

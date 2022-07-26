@@ -1,12 +1,12 @@
 import React from "react";
 import { FormControl, Select, MenuItem } from "@mui/material";
 
-import { useAppDispatach } from "../../redux/store";
+import { useAppDispatch } from "../../redux/store";
 import { setTheme } from "../../../../commons/redux/settings/settings-slice";
 import SettingItem from "../utils/SettingItem";
 
 const Theme = ({ value }: { value: "default" | "dark" | "light" }) => {
-  const dispatch = useAppDispatach();
+  const dispatch = useAppDispatch();
 
   return (
     <SettingItem

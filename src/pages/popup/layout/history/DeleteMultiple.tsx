@@ -5,12 +5,12 @@ import dayjs from "dayjs";
 
 import ConfirmationModal from "../utils/ConfirmationModal";
 import { deleteRange, deleteAll } from "../../redux/history/thunks";
-import { useAppDispatach } from "@src/pages/options/redux/store";
+import { useAppDispatch } from "@src/pages/options/redux/store";
 
 const DeleteMultiple = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const dispatch = useAppDispatach();
+  const dispatch = useAppDispatch();
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);

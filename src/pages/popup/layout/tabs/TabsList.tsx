@@ -12,14 +12,14 @@ import { ExpandMore as ExpandMoreIcon } from "@mui/icons-material";
 import { ISettings } from "@src/commons/redux/settings/defaults";
 import TabItem from "../utils/ListItem";
 import WindowItem from "../utils/WindowItem";
-import { RootState, useAppDispatach } from "../../redux/store";
+import { RootState, useAppDispatch } from "../../redux/store";
 import { restoreSession } from "../../redux/tabs/thunks";
 
 const TabsList = ({ settings }: { settings: ISettings }) => {
   const tabs = useSelector((state: RootState) => state.tabs);
   const UI = useSelector((state: RootState) => state.ui);
 
-  const dispatch = useAppDispatach();
+  const dispatch = useAppDispatch();
 
   const onTabClick = async (url: string) => {
     // Open link in new tab

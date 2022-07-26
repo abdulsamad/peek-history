@@ -3,7 +3,7 @@ import { styled } from "@mui/material";
 
 import SettingItem from "../utils/SettingItem";
 import { accents } from "../../../../commons/redux/settings/defaults";
-import { useAppDispatach } from "../../redux/store";
+import { useAppDispatch } from "../../redux/store";
 import { setAccent } from "../../../../commons/redux/settings/settings-slice";
 
 const Button = styled("button")<{ active?: boolean }>(({ active }) => ({
@@ -55,7 +55,7 @@ const RoundedInput = styled("input")(() => ({
 }));
 
 const Accent = ({ value }: { value: string }) => {
-  const dispatch = useAppDispatach();
+  const dispatch = useAppDispatch();
 
   return (
     <SettingItem label="Accent">

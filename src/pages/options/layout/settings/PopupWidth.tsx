@@ -2,11 +2,11 @@ import React from "react";
 import { FormControl, Slider } from "@mui/material";
 
 import SettingItem from "../utils/SettingItem";
-import { useAppDispatach } from "../../redux/store";
+import { useAppDispatch } from "../../redux/store";
 import { setPopupWidth } from "../../../../commons/redux/settings/settings-slice";
 
 const PopupWidth = ({ value }: { value: number }) => {
-  const dispatch = useAppDispatach();
+  const dispatch = useAppDispatch();
 
   return (
     <SettingItem label="Popup Width" helperText="Default value is 400.">

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { ISettings } from "@src/commons/redux/settings/defaults";
 import HistoryItem from "../utils/ListItem";
 import { deleteItem } from "../../redux/history/thunks";
-import { RootState, useAppDispatach } from "../../redux/store";
+import { RootState, useAppDispatch } from "../../redux/store";
 import Preloader from "./Preloader";
 import NotFound from "../utils/NotFound";
 
@@ -13,7 +13,7 @@ const HistoryList = ({ settings }: { settings: ISettings }) => {
   const history = useSelector((state: RootState) => state.history);
   const UI = useSelector((state: RootState) => state.ui);
 
-  const dispatch = useAppDispatach();
+  const dispatch = useAppDispatch();
 
   const onClick = async (url: string) => {
     // Open link in new tab

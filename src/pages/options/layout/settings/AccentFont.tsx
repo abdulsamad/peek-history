@@ -2,11 +2,11 @@ import React from "react";
 import { FormControl, Select, MenuItem } from "@mui/material";
 
 import SettingItem from "../utils/SettingItem";
-import { useAppDispatach } from "../../redux/store";
+import { useAppDispatch } from "../../redux/store";
 import { setAccentFont } from "../../../../commons/redux/settings/settings-slice";
 
 const AccentFont = ({ value }: { value: string }) => {
-  const dispatch = useAppDispatach();
+  const dispatch = useAppDispatch();
 
   return (
     <SettingItem

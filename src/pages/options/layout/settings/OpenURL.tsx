@@ -2,7 +2,7 @@ import React from "react";
 import { FormControl, Select, MenuItem } from "@mui/material";
 
 import SettingItem from "../utils/SettingItem";
-import { useAppDispatach } from "../../redux/store";
+import { useAppDispatch } from "../../redux/store";
 import { setOpenURL } from "../../../../commons/redux/settings/settings-slice";
 
 const OpenURL = ({
@@ -10,7 +10,7 @@ const OpenURL = ({
 }: {
   value: "new-tab" | "current-tab" | "background-tab";
 }) => {
-  const dispatch = useAppDispatach();
+  const dispatch = useAppDispatch();
 
   return (
     <SettingItem label="Open URL in">

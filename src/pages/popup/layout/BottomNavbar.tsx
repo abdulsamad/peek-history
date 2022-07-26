@@ -7,13 +7,13 @@ import {
   Devices as DevicesIcon,
 } from "@mui/icons-material";
 
-import { RootState, useAppDispatach } from "../redux/store";
+import { RootState, useAppDispatch } from "../redux/store";
 import { switchActiveView } from "../redux/ui/ui-slice";
 import DeleteMultiple from "./history/DeleteMultiple";
 
 const BottomNavbar = () => {
   const UI = useSelector((state: RootState) => state.ui);
-  const dispatch = useAppDispatach();
+  const dispatch = useAppDispatch();
 
   return (
     <Paper>
