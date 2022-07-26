@@ -41,27 +41,55 @@ const HistoryList = ({ settings }: { settings: ISettings }) => {
 
   return (
     <List sx={{ padding: 0 }} aria-label="History Items">
-      {history.items.map(({ id, title, url, lastVisitTime }) => (
-        <HistoryItem
-          key={id}
-          title={title}
-          url={url}
-          lastVisitTime={lastVisitTime}
-          hideURL={settings.hideURL}
-          hideTime={settings.hideTime}
-          onClick={() => {
-            if (!url) throw new Error("URL not found!");
+      {settings.sort === "most-visit"
+        ? history.items
+            .slice() // Slicing before sorting before array is frozen in strict mode
+            .sort((a, b) => {
+              if (!b.visitCount || !a.visitCount) return 0;
+              return b.visitCount - a.visitCount;
+            })
+            .map(({ id, title, url, lastVisitTime }) => (
+              <HistoryItem
+                key={id}
+                title={title}
+                url={url}
+                lastVisitTime={lastVisitTime}
+                hideURL={settings.hideURL}
+                hideTime={settings.hideTime}
+                onClick={() => {
+                  if (!url) throw new Error("URL not found!");
 
-            onClick(url);
-          }}
-          onItemDelete={() => {
-            if (!url) throw new Error("URL not found!");
+                  onClick(url);
+                }}
+                onItemDelete={() => {
+                  if (!url) throw new Error("URL not found!");
 
-            dispatch(deleteItem(url));
-          }}
-          showSecondary
-        />
-      ))}
+                  dispatch(deleteItem(url));
+                }}
+                showSecondary
+              />
+            ))
+        : history.items.map(({ id, title, url, lastVisitTime }) => (
+            <HistoryItem
+              key={id}
+              title={title}
+              url={url}
+              lastVisitTime={lastVisitTime}
+              hideURL={settings.hideURL}
+              hideTime={settings.hideTime}
+              onClick={() => {
+                if (!url) throw new Error("URL not found!");
+
+                onClick(url);
+              }}
+              onItemDelete={() => {
+                if (!url) throw new Error("URL not found!");
+
+                dispatch(deleteItem(url));
+              }}
+              showSecondary
+            />
+          ))}
     </List>
   );
 };
