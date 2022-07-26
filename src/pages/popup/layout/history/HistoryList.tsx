@@ -30,7 +30,9 @@ const HistoryList = ({ settings }: { settings: ISettings }) => {
   };
 
   if (history.loading) {
-    return <Preloader hideURL={false} />;
+    return (
+      <Preloader hideURL={settings.hideURL} hideTime={settings.hideTime} />
+    );
   }
 
   // User search for history item

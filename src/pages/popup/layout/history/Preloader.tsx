@@ -13,11 +13,12 @@ import {
 
 interface IPreloader {
   hideURL: boolean;
+  hideTime: boolean;
 }
 
 const content: ReactElement[] = [];
 
-const Preloader = ({ hideURL }: IPreloader) => {
+const Preloader = ({ hideURL, hideTime }: IPreloader) => {
   // Push history item to the array and create a copy of history items for skeleton loading
   for (let i = 0; i < 10; i++) {
     content.push(
@@ -34,7 +35,7 @@ const Preloader = ({ hideURL }: IPreloader) => {
           <IconButton edge="end">
             <Skeleton variant="circular" width={20} height={20} />
           </IconButton>
-          <Skeleton width={47} />
+          {!hideTime && <Skeleton width={47} />}
         </ListItemSecondaryAction>
       </StyledListItem>
     );
