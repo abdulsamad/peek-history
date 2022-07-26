@@ -12,7 +12,7 @@ import InfiniteScroll from "./settings/InfiniteScroll";
 import OpenURL from "./settings/OpenURL";
 import HideTime from "./settings/HideTime";
 import AccentFont from "./settings/AccentFont";
-import { ISettings } from "../../../common/redux/settings/defaults";
+import { ISettings } from "../../../commons/redux/settings/defaults";
 
 const Content = ({ settings }: { settings: ISettings }) => (
   <Container sx={{ margin: "1rem auto" }}>

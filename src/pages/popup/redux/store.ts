@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import history from "./history/history-slice";
 import tabs from "./tabs/tabs-slice";
 import ui from "./ui/ui-slice";
-import settings from "@src/common/redux/settings/settings-slice";
+import settings from "@src/commons/redux/settings/settings-slice";
 
 const store = configureStore({
   reducer: {

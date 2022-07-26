@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import { getHistory } from "./redux/history/thunks";
 import { getRecentlyClosed, getDevices } from "./redux/tabs/thunks";
-import { getSettingsFromStorage } from "@src/common/redux/settings/thunks";
+import { getSettingsFromStorage } from "@src/commons/redux/settings/thunks";
 import Popup from "@src/pages/popup/Popup";
 
 // Load inital {Settings, History, Recently Closed Tabs, Tabs from Other Devices}

@@ -2,9 +2,9 @@ import React from "react";
 import { styled } from "@mui/material";
 
 import SettingItem from "../utils/SettingItem";
-import { accents } from "../../../../common/redux/settings/defaults";
+import { accents } from "../../../../commons/redux/settings/defaults";
 import { useAppDispatach } from "../../redux/store";
-import { setAccent } from "../../../../common/redux/settings/settings-slice";
+import { setAccent } from "../../../../commons/redux/settings/settings-slice";
 
 const Button = styled("button")<{ active?: boolean }>(({ active }) => ({
   height: 30,

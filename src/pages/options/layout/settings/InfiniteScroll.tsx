@@ -3,7 +3,7 @@ import { Switch } from "@mui/material";
 
 import SettingItem from "../utils/SettingItem";
 import { useAppDispatach } from "../../redux/store";
-import { setInfinite } from "../../../../common/redux/settings/settings-slice";
+import { setInfinite } from "../../../../commons/redux/settings/settings-slice";
 
 const InfiniteScroll = ({ value }: { value: boolean }) => {
   const dispatch = useAppDispatach();

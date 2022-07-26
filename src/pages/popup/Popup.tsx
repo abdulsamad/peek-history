@@ -5,7 +5,7 @@ import Navbar from "./layout/Navbar";
 import BottomNavBar from "./layout/BottomNavbar";
 import MainContainer from "./layout/utils/MainContainer";
 import Content from "./layout/Content";
-import ThemeProvider from "@src/common/theme";
+import ThemeProvider from "@src/commons/theme";
 import { RootState } from "./redux/store";
 
 const Popup = () => {

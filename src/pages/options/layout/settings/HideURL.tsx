@@ -3,7 +3,7 @@ import { Switch } from "@mui/material";
 
 import SettingItem from "../utils/SettingItem";
 import { useAppDispatach } from "../../redux/store";
-import { setHideURL } from "../../../../common/redux/settings/settings-slice";
+import { setHideURL } from "../../../../commons/redux/settings/settings-slice";
 
 const HideURL = ({ value }: { value: boolean }) => {
   const dispatch = useAppDispatach();
