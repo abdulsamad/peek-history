@@ -28,7 +28,10 @@ const Content = ({ settings }: { settings: ISettings }) => (
       <PopupWidth value={settings.popupWidth} />
       <HideURL value={settings.hideURL} />
       <Sort value={settings.sort} />
-      <InfiniteScroll value={settings.infinite} />
+      <InfiniteScroll
+        value={settings.infinite}
+        disabled={settings.sort === "most-visit"}
+      />
       <OpenURL value={settings.openURL} />
       <HideTime value={settings.hideTime} />
     </Paper>
