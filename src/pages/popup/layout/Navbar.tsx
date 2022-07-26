@@ -6,7 +6,7 @@ import Search from "./Search";
 const Navbar = ({ title }: { title: string }) => (
   <AppBar position="relative" sx={{ height: 60 }} enableColorOnDark>
     <Toolbar sx={{ justifyContent: "space-between" }}>
-      <Typography variant="h6" color="primary.light" noWrap>
+      <Typography variant="h6" noWrap>
         {title}
       </Typography>
       <Search />

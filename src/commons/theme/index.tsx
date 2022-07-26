@@ -8,16 +8,18 @@ import {
   darken,
 } from "@mui/material";
 
+import { ISettings } from "../redux/settings/defaults";
+
 interface IThemeProvider {
   children: React.ReactNode;
-  settings: any;
+  settings: ISettings;
   fullWidth?: boolean;
 }
 
 const ThemeProvider = ({ children, fullWidth, settings }: IThemeProvider) => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
-  const { theme, accent, popupWidth, font } = settings;
+  const { theme, accent, accentFont, popupWidth, font } = settings;
 
   const customTheme = useMemo(
     () =>
@@ -105,9 +107,23 @@ const ThemeProvider = ({ children, fullWidth, settings }: IThemeProvider) => {
               },
             },
           },
+          MuiAppBar: {
+            styleOverrides: {
+              root: {
+                color: accentFont,
+              },
+            },
+          },
+          MuiButton: {
+            styleOverrides: {
+              textPrimary: {
+                color: accentFont,
+              },
+            },
+          },
         },
       }),
-    [theme, accent, popupWidth, font]
+    [theme, accent, accentFont, popupWidth, font]
   );
 
   return (
