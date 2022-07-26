@@ -15,7 +15,7 @@ const Popup = () => {
     <ThemeProvider settings={settings}>
       <MainContainer>
         <Navbar title={import.meta.env.VITE_EXTENSION_TITLE} />
-        <Content />
+        <Content settings={settings} />
         <BottomNavBar />
       </MainContainer>
     </ThemeProvider>

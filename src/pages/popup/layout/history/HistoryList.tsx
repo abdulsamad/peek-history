@@ -2,14 +2,14 @@ import React from "react";
 import { List } from "@mui/material";
 import { useSelector } from "react-redux";
 
+import { ISettings } from "@src/commons/redux/settings/defaults";
 import HistoryItem from "../utils/ListItem";
 import { deleteItem } from "../../redux/history/thunks";
 import { RootState, useAppDispatach } from "../../redux/store";
 import Preloader from "./Preloader";
-import { OpenURL } from "../../redux/ui/ui-slice";
 import NotFound from "../utils/NotFound";
 
-const HistoryList = () => {
+const HistoryList = ({ settings }: { settings: ISettings }) => {
   const history = useSelector((state: RootState) => state.history);
   const UI = useSelector((state: RootState) => state.ui);
 
@@ -17,8 +17,11 @@ const HistoryList = () => {
 
   const onClick = async (url: string) => {
     // Open link in new tab
-    if (UI.openURL === OpenURL.NEW_TAB) {
+    if (settings.openURL === "new-tab") {
       await chrome.tabs.create({ url });
+      return;
+    } else if (settings.openURL === "background-tab") {
+      await chrome.tabs.create({ url, active: false });
       return;
     }
 
@@ -44,7 +47,8 @@ const HistoryList = () => {
           title={title}
           url={url}
           lastVisitTime={lastVisitTime}
-          hideURL={false}
+          hideURL={settings.hideURL}
+          hideTime={settings.hideTime}
           onClick={() => {
             if (!url) throw new Error("URL not found!");
 

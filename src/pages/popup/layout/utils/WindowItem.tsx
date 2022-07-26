@@ -30,11 +30,13 @@ const WindowItem = ({
   onRestoreClick,
   onTabClick,
   hideURL,
+  hideTime,
 }: {
   window: IWindowItem;
   onRestoreClick: () => void;
   onTabClick: (url: string) => void;
   hideURL: boolean;
+  hideTime: boolean;
 }) => {
   const { tabs, sessionId } = window;
 
@@ -75,6 +77,7 @@ const WindowItem = ({
               title={tab.title}
               url={tab.url}
               hideURL={hideURL}
+              hideTime={hideTime}
               onClick={() => onTabClick(tab.url)}
             />
           ))}

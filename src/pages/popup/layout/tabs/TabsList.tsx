@@ -9,13 +9,13 @@ import { useSelector } from "react-redux";
 import { Accordion } from "@mui/material";
 import { ExpandMore as ExpandMoreIcon } from "@mui/icons-material";
 
+import { ISettings } from "@src/commons/redux/settings/defaults";
 import TabItem from "../utils/ListItem";
 import WindowItem from "../utils/WindowItem";
 import { RootState, useAppDispatach } from "../../redux/store";
 import { restoreSession } from "../../redux/tabs/thunks";
-import { OpenURL } from "../../redux/ui/ui-slice";
 
-const TabsList = () => {
+const TabsList = ({ settings }: { settings: ISettings }) => {
   const tabs = useSelector((state: RootState) => state.tabs);
   const UI = useSelector((state: RootState) => state.ui);
 
@@ -23,8 +23,11 @@ const TabsList = () => {
 
   const onTabClick = async (url: string) => {
     // Open link in new tab
-    if (UI.openURL === OpenURL.NEW_TAB) {
+    if (settings.openURL === "new-tab") {
       await chrome.tabs.create({ url });
+      return;
+    } else if (settings.openURL === "background-tab") {
+      await chrome.tabs.create({ url, active: false });
       return;
     }
 
@@ -52,7 +55,8 @@ const TabsList = () => {
                   <WindowItem
                     key={window.sessionId}
                     window={window}
-                    hideURL={false}
+                    hideURL={settings.hideURL}
+                    hideTime={settings.hideTime}
                     onRestoreClick={() => onRestoreClick(window.sessionId)}
                     onTabClick={onTabClick}
                   />
@@ -64,7 +68,8 @@ const TabsList = () => {
                   key={tab.title}
                   title={tab.title}
                   url={tab.url}
-                  hideURL={false}
+                  hideURL={settings.hideURL}
+                  hideTime={settings.hideTime}
                   onClick={() => onTabClick(tab.url)}
                 />
               );
@@ -93,7 +98,8 @@ const TabsList = () => {
                     <WindowItem
                       key={window.sessionId}
                       window={window}
-                      hideURL={false}
+                      hideURL={settings.hideURL}
+                      hideTime={settings.hideTime}
                       onRestoreClick={() => onRestoreClick(window.sessionId)}
                       onTabClick={onTabClick}
                     />
@@ -105,7 +111,8 @@ const TabsList = () => {
                     key={window.tabs[0].title}
                     title={window.tabs[0].title}
                     url={window.tabs[0].url}
-                    hideURL={false}
+                    hideURL={settings.hideURL}
+                    hideTime={settings.hideTime}
                     onClick={() => onTabClick(window.tabs[0].url)}
                   />
                 );

@@ -21,6 +21,7 @@ type IFilteredHistoryItem = Omit<IHistoryItem, "id">;
 
 interface INewHistoryItem extends IFilteredHistoryItem {
   hideURL: boolean;
+  hideTime: boolean;
   onClick: MouseEventHandler<HTMLLIElement>;
   showSecondary?: boolean;
   onItemDelete?: () => void;
@@ -31,6 +32,7 @@ const HistoryItem = ({
   url,
   lastVisitTime,
   hideURL,
+  hideTime,
   onClick,
   showSecondary,
   onItemDelete,
@@ -75,7 +77,7 @@ const HistoryItem = ({
             }
             onConfirm={onItemDelete}
           />
-          {lastVisitTime && (
+          {!hideTime && lastVisitTime && (
             <Typography variant="caption" display="block" noWrap>
               <TimeAgo datetime={lastVisitTime} />
             </Typography>

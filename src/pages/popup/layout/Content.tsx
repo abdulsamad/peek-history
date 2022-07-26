@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { styled } from "@mui/material";
 
+import { ISettings } from "@src/commons/redux/settings/defaults";
 import HistoryList from "./history/HistoryList";
 import TabsList from "./tabs/TabsList";
 import { RootState } from "../redux/store";
@@ -14,13 +15,13 @@ const ContentContainer = styled("div")(() => ({
   overflowY: "auto",
 }));
 
-const Content = () => {
+const Content = ({ settings }: { settings: ISettings }) => {
   const UIState = useSelector((state: RootState) => state.ui);
 
   return (
     <ContentContainer>
-      {UIState.active === Active.HISTORY && <HistoryList />}
-      {UIState.active === Active.TABS && <TabsList />}
+      {UIState.active === Active.HISTORY && <HistoryList settings={settings} />}
+      {UIState.active === Active.TABS && <TabsList settings={settings} />}
     </ContentContainer>
   );
 };
