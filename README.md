@@ -13,20 +13,25 @@ This extension helps you to quickly peek history in the popup that helps you vie
 
 ### :sparkles: Features
 
-- Quickly peek history in popup
+- Quickly peek history in popup without going away from your working tab.
 - Delete specific or all history
-- Reopen closed tabs (Full session)
+- Reopen closed tabs (Full sessions)
 - Restore sessions from other devices
-- Can be fully controlled with a keyboard
 - Infinite scrolling
 
 ### ⌨ Keyboard Shortcuts
 
 - 🔵 Toggle peek history (Open/Close extension popup) - <kbd>Ctrl + Shift + H</kbd>
-- 🔍 Quickly search in history - <kbd>Ctrl + S</kbd> (After opening popup)
-- ⚙️ Open extension options/settings - <kbd>Ctrl + O</kbd> (After opening popup)
-- 📑 See recently closed tabs/other tabs - <kbd>Ctrl + ➡️</kbd> Right Arrow (After opening popup)
-- 🔢 After opening the popup you can use number keys <kbd>Ctrl + (1 - 9)</kbd> to open the nth number of history link or recently closed tab.
+
+In the Popup
+
+- 🔍 Quickly search in history - <kbd>Alt + S</kbd>
+- ⚙️ Open extension options/settings - <kbd>Alt + O</kbd>
+- 📑 See recently closed tabs/other tabs - <kbd>Alt + T</kbd>
+- 🔙 Switch back to view history from recently closed/other tabs - <kbd>Alt + H</kbd>
+- 🔢 After opening the popup you can use number keys <kbd>Alt + (1 - 9)</kbd> to open the nth number of history link or recently closed tab.
+
+Replace Option key with Alt on Mac.
 
 ### Screenshots
 
