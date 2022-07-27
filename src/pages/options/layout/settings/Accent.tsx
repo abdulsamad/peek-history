@@ -1,5 +1,5 @@
-import React from "react";
-import { styled } from "@mui/material";
+import React, { useCallback } from "react";
+import { debounce, styled } from "@mui/material";
 
 import SettingItem from "../utils/SettingItem";
 import { accents } from "../../../../commons/redux/settings/defaults";
@@ -42,7 +42,7 @@ const ButtonGroup = styled("div")(() => ({
   justifyContent: "space-between",
 }));
 
-const RoundedInput = styled("input")(() => ({
+const CustomColorInput = styled("input")(() => ({
   height: 30,
   width: 30,
   border: "none",
@@ -57,6 +57,11 @@ const RoundedInput = styled("input")(() => ({
 const Accent = ({ value }: { value: string }) => {
   const dispatch = useAppDispatch();
 
+  const debouncedSetAccent = useCallback(
+    debounce((color: string) => dispatch(setAccent(color)), 200),
+    []
+  );
+
   return (
     <SettingItem label="Accent">
       <ButtonGroup>
@@ -69,11 +74,10 @@ const Accent = ({ value }: { value: string }) => {
             active={color === value}
           />
         ))}
-        <RoundedInput
+        <CustomColorInput
           type="color"
           value={value}
-          // TODO: Add debounce to improve performance
-          onChange={(ev) => dispatch(setAccent(ev.target.value))}
+          onChange={(ev) => debouncedSetAccent(ev.target.value)}
         />
       </ButtonGroup>
     </SettingItem>
