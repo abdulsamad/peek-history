@@ -11,9 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/setup-node@v1
+      - uses: mskelton/setup-yarn@v1
         with:
           node-version: 16
-      - run: npm ci
-      - run: npm run deploy-build
+      - run: yarn
+      - run: yarn run deploy-build
 
