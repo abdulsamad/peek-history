@@ -18,9 +18,9 @@ jobs:
         with:
           node-version: 16
       - name: Install dependencies
-        run: yarn
-      - name: Build
-        run: yarn run deploy-build
+        run: |
+          yarn
+          yarn run deploy-build
       - name: Archive prouction artifacts
         uses: actions/upload-artifacts@v3
         with:
