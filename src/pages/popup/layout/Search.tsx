@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { InputBase, styled } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
@@ -38,16 +38,20 @@ const StyledInputBase = styled(InputBase)<{ open: boolean }>(
 
 const Search = () => {
   const UI = useSelector((state: RootState) => state.ui);
-  const dispatch = useAppDispatch();
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (UI.searchOpened) {
+      inputRef.current?.focus();
+    }
+  }, [UI.searchOpened]);
 
   return (
     <div>
       <StyledSearchIcon
-        onClick={() => {
-          dispatch(setSearchOpened(!UI.searchOpened));
-          inputRef.current?.focus();
-        }}
+        onClick={() => dispatch(setSearchOpened(!UI.searchOpened))}
       />
       <StyledInputBase
         placeholder="Enter search keyword or URL"

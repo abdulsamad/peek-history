@@ -7,6 +7,7 @@ import HistoryList from "./history/HistoryList";
 import TabsList from "./tabs/TabsList";
 import { RootState } from "../redux/store";
 import { Active } from "../redux/ui/ui-slice";
+import KeyboardShortcuts from "./KeyboardShortcuts";
 
 const ContentContainer = styled("div")(() => ({
   height: "calc(100% - 56px)",
@@ -22,6 +23,7 @@ const Content = ({ settings }: { settings: ISettings }) => {
     <ContentContainer>
       {UIState.active === Active.HISTORY && <HistoryList settings={settings} />}
       {UIState.active === Active.TABS && <TabsList settings={settings} />}
+      <KeyboardShortcuts active={UIState.active} settings={settings} />
     </ContentContainer>
   );
 };
