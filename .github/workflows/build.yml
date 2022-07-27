@@ -1,0 +1,16 @@
+name: Extension Continuos Integration
+
+on:
+  push:
+    branches: [ v2 ]
+  pull_request:
+    branches:  [ main ]
+
+jobs:
+  Build_Extension:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: echo "This is your first GitHub Action!"
