@@ -32,7 +32,7 @@ jobs:
       - name: Archive production artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ steps.package.outputs.version }}-v${{ steps.package.outputs.version }}.zip
+          name: ${{ steps.package.outputs.name }}-v${{ steps.package.outputs.version }}.zip
           path: ./*.zip
     
 
