@@ -11,9 +11,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup yarn
       - uses: mskelton/setup-yarn@v1
         with:
           node-version: 16
       - run: yarn
       - run: yarn run deploy-build
+      - name: Archive prouction artifacts
+        uses: actions/upload-artifacts@v3
+        with:
+          name: zip dist folder
+          path: dist
+    
 
