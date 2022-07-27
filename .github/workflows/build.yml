@@ -17,8 +17,10 @@ jobs:
       - uses: mskelton/setup-yarn@v1
         with:
           node-version: 16
-      - run: yarn
-      - run: yarn run deploy-build
+      - name: Install dependencies
+        run: yarn
+      - name: Build
+        run: yarn run deploy-build
       - name: Archive prouction artifacts
         uses: actions/upload-artifacts@v3
         with:
