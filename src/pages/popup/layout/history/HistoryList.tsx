@@ -2,6 +2,7 @@ import React, { Fragment, useCallback } from "react";
 import { CircularProgress, List, ListItem } from "@mui/material";
 import { useSelector } from "react-redux";
 
+import useInfiniteScroll from "@src/hooks/useInfiniteScroll";
 import { ISettings } from "@src/commons/redux/settings/defaults";
 import { IHistoryItem } from "../../redux/history/history-slice";
 import HistoryItem from "../utils/ListItem";
@@ -9,27 +10,13 @@ import { deleteItem, addHistory } from "../../redux/history/thunks";
 import { RootState, useAppDispatch } from "../../redux/store";
 import Preloader from "./Preloader";
 import NotFound from "../utils/NotFound";
-import useInfiniteScroll from "@src/hooks/useInfiniteScroll";
+import { onURLClick } from "../utils";
 
 const HistoryList = ({ settings }: { settings: ISettings }) => {
   const history = useSelector((state: RootState) => state.history);
   const UI = useSelector((state: RootState) => state.ui);
 
   const dispatch = useAppDispatch();
-
-  const onClick = async (url: string) => {
-    // Open link in new tab
-    if (settings.openURL === "new-tab") {
-      await chrome.tabs.create({ url });
-      return;
-    } else if (settings.openURL === "background-tab") {
-      await chrome.tabs.create({ url, active: false });
-      return;
-    }
-
-    // Open link in current tab
-    await chrome.tabs.update({ url });
-  };
 
   const historyItemBlock = useCallback(
     ({
@@ -48,7 +35,7 @@ const HistoryList = ({ settings }: { settings: ISettings }) => {
         onClick={() => {
           if (!url) throw new Error("URL not found!");
 
-          onClick(url);
+          onURLClick(url, settings.openURL);
         }}
         onItemDelete={() => {
           if (!url) throw new Error("URL not found!");

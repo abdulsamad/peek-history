@@ -14,25 +14,12 @@ import TabItem from "../utils/ListItem";
 import WindowItem from "../utils/WindowItem";
 import { RootState, useAppDispatch } from "../../redux/store";
 import { restoreSession } from "../../redux/tabs/thunks";
+import { onURLClick } from "../utils";
 
 const TabsList = ({ settings }: { settings: ISettings }) => {
   const tabs = useSelector((state: RootState) => state.tabs);
 
   const dispatch = useAppDispatch();
-
-  const onTabClick = async (url: string) => {
-    // Open link in new tab
-    if (settings.openURL === "new-tab") {
-      await chrome.tabs.create({ url });
-      return;
-    } else if (settings.openURL === "background-tab") {
-      await chrome.tabs.create({ url, active: false });
-      return;
-    }
-
-    // Open link in current tab
-    await chrome.tabs.update({ url });
-  };
 
   const onRestoreClick = async (id: string) => {
     await dispatch(restoreSession(id));
@@ -57,7 +44,7 @@ const TabsList = ({ settings }: { settings: ISettings }) => {
                     hideURL={settings.hideURL}
                     hideTime={settings.hideTime}
                     onRestoreClick={() => onRestoreClick(window.sessionId)}
-                    onTabClick={onTabClick}
+                    onTabClick={(url) => onURLClick(url, settings.openURL)}
                   />
                 );
 
@@ -69,7 +56,7 @@ const TabsList = ({ settings }: { settings: ISettings }) => {
                   url={tab.url}
                   hideURL={settings.hideURL}
                   hideTime={settings.hideTime}
-                  onClick={() => onTabClick(tab.url)}
+                  onClick={() => onURLClick(tab.url, settings.openURL)}
                 />
               );
             })}
@@ -100,7 +87,7 @@ const TabsList = ({ settings }: { settings: ISettings }) => {
                       hideURL={settings.hideURL}
                       hideTime={settings.hideTime}
                       onRestoreClick={() => onRestoreClick(window.sessionId)}
-                      onTabClick={onTabClick}
+                      onTabClick={(url) => onURLClick(url, settings.openURL)}
                     />
                   );
 
@@ -112,7 +99,9 @@ const TabsList = ({ settings }: { settings: ISettings }) => {
                     url={window.tabs[0].url}
                     hideURL={settings.hideURL}
                     hideTime={settings.hideTime}
-                    onClick={() => onTabClick(window.tabs[0].url)}
+                    onClick={() =>
+                      onURLClick(window.tabs[0].url, settings.openURL)
+                    }
                   />
                 );
               })}
