@@ -34,5 +34,6 @@ jobs:
         with:
           name: ${{ steps.package.outputs.name }}-v${{ steps.package.outputs.version }}
           path: ./*.zip
+          retention-days: 30
     
 
