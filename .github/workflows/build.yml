@@ -14,13 +14,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Setup yarn
-      - uses: mskelton/setup-yarn@v1
+        uses: mskelton/setup-yarn@v1
         with:
           node-version: 16
       - name: Install dependencies
-        run: |
-          yarn
-          yarn run deploy-build
+        run: yarn
+      - name: Build 
+        run: yarn run deploy-build
       - name: Archive prouction artifacts
         uses: actions/upload-artifacts@v3
         with:
