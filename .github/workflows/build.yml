@@ -25,14 +25,14 @@ jobs:
       - name: Build and zip the build (dist) folder
         run: yarn run deploy-build
 
-      - name: Read package.json
-        uses: dutscher/read-package-json-endpoint-actions@v1.33.7
-        id: package-json-endpoint
+      - name: Get package info
+        uses: codex-team/action-nodejs-package-info@v1
+        id: package
 
       - name: Archive production artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: peek-history-v${{ steps.package-json-endpoint.outputs.endpoint }}.zip
+          name: ${{ steps.package.outputs.version }}-v${{ steps.package.outputs.version }}.zip
           path: ./*.zip
     
 
