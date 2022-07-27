@@ -17,7 +17,6 @@ import { restoreSession } from "../../redux/tabs/thunks";
 
 const TabsList = ({ settings }: { settings: ISettings }) => {
   const tabs = useSelector((state: RootState) => state.tabs);
-  const UI = useSelector((state: RootState) => state.ui);
 
   const dispatch = useAppDispatch();
 
