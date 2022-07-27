@@ -8,8 +8,10 @@ import { getRecentlyClosed, getDevices } from "./redux/tabs/thunks";
 import { getSettingsFromStorage } from "@src/commons/redux/settings/thunks";
 import Popup from "@src/pages/popup/Popup";
 
-// Load inital {Settings, History, Recently Closed Tabs, Tabs from Other Devices}
+// Load extension settings
 store.dispatch(getSettingsFromStorage());
+
+// Load inital data { History, Recently Closed Tabs, Tabs from Other Devices}
 store.dispatch(getHistory({}));
 store.dispatch(getRecentlyClosed());
 store.dispatch(getDevices());
