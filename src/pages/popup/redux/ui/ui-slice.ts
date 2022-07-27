@@ -13,11 +13,13 @@ export enum Active {
 interface UIState {
   searchOpened: boolean;
   active: Active;
+  showUpdatePopup: boolean;
 }
 
 const initialState: UIState = {
   searchOpened: false,
   active: Active.HISTORY,
+  showUpdatePopup: false,
 };
 
 const UISlice = createSlice({
@@ -30,8 +32,12 @@ const UISlice = createSlice({
     setSearchOpened: (state, { payload }: PayloadAction<boolean>) => {
       state.searchOpened = payload;
     },
+    setShowUpdatePopup: (state, { payload }: PayloadAction<boolean>) => {
+      state.showUpdatePopup = payload;
+    },
   },
 });
 
-export const { switchActiveView, setSearchOpened } = UISlice.actions;
+export const { switchActiveView, setSearchOpened, setShowUpdatePopup } =
+  UISlice.actions;
 export default UISlice.reducer;
