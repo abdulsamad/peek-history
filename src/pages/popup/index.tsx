@@ -2,6 +2,8 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 
+import "./index.css";
+
 import store from "./redux/store";
 import { getHistory } from "./redux/history/thunks";
 import { getRecentlyClosed, getDevices } from "./redux/tabs/thunks";
