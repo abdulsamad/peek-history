@@ -13,4 +13,4 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: echo "This is your first GitHub Action!"
+      - run: npm run deploy-build
