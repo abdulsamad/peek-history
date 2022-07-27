@@ -22,6 +22,8 @@ const Font = ({ value }: { value: string }) => {
     chrome.fontSettings.getFontList((fonts) => setFontList(fonts));
   }, []);
 
+  if (fontList.length === 0) return null;
+
   return (
     <SettingItem
       label="Font"
