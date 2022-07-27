@@ -14,8 +14,6 @@ jobs:
       - uses: mskelton/setup-yarn@v1
         with:
           node-version: 16
-      - name: install and build
-      - run: |
-          yarn
-          yarn run deploy-build
+      - run: yarn
+      - run: yarn run deploy-build
 
