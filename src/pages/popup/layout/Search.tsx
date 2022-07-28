@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { lighten, InputBase, styled } from "@mui/material";
+import { lighten, InputBase, styled, darken } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
 
 import { RootState, useAppDispatch } from "../redux/store";
@@ -38,11 +38,11 @@ const StyledInputBase = styled(InputBase)<{
   input: {
     padding: "0.5rem",
     borderRadius: 10,
-    backgroundColor: "rgba(255,255,255, 0.35)",
+    backgroundColor: "rgba(255,255,255, 0.25)",
     color: "#f5f5f5",
 
     "&::placeholder": {
-      color: lighten(accentFontColor, 0.9),
+      color: lighten(accentFontColor, 0.3),
     },
   },
 }));
