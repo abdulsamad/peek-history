@@ -22,6 +22,11 @@ const StyledListItem = styled(ListItem)(
     background-color: rgba(0, 0, 0, 0.1);
     border-left: 5px solid ${theme.palette.primary.main};
   }
+  
+  &:focus {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-left: 5px solid ${theme.palette.primary.main};  
+  }
 `
 );
 
