@@ -38,7 +38,12 @@ const HistoryItem = ({
   onItemDelete,
 }: INewHistoryItem) => {
   return (
-    <StyledListItem divider={true} onClick={onClick} data-history-item>
+    <StyledListItem
+      divider={true}
+      onClick={onClick}
+      tabIndex={-1}
+      data-history-item
+    >
       <StyledListItemIcon>
         <StyledAvatar
           // TODO: Add new favicon API when chrome adds it
