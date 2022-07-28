@@ -31,7 +31,7 @@ const KeyboardShortcuts = ({
       elememtsCollection.push(
         <Hotkeys
           keyName={`alt+${index + 1}`}
-          onKeyDown={(shortcut, ev) => {
+          onKeyUp={(shortcut, ev) => {
             ev.preventDefault();
 
             if (active === Active.HISTORY) {
@@ -60,7 +60,7 @@ const KeyboardShortcuts = ({
       {/* Open search */}
       <Hotkeys
         keyName="alt+s"
-        onKeyDown={(shortcut, ev) => {
+        onKeyUp={(shortcut, ev) => {
           ev.preventDefault();
           dispatch(setSearchOpened(true));
         }}
@@ -69,7 +69,7 @@ const KeyboardShortcuts = ({
       {/* Open History/extension home view */}
       <Hotkeys
         keyName="alt+h"
-        onKeyDown={(shortcut, ev) => {
+        onKeyUp={(shortcut, ev) => {
           ev.preventDefault();
           dispatch(switchActiveView(Active.HISTORY));
         }}
@@ -78,7 +78,7 @@ const KeyboardShortcuts = ({
       {/* Open Tab view */}
       <Hotkeys
         keyName="alt+t"
-        onKeyDown={(shortcut, ev) => {
+        onKeyUp={(shortcut, ev) => {
           ev.preventDefault();
           dispatch(switchActiveView(Active.TABS));
         }}
@@ -87,7 +87,7 @@ const KeyboardShortcuts = ({
       {/* Open extension settings page */}
       <Hotkeys
         keyName="alt+o"
-        onKeyDown={(shortcut, ev) => {
+        onKeyUp={(shortcut, ev) => {
           ev.preventDefault();
           chrome.runtime.openOptionsPage();
         }}
