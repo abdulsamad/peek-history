@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { lighten, InputBase, styled, darken } from "@mui/material";
+import { lighten, InputBase, styled } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
 
 import { RootState, useAppDispatch } from "../redux/store";
