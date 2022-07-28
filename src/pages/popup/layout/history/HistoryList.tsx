@@ -2,18 +2,23 @@ import React, { Fragment, useCallback } from "react";
 import { CircularProgress, List, ListItem } from "@mui/material";
 import { useSelector } from "react-redux";
 
-import useInfiniteScroll from "@src/hooks/useInfiniteScroll";
 import { ISettings } from "@src/commons/redux/settings/defaults";
+import useInfiniteScroll from "../../hooks/useInfiniteScroll";
 import { IHistoryItem } from "../../redux/history/history-slice";
 import HistoryItem from "../utils/ListItem";
 import { deleteItem, addHistory } from "../../redux/history/thunks";
 import { RootState, useAppDispatch } from "../../redux/store";
 import Preloader from "./Preloader";
 import NotFound from "../utils/NotFound";
-import { onURLClick } from "../utils";
+import { onURLClick } from "../../hooks/utils";
 
-const HistoryList = ({ settings }: { settings: ISettings }) => {
-  const history = useSelector((state: RootState) => state.history);
+const HistoryList = ({
+  settings,
+  history,
+}: {
+  settings: ISettings;
+  history: RootState["history"];
+}) => {
   const UI = useSelector((state: RootState) => state.ui);
 
   const dispatch = useAppDispatch();

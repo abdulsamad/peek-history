@@ -5,7 +5,6 @@ import {
   List,
   Typography,
 } from "@mui/material";
-import { useSelector } from "react-redux";
 import { Accordion } from "@mui/material";
 import { ExpandMore as ExpandMoreIcon } from "@mui/icons-material";
 
@@ -14,11 +13,15 @@ import TabItem from "../utils/ListItem";
 import WindowItem from "../utils/WindowItem";
 import { RootState, useAppDispatch } from "../../redux/store";
 import { restoreSession } from "../../redux/tabs/thunks";
-import { onURLClick } from "../utils";
+import { onURLClick } from "../../hooks/utils";
 
-const TabsList = ({ settings }: { settings: ISettings }) => {
-  const tabs = useSelector((state: RootState) => state.tabs);
-
+const TabsList = ({
+  settings,
+  tabs,
+}: {
+  settings: ISettings;
+  tabs: RootState["tabs"];
+}) => {
   const dispatch = useAppDispatch();
 
   const onRestoreClick = async (id: string) => {
