@@ -1,4 +1,10 @@
-import { Avatar, ListItem, ListItemText, ListItemIcon } from "@mui/material";
+import {
+  Avatar,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+  darken,
+} from "@mui/material";
 import { styled } from "@mui/material";
 
 const StyledListItemIcon = styled(ListItemIcon)`
@@ -24,7 +30,8 @@ const StyledListItem = styled(ListItem)(
   }
   
   &:focus {
-    background-color: rgba(0, 0, 0, 0.1);
+    outline: none;
+    background-color: ${darken(theme.palette.text.primary, 0.9)};
     border-left: 5px solid ${theme.palette.primary.main};  
   }
 `
