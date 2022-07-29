@@ -70,7 +70,7 @@ const useKeyboardShortcuts = ({
     });
   }
 
-  // TODO: Fix directly using DOM to navigate
+  // TODO: Fix directly using DOM
   useHotkeys(
     "up",
     (ev) => {
@@ -130,7 +130,7 @@ const useKeyboardShortcuts = ({
     [active]
   );
 
-  // TODO: Fix directly using DOM to navigate
+  // TODO: Fix directly using DOM
   useHotkeys(
     "down",
     (ev) => {
@@ -191,10 +191,7 @@ const useKeyboardShortcuts = ({
 
         if (url) onURLClick(url, settings.openURL);
       } else if (active === Active.TABS) {
-        const url = document.querySelectorAll(historyItemSelector);
-
-        console.log(url);
-        // if (url) onURLClick(url, settings.openURL);
+        (document.activeElement as HTMLElement).click();
       }
     },
     [active]
