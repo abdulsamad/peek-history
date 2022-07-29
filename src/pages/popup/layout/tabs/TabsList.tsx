@@ -31,7 +31,7 @@ const TabsList = ({
   return (
     <div>
       {/* Recently Closed Tabs */}
-      <Accordion TransitionProps={{ unmountOnExit: true }}>
+      <Accordion TransitionProps={{ unmountOnExit: true }} data-tabs-accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>Recently Closed Tabs</Typography>
         </AccordionSummary>
@@ -72,6 +72,7 @@ const TabsList = ({
         <Accordion
           key={device.deviceName}
           TransitionProps={{ unmountOnExit: true }}
+          data-tabs-accordion
         >
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Typography>{device.deviceName}</Typography>

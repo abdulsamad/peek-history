@@ -15,6 +15,7 @@ import { onURLClick } from "../hooks/utils";
 
 // History/Tab Item selector
 export const historyItemSelector = '[data-history-item="true"]';
+export const tabsAccordionSelector = '[data-tabs-accordion="true"]';
 
 const useKeyboardShortcuts = ({
   active,
@@ -78,7 +79,7 @@ const useKeyboardShortcuts = ({
       ] as HTMLElement;
 
       elem.focus();
-    } else if (active === Active.TABS) {
+    } else if (active === Active.TABS && tabFocusNum.current.value() > 0) {
       const prevNum = tabFocusNum.current.prev().value;
       //
     }
