@@ -184,13 +184,12 @@ const useKeyboardShortcuts = ({
     (ev) => {
       ev.preventDefault();
 
-      const currentValue = historyFocusNum.current.value();
+      const currentHistoryFocusNum = historyFocusNum.current.value();
+      const currentTabFocusNum = tabFocusNum.current.value();
 
-      if (active === Active.HISTORY && currentValue >= 0) {
-        const url = history.items[currentValue].url;
-
-        if (url) onURLClick(url, settings.openURL);
-      } else if (active === Active.TABS) {
+      if (active === Active.HISTORY && currentHistoryFocusNum >= 0) {
+        (document.activeElement as HTMLElement).click();
+      } else if (active === Active.TABS && currentTabFocusNum >= 0) {
         (document.activeElement as HTMLElement).click();
       }
     },
