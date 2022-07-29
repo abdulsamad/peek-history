@@ -176,22 +176,29 @@ const useKeyboardShortcuts = ({
         elem.focus();
       }
     },
-    [active]
+    [active, history.items]
   );
 
-  useHotkeys("enter", (ev) => {
-    ev.preventDefault();
+  useHotkeys(
+    "enter",
+    (ev) => {
+      ev.preventDefault();
 
-    const currentValue = historyFocusNum.current.value();
+      const currentValue = historyFocusNum.current.value();
 
-    if (active === Active.HISTORY && currentValue >= 0) {
-      const url = history.items[currentValue].url;
+      if (active === Active.HISTORY && currentValue >= 0) {
+        const url = history.items[currentValue].url;
 
-      if (url) onURLClick(url, settings.openURL);
-    } else if (active === Active.TABS) {
-      //
-    }
-  });
+        if (url) onURLClick(url, settings.openURL);
+      } else if (active === Active.TABS) {
+        const url = document.querySelectorAll(historyItemSelector);
+
+        console.log(url);
+        // if (url) onURLClick(url, settings.openURL);
+      }
+    },
+    [active]
+  );
 
   useHotkeys("backspace,delete", (ev) => {
     ev.preventDefault();
