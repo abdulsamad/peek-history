@@ -13,6 +13,9 @@ import { deleteItem } from "../redux/history/thunks";
 import { RootState } from "../redux/store";
 import { onURLClick } from "../hooks/utils";
 
+// History/Tab Item selector
+export const historyItemSelector = '[data-history-item="true"]';
+
 const useKeyboardShortcuts = ({
   active,
   settings,
@@ -29,7 +32,6 @@ const useKeyboardShortcuts = ({
   const parentRef = useRef();
   const historyFocusNum = useRef(numberIterator());
   const tabFocusNum = useRef(numberIterator());
-  const historyItemSelector = '[data-history-item="true"]';
 
   // Open search
   useHotkeys("alt+s", () => {

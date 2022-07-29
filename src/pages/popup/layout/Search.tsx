@@ -8,6 +8,7 @@ import { getHistory } from "../redux/history/thunks";
 import { setSearchOpened, Active } from "../redux/ui/ui-slice";
 import { filter } from "../redux/tabs/tabs-slice";
 import { getDevices, getRecentlyClosed } from "../redux/tabs/thunks";
+import { historyItemSelector } from "../hooks/useKeyboardShortcuts";
 
 const StyledSearchIcon = styled(SearchIcon)(({ theme }) => ({
   height: "100%",
@@ -76,11 +77,12 @@ const Search = () => {
         style={{ width: UI.searchOpened ? "100%" : 0 }}
         onKeyUp={async (ev) => {
           const target = ev.target as HTMLInputElement;
+          const UpDownArrowKeysPressed =
+            ev.key === "ArrowDown" || ev.key === "ArrowUp";
 
           if (UI.active === Active.HISTORY) {
             // Update history
             await dispatch(getHistory({ text: target.value }));
-            return;
           } else if (UI.active === Active.TABS) {
             // ! BUG: Fix state not properly updating because of Immer in tabSlice. Other Tabs filtering also needs work.
             // Refresh data (because filtering removed the data from tabSlice state)
@@ -89,6 +91,15 @@ const Search = () => {
 
             // Update Tabs
             dispatch(filter(target.value));
+          }
+
+          // Accessibility
+          if (UpDownArrowKeysPressed) {
+            const elem = document.querySelector(
+              historyItemSelector
+            ) as HTMLElement;
+
+            if (elem) elem.focus();
           }
         }}
         onBlur={() => dispatch(setSearchOpened(false))}
