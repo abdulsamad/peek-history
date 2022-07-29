@@ -16,6 +16,7 @@ import { onURLClick } from "../hooks/utils";
 // History/Tab Item selector
 export const historyItemSelector = '[data-history-item="true"]';
 export const tabsAccordionSelector = '[data-tabs-accordion="true"]';
+export const windowItemSelector = '[data-window-item="true"]';
 
 const useKeyboardShortcuts = ({
   active,
@@ -69,40 +70,114 @@ const useKeyboardShortcuts = ({
     });
   }
 
-  useHotkeys("up", (ev) => {
-    ev.preventDefault();
+  // TODO: Fix directly using DOM to navigate
+  useHotkeys(
+    "up",
+    (ev) => {
+      ev.preventDefault();
 
-    if (active === Active.HISTORY && historyFocusNum.current.value() > 0) {
-      const prevNum = historyFocusNum.current.prev().value;
-      const elem = document.querySelectorAll(historyItemSelector)[
-        prevNum
-      ] as HTMLElement;
+      if (active === Active.HISTORY && historyFocusNum.current.value() > 0) {
+        const prevNum = historyFocusNum.current.prev().value;
+        const elem = document.querySelectorAll(historyItemSelector)[
+          prevNum
+        ] as HTMLElement;
 
-      elem.focus();
-    } else if (active === Active.TABS && tabFocusNum.current.value() > 0) {
-      const prevNum = tabFocusNum.current.prev().value;
-      //
-    }
-  });
+        elem.focus();
+      } else if (active === Active.TABS) {
+        //
+        if (tabFocusNum.current.value() === 0) {
+          // Close all window inside tabs
+          document.querySelectorAll(windowItemSelector).forEach((elem) => {
+            // Click on the Accordion
+            (elem as HTMLElement).click();
+          });
 
-  useHotkeys("down", (ev) => {
-    ev.preventDefault();
+          // Close all tabs accordions
+          document.querySelectorAll(tabsAccordionSelector).forEach((elem) => {
+            // Click on the Accordion
+            (elem as HTMLElement).click();
+          });
 
-    if (
-      active === Active.HISTORY &&
-      historyFocusNum.current.value() < history.items.length - 1
-    ) {
-      const nextNum = historyFocusNum.current.next().value;
-      const elem = document.querySelectorAll(historyItemSelector)[
-        nextNum
-      ] as HTMLElement;
+          return;
+        }
 
-      elem.focus();
-    } else if (active === Active.TABS) {
-      const nextNum = tabFocusNum.current.next().value;
-      //
-    }
-  });
+        // Open all tabs accordions
+        document.querySelectorAll(tabsAccordionSelector).forEach((elem) => {
+          // Check if accordion is already expanded
+          if ((elem as HTMLElement).classList.contains("Mui-expanded")) return;
+
+          // Click on the Accordion
+          (elem as HTMLElement).click();
+        });
+
+        // Open all window inside tabs
+        document.querySelectorAll(windowItemSelector).forEach((elem) => {
+          // Check if accordion is already expanded
+          if ((elem as HTMLElement).classList.contains("Mui-expanded")) return;
+
+          // Click on the Accordion
+          (elem as HTMLElement).click();
+        });
+
+        const prevNum = tabFocusNum.current.prev().value;
+        const elem = document.querySelectorAll(historyItemSelector)[
+          prevNum
+        ] as HTMLElement;
+
+        elem.focus();
+      }
+    },
+    [active]
+  );
+
+  // TODO: Fix directly using DOM to navigate
+  useHotkeys(
+    "down",
+    (ev) => {
+      ev.preventDefault();
+
+      if (
+        active === Active.HISTORY &&
+        historyFocusNum.current.value() < history.items.length - 1
+      ) {
+        const nextNum = historyFocusNum.current.next().value;
+        const elem = document.querySelectorAll(historyItemSelector)[
+          nextNum
+        ] as HTMLElement;
+
+        elem.focus();
+      } else if (active === Active.TABS) {
+        // Open all tabs accordions
+        document.querySelectorAll(tabsAccordionSelector).forEach((elem) => {
+          // Check if accordion is already expanded
+          if ((elem as HTMLElement).classList.contains("Mui-expanded")) return;
+
+          // Click on the Accordion
+          (elem as HTMLElement).click();
+        });
+
+        // Open all window inside tabs
+        document.querySelectorAll(windowItemSelector).forEach((elem) => {
+          // Check if accordion is already expanded
+          if ((elem as HTMLElement).classList.contains("Mui-expanded")) return;
+
+          // Click on the Accordion
+          (elem as HTMLElement).click();
+        });
+
+        const historyItems = document.querySelectorAll(historyItemSelector);
+
+        // Check if next value exists in DOM
+        if (!historyItems[tabFocusNum.current.value() + 1]) return;
+
+        const nextNum = tabFocusNum.current.next().value;
+        const elem = historyItems[nextNum] as HTMLElement;
+
+        elem.focus();
+      }
+    },
+    [active]
+  );
 
   useHotkeys("enter", (ev) => {
     ev.preventDefault();
