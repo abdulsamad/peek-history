@@ -7,7 +7,6 @@ import { RootState, useAppDispatch } from "../redux/store";
 import { getHistory } from "../redux/history/thunks";
 import { setSearchOpened, Active } from "../redux/ui/ui-slice";
 import { filter } from "../redux/tabs/thunks";
-import { getDevices, getRecentlyClosed } from "../redux/tabs/thunks";
 import { historyItemSelector } from "../hooks/useKeyboardShortcuts";
 
 const StyledSearchIcon = styled(SearchIcon)(({ theme }) => ({
@@ -84,7 +83,7 @@ const Search = () => {
             // Update history
             await dispatch(getHistory({ text: target.value }));
           } else if (UI.active === Active.TABS) {
-            // ! BUG: Fix state not properly updating because of Immer in tabSlice. Other Tabs filtering also needs work.
+            // Update Tabs
             dispatch(filter(target.value));
           }
 
