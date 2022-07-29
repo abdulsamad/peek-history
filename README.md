@@ -11,7 +11,7 @@
 
 This extension helps you to quickly peek history in the popup that helps you view, search, and delete your history without distracting you from your work. It also lets you restore your sessions across devices (Reopen recently closed tabs/windows or tabs/windows on other devices).
 
-### :sparkles: Features
+### ✨ Features
 
 - Quickly peek history in popup without going away from your working tab.
 - Delete specific or all history
