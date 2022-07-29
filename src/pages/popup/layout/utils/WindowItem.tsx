@@ -46,7 +46,6 @@ const WindowItem = ({
         expandIcon={<ExpandMoreIcon />}
         aria-label="Window on Other Device"
         sx={{ flexBasis: "100%", justifyContent: "space-between" }}
-        data-tabs-accordion
       >
         <Typography>
           Window &#40;{`${tabs.length} ${tabs.length > 1 ? "Tabs" : "Tab"}`}
