@@ -61,53 +61,7 @@ const initialState: tabsState = {
 const tabsSlice = createSlice({
   name: "tabs",
   initialState,
-  reducers: {
-    filter(state, { payload }: PayloadAction<string>) {
-      const regex = new RegExp(payload, "gi");
-
-      // Return when payload is empty
-      if (payload === "") return;
-
-      const filteredRecentsTabs = state.recent.filter(({ tab, window }) => {
-        if (tab && (regex.test(tab.title) || regex.test(tab.url))) {
-          return true;
-        }
-
-        //  Window
-        if (!window) return false;
-
-        const filteredWindow = window.tabs.filter(
-          (tab) => regex.test(tab.title) || regex.test(tab.url)
-        );
-
-        if (filteredWindow.length > 0) {
-          window.tabs = filteredWindow;
-          return true;
-        }
-      });
-
-      const filteredOtherTabs = state.other.filter(({ sessions }) => {
-        const devices = sessions.filter((device) => {
-          // Tabs on windows
-          const tabs = device.window.tabs.filter(
-            (tab) => regex.test(tab.title) || regex.test(tab.url)
-          );
-
-          if (tabs.length > 0) {
-            device.window.tabs = tabs;
-            return true;
-          }
-        });
-
-        if (devices.length > 0) {
-          return true;
-        }
-      });
-
-      state.recent = filteredRecentsTabs;
-      state.other = filteredOtherTabs;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     // Recently Closed Tabs
     builder.addCase(
@@ -126,5 +80,4 @@ const tabsSlice = createSlice({
   },
 });
 
-export const { filter } = tabsSlice.actions;
 export default tabsSlice.reducer;
