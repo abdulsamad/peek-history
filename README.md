@@ -31,7 +31,7 @@ In the Popup
 - 🔙 Switch back to view history from recently closed/other tabs - <kbd>Alt + H</kbd>
 - 🔢 After opening the popup you can use number keys <kbd>Alt + (1 - 9)</kbd> to open the nth number of history link or recently closed tab.
 
-💡 Replace Alt key with Option on Mac.
+> 💡 **Tip:** Replace Alt key with Option on Mac.
 
 ### Screenshots
 
