@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { getRecentlyClosed, getDevices } from "./thunks";
+import { getRecentlyClosed, getDevices, filter } from "./thunks";
 
 interface ITabSession {
   lastModified: number;
@@ -75,6 +75,16 @@ const tabsSlice = createSlice({
         getDevices.fulfilled,
         (state, { payload }: PayloadAction<IDevice[]>) => {
           state.other = payload;
+        }
+      ),
+      builder.addCase(
+        filter.fulfilled,
+        (
+          state,
+          { payload }: PayloadAction<{ recent: ISession[]; other: IDevice[] }>
+        ) => {
+          state.recent = payload.recent;
+          state.other = payload.other;
         }
       );
   },
