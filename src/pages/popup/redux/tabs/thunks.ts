@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { IDevice, ISession } from "./tabs-slice";
+import { openAllTabsAccordions } from "../../hooks/utils";
 
 export const getRecentlyClosed = createAsyncThunk(
   "tabs/getRecentlyClosed",
@@ -30,6 +31,8 @@ export const filter = createAsyncThunk(
   async (keyword: string) => {
     const regex = new RegExp(keyword, "gi");
 
+    openAllTabsAccordions();
+
     const recentlyClosedTabs = await (
       chrome.sessions as any
     ).getRecentlyClosed();
@@ -42,7 +45,7 @@ export const filter = createAsyncThunk(
         }
 
         //  Window
-        if (!window) return;
+        if (!window) return false;
 
         const filteredWindow = window.tabs.filter(
           (tab) => regex.test(tab.title) || regex.test(tab.url)
