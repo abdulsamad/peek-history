@@ -8,7 +8,11 @@ import {
   setSearchOpened,
   switchActiveView,
 } from "../redux/ui/ui-slice";
-import { numberIterator } from "./utils";
+import {
+  closeAllTabsAccordions,
+  numberIterator,
+  openAllTabsAccordions,
+} from "./utils";
 import { deleteItem } from "../redux/history/thunks";
 import { RootState } from "../redux/store";
 import { onURLClick } from "../hooks/utils";
@@ -86,38 +90,11 @@ const useKeyboardShortcuts = ({
       } else if (active === Active.TABS) {
         //
         if (tabFocusNum.current.value() === 0) {
-          // Close all window inside tabs
-          document.querySelectorAll(windowItemSelector).forEach((elem) => {
-            // Click on the Accordion
-            (elem as HTMLElement).click();
-          });
-
-          // Close all tabs accordions
-          document.querySelectorAll(tabsAccordionSelector).forEach((elem) => {
-            // Click on the Accordion
-            (elem as HTMLElement).click();
-          });
-
+          closeAllTabsAccordions();
           return;
         }
 
-        // Open all tabs accordions
-        document.querySelectorAll(tabsAccordionSelector).forEach((elem) => {
-          // Check if accordion is already expanded
-          if ((elem as HTMLElement).classList.contains("Mui-expanded")) return;
-
-          // Click on the Accordion
-          (elem as HTMLElement).click();
-        });
-
-        // Open all window inside tabs
-        document.querySelectorAll(windowItemSelector).forEach((elem) => {
-          // Check if accordion is already expanded
-          if ((elem as HTMLElement).classList.contains("Mui-expanded")) return;
-
-          // Click on the Accordion
-          (elem as HTMLElement).click();
-        });
+        openAllTabsAccordions();
 
         const prevNum = tabFocusNum.current.prev().value;
         const elem = document.querySelectorAll(historyItemSelector)[
@@ -147,23 +124,7 @@ const useKeyboardShortcuts = ({
 
         elem.focus();
       } else if (active === Active.TABS) {
-        // Open all tabs accordions
-        document.querySelectorAll(tabsAccordionSelector).forEach((elem) => {
-          // Check if accordion is already expanded
-          if ((elem as HTMLElement).classList.contains("Mui-expanded")) return;
-
-          // Click on the Accordion
-          (elem as HTMLElement).click();
-        });
-
-        // Open all window inside tabs
-        document.querySelectorAll(windowItemSelector).forEach((elem) => {
-          // Check if accordion is already expanded
-          if ((elem as HTMLElement).classList.contains("Mui-expanded")) return;
-
-          // Click on the Accordion
-          (elem as HTMLElement).click();
-        });
+        openAllTabsAccordions();
 
         const historyItems = document.querySelectorAll(historyItemSelector);
 

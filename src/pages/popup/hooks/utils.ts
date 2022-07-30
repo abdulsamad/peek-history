@@ -1,4 +1,8 @@
 import { ISettings } from "@src/commons/redux/settings/defaults";
+import {
+  tabsAccordionSelector,
+  windowItemSelector,
+} from "./useKeyboardShortcuts";
 
 export const onURLClick = async (
   url: string,
@@ -41,4 +45,39 @@ export const numberIterator = (
         ? { value: ++index, done: false }
         : { value: index, done: true },
   };
+};
+
+// Open All MUI accordion in Tabs view
+export const openAllTabsAccordions = () => {
+  document.querySelectorAll(tabsAccordionSelector).forEach((elem) => {
+    // Check if accordion is already expanded
+    if ((elem as HTMLElement).classList.contains("Mui-expanded")) return;
+
+    // Click on the Accordion
+    (elem as HTMLElement).click();
+  });
+
+  // Open all window inside tabs
+  document.querySelectorAll(windowItemSelector).forEach((elem) => {
+    // Check if accordion is already expanded
+    if ((elem as HTMLElement).classList.contains("Mui-expanded")) return;
+
+    // Click on the Accordion
+    (elem as HTMLElement).click();
+  });
+};
+
+// Close All MUI accordions in Tabs view
+export const closeAllTabsAccordions = () => {
+  // Close all window inside tabs
+  document.querySelectorAll(windowItemSelector).forEach((elem) => {
+    // Click on the Accordion
+    (elem as HTMLElement).click();
+  });
+
+  // Close all tabs accordions
+  document.querySelectorAll(tabsAccordionSelector).forEach((elem) => {
+    // Click on the Accordion
+    (elem as HTMLElement).click();
+  });
 };
