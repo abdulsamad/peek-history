@@ -9,10 +9,12 @@
 
 > <p align="center">A simple and minimal extension for quickly peeking and managing history. </p>
 
+
+### Status
+
 ![Peek History Build](https://github.com/abdulsamad/peek-history/actions/workflows/build.yml/badge.svg)
 
 This extension helps you to quickly peek history in the popup that helps you view, search, and delete your history without distracting you from your work. It also lets you restore your sessions across devices (Reopen recently closed tabs/windows or tabs/windows on other devices).
-
 
 ### ✨ Features
 
