@@ -77,6 +77,8 @@ const tabsSlice = createSlice({
           state.other = payload;
         }
       ),
+      // ? Reset to initial state before filtering (because of Immer.js)
+      builder.addCase(filter.pending, () => initialState),
       builder.addCase(
         filter.fulfilled,
         (
