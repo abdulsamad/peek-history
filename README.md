@@ -9,7 +9,7 @@
 
 > <p align="center">A simple and minimal extension for quickly peeking and managing history. </p>
 
-<h2>
+<h2 align="center">
   <a href="https://github.com/abdulsamad/peek-history/actions"/>
    <img src="https://github.com/abdulsamad/peek-history/actions/workflows/build.yml/badge.svg" alt="Peek History Build">
   </a>
