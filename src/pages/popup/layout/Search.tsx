@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { lighten, InputBase, styled } from "@mui/material";
+import { lighten, InputBase, styled, darken } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
 
 import { RootState, useAppDispatch } from "../redux/store";
@@ -43,6 +43,10 @@ const StyledInputBase = styled(InputBase)<{
 
     "&::placeholder": {
       color: lighten(accentFontColor, 0.3),
+    },
+
+    "&::selection": {
+      backgroundColor: darken(accentFontColor, 1),
     },
   },
 }));
@@ -96,7 +100,9 @@ const Search = () => {
             if (elem) elem.focus();
           }
         }}
-        onBlur={() => dispatch(setSearchOpened(false))}
+        onBlur={(ev) => {
+          if (ev.target.value === "") dispatch(setSearchOpened(false));
+        }}
       />
     </div>
   );
