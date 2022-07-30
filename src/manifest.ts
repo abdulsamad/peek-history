@@ -3,41 +3,47 @@ import { ManifestType } from "@src/manifest-type";
 
 const manifest: ManifestType = {
   manifest_version: 3,
-  name: packageJson.name,
+  name: "Peek History",
   version: packageJson.version,
   description: packageJson.description,
+  author: packageJson.author,
   options_page: "src/pages/options/index.html",
-  background: { service_worker: "src/pages/background/index.js" },
   action: {
+    default_title: "Peek History",
     default_popup: "src/pages/popup/index.html",
-    default_icon: "icon-34.png",
-  },
-  chrome_url_overrides: {
-    newtab: "src/pages/newtab/index.html",
+    default_icon: {
+      "128": "icon128.png",
+      "48": "icon48.png",
+      "32": "icon32.png",
+      "16": "icon16.png",
+    },
   },
   icons: {
-    "128": "icon-128.png",
+    "128": "icon128.png",
+    "48": "icon48.png",
+    "32": "icon32.png",
+    "16": "icon16.png",
   },
-  content_scripts: [
-    {
-      matches: ["http://*/*", "https://*/*", "<all_urls>"],
-      js: ["src/pages/content/index.js"],
-      css: ["contentStyle.css"],
-    },
-  ],
-  devtools_page: "src/pages/devtools/index.html",
+  permissions: ["fontSettings", "tabs", "history", "storage", "sessions"],
   web_accessible_resources: [
     {
-      resources: [
-        "assets/jsx-runtime.*.js",
-        "src/pages/contentView/index.js",
-        "contentStyle.css",
-        "icon-128.png",
-        "icon-34.png",
-      ],
+      resources: ["icon128.png"],
       matches: ["*://*/*"],
     },
   ],
+  content_security_policy: {
+    extension_pages: "script-src 'self'; object-src 'self'",
+  },
+  incognito: "not_allowed",
+  commands: {
+    _execute_browser_action: {
+      suggested_key: {
+        default: "Ctrl+Shift+H",
+        mac: "MacCtrl+Shift+H",
+      },
+      description: "Quickly toggles Peek History",
+    },
+  },
 };
 
 export default manifest;
