@@ -3,6 +3,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   List,
+  ListItem,
   Typography,
 } from "@mui/material";
 import { Accordion } from "@mui/material";
@@ -37,6 +38,11 @@ const TabsList = ({
         </AccordionSummary>
         <AccordionDetails>
           <List aria-label="Recently Closed Tabs">
+            {tabs.recent.length === 0 && (
+              <ListItem>
+                <Typography variant="h5">No recent tabs found.</Typography>
+              </ListItem>
+            )}
             {tabs.recent.map(({ tab, window }) => {
               // Session contains window
               if (window)
