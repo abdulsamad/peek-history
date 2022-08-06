@@ -65,7 +65,7 @@ const TabsList = ({
                   url={tab.url}
                   hideURL={settings.hideURL}
                   hideTime={settings.hideTime}
-                  onClick={() => onURLClick(tab.url, settings.openURL)}
+                  onClick={() => onRestoreClick(tab.sessionId)}
                 />
               );
             })}
@@ -100,7 +100,7 @@ const TabsList = ({
                     />
                   );
 
-                // Session also contains tab {Other Tab (Tab form other device) will still have structure like window}
+                // Session contains tab {Other Tab (Tab form other device) will still have structure like window}
                 return (
                   <TabItem
                     key={window.tabs[0].title}
@@ -108,9 +108,7 @@ const TabsList = ({
                     url={window.tabs[0].url}
                     hideURL={settings.hideURL}
                     hideTime={settings.hideTime}
-                    onClick={() =>
-                      onURLClick(window.tabs[0].url, settings.openURL)
-                    }
+                    onClick={() => onRestoreClick(window.tabs[0].sessionId)}
                   />
                 );
               })}
