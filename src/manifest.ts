@@ -24,7 +24,14 @@ const manifest: ManifestType = {
     "32": "icon32.png",
     "16": "icon16.png",
   },
-  permissions: ["fontSettings", "tabs", "history", "storage", "sessions"],
+  permissions: [
+    "fontSettings",
+    "tabs",
+    "history",
+    "storage",
+    "sessions",
+    "favicon",
+  ],
   web_accessible_resources: [
     {
       resources: ["icon128.png"],
@@ -36,10 +43,10 @@ const manifest: ManifestType = {
   },
   incognito: "not_allowed",
   commands: {
-    _execute_browser_action: {
+    _execute_action: {
       suggested_key: {
         default: "Ctrl+Shift+H",
-        mac: "MacCtrl+Shift+H",
+        mac: "Command+Shift+H",
       },
       description: "Quickly toggles Peek History",
     },
