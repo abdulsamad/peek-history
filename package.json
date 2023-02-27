@@ -13,16 +13,16 @@
     "deploy-build": "bestzip ${npm_package_name}-v${npm_package_version}.zip dist/*"
   },
   "dependencies": {
-    "@emotion/react": "^11.9.3",
-    "@emotion/styled": "^11.9.3",
-    "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.9.2",
-    "@reduxjs/toolkit": "^1.8.3",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.9",
+    "@mui/material": "^5.11.10",
+    "@reduxjs/toolkit": "^1.9.3",
     "dayjs": "^1.11.7",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-hotkeys-hook": "^3.4.7",
-    "react-redux": "^8.0.2",
+    "react-hotkeys-hook": "^4.3.7",
+    "react-redux": "^8.0.5",
     "timeago-react": "^3.0.5"
   },
   "devDependencies": {
