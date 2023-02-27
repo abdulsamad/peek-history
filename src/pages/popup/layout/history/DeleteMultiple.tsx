@@ -40,6 +40,7 @@ const DeleteMultiple = () => {
         onClose={handleClose}
         anchorOrigin={{ vertical: "top", horizontal: "left" }}
         transformOrigin={{ vertical: "top", horizontal: "left" }}
+        sx={{ ul: { padding: 0 } }}
       >
         <MenuItem>
           <ConfirmationModal
