@@ -13,8 +13,8 @@ const StyledListItemIcon = styled(ListItemIcon)`
 `;
 
 const StyledAvatar = styled(Avatar)(() => ({
-  height: 16,
-  width: 16,
+  height: 20,
+  width: 20,
 }));
 
 const StyledListItem = styled(ListItem)(
