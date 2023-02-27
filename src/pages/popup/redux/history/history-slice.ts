@@ -62,9 +62,12 @@ const historySlice = createSlice({
         state.loading = false;
         state.items = [];
       }),
-      builder.addCase(deleteRange.fulfilled, (state) => {
-        state.items = [];
-      });
+      builder.addCase(
+        deleteRange.fulfilled,
+        (state, { payload }: PayloadAction<IHistoryItem[]>) => {
+          state.items = payload;
+        }
+      );
   },
 });
 

@@ -76,6 +76,13 @@ export const deleteRange = createAsyncThunk(
   }) => {
     await chrome.history.deleteRange({ startTime, endTime });
 
-    return true;
+    // Refetch and update history in state
+    const historyItems = await chrome.history.search({
+      text: "",
+      maxResults: 50,
+      startTime: dayjs("01-01-1970").valueOf(),
+    });
+
+    return historyItems;
   }
 );
