@@ -51,7 +51,14 @@ export const addHistory = createAsyncThunk(
       endTime,
     });
 
-    return historyItems;
+    if (historyItems.length === 51) {
+      // Remove last history item
+      historyItems.pop();
+
+      return { history: historyItems, remaining: true };
+    } else {
+      return { history: historyItems, remaining: false };
+    }
   }
 );
 

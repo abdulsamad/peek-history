@@ -148,14 +148,18 @@ const InfiniteHistoryItemsList = ({
           return (
             <Fragment key={id}>
               <>{historyItemBlock({ id, title, url, lastVisitTime })}</>
-              <ListItem
-                key={id}
-                ref={(node: HTMLLIElement) => lastElemRef(node, lastVisitTime)}
-                alignItems="center"
-                sx={{ justifyContent: "center", padding: "10px 0" }}
-              >
-                <CircularProgress size={16} />
-              </ListItem>
+              {history.remaining && (
+                <ListItem
+                  key={id}
+                  ref={(node: HTMLLIElement) =>
+                    lastElemRef(node, lastVisitTime)
+                  }
+                  alignItems="center"
+                  sx={{ justifyContent: "center", padding: "10px 0" }}
+                >
+                  <CircularProgress size={16} />
+                </ListItem>
+              )}
             </Fragment>
           );
         }
