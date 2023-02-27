@@ -23,7 +23,8 @@ const DeleteMultiple = () => {
   return (
     <>
       <ButtonBase
-        sx={{ height: "100%", width: "100%", padding: "14px 12px 0 12px" }}
+        component="div"
+        sx={{ height: "100%", width: "100%" }}
         onClick={handleClick}
       >
         <DeleteForeverIcon
