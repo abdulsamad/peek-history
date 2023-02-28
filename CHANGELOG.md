@@ -1,6 +1,6 @@
 ## Changelog
 
-### [2.0.0] - DD-MM-2022
+### [2.0.0] - 01-03-2023
 - Switched to Redux for state management
 - Switched to Vite for bundling
 - Upgraded to React 18
