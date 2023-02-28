@@ -94,6 +94,29 @@ const DeleteMultiple = () => {
         <MenuItem>
           <ConfirmationModal
             sx={{ padding: "6px 16px", height: "36px", width: "100%" }}
+            text="Last 6 Hours"
+            question="Clear History?"
+            warning={
+              <>
+                <strong>Note:</strong> This will delete all your browsing
+                history in last 6 hours.
+              </>
+            }
+            onConfirm={() => {
+              const timeHourAgo = dayjs().subtract(6, "hours").valueOf();
+
+              dispatch(
+                deleteRange({
+                  startTime: timeHourAgo,
+                  endTime: dayjs().valueOf(),
+                })
+              );
+            }}
+          />
+        </MenuItem>
+        <MenuItem>
+          <ConfirmationModal
+            sx={{ padding: "6px 16px", height: "36px", width: "100%" }}
             text="Last 24 Hours"
             question="Clear History?"
             warning={
