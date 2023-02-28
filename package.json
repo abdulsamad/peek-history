@@ -50,7 +50,7 @@
     "vite": "^4.1.4"
   },
   "engines": {
-    "node": "^16.x.x",
+    "node": "^18.x.x",
     "yarn": "^1.x.x"
   }
 }
