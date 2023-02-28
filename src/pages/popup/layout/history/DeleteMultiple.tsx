@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu, MenuItem, ButtonBase } from "@mui/material";
+import { Menu, MenuItem, ButtonBase, menuItemClasses } from "@mui/material";
 import { DeleteForever as DeleteForeverIcon } from "@mui/icons-material";
 import dayjs from "dayjs";
 
@@ -40,10 +40,14 @@ const DeleteMultiple = () => {
         onClose={handleClose}
         anchorOrigin={{ vertical: "top", horizontal: "left" }}
         transformOrigin={{ vertical: "top", horizontal: "left" }}
-        sx={{ ul: { padding: 0 } }}
+        sx={{
+          li: { padding: 0 },
+          "li > div": { flex: 1 },
+        }}
       >
         <MenuItem>
           <ConfirmationModal
+            sx={{ padding: "6px 16px", height: "36px", width: "100%" }}
             text="Last 30 Mins"
             question="Clear History?"
             warning={
@@ -66,6 +70,7 @@ const DeleteMultiple = () => {
         </MenuItem>
         <MenuItem>
           <ConfirmationModal
+            sx={{ padding: "6px 16px", height: "36px", width: "100%" }}
             text="Last 1 Hour"
             question="Clear History?"
             warning={
@@ -88,6 +93,7 @@ const DeleteMultiple = () => {
         </MenuItem>
         <MenuItem>
           <ConfirmationModal
+            sx={{ padding: "6px 16px", height: "36px", width: "100%" }}
             text="Last 24 Hours"
             question="Clear History?"
             warning={
@@ -110,6 +116,7 @@ const DeleteMultiple = () => {
         </MenuItem>
         <MenuItem>
           <ConfirmationModal
+            sx={{ padding: "6px 16px", height: "36px", width: "100%" }}
             text="Delete All"
             question="Clear History?"
             warning={
