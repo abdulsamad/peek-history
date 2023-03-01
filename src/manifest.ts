@@ -8,6 +8,7 @@ const manifest: ManifestType = {
   description: packageJson.description,
   author: packageJson.author,
   options_page: "src/pages/options/index.html",
+  background: { service_worker: "src/pages/background/index.js" },
   action: {
     default_title: "Peek History",
     default_popup: "src/pages/popup/index.html",
@@ -46,7 +47,6 @@ const manifest: ManifestType = {
     _execute_action: {
       suggested_key: {
         default: "Ctrl+Shift+H",
-        mac: "Command+Shift+H",
       },
       description: "Quickly toggles Peek History",
     },
