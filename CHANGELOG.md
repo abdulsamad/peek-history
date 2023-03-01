@@ -9,7 +9,7 @@
 - Improved keyboard navigation and shortcuts
 - Changed shortcuts modifier from CTRL to Alt/Option
 - Added setting to set tab (current or new blank) for opening URLs
-- Added hide time and accent font color setting in options
+- Added hide time and accent font color settings in options
 - Improved UI and UX
 
 ### [1.0.8] - 08-04-2021
