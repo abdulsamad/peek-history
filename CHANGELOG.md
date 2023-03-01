@@ -5,7 +5,7 @@
 - Switched to Vite for bundling
 - Upgraded to React 18
 - Increased favicon quality with New Favicon API
-- Added option to delete history in 3 time ranges
+- Added option to delete history in time ranges
 - Improved keyboard navigation and shortcuts
 - Changed shortcuts modifier from CTRL to Alt/Option
 - Added setting to set tab (current or new blank) for opening URLs
