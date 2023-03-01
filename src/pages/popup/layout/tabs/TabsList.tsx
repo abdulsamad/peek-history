@@ -40,7 +40,7 @@ const TabsList = ({
           <List aria-label="Recently Closed Tabs">
             {tabs.recent.length === 0 && (
               <ListItem>
-                <Typography variant="h5">No recent tabs found.</Typography>
+                <Typography variant="h6">No recent tabs found.</Typography>
               </ListItem>
             )}
             {tabs.recent.map(({ tab, window }) => {
