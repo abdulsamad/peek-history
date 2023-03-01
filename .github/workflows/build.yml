@@ -17,7 +17,7 @@ jobs:
       - name: Setup yarn
         uses: mskelton/setup-yarn@v1
         with:
-          node-version: 16
+          node-version: 18
 
       - name: Install dependencies
         run: yarn
