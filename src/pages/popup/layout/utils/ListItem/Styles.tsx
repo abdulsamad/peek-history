@@ -18,7 +18,7 @@ const StyledAvatar = styled(Avatar)(() => ({
   width: 20,
 }));
 
-const StyledListItem = styled(ListItem)<{ hideURL: boolean }>(
+const StyledListItem = styled(ListItem)<{ hideURL?: boolean }>(
   ({ theme, hideURL }) => `
   display: flex;
   align-items: center;
