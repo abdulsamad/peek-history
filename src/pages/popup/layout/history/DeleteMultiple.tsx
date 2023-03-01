@@ -23,7 +23,8 @@ const DeleteMultiple = () => {
   return (
     <>
       <ButtonBase
-        sx={{ height: "100%", width: "100%", padding: "14px 12px 0 12px" }}
+        component="div"
+        sx={{ height: "100%", width: "100%" }}
         onClick={handleClick}
       >
         <DeleteForeverIcon
@@ -39,51 +40,114 @@ const DeleteMultiple = () => {
         onClose={handleClose}
         anchorOrigin={{ vertical: "top", horizontal: "left" }}
         transformOrigin={{ vertical: "top", horizontal: "left" }}
+        sx={{
+          li: { padding: 0 },
+          "li > div": { flex: 1 },
+        }}
       >
-        <MenuItem
-          onClick={() => {
-            const time30MinsAgo = dayjs().subtract(30, "minute").valueOf();
+        <MenuItem>
+          <ConfirmationModal
+            sx={{ padding: "6px 16px", height: "36px", width: "100%" }}
+            text="Last 30 Mins"
+            question="Clear History?"
+            warning={
+              <>
+                <strong>Note:</strong> This will delete all your browsing
+                history in last 30 minutes.
+              </>
+            }
+            onConfirm={() => {
+              const time30MinsAgo = dayjs().subtract(30, "minute").valueOf();
 
-            dispatch(
-              deleteRange({
-                startTime: time30MinsAgo,
-                endTime: dayjs().valueOf(),
-              })
-            );
-          }}
-        >
-          Last 30 Mins
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            const timeHourAgo = dayjs().subtract(1, "hours").valueOf();
+              dispatch(
+                deleteRange({
+                  startTime: time30MinsAgo,
+                  endTime: dayjs().valueOf(),
+                })
+              );
 
-            dispatch(
-              deleteRange({
-                startTime: timeHourAgo,
-                endTime: dayjs().valueOf(),
-              })
-            );
-          }}
-        >
-          Last 1 Hour
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            const time24HoursAgo = dayjs().subtract(24, "hours").valueOf();
-
-            dispatch(
-              deleteRange({
-                startTime: time24HoursAgo,
-                endTime: dayjs().valueOf(),
-              })
-            );
-          }}
-        >
-          Last 24 Hours
+              handleClose();
+            }}
+          />
         </MenuItem>
         <MenuItem>
           <ConfirmationModal
+            sx={{ padding: "6px 16px", height: "36px", width: "100%" }}
+            text="Last 1 Hour"
+            question="Clear History?"
+            warning={
+              <>
+                <strong>Note:</strong> This will delete all your browsing
+                history in last hour.
+              </>
+            }
+            onConfirm={() => {
+              const timeHourAgo = dayjs().subtract(1, "hours").valueOf();
+
+              dispatch(
+                deleteRange({
+                  startTime: timeHourAgo,
+                  endTime: dayjs().valueOf(),
+                })
+              );
+
+              handleClose();
+            }}
+          />
+        </MenuItem>
+        <MenuItem>
+          <ConfirmationModal
+            sx={{ padding: "6px 16px", height: "36px", width: "100%" }}
+            text="Last 6 Hours"
+            question="Clear History?"
+            warning={
+              <>
+                <strong>Note:</strong> This will delete all your browsing
+                history in last 6 hours.
+              </>
+            }
+            onConfirm={() => {
+              const timeHourAgo = dayjs().subtract(6, "hours").valueOf();
+
+              dispatch(
+                deleteRange({
+                  startTime: timeHourAgo,
+                  endTime: dayjs().valueOf(),
+                })
+              );
+
+              handleClose();
+            }}
+          />
+        </MenuItem>
+        <MenuItem>
+          <ConfirmationModal
+            sx={{ padding: "6px 16px", height: "36px", width: "100%" }}
+            text="Last 24 Hours"
+            question="Clear History?"
+            warning={
+              <>
+                <strong>Note:</strong> This will delete all your browsing
+                history in last 24 hours.
+              </>
+            }
+            onConfirm={() => {
+              const time24HoursAgo = dayjs().subtract(24, "hours").valueOf();
+
+              dispatch(
+                deleteRange({
+                  startTime: time24HoursAgo,
+                  endTime: dayjs().valueOf(),
+                })
+              );
+
+              handleClose();
+            }}
+          />
+        </MenuItem>
+        <MenuItem>
+          <ConfirmationModal
+            sx={{ padding: "6px 16px", height: "36px", width: "100%" }}
             text="Delete All"
             question="Clear History?"
             warning={
@@ -92,7 +156,10 @@ const DeleteMultiple = () => {
                 history.
               </>
             }
-            onConfirm={() => dispatch(deleteAll())}
+            onConfirm={() => {
+              dispatch(deleteAll());
+              handleClose();
+            }}
           />
         </MenuItem>
       </Menu>

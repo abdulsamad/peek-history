@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+import { getShowUpdatePopup } from "./thunks";
+
 /**
  * All settings such as extension options, views should be in UI State
  */
@@ -35,6 +37,14 @@ const UISlice = createSlice({
     setShowUpdatePopup: (state, { payload }: PayloadAction<boolean>) => {
       state.showUpdatePopup = payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(
+      getShowUpdatePopup.fulfilled,
+      (state, { payload }: PayloadAction<boolean>) => {
+        state.showUpdatePopup = payload;
+      }
+    );
   },
 });
 

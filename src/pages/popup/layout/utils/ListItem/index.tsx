@@ -11,6 +11,7 @@ import {
   StyledListItemIcon,
   StyledListItemText,
 } from "./Styles";
+import { faviconURL } from "../../utils";
 
 // Filter id field from historyItem because we don't want it as prop
 type IFilteredHistoryItem = Omit<IHistoryItem, "id">;
@@ -42,12 +43,13 @@ const HistoryItem = ({
       divider={true}
       onClick={onClick}
       tabIndex={-1}
+      hideURL={hideURL}
       data-history-item
     >
       <StyledListItemIcon>
         <StyledAvatar
-          // TODO: Add new favicon API when chrome adds it
-          // src={`chrome://favicon/${url.href}`}
+          variant="square"
+          src={faviconURL(url)}
           alt={`${url} Favicon`}
         />
       </StyledListItemIcon>

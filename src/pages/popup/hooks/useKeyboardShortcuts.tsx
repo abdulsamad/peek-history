@@ -40,28 +40,28 @@ const useKeyboardShortcuts = ({
   const tabFocusNum = useRef(numberIterator());
 
   // Open search
-  useHotkeys("alt+s", (ev) => {
+  useHotkeys("alt+s, ctrl+s", (ev) => {
     ev.preventDefault();
 
     dispatch(setSearchOpened(true));
   });
 
   // Open History/extension home view
-  useHotkeys("alt+h", (ev) => {
+  useHotkeys("alt+h, ctrl+h", (ev) => {
     ev.preventDefault();
 
     dispatch(switchActiveView(Active.HISTORY));
   });
 
   // Open Tab view
-  useHotkeys("alt+t", (ev) => {
+  useHotkeys("alt+t, ctrl+t", (ev) => {
     ev.preventDefault();
 
     dispatch(switchActiveView(Active.TABS));
   });
 
   // Open extension settings page
-  useHotkeys("alt+o", (ev) => {
+  useHotkeys("alt+o, ctrl+o", (ev) => {
     ev.preventDefault();
 
     chrome.runtime.openOptionsPage();
@@ -69,7 +69,7 @@ const useKeyboardShortcuts = ({
 
   // Open nth number history/tab link
   for (let index = 0; index < 9; index++) {
-    useHotkeys(`alt+${index + 1}`, (ev) => {
+    useHotkeys(`alt+${index + 1}, ctrl+${index + 1}`, (ev) => {
       ev.preventDefault();
 
       if (active === Active.HISTORY) {

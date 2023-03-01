@@ -17,9 +17,6 @@
 
 This extension helps you to quickly peek history in the popup that helps you view, search, and delete your history without distracting you from your work. It also lets you restore your sessions across devices (Reopen recently closed tabs/windows or tabs/windows on other devices).
 
-
-> <span style="color: red">v2.0.0 is not completed and deployed yet. Waiting for <a href="https://developer.chrome.com/docs/extensions/mv3/intro/mv3-overview/#:~:text=scripts%20at%20runtime.-,New%20favicon%20API%3A,-this%20new%20JavaScript">new Favicion</a> API release.</span>
-
 ### ✨ Features
 
 - Quickly peek history in popup without going away from your working tab.

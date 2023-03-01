@@ -10,6 +10,8 @@ import {
   IconButton,
   Slide,
   styled,
+  SxProps,
+  Theme,
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
 
@@ -34,27 +36,29 @@ interface IConfirmationModal {
   icon?: React.ReactNode;
   text?: string;
   ButtonProps?: any;
+  sx?: SxProps<Theme> | undefined;
 }
 
 const ConfirmationModal = ({
   question,
   warning,
+  onConfirm,
   icon,
   text,
   ButtonProps,
-  onConfirm,
+  sx,
 }: IConfirmationModal) => {
   const [open, setOpen] = useState(false);
 
   return (
     <Container>
       {icon && (
-        <IconButton onClick={() => setOpen(true)} {...ButtonProps}>
+        <IconButton sx={sx} onClick={() => setOpen(true)} {...ButtonProps}>
           {icon}
         </IconButton>
       )}
       {text && (
-        <ButtonBase onClick={() => setOpen(true)} {...ButtonProps}>
+        <ButtonBase sx={sx} onClick={() => setOpen(true)} {...ButtonProps}>
           {text}
         </ButtonBase>
       )}

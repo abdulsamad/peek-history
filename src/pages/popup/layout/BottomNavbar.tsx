@@ -29,7 +29,7 @@ const BottomNavbar = () => {
         <BottomNavigationAction label="Home" icon={<HomeIcon />} />
         <BottomNavigationAction label="Tabs" icon={<DevicesIcon />} />
         <BottomNavigationAction
-          label="Delete All"
+          label=""
           icon={<DeleteMultiple />}
           sx={{ padding: 0 }}
         />

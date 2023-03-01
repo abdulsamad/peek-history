@@ -4,6 +4,7 @@ import {
   ListItemText,
   ListItemIcon,
   darken,
+  lighten,
 } from "@mui/material";
 import { styled } from "@mui/material";
 
@@ -13,25 +14,38 @@ const StyledListItemIcon = styled(ListItemIcon)`
 `;
 
 const StyledAvatar = styled(Avatar)(() => ({
-  height: 16,
-  width: 16,
+  height: 20,
+  width: 20,
 }));
 
-const StyledListItem = styled(ListItem)(
-  ({ theme }) => `
+const StyledListItem = styled(ListItem)<{ hideURL?: boolean }>(
+  ({ theme, hideURL }) => `
   display: flex;
   align-items: center;
-  padding: 8px 16px;
+  padding: ${hideURL ? "14px 16px" : "8px 16px"};
   cursor: pointer;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background: rgba( 255, 255, 255, 0.25 );
+    background-color: ${
+      theme.palette.mode === "dark"
+        ? darken(theme.palette.text.primary, 0.6)
+        : lighten(theme.palette.text.primary, 0.9)
+    };
+    box-shadow: 0 3px 5px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 14px );
     border-left: 5px solid ${theme.palette.primary.main};
   }
   
   &:focus {
     outline: none;
-    background-color: ${darken(theme.palette.text.primary, 0.9)};
+    background-color: ${
+      theme.palette.mode === "dark"
+        ? darken(theme.palette.text.primary, 0.6)
+        : lighten(theme.palette.text.primary, 0.9)
+    };
+    box-shadow: 0 3px 5px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 14px );
     border-left: 5px solid ${theme.palette.primary.main};  
   }
 `

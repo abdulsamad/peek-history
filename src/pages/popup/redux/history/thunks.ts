@@ -1,12 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import dayjs from "dayjs";
 
+const defaults = {
+  text: "",
+  maxResults: 50,
+  startTime: dayjs("01-01-1970").valueOf(),
+};
+
 export const getHistory = createAsyncThunk(
   "history/getHistory",
   async ({
-    text = "",
-    maxResults = 50,
-    startTime = dayjs("01-01-1970").valueOf(),
+    text = defaults.text,
+    maxResults = defaults.maxResults,
+    startTime = defaults.startTime,
     endTime,
   }: {
     text?: string;
@@ -28,9 +34,9 @@ export const getHistory = createAsyncThunk(
 export const addHistory = createAsyncThunk(
   "history/addHistory",
   async ({
-    text = "",
-    maxResults = 50,
-    startTime = dayjs("01-01-1970").valueOf(),
+    text = defaults.text,
+    maxResults = defaults.maxResults,
+    startTime = defaults.startTime,
     endTime,
   }: {
     text?: string;
@@ -40,12 +46,19 @@ export const addHistory = createAsyncThunk(
   }) => {
     const historyItems = await chrome.history.search({
       text,
-      maxResults,
+      maxResults: maxResults + 1,
       startTime,
       endTime,
     });
 
-    return historyItems;
+    if (historyItems.length === 51) {
+      // Remove last history item
+      historyItems.pop();
+
+      return { history: historyItems, remaining: true };
+    } else {
+      return { history: historyItems, remaining: false };
+    }
   }
 );
 
@@ -76,6 +89,13 @@ export const deleteRange = createAsyncThunk(
   }) => {
     await chrome.history.deleteRange({ startTime, endTime });
 
-    return true;
+    // Refetch and update history in state
+    const historyItems = await chrome.history.search({
+      text: "",
+      maxResults: 50,
+      startTime: dayjs("01-01-1970").valueOf(),
+    });
+
+    return historyItems;
   }
 );
