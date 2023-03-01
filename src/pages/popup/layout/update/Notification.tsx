@@ -78,7 +78,8 @@ const Notification = ({ showUpdatePopup }: INotification) => {
           <Button
             variant="contained"
             size="small"
-            color="info"
+            color="primary"
+            sx={{ "&:hover": { backgroundColor: "primary.main" } }}
             onClick={closeShowUpdatePopup}
           >
             Got it!
