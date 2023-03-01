@@ -8,11 +8,23 @@ import {
   List,
   ListItem,
   ListItemText,
+  Typography,
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
 
 import { useAppDispatch } from "../../redux/store";
 import { setShowUpdatePopup } from "../../redux/ui/ui-slice";
+import KBD from "../utils/KBD";
+
+const WhatsNew = [
+  <Typography lineHeight="1.5em" key="shortcut">
+    Changed shortcuts modifier from <KBD>CTRL</KBD> to <KBD>Alt/Option</KBD>
+  </Typography>,
+  "Added option to delete history in time ranges",
+  "Added setting to set tab (current or new blank) for opening URLs",
+  "Added hide time and accent font color setting in options",
+  "Improved keyboard navigation and shortcuts",
+];
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -38,39 +50,25 @@ const Notification = ({ showUpdatePopup }: INotification) => {
 
   return (
     <div>
-      <Dialog open={showUpdatePopup} TransitionComponent={Transition}>
-        <DialogTitle textAlign="center">Updated to {version}! 🎉</DialogTitle>
-        <List>
-          <ListItem>
-            <ListItemText>
-              Added option to delete history in 3 time ranges
-            </ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemText>
-              Improved keyboard navigation and shortcuts
-            </ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemText>
-              Changed shortcuts modifier from CTRL to Alt/Option
-            </ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemText>
-              Added setting to set tab (current or new blank) for opening URLs
-            </ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemText>
-              Added hide time and accent font color setting in options
-            </ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemText>
-              Increased favicon quality with New Favicon API
-            </ListItemText>
-          </ListItem>
+      <Dialog
+        open={showUpdatePopup}
+        onClose={closeShowUpdatePopup}
+        TransitionComponent={Transition}
+      >
+        <DialogTitle textAlign="center" fontStyle="italic">
+          Updated to {version}! 🎉
+        </DialogTitle>
+        <Typography sx={{ padding: "0 1em" }} fontWeight="600">
+          What&apos;s New
+        </Typography>
+        <List sx={{ fontSize: "0.5rem" }} dense={true}>
+          {WhatsNew.map((log, index) => (
+            <ListItem key={index}>
+              <ListItemText sx={{ fontSize: "0.9rem" }} disableTypography>
+                {log}
+              </ListItemText>
+            </ListItem>
+          ))}
         </List>
         <Box
           sx={{ padding: "1em", display: "flex" }}
