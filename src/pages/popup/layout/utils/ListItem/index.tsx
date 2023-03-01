@@ -43,6 +43,7 @@ const HistoryItem = ({
       divider={true}
       onClick={onClick}
       tabIndex={-1}
+      hideURL={hideURL}
       data-history-item
     >
       <StyledListItemIcon>

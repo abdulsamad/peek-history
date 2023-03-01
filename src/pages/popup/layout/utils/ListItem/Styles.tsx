@@ -18,11 +18,11 @@ const StyledAvatar = styled(Avatar)(() => ({
   width: 20,
 }));
 
-const StyledListItem = styled(ListItem)(
-  ({ theme }) => `
+const StyledListItem = styled(ListItem)<{ hideURL: boolean }>(
+  ({ theme, hideURL }) => `
   display: flex;
   align-items: center;
-  padding: 8px 16px;
+  padding: ${hideURL ? "14px 16px" : "8px 16px"};
   cursor: pointer;
 
   &:hover {
