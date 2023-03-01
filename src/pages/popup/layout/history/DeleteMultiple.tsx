@@ -65,6 +65,8 @@ const DeleteMultiple = () => {
                   endTime: dayjs().valueOf(),
                 })
               );
+
+              handleClose();
             }}
           />
         </MenuItem>
@@ -88,6 +90,8 @@ const DeleteMultiple = () => {
                   endTime: dayjs().valueOf(),
                 })
               );
+
+              handleClose();
             }}
           />
         </MenuItem>
@@ -111,6 +115,8 @@ const DeleteMultiple = () => {
                   endTime: dayjs().valueOf(),
                 })
               );
+
+              handleClose();
             }}
           />
         </MenuItem>
@@ -134,6 +140,8 @@ const DeleteMultiple = () => {
                   endTime: dayjs().valueOf(),
                 })
               );
+
+              handleClose();
             }}
           />
         </MenuItem>
@@ -148,7 +156,10 @@ const DeleteMultiple = () => {
                 history.
               </>
             }
-            onConfirm={() => dispatch(deleteAll())}
+            onConfirm={() => {
+              dispatch(deleteAll());
+              handleClose();
+            }}
           />
         </MenuItem>
       </Menu>
