@@ -47,6 +47,7 @@ const manifest: ManifestType = {
     _execute_action: {
       suggested_key: {
         default: "Ctrl+Shift+H",
+        mac: "Ctrl+Shift+H",
       },
       description: "Quickly toggles Peek History",
     },
