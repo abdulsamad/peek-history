@@ -28,7 +28,7 @@ jobs:
         run: yarn run deploy-build
 
       - name: Get package info
-        uses: codex-team/action-nodejs-package-info@v1
+        uses: codex-team/action-nodejs-package-info@v1.1
         id: package
 
       - name: Archive production artifacts
