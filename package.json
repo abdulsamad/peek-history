@@ -9,8 +9,7 @@
     "build": "tsc --noEmit && vite build",
     "lint": "eslint src",
     "format": "prettier --write src/**/*.js",
-    "predeploy": "yarn run build",
-    "deploy": "bestzip ${npm_package_name}-v${npm_package_version}.zip dist/*"
+    "deploy-build": "yarn run build && bestzip ${npm_package_name}-v${npm_package_version}.zip dist/*"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
