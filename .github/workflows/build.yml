@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup yarn
-        uses: mskelton/setup-yarn@v1
+        uses: borales/actions-yarn@v4
         with:
           node-version: 18
 
