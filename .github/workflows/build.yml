@@ -14,13 +14,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup yarn
-        uses: borales/actions-yarn@v4
+      - name: Set Node.js 18.x
+        uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 18.x
 
       - name: Install dependencies
-        run: yarn
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
 
       - name: Build and zip the build (dist) folder
         run: yarn run deploy-build
