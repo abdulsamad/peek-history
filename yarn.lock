@@ -1044,13 +1044,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/chrome@npm:^0.0.217":
-  version: 0.0.217
-  resolution: "@types/chrome@npm:0.0.217"
+"@types/chrome@npm:^0.0.246":
+  version: 0.0.246
+  resolution: "@types/chrome@npm:0.0.246"
   dependencies:
     "@types/filesystem": "*"
     "@types/har-format": "*"
-  checksum: a450d3e72647801db6ff38c7662d7a6dec9ac2758315668403159d593674826596bd18c593f55f771c37ae954de9a4b7dabc75dc52cab699c416d0a4b4ad6bb7
+  checksum: 6c6d92814b9838bbb1034d0cf731e53f8bb0090dc3e4a248c0e7c4c087fba305702ebf61b80858fec60f52858cb9ecf8148dbe9e94a20d742661085f31ee9cc7
   languageName: node
   linkType: hard
 
@@ -4351,7 +4351,7 @@ __metadata:
     "@mui/icons-material": ^5.11.9
     "@mui/material": ^5.11.10
     "@reduxjs/toolkit": ^1.9.3
-    "@types/chrome": ^0.0.217
+    "@types/chrome": ^0.0.246
     "@types/node": ^18.14.2
     "@types/react": ^18.0.28
     "@types/react-dom": ^18.0.11
