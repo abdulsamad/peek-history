@@ -30,6 +30,7 @@ export const numberIterator = (
   reset: () => void;
   prev: () => { value: number; done: boolean };
   next: () => { value: number; done: boolean };
+  set: (num: number) => { value: number; done: boolean };
 } => {
   let index = start;
 
@@ -44,6 +45,16 @@ export const numberIterator = (
       index < end
         ? { value: ++index, done: false }
         : { value: index, done: true },
+    set: (num) =>
+      num === end
+        ? {
+            value: num,
+            done: true,
+          }
+        : {
+            value: num,
+            done: false,
+          },
   };
 };
 
