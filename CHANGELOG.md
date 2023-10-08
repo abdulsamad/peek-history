@@ -1,5 +1,9 @@
 ## Changelog
 
+### [2.0.1] - 01-03-2023
+- Updated dependencies
+- Minor performance improvements
+
 ### [2.0.0] - 01-03-2023
 - Switched to Redux for state management
 - Switched to Vite for bundling
