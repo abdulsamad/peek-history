@@ -6,20 +6,20 @@ import { openAllTabsAccordions } from "../../hooks/utils";
 export const getRecentlyClosed = createAsyncThunk(
   "tabs/getRecentlyClosed",
   async () => {
-    const tabs = await chrome.sessions.getRecentlyClosed();
+    const tabs = await (chrome.sessions as any).getRecentlyClosed();
     return tabs;
   }
 );
 
 export const getDevices = createAsyncThunk("tabs/getDevices", async () => {
-  const deviceItems = await chrome.sessions.getDevices();
+  const deviceItems = await (chrome.sessions as any).getDevices();
   return deviceItems;
 });
 
 export const restoreSession = createAsyncThunk(
   "tabs/restoreSession",
   async (sessionId: string) => {
-    const restoredSession = await chrome.sessions.restore(sessionId);
+    const restoredSession = await (chrome.sessions as any).restore(sessionId);
     return restoredSession;
   }
 );
