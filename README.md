@@ -1,3 +1,5 @@
+> <p><b>:bell: Heads Up: </b> I worked on this project in my initial days, and it's time to call it a day. The functionality it offered is now a default feature in the Chrome browser, making this project obsolete. Unfortunately, I won't be making any more updates.</p>
+
 <p align="center">
   <a href="https://chrome.google.com/webstore/detail/peek-history/gknodemjjckmkncijnedcpogffimkmbm">
     <img alt="Peek History" src="readme/icon.png" width="60" />
@@ -7,9 +9,7 @@
   Peek History
 </h2>
 
-> <p><b>:bell: Heads Up: </b> I worked on this project in my initial days, and it's time to call it a day. The functionality it offered is now a default feature in the Chrome browser, making this project obsolete. Unfortunately, I won't be making any more updates.</p>
-
-<!-- > <p align="center">A simple and minimal extension for quickly peeking and managing history. </p> -->
+> <p align="center">A simple and minimal extension for quickly peeking and managing history. </p>
 
 <p align="center">
   <a href="https://github.com/abdulsamad/peek-history/actions"/>
