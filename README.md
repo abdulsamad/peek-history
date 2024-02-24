@@ -3,7 +3,7 @@
 <br/>
 
 <p align="center">
-  <a href="https://chrome.google.com/webstore/detail/peek-history/gknodemjjckmkncijnedcpogffimkmbm">
+  <a href="https://chromewebstore.google.com/detail/peek-history/gknodemjjckmkncijnedcpogffimkmbm">
     <img alt="Peek History" src="readme/icon.png" width="60" />
   </a>
 </p>
@@ -14,10 +14,10 @@
 > <p align="center">A simple and minimal extension for quickly peeking and managing history. </p>
 
 <p align="center">
-  <a href="https://github.com/abdulsamad/peek-history/actions"/>
+  <a href="https://github.com/abdulsamad/peek-history/actions">
    <img src="https://github.com/abdulsamad/peek-history/actions/workflows/build.yml/badge.svg" alt="Peek History Build">
   </a>
-</h2>
+</p>
 
 This extension helps you to quickly peek history in the popup that helps you view, search, and delete your history without distracting you from your work. It also lets you restore your sessions across devices (Reopen recently closed tabs/windows or tabs/windows on other devices).
 
@@ -53,7 +53,7 @@ In the Popup
 <br>
 
 <p align="center" >
-  <a href="https://chrome.google.com/webstore/detail/peek-history/gknodemjjckmkncijnedcpogffimkmbm">
+  <a href="https://chromewebstore.google.com/detail/peek-history/gknodemjjckmkncijnedcpogffimkmbm">
   <img src="readme/chromewebstore.png" alt="ChromeWebStore logo" height="58" width="206">
   </a>
 </p>
