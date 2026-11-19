@@ -1,40 +1,27 @@
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useEffect } from "react";
 
-interface IuseInfiniteScroll {
-  next: (prevTime: number | undefined) => void;
-}
-
-const useInfiniteScroll = ({ next }: IuseInfiniteScroll) => {
+/**
+ * Returns a callback ref for a loader element. `onReachEnd` runs whenever the
+ * loader scrolls into view, including right after it mounts while visible.
+ */
+const useInfiniteScroll = (onReachEnd: () => void) => {
   const observer = useRef<IntersectionObserver>();
-  const prevLastVisitTime = useRef<number>();
+  const onReachEndRef = useRef(onReachEnd);
 
-  const lastElemRef = useCallback(
-    (node: HTMLLIElement, lastVisitTime: number | undefined) => {
-      // Disconnect old observer
-      if (observer.current) observer.current.disconnect();
+  useEffect(() => {
+    onReachEndRef.current = onReachEnd;
+  });
 
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          node.scrollIntoView();
+  // Stable identity, so re-renders don't detach and re-attach the observer
+  return useCallback((node: HTMLElement | null) => {
+    observer.current?.disconnect();
+    if (!node) return;
 
-          setTimeout(() => {
-            next(prevLastVisitTime.current);
-
-            if (observer.current) {
-              observer.current.disconnect();
-            }
-          }, 800);
-        }
-      });
-
-      if (lastVisitTime !== prevLastVisitTime.current && node)
-        observer.current.observe(node);
-      prevLastVisitTime.current = lastVisitTime;
-    },
-    []
-  );
-
-  return { lastElemRef };
+    observer.current = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) onReachEndRef.current();
+    });
+    observer.current.observe(node);
+  }, []);
 };
 
 export default useInfiniteScroll;

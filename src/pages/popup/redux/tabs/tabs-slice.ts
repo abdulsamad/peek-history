@@ -51,6 +51,8 @@ export interface IDevice {
 interface tabsState {
   recent: ISession[];
   other: IDevice[];
+  // requestId of the latest filter call, older results are ignored
+  filterId?: string;
 }
 
 const initialState: tabsState = {
@@ -77,18 +79,16 @@ const tabsSlice = createSlice({
           state.other = payload;
         }
       ),
-      // ? Reset to initial state before filtering (because of Immer.js)
-      builder.addCase(filter.pending, () => initialState),
-      builder.addCase(
-        filter.fulfilled,
-        (
-          state,
-          { payload }: PayloadAction<{ recent: ISession[]; other: IDevice[] }>
-        ) => {
-          state.recent = payload.recent;
-          state.other = payload.other;
-        }
-      );
+      builder.addCase(filter.pending, (state, { meta }) => {
+        state.filterId = meta.requestId;
+      }),
+      builder.addCase(filter.fulfilled, (state, { payload, meta }) => {
+        // A newer search was typed while this one was loading
+        if (meta.requestId !== state.filterId) return;
+
+        state.recent = payload.recent;
+        state.other = payload.other;
+      });
   },
 });
 

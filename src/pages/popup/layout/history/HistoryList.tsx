@@ -133,11 +133,7 @@ const InfiniteHistoryItemsList = ({
   }: Omit<IHistoryItem, "typedCount" | "visitCount">) => JSX.Element;
 }) => {
   const dispatch = useAppDispatch();
-  const { lastElemRef } = useInfiniteScroll({
-    next: (prevLastVisitTime) => {
-      dispatch(addHistory({ endTime: prevLastVisitTime }));
-    },
-  });
+  const loaderRef = useInfiniteScroll(() => dispatch(addHistory()));
 
   const historyLength = history.items.length;
 
@@ -151,9 +147,7 @@ const InfiniteHistoryItemsList = ({
               {history.remaining && (
                 <ListItem
                   key={id}
-                  ref={(node: HTMLLIElement) =>
-                    lastElemRef(node, lastVisitTime)
-                  }
+                  ref={loaderRef}
                   alignItems="center"
                   sx={{ justifyContent: "center", padding: "10px 0" }}
                 >

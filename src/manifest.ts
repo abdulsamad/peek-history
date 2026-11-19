@@ -33,12 +33,6 @@ const manifest: ManifestType = {
     "sessions",
     "favicon",
   ],
-  web_accessible_resources: [
-    {
-      resources: ["icon128.png"],
-      matches: ["*://*/*"],
-    },
-  ],
   content_security_policy: {
     extension_pages: "script-src 'self'; object-src 'self'",
   },

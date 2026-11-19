@@ -25,9 +25,7 @@ const Content = ({ settings }: { settings: ISettings }) => {
   // Keyboard Navigation
   useKeyboardShortcuts({
     active: UIState.active,
-    settings,
     tabs,
-    history,
   });
 
   return (

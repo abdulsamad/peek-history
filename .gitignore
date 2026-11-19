@@ -81,3 +81,5 @@ dist
 
 # Generated manifest file
 public/manifest.json
+# Release packages
+*.zip

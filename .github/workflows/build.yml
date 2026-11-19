@@ -1,4 +1,4 @@
-name: Extension Continuos Integration
+name: Extension Continuous Integration
 
 on:
   push:
@@ -12,30 +12,31 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
 
-      - name: Set Node.js 18.x
-        uses: actions/setup-node@v3
+      - name: Set Node.js 24.x
+        uses: actions/setup-node@v7
         with:
-          node-version: 18.x
+          node-version: 24.x
 
       - name: Install dependencies
-        uses: borales/actions-yarn@v4
+        uses: borales/actions-yarn@v5
         with:
-          cmd: install
+          cmd: install --immutable
 
-      - name: Build and zip the build (dist) folder
-        run: yarn run deploy-build
+      - name: Build the extension
+        run: yarn run build
 
       - name: Get package info
         uses: codex-team/action-nodejs-package-info@v1.1
         id: package
 
       - name: Archive production artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ steps.package.outputs.name }}-v${{ steps.package.outputs.version }}
-          path: ./*.zip
+          # Downloaded artifact is the store-ready package (manifest.json at root)
+          path: dist/
           retention-days: 30
-    
+
 

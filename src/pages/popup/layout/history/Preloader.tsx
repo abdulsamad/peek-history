@@ -16,9 +16,9 @@ interface IPreloader {
   hideTime: boolean;
 }
 
-const content: ReactElement[] = [];
-
 const Preloader = ({ hideURL, hideTime }: IPreloader) => {
+  const content: ReactElement[] = [];
+
   // Push history item to the array and create a copy of history items for skeleton loading
   for (let i = 0; i < 10; i++) {
     content.push(

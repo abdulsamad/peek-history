@@ -74,7 +74,7 @@ const WindowItem = ({
         >
           {tabs.map((tab: ITabItem) => (
             <TabItem
-              key={tab.title}
+              key={tab.sessionId}
               title={tab.title}
               url={tab.url}
               hideURL={hideURL}

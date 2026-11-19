@@ -17,13 +17,14 @@ import { setShowUpdatePopup } from "../../redux/ui/ui-slice";
 import KBD from "../utils/KBD";
 
 const WhatsNew = [
-  <Typography lineHeight="1.5em" key="shortcut">
-    Changed shortcuts modifier from <KBD>CTRL</KBD> to <KBD>Alt/Option</KBD>
+  "Fixed search results getting mixed with unrelated history while scrolling",
+  "Fixed infinite scroll getting stuck and showing duplicate items",
+  "Fixed tabs search missing results and not filtering other devices",
+  <Typography lineHeight="1.5em" key="delete">
+    <KBD>Delete</KBD> now asks before removing the selected item
   </Typography>,
-  "Added option to delete history in time ranges",
-  "Added setting to set tab (current or new blank) for opening URLs",
-  "Added hide time and accent font color setting in options",
-  "Improved keyboard navigation and shortcuts",
+  "Fixed settings not saving when changed quickly",
+  "Fixed the Cancel button being invisible in the light theme",
 ];
 
 const Transition = React.forwardRef(function Transition(

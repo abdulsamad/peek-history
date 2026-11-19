@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { IDevice, ISession } from "./tabs-slice";
-import { openAllTabsAccordions } from "../../hooks/utils";
+import { IDevice, ISession, ITabItem } from "./tabs-slice";
 
 export const getRecentlyClosed = createAsyncThunk(
   "tabs/getRecentlyClosed",
@@ -27,51 +26,34 @@ export const restoreSession = createAsyncThunk(
 export const filter = createAsyncThunk(
   "tabs/filter",
   async (keyword: string) => {
-    const regex = new RegExp(keyword, "gi");
+    // Plain text match, the keyword is not a pattern
+    const query = keyword.toLowerCase();
+    const matches = ({ title, url }: ITabItem) =>
+      [title, url].some((value) => value?.toLowerCase().includes(query));
 
-    openAllTabsAccordions();
-
-    const recentlyClosedTabs = await (
+    const recentlyClosedTabs: ISession[] = await (
       chrome.sessions as any
     ).getRecentlyClosed();
-    const otherTabs = await (chrome.sessions as any).getDevices();
+    const otherTabs: IDevice[] = await (chrome.sessions as any).getDevices();
 
-    const filteredRecentsTabs = recentlyClosedTabs.filter(
-      ({ tab, window }: ISession) => {
-        if (tab && (regex.test(tab.title) || regex.test(tab.url))) {
-          return true;
-        }
+    const filteredRecentsTabs = recentlyClosedTabs.filter(({ tab, window }) => {
+      if (tab) return matches(tab);
 
-        //  Window
-        if (!window) return false;
+      //  Window
+      if (!window) return false;
 
-        const filteredWindow = window.tabs.filter(
-          (tab) => regex.test(tab.title) || regex.test(tab.url)
-        );
+      window.tabs = window.tabs.filter(matches);
+      return window.tabs.length > 0;
+    });
 
-        if (filteredWindow.length > 0) {
-          window.tabs = filteredWindow;
-          return true;
-        }
-      }
-    );
-
-    const filteredOtherTabs = otherTabs.filter(({ sessions }: IDevice) => {
-      const devices = sessions.filter((device) => {
-        // Tabs on windows
-        const tabs = device.window.tabs.filter(
-          (tab) => regex.test(tab.title) || regex.test(tab.url)
-        );
-
-        if (tabs.length > 0) {
-          device.window.tabs = tabs;
-          return true;
-        }
+    const filteredOtherTabs = otherTabs.filter((device) => {
+      // Tabs on windows
+      device.sessions = device.sessions.filter(({ window }) => {
+        window.tabs = window.tabs.filter(matches);
+        return window.tabs.length > 0;
       });
 
-      if (devices.length > 0) {
-        return true;
-      }
+      return device.sessions.length > 0;
     });
 
     return {

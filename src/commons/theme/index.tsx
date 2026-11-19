@@ -4,8 +4,6 @@ import {
   ThemeProvider as MUIThemeProvider,
   CssBaseline,
   useMediaQuery,
-  lighten,
-  darken,
 } from "@mui/material";
 
 import { ISettings } from "../redux/settings/defaults";
@@ -33,25 +31,20 @@ const ThemeProvider = ({ children, fullWidth, settings }: IThemeProvider) => {
               : theme === "dark"
               ? "dark"
               : "light",
+          // light/dark shades are derived by MUI
           primary: {
-            light: lighten(accent, 5),
             main: accent,
-            dark: darken(accent, 5),
+            // Text on accent backgrounds (navbar, contained buttons)
+            contrastText: accentFont,
           },
           error: {
-            light: lighten("#F44336", 5),
             main: "#F44336",
-            dark: darken("#F44336", 5),
           },
           warning: {
-            light: lighten("#FFC107", 5),
             main: "#FFC107",
-            dark: darken("#FFC107", 5),
           },
           success: {
-            light: lighten("#4CAF50", 5),
             main: "#4CAF50",
-            dark: darken("#4CAF50", 5),
           },
           background: {
             default:
@@ -104,20 +97,6 @@ const ThemeProvider = ({ children, fullWidth, settings }: IThemeProvider) => {
               "*::-webkit-scrollbar-thumb": {
                 backgroundColor: accent,
                 borderRadius: 6,
-              },
-            },
-          },
-          MuiAppBar: {
-            styleOverrides: {
-              root: {
-                color: accentFont,
-              },
-            },
-          },
-          MuiButton: {
-            styleOverrides: {
-              textPrimary: {
-                color: accentFont,
               },
             },
           },

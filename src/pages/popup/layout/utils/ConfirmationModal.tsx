@@ -64,6 +64,7 @@ const ConfirmationModal = ({
       )}
       <Dialog
         open={open}
+        onClose={() => setOpen(false)}
         TransitionComponent={Transition}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
@@ -82,6 +83,7 @@ const ConfirmationModal = ({
               setOpen(false);
             }}
             color="error"
+            autoFocus
           >
             Delete
           </Button>

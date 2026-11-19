@@ -18,10 +18,15 @@ This extension helps you to quickly peek history in the popup that helps you vie
 ### ✨ Features
 
 - Quickly peek history in popup without going away from your working tab.
-- Delete specific or all history
-- Reopen closed tabs (Full sessions)
+- Search history, recently closed tabs and tabs from other devices
+- Delete specific history, the last 30 mins / 1 hour / 6 hours / 24 hours, or all history
+- Reopen recently closed tabs and windows (Full sessions)
 - Restore sessions from other devices
-- Infinite scrolling
+- Sort history by last visit or most visit
+- Infinite scrolling (can be turned off)
+- Full keyboard navigation
+- Customizable theme (System/Dark/Light), accent color, accent font color, font and popup width
+- Hide URLs or visit times, and choose where links open (New tab, current tab or background tab)
 
 ### ⌨ Keyboard Shortcuts
 
@@ -33,9 +38,12 @@ In the Popup
 - ⚙️ Open extension options/settings - <kbd>Alt + O</kbd>
 - 📑 See recently closed tabs/other tabs - <kbd>Alt + T</kbd>
 - 🔙 Switch back to view history from recently closed/other tabs - <kbd>Alt + H</kbd>
-- 🔢 After opening the popup you can use number keys <kbd>Alt + (1 - 9)</kbd> to open the nth number of history link or recently closed tab
+- 🔢 Open the nth history link as shown in the list, or restore the nth recently closed tab/window - <kbd>Alt + (1 - 9)</kbd>
+- ↕️ Move through the list, also from the search box - <kbd>↑</kbd> <kbd>↓</kbd>
+- ↩️ Open the selected history link or tab - <kbd>Enter</kbd>
+- 🗑️ Delete the selected history link (asks for confirmation) - <kbd>Delete</kbd> or <kbd>Backspace</kbd>
 
-> 💡 **Tip:** Replace Alt key with Option on Mac.
+> 💡 **Tip:** Replace Alt key with Option on Mac. You can change the toggle shortcut at `chrome://extensions/shortcuts`.
 
 ### Screenshots
 

@@ -1,64 +1,92 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import dayjs from "dayjs";
 
-const defaults = {
-  text: "",
-  maxResults: 50,
-  startTime: dayjs("01-01-1970").valueOf(),
+import type { HistoryState, IHistoryItem } from "./history-slice";
+
+type ThunkConfig = { state: { history: HistoryState } };
+
+const PAGE_SIZE = 50;
+
+/**
+ * chrome.history.search orders results by each URL's latest visit inside
+ * [startTime, endTime), but reports lastVisitTime as the URL's latest visit
+ * overall. Returns the in-range visit time, which is where the next page starts.
+ */
+const visitTimeBefore = async (item: IHistoryItem, endTime?: number) => {
+  const { lastVisitTime, url } = item;
+
+  if (
+    lastVisitTime !== undefined &&
+    (endTime === undefined || lastVisitTime < endTime)
+  ) {
+    return lastVisitTime;
+  }
+
+  const visits = await chrome.history.getVisits({ url: url as string });
+  const before = visits
+    .map(({ visitTime }) => visitTime ?? 0)
+    .filter((time) => endTime === undefined || time < endTime);
+
+  return before.length > 0 ? Math.max(...before) : undefined;
+};
+
+/**
+ * Fetches one page of history visited before `endTime`, and the end time for the next page.
+ */
+const searchPage = async (text: string, endTime?: number) => {
+  // Ask for one extra item to know whether more history remains
+  const results = await chrome.history.search({
+    text,
+    startTime: 0,
+    endTime,
+    maxResults: PAGE_SIZE + 1,
+  });
+
+  const items = results.slice(0, PAGE_SIZE);
+  const last = items[items.length - 1];
+  const cursor =
+    results.length > PAGE_SIZE && last
+      ? await visitTimeBefore(last, endTime)
+      : undefined;
+
+  return { items, cursor, remaining: cursor !== undefined };
 };
 
 export const getHistory = createAsyncThunk(
   "history/getHistory",
-  async ({
-    text = defaults.text,
-    maxResults = defaults.maxResults,
-    startTime = defaults.startTime,
-    endTime,
-  }: {
-    text?: string;
-    maxResults?: number;
-    startTime?: number;
-    endTime?: number;
-  }) => {
-    const historyItems = await chrome.history.search({
-      text,
-      maxResults,
-      startTime,
-      endTime,
-    });
-
-    return historyItems;
-  }
+  async ({ text = "" }: { text?: string }) => searchPage(text)
 );
 
-export const addHistory = createAsyncThunk(
+export const addHistory = createAsyncThunk<
+  {
+    items: IHistoryItem[];
+    cursor?: number;
+    remaining: boolean;
+    searchId?: string;
+  },
+  void,
+  ThunkConfig
+>(
   "history/addHistory",
-  async ({
-    text = defaults.text,
-    maxResults = defaults.maxResults,
-    startTime = defaults.startTime,
-    endTime,
-  }: {
-    text?: string;
-    maxResults?: number;
-    startTime?: number;
-    endTime?: number;
-  }) => {
-    const historyItems = await chrome.history.search({
-      text,
-      maxResults: maxResults + 1,
-      startTime,
-      endTime,
-    });
+  async (_, { getState }) => {
+    const { query, cursor, items, searchId } = getState().history;
+    const shown = new Set(items.map(({ id }) => id));
 
-    if (historyItems.length === 51) {
-      // Remove last history item
-      historyItems.pop();
+    // URLs visited again later are already listed, so skip pages made only of those
+    let page = await searchPage(query, cursor);
+    let fresh = page.items.filter(({ id }) => !shown.has(id));
 
-      return { history: historyItems, remaining: true };
-    } else {
-      return { history: historyItems, remaining: false };
+    while (fresh.length === 0 && page.remaining) {
+      page = await searchPage(query, page.cursor);
+      fresh = page.items.filter(({ id }) => !shown.has(id));
     }
+
+    return { ...page, items: fresh, searchId };
+  },
+  {
+    condition: (_, { getState }) => {
+      const { remaining, loadingMore } = getState().history;
+      return remaining && !loadingMore;
+    },
   }
 );
 
@@ -78,24 +106,16 @@ export const deleteAll = createAsyncThunk("history/deleteAll", async () => {
   return true;
 });
 
-export const deleteRange = createAsyncThunk(
+export const deleteRange = createAsyncThunk<
+  void,
+  { startTime: number; endTime?: number },
+  ThunkConfig
+>(
   "history/deleteRange",
-  async ({
-    startTime,
-    endTime = Date.now(),
-  }: {
-    startTime: number;
-    endTime?: number;
-  }) => {
+  async ({ startTime, endTime = Date.now() }, { dispatch, getState }) => {
     await chrome.history.deleteRange({ startTime, endTime });
 
-    // Refetch and update history in state
-    const historyItems = await chrome.history.search({
-      text: "",
-      maxResults: 50,
-      startTime: dayjs("01-01-1970").valueOf(),
-    });
-
-    return historyItems;
+    // Reload the list for the current search
+    await dispatch(getHistory({ text: getState().history.query }));
   }
 );

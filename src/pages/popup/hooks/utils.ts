@@ -1,3 +1,5 @@
+import { flushSync } from "react-dom";
+
 import { ISettings } from "@src/commons/redux/settings/defaults";
 import {
   tabsAccordionSelector,
@@ -21,74 +23,29 @@ export const onURLClick = async (
   await chrome.tabs.update({ url });
 };
 
-export const numberIterator = (
-  start = -1,
-  end = Infinity,
-  resetVal = -1
-): {
-  value: () => number;
-  reset: () => void;
-  prev: () => { value: number; done: boolean };
-  next: () => { value: number; done: boolean };
-  set: (num: number) => { value: number; done: boolean };
-} => {
-  let index = start;
+// Click the accordion headers that are not in the wanted state. flushSync renders
+// each change right away, so newly shown windows and tabs can be queried after.
+const setAccordions = (selector: string, expanded: boolean) => {
+  document.querySelectorAll<HTMLElement>(selector).forEach((elem) => {
+    if (elem.classList.contains("Mui-expanded") === expanded) return;
 
-  return {
-    value: () => index,
-    reset: () => (index = resetVal),
-    prev: () =>
-      index > 0
-        ? { value: --index, done: false }
-        : { value: index, done: true },
-    next: () =>
-      index < end
-        ? { value: ++index, done: false }
-        : { value: index, done: true },
-    set: (num) =>
-      num === end
-        ? {
-            value: num,
-            done: true,
-          }
-        : {
-            value: num,
-            done: false,
-          },
-  };
+    flushSync(() => elem.click());
+  });
 };
 
 // Open All MUI accordion in Tabs view
 export const openAllTabsAccordions = () => {
-  document.querySelectorAll(tabsAccordionSelector).forEach((elem) => {
-    // Check if accordion is already expanded
-    if ((elem as HTMLElement).classList.contains("Mui-expanded")) return;
-
-    // Click on the Accordion
-    (elem as HTMLElement).click();
-  });
+  setAccordions(tabsAccordionSelector, true);
 
   // Open all window inside tabs
-  document.querySelectorAll(windowItemSelector).forEach((elem) => {
-    // Check if accordion is already expanded
-    if ((elem as HTMLElement).classList.contains("Mui-expanded")) return;
-
-    // Click on the Accordion
-    (elem as HTMLElement).click();
-  });
+  setAccordions(windowItemSelector, true);
 };
 
 // Close All MUI accordions in Tabs view
 export const closeAllTabsAccordions = () => {
   // Close all window inside tabs
-  document.querySelectorAll(windowItemSelector).forEach((elem) => {
-    // Click on the Accordion
-    (elem as HTMLElement).click();
-  });
+  setAccordions(windowItemSelector, false);
 
   // Close all tabs accordions
-  document.querySelectorAll(tabsAccordionSelector).forEach((elem) => {
-    // Click on the Accordion
-    (elem as HTMLElement).click();
-  });
+  setAccordions(tabsAccordionSelector, false);
 };

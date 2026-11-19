@@ -8,22 +8,24 @@ import { getHistory } from "../redux/history/thunks";
 import { setSearchOpened, Active } from "../redux/ui/ui-slice";
 import { filter } from "../redux/tabs/thunks";
 import { historyItemSelector } from "../hooks/useKeyboardShortcuts";
+import { openAllTabsAccordions } from "../hooks/utils";
 
-const StyledSearchIcon = styled(SearchIcon)(({ theme }) => ({
+const StyledSearchIcon = styled(SearchIcon)({
   height: "100%",
   cursor: "pointer",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  color: theme.palette.primary.light,
-}));
+  // Same color as the navbar title (accent font color)
+  color: "inherit",
+});
 
 const StyledInputBase = styled(InputBase)<{
   open: boolean;
   accentFontColor: string;
 }>(({ theme, open, accentFontColor }) => ({
   transition: "all 0.3s ease-out",
-  trasformOrigin: "left",
+  transformOrigin: "left",
   background: theme.palette.primary.main,
   cursor: "pointer",
   position: "absolute",
@@ -66,6 +68,23 @@ const Search = () => {
     }
   }, [UI.searchOpened]);
 
+  const search = (text: string) => {
+    if (UI.active === Active.HISTORY) {
+      // Update history
+      dispatch(getHistory({ text }));
+    } else if (UI.active === Active.TABS) {
+      // Update Tabs
+      dispatch(filter(text));
+    }
+  };
+
+  // Apply the current search to the view that was switched to
+  useEffect(() => {
+    const text = inputRef.current?.value;
+
+    if (text) search(text);
+  }, [UI.active]);
+
   return (
     <div>
       <StyledSearchIcon
@@ -78,26 +97,16 @@ const Search = () => {
         inputProps={{ "aria-label": "search history" }}
         inputRef={inputRef}
         style={{ width: UI.searchOpened ? "100%" : 0 }}
-        onKeyUp={async (ev) => {
-          const target = ev.target as HTMLInputElement;
-          const UpDownArrowKeysPressed =
-            ev.key === "ArrowDown" || ev.key === "ArrowUp";
+        onChange={(ev) => {
+          // Show the matching tabs inside their sections
+          if (UI.active === Active.TABS) openAllTabsAccordions();
 
-          if (UI.active === Active.HISTORY) {
-            // Update history
-            await dispatch(getHistory({ text: target.value }));
-          } else if (UI.active === Active.TABS) {
-            // Update Tabs
-            dispatch(filter(target.value));
-          }
-
+          search(ev.target.value);
+        }}
+        onKeyUp={(ev) => {
           // Accessibility
-          if (UpDownArrowKeysPressed) {
-            const elem = document.querySelector(
-              historyItemSelector
-            ) as HTMLElement;
-
-            if (elem) elem.focus();
+          if (ev.key === "ArrowDown" || ev.key === "ArrowUp") {
+            document.querySelector<HTMLElement>(historyItemSelector)?.focus();
           }
         }}
         onBlur={(ev) => {

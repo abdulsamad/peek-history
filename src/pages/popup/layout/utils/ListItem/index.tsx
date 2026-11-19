@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from "react";
+import React, { MouseEventHandler, useRef } from "react";
 import { Typography, ListItemSecondaryAction } from "@mui/material";
 import { Delete as DeleteIcon } from "@mui/icons-material";
 import TimeAgo from "timeago-react";
@@ -38,10 +38,19 @@ const HistoryItem = ({
   showSecondary,
   onItemDelete,
 }: INewHistoryItem) => {
+  const deleteButtonRef = useRef<HTMLButtonElement>(null);
+
   return (
     <StyledListItem
       divider={true}
       onClick={onClick}
+      onKeyDown={(ev) => {
+        // Delete/Backspace on the focused row works like its delete button
+        if (onItemDelete && (ev.key === "Delete" || ev.key === "Backspace")) {
+          ev.preventDefault();
+          deleteButtonRef.current?.click();
+        }
+      }}
       tabIndex={-1}
       hideURL={hideURL}
       data-history-item
@@ -74,7 +83,11 @@ const HistoryItem = ({
         <ListItemSecondaryAction sx={{ textAlign: "right" }}>
           <ConfirmationModal
             icon={<DeleteIcon fontSize="small" />}
-            ButtonProps={{ edge: "end", "aria-label": "delete" }}
+            ButtonProps={{
+              edge: "end",
+              "aria-label": "delete",
+              ref: deleteButtonRef,
+            }}
             question="Delete History Item?"
             warning={
               <>

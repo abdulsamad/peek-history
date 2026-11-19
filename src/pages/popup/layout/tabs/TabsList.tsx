@@ -60,7 +60,7 @@ const TabsList = ({
               // Session contains tab
               return (
                 <TabItem
-                  key={tab.title}
+                  key={tab.sessionId}
                   title={tab.title}
                   url={tab.url}
                   hideURL={settings.hideURL}
@@ -74,9 +74,10 @@ const TabsList = ({
       </Accordion>
 
       {/* Other Tabs (Remote devices tabs and sessions) */}
-      {tabs.other.map((device) => (
+      {tabs.other.map((device, index) => (
         <Accordion
-          key={device.deviceName}
+          // Device names are not unique (e.g. two "MacBook Pro")
+          key={`${index}-${device.deviceName}`}
           TransitionProps={{ unmountOnExit: true }}
         >
           <AccordionSummary expandIcon={<ExpandMoreIcon />} data-tabs-accordion>
@@ -103,7 +104,7 @@ const TabsList = ({
                 // Session contains tab {Other Tab (Tab form other device) will still have structure like window}
                 return (
                   <TabItem
-                    key={window.tabs[0].title}
+                    key={window.tabs[0].sessionId}
                     title={window.tabs[0].title}
                     url={window.tabs[0].url}
                     hideURL={settings.hideURL}

@@ -3,7 +3,7 @@ import { Typography, Link, Container } from "@mui/material";
 
 const Footer = () => {
   return (
-    <Container component="footer" sx={{ textAlign: "center" }}>
+    <Container component="footer" sx={{ textAlign: "center", pb: 5 }}>
       <Typography variant="subtitle1">
         Please leave a positive rating on the{" "}
         <Link underline="none" href={import.meta.env.VITE_EXTENSION_URL}>
